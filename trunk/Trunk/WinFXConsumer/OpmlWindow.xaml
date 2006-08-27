@@ -1,0 +1,26 @@
+<Window x:Class="WinFXConsumer.OpmlWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Import OPML" Height="500" Width="726"
+    xmlns:d="http://schemas.microsoft.com/expression/interactivedesigner/2006" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+    
+    >
+  
+    <Grid x:Name="Grid" Style="{DynamicResource Grid}">
+    <Grid Margin="43,27,32,29" MinHeight="50" MinWidth="50" x:Name="grid1">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="0.133889138732256*" />
+        <RowDefinition Height="0.163489812156225*" />
+        <RowDefinition Height="0.702621049111519*" />
+      </Grid.RowDefinitions>
+			<Rectangle d:LayoutOverrides="VerticalAlignment" Stroke="sc#1, 0.228, 0.228, 0.228" Fill="#FFFFFFFF" RadiusX="19.5" RadiusY="19.5" Margin="13,0.431484876788957,14.8000000000001,6.80000000000001" Width="Auto" Height="Auto" Grid.Row="2" Grid.RowSpan="1" x:Name="Rectangle1"/>
+			<Rectangle d:LayoutOverrides="Height, GridBox" Stroke="sc#1, 0.228, 0.228, 0.228" Fill="#FFFFFFFF" RadiusX="9.50000000000004" RadiusY="9.50000000000004" VerticalAlignment="Top" Margin="22,11,50.6,0" Width="Auto" Height="37.6" x:Name="Rectangle"/>
+      <TreeView Grid.Row="2" Margin="17,10,20,15" x:Name="treeView1" BorderBrush="{x:Null}" />
+      <Button Style="{DynamicResource Button}" Grid.Row="1" Margin="21,9,0,25" x:Name="button1" HorizontalAlignment="Left" Width="189" Content="Preview"/>
+      <TextBox Margin="27,15,54,9" x:Name="textBox1" Text="http://hosting.opml.org/dave/spec/subscriptionList.opml" BorderBrush="{x:Null}"/>
+      <Button Style="{DynamicResource Button}" Grid.Row="1" Margin="230,8.97156398104281,215,24.2227488151657" x:Name="button2" Content="Export"/>
+      <Button Style="{DynamicResource Button}" Grid.Row="1" HorizontalAlignment="Right" Margin="0,9.97156398104281,33,24.2227488151657" x:Name="button3" Width="163" Content="Import"/>
+      <Button Style="{DynamicResource Button}" Grid.Row="1" Height="21" HorizontalAlignment="Left" Margin="49,0,0,3.22274881516569" Name="button4" VerticalAlignment="Bottom" Width="132" Content="View html" Visibility="Hidden" />
+    </Grid>
+  </Grid>
+</Window>

@@ -1,0 +1,10 @@
+bin\Debug\PluginConsumer.exe
+bin\Debug\PluginConsumer.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\PluginConsumer.Properties.Resources.resources
+obj\Debug\PluginConsumer.csproj.GenerateResource.Cache
+obj\Debug\PluginConsumer.exe
+obj\Debug\PluginConsumer.pdb
+obj\Debug\PluginConsumer.Form1.resources
+bin\Debug\PluginInterface.dll
+bin\Debug\PluginInterface.pdb
