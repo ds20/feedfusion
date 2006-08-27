@@ -1,0 +1,178 @@
+<Grid 
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:d="http://schemas.microsoft.com/expression/interactivedesigner/2006"
+	mc:Ignorable="d"
+	Background="#FFFFFFFF" 
+	x:Name="DocumentRoot"
+	x:Class="UntitledProject1.Scene1" 
+	Width="640" Height="480">
+
+	<Grid.Resources>
+		<Storyboard x:Key="OnLoaded">
+			<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Label1">
+				<SplineColorKeyFrame d:KeyEase="Linear;Linear;0.5;0.5;0.5;0.5" KeySpline="0.5,0.5,0.5,0.5" Value="#FF000000" KeyTime="00:00:00"/>
+				<SplineColorKeyFrame d:KeyEase="Linear;Linear;0.5;0.5;0.5;0.5" KeySpline="0.5,0.5,0.5,0.5" Value="#FFFFECBC" KeyTime="00:00:00.0010000"/>
+				<SplineColorKeyFrame d:KeyEase="Linear;Linear;0.5;0.5;0.5;0.5" KeySpline="0.5,0.5,0.5,0.5" Value="#FF000000" KeyTime="00:00:01.2500000"/>
+				<SplineColorKeyFrame d:KeyEase="Linear;Linear;0.5;0.5;0.5;0.5" KeySpline="0.5,0.5,0.5,0.5" Value="#FFFFECBC" KeyTime="00:00:03.7500000"/>
+				<SplineColorKeyFrame d:KeyEase="Linear;Linear;0.5;0.5;0.5;0.5" KeySpline="0.5,0.5,0.5,0.5" Value="#FF000000" KeyTime="00:00:05"/>
+			</ColorAnimationUsingKeyFrames>
+			<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Label">
+				<SplineColorKeyFrame d:KeyEase="Linear;Linear;0.5;0.5;0.5;0.5" KeySpline="0.5,0.5,0.5,0.5" Value="#FFFFECBC" KeyTime="00:00:00.0010000"/>
+				<SplineColorKeyFrame d:KeyEase="Linear;Linear;0.5;0.5;0.5;0.5" KeySpline="0.5,0.5,0.5,0.5" Value="#FF000000" KeyTime="00:00:01.2500000"/>
+				<SplineColorKeyFrame d:KeyEase="Linear;Linear;0.5;0.5;0.5;0.5" KeySpline="0.5,0.5,0.5,0.5" Value="#FFFFECBC" KeyTime="00:00:02.5000000"/>
+				<SplineColorKeyFrame d:KeyEase="Linear;Linear;0.5;0.5;0.5;0.5" KeySpline="0.5,0.5,0.5,0.5" Value="#FF000000" KeyTime="00:00:05"/>
+			</ColorAnimationUsingKeyFrames>
+			<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(Light.Color)" Storyboard.TargetName="Directional">
+				<SplineColorKeyFrame d:KeyEase="Linear;Linear;0.5;0.5;0.5;0.5" KeySpline="0.5,0.5,0.5,0.5" Value="sc#1, 1, 0, 0" KeyTime="00:00:01.2500000"/>
+				<SplineColorKeyFrame d:KeyEase="Linear;Linear;0.5;0.5;0.5;0.5" KeySpline="0.5,0.5,0.5,0.5" Value="#FF000000" KeyTime="00:00:02.5000000"/>
+				<SplineColorKeyFrame d:KeyEase="Linear;Linear;0.5;0.5;0.5;0.5" KeySpline="0.5,0.5,0.5,0.5" Value="#FFFFFFFF" KeyTime="00:00:03.7500000"/>
+				<SplineColorKeyFrame d:KeyEase="Linear;Linear;0.5;0.5;0.5;0.5" KeySpline="0.5,0.5,0.5,0.5" Value="#FFFFFFFF" KeyTime="00:00:05"/>
+			</ColorAnimationUsingKeyFrames>
+			<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(GeometryModel3D.BackMaterial).(EmissiveMaterial.Brush).(SolidColorBrush.Color)" Storyboard.TargetName="sun_soho_s_jpgModel">
+				<SplineColorKeyFrame d:KeyEase="Linear;Linear;0.5;0.5;0.5;0.5" KeySpline="0.5,0.5,0.5,0.5" Value="sc#1, 0, 0, 0" KeyTime="00:00:02.5000000"/>
+				<SplineColorKeyFrame d:KeyEase="Linear;Linear;0.5;0.5;0.5;0.5" KeySpline="0.5,0.5,0.5,0.5" Value="sc#1, 1, 0.796209931, 0" KeyTime="00:00:05"/>
+			</ColorAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Canvas">
+				<SplineDoubleKeyFrame d:KeyEase="Linear;Linear;0.5;0.5;0.5;0.5" KeySpline="0.5,0.5,0.5,0.5" Value="0.8955034736399532" KeyTime="00:00:01.2500000"/>
+				<SplineDoubleKeyFrame d:KeyEase="Linear;Linear;0.5;0.5;0.5;0.5" KeySpline="0.5,0.5,0.5,0.5" Value="0.80234882785444517" KeyTime="00:00:02.5000000"/>
+				<SplineDoubleKeyFrame d:KeyEase="Linear;Linear;0.5;0.5;0.5;0.5" KeySpline="0.5,0.5,0.5,0.5" Value="0.8955034736399532" KeyTime="00:00:03.7500000"/>
+				<SplineDoubleKeyFrame d:KeyEase="Linear;Linear;0.5;0.5;0.5;0.5" KeySpline="0.5,0.5,0.5,0.5" Value="1" KeyTime="00:00:05"/>
+				<SplineDoubleKeyFrame d:KeyEase="Linear;Linear;0.5;0.5;0.5;0.5" KeySpline="0.5,0.5,0.5,0.5" Value="0" KeyTime="00:00:06.5000000"/>
+			</DoubleAnimationUsingKeyFrames>
+			<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="Canvas">
+				<SplineColorKeyFrame d:KeyEase="Linear;Linear;0.5;0.5;0.5;0.5" KeySpline="0.5,0.5,0.5,0.5" Value="#FF000000" KeyTime="00:00:02.5000000"/>
+				<SplineColorKeyFrame d:KeyEase="Linear;Linear;0.5;0.5;0.5;0.5" KeySpline="0.5,0.5,0.5,0.5" Value="sc#0, 1, 1, 1" KeyTime="00:00:03.7500000"/>
+				<SplineColorKeyFrame d:KeyEase="Linear;Linear;0.5;0.5;0.5;0.5" KeySpline="0.5,0.5,0.5,0.5" Value="#FF000000" KeyTime="00:00:05"/>
+			</ColorAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[5].(TranslateTransform.X)" Storyboard.TargetName="Label">
+				<SplineDoubleKeyFrame d:KeyEase="Linear;Linear;0.5;0.5;0.5;0.5" KeySpline="0.5,0.5,0.5,0.5" Value="-1" KeyTime="00:00:00"/>
+				<SplineDoubleKeyFrame d:KeyEase="Linear;Linear;0.5;0.5;0.5;0.5" KeySpline="0.5,0.5,0.5,0.5" Value="0" KeyTime="00:00:00.0010000"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[5].(TranslateTransform.Y)" Storyboard.TargetName="Label">
+				<SplineDoubleKeyFrame d:KeyEase="Linear;Linear;0.5;0.5;0.5;0.5" KeySpline="0.5,0.5,0.5,0.5" Value="0" KeyTime="00:00:00"/>
+				<SplineDoubleKeyFrame d:KeyEase="Linear;Linear;0.5;0.5;0.5;0.5" KeySpline="0.5,0.5,0.5,0.5" Value="0" KeyTime="00:00:00.0010000"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+	</Grid.Resources>
+
+	<Grid.Triggers>
+		<EventTrigger RoutedEvent="FrameworkElement.Loaded">
+			<BeginStoryboard x:Name="OnLoaded_BeginStoryboard" Storyboard="{DynamicResource OnLoaded}"/>
+		</EventTrigger>
+	</Grid.Triggers>
+	
+	<Grid.ColumnDefinitions>
+		<ColumnDefinition Width="0.142578688997979*"/>
+		<ColumnDefinition Width="0.0739965347964191*"/>
+		<ColumnDefinition Width="0.254475887958417*"/>
+		<ColumnDefinition Width="0.113701992492059*"/>
+		<ColumnDefinition Width="0.12092116661854*"/>
+		<ColumnDefinition Width="0.294325729136586*"/>
+	</Grid.ColumnDefinitions>
+	<Grid.RowDefinitions>
+		<RowDefinition Height="0.338699586100683*"/>
+		<RowDefinition Height="0.187698527288478*"/>
+		<RowDefinition Height="0.161228222158051*"/>
+		<RowDefinition Height="0.139570699778612*"/>
+		<RowDefinition Height="0.172802964674175*"/>
+	</Grid.RowDefinitions>
+	<Canvas Margin="0,0,-1.13686837721616E-13,-5.6843418860808E-14" x:Name="Canvas" Grid.RowSpan="5" Grid.ColumnSpan="6" Background="#FF000000">
+		<Viewport3D Width="640" Height="480" Canvas.Left="0" Canvas.Top="0" x:Name="sun_soho_s_jpg">
+			<Viewport3D.Camera>
+				<PerspectiveCamera x:Name="Camera" FieldOfView="45" NearPlaneDistance="0.1" FarPlaneDistance="100" Position="4.9737991503207E-14,0,32.1895141649746" LookDirection="0,0,-32.1895141649746" UpDirection="0,1,0"/>
+			</Viewport3D.Camera>
+			<ModelVisual3D x:Name="sun_soho_s_jpgModelContainer">
+				<ModelVisual3D.Content>
+					<GeometryModel3D x:Name="sun_soho_s_jpgModel" d:Bounds="-13.3333333333333,-10,0,26.6666666666667,20,0">
+						<GeometryModel3D.Geometry>
+							<MeshGeometry3D TriangleIndices="0 1 10 1 11 10 1 2 11 2 12 11 2 3 12 3 13 12 3 4 13 4 14 13 4 5 14 5 15 14 5 6 15 6 16 15 6 7 16 7 17 16 7 8 17 8 18 17 8 9 18 9 19 18 10 11 20 11 21 20 11 12 21 12 22 21 12 13 22 13 23 22 13 14 23 14 24 23 14 15 24 15 25 24 15 16 25 16 26 25 16 17 26 17 27 26 17 18 27 18 28 27 18 19 28 19 29 28 20 21 30 21 31 30 21 22 31 22 32 31 22 23 32 23 33 32 23 24 33 24 34 33 24 25 34 25 35 34 25 26 35 26 36 35 26 27 36 27 37 36 27 28 37 28 38 37 28 29 38 29 39 38 30 31 40 31 41 40 31 32 41 32 42 41 32 33 42 33 43 42 33 34 43 34 44 43 34 35 44 35 45 44 35 36 45 36 46 45 36 37 46 37 47 46 37 38 47 38 48 47 38 39 48 39 49 48 40 41 50 41 51 50 41 42 51 42 52 51 42 43 52 43 53 52 43 44 53 44 54 53 44 45 54 45 55 54 45 46 55 46 56 55 46 47 56 47 57 56 47 48 57 48 58 57 48 49 58 49 59 58 50 51 60 51 61 60 51 52 61 52 62 61 52 53 62 53 63 62 53 54 63 54 64 63 54 55 64 55 65 64 55 56 65 56 66 65 56 57 66 57 67 66 57 58 67 58 68 67 58 59 68 59 69 68 60 61 70 61 71 70 61 62 71 62 72 71 62 63 72 63 73 72 63 64 73 64 74 73 64 65 74 65 75 74 65 66 75 66 76 75 66 67 76 67 77 76 67 68 77 68 78 77 68 69 78 69 79 78 70 71 80 71 81 80 71 72 81 72 82 81 72 73 82 73 83 82 73 74 83 74 84 83 74 75 84 75 85 84 75 76 85 76 86 85 76 77 86 77 87 86 77 78 87 78 88 87 78 79 88 79 89 88 80 81 90 81 91 90 81 82 91 82 92 91 82 83 92 83 93 92 83 84 93 84 94 93 84 85 94 85 95 94 85 86 95 86 96 95 86 87 96 87 97 96 87 88 97 88 98 97 88 89 98 89 99 98">
+								<MeshGeometry3D.Positions>
+									<Point3DCollection>-13.333333,-10,0 -10.37037,-10,0 -7.4074074,-10,0 -4.4444444,-10,0 -1.4814815,-10,0 1.4814815,-10,0 4.4444444,-10,0 7.4074074,-10,0 10.37037,-10,0 13.333333,-10,0 -13.333333,-7.7777778,0 -10.37037,-7.7777778,0 -7.4074074,-7.7777778,0
+-4.4444444,-7.7777778,0 -1.4814815,-7.7777778,0 1.4814815,-7.7777778,0 4.4444444,-7.7777778,0 7.4074074,-7.7777778,0 10.37037,-7.7777778,0 13.333333,-7.7777778,0 -13.333333,-5.5555556,0 -10.37037,-5.5555556,0 -7.4074074,-5.5555556,0 -4.4444444,-5.5555556,0 -1.4814815,-5.5555556,0 1.4814815,-5.5555556,0
+4.4444444,-5.5555556,0 7.4074074,-5.5555556,0 10.37037,-5.5555556,0 13.333333,-5.5555556,0 -13.333333,-3.3333333,0 -10.37037,-3.3333333,0 -7.4074074,-3.3333333,0 -4.4444444,-3.3333333,0 -1.4814815,-3.3333333,0 1.4814815,-3.3333333,0 4.4444444,-3.3333333,0 7.4074074,-3.3333333,0 10.37037,-3.3333333,0
+13.333333,-3.3333333,0 -13.333333,-1.1111111,0 -10.37037,-1.1111111,0 -7.4074074,-1.1111111,0 -4.4444444,-1.1111111,0 -1.4814815,-1.1111111,0 1.4814815,-1.1111111,0 4.4444444,-1.1111111,0 7.4074074,-1.1111111,0 10.37037,-1.1111111,0 13.333333,-1.1111111,0 -13.333333,1.1111111,0 -10.37037,1.1111111,0
+-7.4074074,1.1111111,0 -4.4444444,1.1111111,0 -1.4814815,1.1111111,0 1.4814815,1.1111111,0 4.4444444,1.1111111,0 7.4074074,1.1111111,0 10.37037,1.1111111,0 13.333333,1.1111111,0 -13.333333,3.3333333,0 -10.37037,3.3333333,0 -7.4074074,3.3333333,0 -4.4444444,3.3333333,0 -1.4814815,3.3333333,0
+1.4814815,3.3333333,0 4.4444444,3.3333333,0 7.4074074,3.3333333,0 10.37037,3.3333333,0 13.333333,3.3333333,0 -13.333333,5.5555556,0 -10.37037,5.5555556,0 -7.4074074,5.5555556,0 -4.4444444,5.5555556,0 -1.4814815,5.5555556,0 1.4814815,5.5555556,0 4.4444444,5.5555556,0 7.4074074,5.5555556,0
+10.37037,5.5555556,0 13.333333,5.5555556,0 -13.333333,7.7777778,0 -10.37037,7.7777778,0 -7.4074074,7.7777778,0 -4.4444444,7.7777778,0 -1.4814815,7.7777778,0 1.4814815,7.7777778,0 4.4444444,7.7777778,0 7.4074074,7.7777778,0 10.37037,7.7777778,0 13.333333,7.7777778,0 -13.333333,10,0
+-10.37037,10,0 -7.4074074,10,0 -4.4444444,10,0 -1.4814815,10,0 1.4814815,10,0 4.4444444,10,0 7.4074074,10,0 10.37037,10,0 13.333333,10,0</Point3DCollection>
+								</MeshGeometry3D.Positions>
+								<MeshGeometry3D.Normals>
+									<Vector3DCollection>0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1
+0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1
+0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1
+0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1
+0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1
+0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1
+0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1
+0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1</Vector3DCollection>
+								</MeshGeometry3D.Normals>
+								<MeshGeometry3D.TextureCoordinates>
+									<PointCollection>0,1 0.11111111,1 0.22222222,1 0.33333333,1 0.44444444,1 0.55555556,1 0.66666667,1 0.77777778,1 0.88888889,1 1,1 0,0.88888889 0.11111111,0.88888889 0.22222222,0.88888889 0.33333333,0.88888889 0.44444444,0.88888889 0.55555556,0.88888889 0.66666667,0.88888889 0.77777778,0.88888889 0.88888889,0.88888889 1,0.88888889 0,0.77777778 0.11111111,0.77777778 0.22222222,0.77777778
+0.33333333,0.77777778 0.44444444,0.77777778 0.55555556,0.77777778 0.66666667,0.77777778 0.77777778,0.77777778 0.88888889,0.77777778 1,0.77777778 0,0.66666667 0.11111111,0.66666667 0.22222222,0.66666667 0.33333333,0.66666667 0.44444444,0.66666667 0.55555556,0.66666667 0.66666667,0.66666667 0.77777778,0.66666667 0.88888889,0.66666667 1,0.66666667 0,0.55555556 0.11111111,0.55555556 0.22222222,0.55555556 0.33333333,0.55555556 0.44444444,0.55555556 0.55555556,0.55555556
+0.66666667,0.55555556 0.77777778,0.55555556 0.88888889,0.55555556 1,0.55555556 0,0.44444444 0.11111111,0.44444444 0.22222222,0.44444444 0.33333333,0.44444444 0.44444444,0.44444444 0.55555556,0.44444444 0.66666667,0.44444444 0.77777778,0.44444444 0.88888889,0.44444444 1,0.44444444 0,0.33333333 0.11111111,0.33333333 0.22222222,0.33333333 0.33333333,0.33333333 0.44444444,0.33333333 0.55555556,0.33333333 0.66666667,0.33333333 0.77777778,0.33333333 0.88888889,0.33333333
+1,0.33333333 0,0.22222222 0.11111111,0.22222222 0.22222222,0.22222222 0.33333333,0.22222222 0.44444444,0.22222222 0.55555556,0.22222222 0.66666667,0.22222222 0.77777778,0.22222222 0.88888889,0.22222222 1,0.22222222 0,0.11111111 0.11111111,0.11111111 0.22222222,0.11111111 0.33333333,0.11111111 0.44444444,0.11111111 0.55555556,0.11111111 0.66666667,0.11111111 0.77777778,0.11111111 0.88888889,0.11111111 1,0.11111111 0,0 0.11111111,0
+0.22222222,0 0.33333333,0 0.44444444,0 0.55555556,0 0.66666667,0 0.77777778,0 0.88888889,0 1,0</PointCollection>
+								</MeshGeometry3D.TextureCoordinates>
+							</MeshGeometry3D>
+						</GeometryModel3D.Geometry>
+						<GeometryModel3D.Material>
+							<DiffuseMaterial>
+								<DiffuseMaterial.Brush>
+									<ImageBrush ImageSource="sun-soho-s.jpg" Stretch="Fill"/>
+								</DiffuseMaterial.Brush>
+							</DiffuseMaterial>
+						</GeometryModel3D.Material>
+						<GeometryModel3D.BackMaterial>
+							<EmissiveMaterial Brush="#FF000000"/>
+						</GeometryModel3D.BackMaterial>
+					</GeometryModel3D>
+				</ModelVisual3D.Content>
+			</ModelVisual3D>
+			<ModelVisual3D x:Name="AmbientContainer">
+				<ModelVisual3D.Content>
+					<DirectionalLight x:Name="Ambient" Color="#FF808080" Direction="0,0,-1">
+						<DirectionalLight.Transform>
+							<Transform3DGroup>
+								<TranslateTransform3D OffsetX="0" OffsetY="0" OffsetZ="0"/>
+								<ScaleTransform3D ScaleX="1" ScaleY="1" ScaleZ="1"/>
+								<RotateTransform3D d:EulerAngles="0,0,0"/>
+								<TranslateTransform3D OffsetX="0" OffsetY="0" OffsetZ="0"/>
+								<TranslateTransform3D OffsetX="0" OffsetY="0" OffsetZ="0"/>
+							</Transform3DGroup>
+						</DirectionalLight.Transform>
+					</DirectionalLight>
+				</ModelVisual3D.Content>
+			</ModelVisual3D>
+			<ModelVisual3D x:Name="DirectionalContainer">
+				<ModelVisual3D.Content>
+					<DirectionalLight x:Name="Directional" Color="#FF7F7F7F" Direction="0,0,-1">
+						<DirectionalLight.Transform>
+							<Transform3DGroup>
+								<TranslateTransform3D OffsetX="0" OffsetY="0" OffsetZ="0"/>
+								<ScaleTransform3D ScaleX="1" ScaleY="1" ScaleZ="1"/>
+								<RotateTransform3D d:EulerAngles="0,0,0"/>
+								<TranslateTransform3D OffsetX="0" OffsetY="0" OffsetZ="0"/>
+								<TranslateTransform3D OffsetX="0" OffsetY="0" OffsetZ="3"/>
+							</Transform3DGroup>
+						</DirectionalLight.Transform>
+					</DirectionalLight>
+				</ModelVisual3D.Content>
+			</ModelVisual3D>
+		</Viewport3D>
+		<Label FontSize="90" FontFamily="Viner Hand ITC" Width="297.6" Height="167.2" Canvas.Left="111.2" Canvas.Top="167.2" x:Name="Label" Content="Feed" Foreground="#FF000000" RenderTransformOrigin="0.5,0.5" OpacityMask="{x:Null}">
+			<Label.RenderTransform>
+				<TransformGroup>
+					<TranslateTransform X="0" Y="0"/>
+					<ScaleTransform ScaleX="1" ScaleY="1"/>
+					<SkewTransform AngleX="0" AngleY="0"/>
+					<RotateTransform Angle="0"/>
+					<TranslateTransform X="0" Y="0"/>
+					<TranslateTransform X="0" Y="0"/>
+				</TransformGroup>
+			</Label.RenderTransform>
+		</Label>
+		<Label FontSize="90" FontFamily="Viner Hand ITC" Width="283.956666666667" Height="155.283333333333" Canvas.Left="264.2" Canvas.Top="206.4" x:Name="Label1" Content="Fusion" Foreground="#FFFFEBCB"/>
+	</Canvas>
+</Grid>
