@@ -35,26 +35,6 @@
         </MenuItem>
 			</Menu>
 
-			<Viewport3D x:Name="mainViewport" ClipToBounds="True" Height="0">
-				<Viewport3D.Camera>
-					<PerspectiveCamera 
-					  FarPlaneDistance="1000"
-					  LookDirection="-11,-10,-9"
-					  UpDirection="0,1,0"
-					  NearPlaneDistance="1" 
-					  Position="11,10,9" 
-					  FieldOfView="70" />
-				</Viewport3D.Camera>
-				<ModelVisual3D>
-					<ModelVisual3D.Content>
-						<DirectionalLight 
-						 Color="White" 
-						 Direction="-2,-3,-1" />
-					</ModelVisual3D.Content>
-				</ModelVisual3D>
-			</Viewport3D>
-
-
 
 
 			<ToolBarPanel Width="Auto" Height="30" x:Name="ToolBarPanel" HorizontalAlignment="Stretch">
@@ -71,36 +51,39 @@
 		
 		<TabControl x:Name="tabs" DockPanel.Dock="Left"  Width="Auto" MinWidth="300" MaxWidth="300" Style="{DynamicResource TabControl}">
 			<TabItem Header="Categories" Opacity="0.99999999999999889" Visibility="Visible" Style="{DynamicResource TabItem}">
-        <TreeView    Width="300"  x:Name="treeView1" Style="{DynamicResource TreeView}">
-					<TreeView.ContextMenu>
+        <ListBox    Width="300"  x:Name="treeView1" Style="{DynamicResource TreeView}">
+					<ListBox.ContextMenu>
 						<ContextMenu x:Name="contextMenu">
               <MenuItem Header="Rename" Click="treeView1_ContextMenuRename" />
               <MenuItem Header="Remove" Click="treeView1_ContextMenuRemove" />
             </ContextMenu>
-					</TreeView.ContextMenu>
-				</TreeView>
+					</ListBox.ContextMenu>
+				</ListBox>
 			</TabItem>
-
-    <TabItem x:Name="TabItem" Header="Animation" Style="{DynamicResource TabItem}">
-      <StackPanel x:Name="StackPanel" Style="{DynamicResource StackPanel}" CanHorizontallyScroll="True" />
-    </TabItem>
     </TabControl>
-
-    <StackPanel CanVerticallyScroll="True" CanHorizontallyScroll="True" Style="{DynamicResource StackPanel}">
-      <DockPanel x:Name="DockPanel1" LastChildFill="False" Style="{DynamicResource DockPanel}">
-        <TextBox x:Name="txtSearch" Width="489.6" Height="25.2766666666667" MaxWidth="200" MinHeight="25" />
-        <Button x:Name="Button" Content="Search" Style="{DynamicResource Button}"/>
-      </DockPanel>
-      <ListBox x:Name="listBox1" Height="Auto" MinHeight="200" MaxHeight="200" Style="{DynamicResource ListBox}"/>
-      <Separator MinHeight="0" x:Name="Separator1"/>
-      <WindowsFormsHost  x:Name="hh" Height ="Auto" MinHeight="500" d:IsHidden="True">
-        <wf:WebBrowser Name="browser"/>
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="100"></RowDefinition>
+        <RowDefinition Height="*"></RowDefinition>
+        <RowDefinition Height="100"></RowDefinition>
+        <RowDefinition Height="100"></RowDefinition>
+      </Grid.RowDefinitions> 
+      
+      <StackPanel  Grid.Row="0"  CanVerticallyScroll="True" CanHorizontallyScroll="True" Style="{DynamicResource StackPanel}">
+               <DockPanel  x:Name="DockPanel1" LastChildFill="False" Style="{DynamicResource DockPanel}">
+                  <TextBox x:Name="txtSearch" Width="489.6" Height="25.2766666666667" MaxWidth="200" MinHeight="25" />
+                  <Button x:Name="Button" Content="Search" Style="{DynamicResource Button}"/>
+              </DockPanel>
+              <ListBox  x:Name="listBox1" Height="Auto" MinHeight="50" MaxHeight="50" Style="{DynamicResource ListBox}"/>
+      </StackPanel>
+      
+      <WindowsFormsHost Grid.Row="1" x:Name="hh" Height ="Auto" MinHeight="500" d:IsHidden="True">
+          <wf:WebBrowser Name="browser"/>
       </WindowsFormsHost>
-      <Separator MinHeight="0" x:Name="Separator"/>
-      <ProgressBar x:Name="progressBar" Height="Auto" MinHeight="20" Width="Auto" Style="{DynamicResource ProgressBar}"/>
-      <StatusBar x:Name="statusBar" />
-    </StackPanel>
-		
+      <StatusBar Grid.Row="3" x:Name="statusBar" Background="Blue" />
+      <ProgressBar Grid.Row="2" x:Name="progressBar" Height="Auto" MinHeight="20" Width="Auto" Style="{DynamicResource ProgressBar}"/>
+
+    </Grid>
 	</DockPanel>
 
 </Window>

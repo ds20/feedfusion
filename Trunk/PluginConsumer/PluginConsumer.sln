@@ -50,8 +50,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClipboardMonitor", "..\Clip
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrayMinimiser", "..\TrayMinimiser\TrayMinimiser.csproj", "{3A051400-AF37-418C-897D-D27106068C84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "firstscene", "..\firstscene\firstscene.csproj", "{74D9E7C2-9A65-4AD0-95C2-CBE78DB904EA}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -106,10 +104,6 @@ Global
 		{3A051400-AF37-418C-897D-D27106068C84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A051400-AF37-418C-897D-D27106068C84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A051400-AF37-418C-897D-D27106068C84}.Release|Any CPU.Build.0 = Release|Any CPU
-		{74D9E7C2-9A65-4AD0-95C2-CBE78DB904EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{74D9E7C2-9A65-4AD0-95C2-CBE78DB904EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{74D9E7C2-9A65-4AD0-95C2-CBE78DB904EA}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{74D9E7C2-9A65-4AD0-95C2-CBE78DB904EA}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
