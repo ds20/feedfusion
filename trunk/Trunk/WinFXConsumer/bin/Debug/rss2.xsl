@@ -22,7 +22,7 @@
 
         <xsl:for-each select="rss/channel/item">
           <xsl:variable name="stl">
-            <xsl:text/>background-color: blue; 
+            <xsl:text/>background-color: maroon; 
                 border: 1px solid #cfcfcf;padding: 0em 1em 0em; margin:
             <xsl:text/>
             <xsl:choose>
