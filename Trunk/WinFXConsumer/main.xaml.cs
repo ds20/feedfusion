@@ -34,9 +34,10 @@ namespace WinFXConsumer
             l=new Label();
             
             Grid headerPanel = new Grid();
+            headerPanel.BitmapEffect =new System.Windows.Media.Effects.DropShadowBitmapEffect();      
             headerPanel.RowDefinitions.Add(new RowDefinition() );
             ColumnDefinition clm = new ColumnDefinition();
-            clm.Width = new GridLength(10);
+            clm.Width = new GridLength(100);
             headerPanel.ColumnDefinitions.Add(clm);   
             headerPanel.ColumnDefinitions.Add(new ColumnDefinition());   
             l.Content=s;
@@ -66,11 +67,12 @@ namespace WinFXConsumer
             //set image source
             myImage.Source = myBitmapImage; 
   
-            headerPanel.Children.Add(myImage );   
+            headerPanel.Children.Add(myImage );
+            myImage.HorizontalAlignment = HorizontalAlignment.Center ;   
             Grid.SetColumn(l, 1);
-            l.Width = w * 16 / 17;
-            l.HorizontalAlignment = HorizontalAlignment.Center;
-            l.HorizontalContentAlignment = HorizontalAlignment.Center;
+            l.Width = w * 16 / 17-100;
+            l.HorizontalAlignment = HorizontalAlignment.Left;
+            l.HorizontalContentAlignment = HorizontalAlignment.Left ;
             this.Children.Add(headerPanel); 
             sp=new StackPanel();
             sp.Visibility = Visibility.Collapsed;   
@@ -94,10 +96,10 @@ namespace WinFXConsumer
         {
             
             Expander exp = new Expander();
-            exp.Width = l.Width*9/10;
+            exp.Width = l.Width*9/10+100;
             Grid itemStack = new Grid();
             ColumnDefinition clm = new ColumnDefinition();
-            clm.Width= new System.Windows.GridLength(exp.Width/2-10);
+            clm.Width= new System.Windows.GridLength(exp.Width*2/3-65);
             itemStack.ColumnDefinitions.Add(clm );
             itemStack.ColumnDefinitions.Add(new ColumnDefinition());
             itemStack.RowDefinitions.Add(new RowDefinition());
@@ -197,7 +199,7 @@ namespace WinFXConsumer
     public partial class Window1 : Window
     {  
 
-        System.Windows.Forms.WebBrowser browser;
+        
         FeedDB dataBase;
         pluginManager pManager;
         int simultaneousDownloads;
@@ -444,8 +446,7 @@ namespace WinFXConsumer
             //dataBase.removeAllHistory();
             dataBase.getHistory("nu exista");
             tabs.TabStripPlacement = Dock.Bottom;
-            browser = (System.Windows.Forms.WebBrowser)hh.Child;
-            browser.Navigate("http://www.google.ro/firefox?client=firefox-a&rls=org.mozilla:en-US:official");
+
             this.Closing += window1_close;
             dataBase.delegCatFeedChanged += ListRefresh;
             button5.Click += button5_Click;
@@ -546,18 +547,26 @@ namespace WinFXConsumer
                 }
                 i++;
             }
-            if (!gasit) setBrowserDocumentText("<html><body><h2><font color=\"red\">Nu exista plugin pentru acest tip de RSS.</font></h2></body></html>");
+            if (!gasit) setBrowserDocumentText("<html><body><h2><font color=\"red\">There is no plugin installed for this RSS type.</font></h2></body></html>");
         }
 
         delegate void DelegSetDocumentText(Object parsedHTML_o);
         void setBrowserDocumentText(Object parsedHTML_o)
         {
-            if (browser.InvokeRequired){
-                DelegSetDocumentText delegForBrowser = setBrowserDocumentText;
-                browser.Invoke(delegForBrowser, parsedHTML_o);
-            }
-            else
-                browser.DocumentText = (String)parsedHTML_o;
+            //if (browser.InvokeRequired)
+            //{
+            //    DelegSetDocumentText delegForBrowser = setBrowserDocumentText;
+            //    browser.Invoke(delegForBrowser, parsedHTML_o);
+            //}
+            //else
+            //{
+                TextWriter  f = new StreamWriter(Environment.CurrentDirectory + "\\temp.htm");
+
+                f.Write((string)parsedHTML_o);
+                f.Close();
+                browser.Source = new Uri(Environment.CurrentDirectory + "\\temp.htm");
+
+            //}
         }
 
         private XmlDocument downloadFeed2(String url)

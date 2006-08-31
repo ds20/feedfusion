@@ -51,7 +51,7 @@
 		
 		<TabControl x:Name="tabs" DockPanel.Dock="Left"  Width="Auto" MinWidth="300" MaxWidth="300" Style="{DynamicResource TabControl}">
 			<TabItem Header="Categories" Opacity="0.99999999999999889" Visibility="Visible" Style="{DynamicResource TabItem}">
-        <ListBox    Width="300"  x:Name="treeView1" Style="{DynamicResource TreeView}">
+        <ListBox    Width="300"  x:Name="categoryList" Style="{DynamicResource TreeView}">
 					<ListBox.ContextMenu>
 						<ContextMenu x:Name="contextMenu">
               <MenuItem Header="Rename" Click="treeView1_ContextMenuRename" />
@@ -76,10 +76,7 @@
               </DockPanel>
               <ListBox  x:Name="listBox1" Height="Auto" MinHeight="50" MaxHeight="50" Style="{DynamicResource ListBox}"/>
       </StackPanel>
-      
-      <WindowsFormsHost Grid.Row="1" x:Name="hh" Height ="Auto" MinHeight="500" d:IsHidden="True">
-          <wf:WebBrowser Name="browser"/>
-      </WindowsFormsHost>
+      <Frame Name="browser" Grid.Row="1"  Height ="Auto" MinHeight="500"/>
       <StatusBar Grid.Row="3" x:Name="statusBar" Background="Blue" />
       <ProgressBar Grid.Row="2" x:Name="progressBar" Height="Auto" MinHeight="20" Width="Auto" Style="{DynamicResource ProgressBar}"/>
 
