@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using PluginInterface;
 using System.Xml;
-using System.Windows.Forms;
 using System.IO;
 using System.Xml.Xsl;
 

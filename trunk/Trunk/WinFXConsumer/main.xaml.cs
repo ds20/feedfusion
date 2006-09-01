@@ -32,7 +32,7 @@ namespace WinFXConsumer
             this.HorizontalAlignment = HorizontalAlignment.Left;   
             this.Background = Brushes.WhiteSmoke;   
             l=new Label();
-            
+            l.BitmapEffect = new System.Windows.Media.Effects.EmbossBitmapEffect();  
             Grid headerPanel = new Grid();
             headerPanel.BitmapEffect =new System.Windows.Media.Effects.DropShadowBitmapEffect();      
             headerPanel.RowDefinitions.Add(new RowDefinition() );
@@ -53,8 +53,8 @@ namespace WinFXConsumer
 
             // BitmapImage.UriSource must be in a BeginInit/EndInit block
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(@"C:\s.jpg");
-
+            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory+@"\cat1.jpg"  );
+            
             // To save significant application memory, set the DecodePixelWidth or  
             // DecodePixelHeight of the BitmapImage value of the image source to the desired 
             // height or width of the rendered image. If you don't do this, the application will 
@@ -761,7 +761,7 @@ namespace WinFXConsumer
             {
                 progressBar.Value = progressBar.Value + 1;
                 if (progressBar.Maximum == progressBar.Value)
-                    progressBar.Opacity = 0;
+                    progressBar.Visibility  = Visibility.Hidden ;
             }
         }
 
