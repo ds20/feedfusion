@@ -10,7 +10,7 @@ using PluginInterface;
 using System.Resources;
 using System.Reflection;
 using System.Xml.Schema;
-using System.Windows.Forms;
+//using System.Windows.Forms;
 
 namespace Opml
 {

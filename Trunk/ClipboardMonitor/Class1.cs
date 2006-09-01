@@ -347,6 +347,24 @@ namespace ClipboardMonitor
             }
         }
 
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // Monitor
+            // 
+            this.ClientSize = new System.Drawing.Size(292, 266);
+            this.Name = "Monitor";
+            this.Load += new System.EventHandler(this.Monitor_Load);
+            this.ResumeLayout(false);
+
+        }
+
+        private void Monitor_Load(object sender, EventArgs e)
+        {
+
+        }
+
  
     }
 }

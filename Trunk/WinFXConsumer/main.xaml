@@ -63,22 +63,25 @@
     </TabControl>
     <Grid>
       <Grid.RowDefinitions>
-        <RowDefinition Height="100"></RowDefinition>
+        <RowDefinition Height="70"></RowDefinition>
         <RowDefinition Height="*"></RowDefinition>
         <RowDefinition Height="100"></RowDefinition>
-        <RowDefinition Height="100"></RowDefinition>
-      </Grid.RowDefinitions> 
+        <RowDefinition Height="10"></RowDefinition>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition ></ColumnDefinition>
+      </Grid.ColumnDefinitions> 
       
-      <StackPanel  Grid.Row="0"  CanVerticallyScroll="True" CanHorizontallyScroll="True" Style="{DynamicResource StackPanel}">
-               <DockPanel  x:Name="DockPanel1" LastChildFill="False" Style="{DynamicResource DockPanel}">
-                  <TextBox x:Name="txtSearch" Width="489.6" Height="25.2766666666667" MaxWidth="200" MinHeight="25" />
-                  <Button x:Name="Button" Content="Search" Style="{DynamicResource Button}"/>
-              </DockPanel>
-              <ListBox  x:Name="listBox1" Height="Auto" MinHeight="50" MaxHeight="50" Style="{DynamicResource ListBox}"/>
+      <StackPanel  Grid.Row="0" Grid.Column="0"  CanVerticallyScroll="True" CanHorizontallyScroll="True" Style="{DynamicResource StackPanel}">
+        <DockPanel  x:Name="DockPanel1" LastChildFill="False" Style="{DynamicResource DockPanel}">
+          <TextBox x:Name="txtSearch" Width="489.6" Height="25.2766666666667" MaxWidth="200" MinHeight="25" />
+          <Button x:Name="Button" Content="Search" Style="{DynamicResource Button}"/>
+        </DockPanel>
+        <ListBox  x:Name="listBox1" Height="Auto" MinHeight="50" MaxHeight="50" Style="{DynamicResource ListBox}"/>
       </StackPanel>
-      <Frame Name="browser" Grid.Row="1"  Height ="Auto" MinHeight="500"/>
-      <StatusBar Grid.Row="3" x:Name="statusBar" Background="Blue" />
-      <ProgressBar Grid.Row="2" x:Name="progressBar" Height="Auto" MinHeight="20" Width="Auto" Style="{DynamicResource ProgressBar}"/>
+      <Frame Name="browser" Grid.Column="0" Grid.Row="1" />
+      <StatusBar Grid.Row="2" Grid.Column="0" x:Name="statusBar" Background="Blue" />
+      <ProgressBar Grid.Row="3" Grid.Column="0" x:Name="progressBar" Height="10" Width="Auto" Style="{DynamicResource ProgressBar}"/>
 
     </Grid>
 	</DockPanel>
