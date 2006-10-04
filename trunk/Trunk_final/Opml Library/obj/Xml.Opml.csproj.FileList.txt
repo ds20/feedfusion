@@ -1,9 +1,0 @@
-bin\Debug\Xml.Opml.dll
-bin\Debug\Xml.Opml.pdb
-bin\Debug\PresentationCore.dll
-bin\Debug\System.Printing.dll
-obj\Debug\ResolveAssemblyReference.cache
-obj\Debug\Xml.Opml.dll
-obj\Debug\Xml.Opml.pdb
-bin\Debug\System.Printing.xml
-bin\Debug\PresentationCore.xml
