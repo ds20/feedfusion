@@ -1,0 +1,13 @@
+bin\Debug\ClipboardMonitor.dll
+bin\Debug\ClipboardMonitor.pdb
+bin\Debug\PluginInterface.dll
+bin\Debug\PresentationCore.dll
+bin\Debug\System.Printing.dll
+bin\Debug\PluginInterface.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\ClipboardMonitor.Monitor.resources
+obj\Debug\ClipboardMonitor.csproj.GenerateResource.Cache
+obj\Debug\ClipboardMonitor.dll
+obj\Debug\ClipboardMonitor.pdb
+bin\Debug\System.Printing.xml
+bin\Debug\PresentationCore.xml

@@ -1,0 +1,11 @@
+bin\Debug\MikeRSS2Plugin.dll
+bin\Debug\MikeRSS2Plugin.pdb
+bin\Debug\PluginInterface.dll
+bin\Debug\PresentationCore.dll
+bin\Debug\System.Printing.dll
+bin\Debug\PluginInterface.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\MikeRSS2Plugin.dll
+obj\Debug\MikeRSS2Plugin.pdb
+bin\Debug\System.Printing.xml
+bin\Debug\PresentationCore.xml

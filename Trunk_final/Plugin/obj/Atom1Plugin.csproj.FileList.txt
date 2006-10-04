@@ -1,0 +1,13 @@
+bin\Debug\Plugin.dll
+bin\Debug\Plugin.pdb
+bin\Debug\PluginInterface.dll
+bin\Debug\PresentationCore.dll
+bin\Debug\System.Printing.dll
+bin\Debug\PluginInterface.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\Plugin.Properties.Resource1.resources
+obj\Debug\Atom1Plugin.csproj.GenerateResource.Cache
+obj\Debug\Plugin.dll
+obj\Debug\Plugin.pdb
+bin\Debug\PresentationCore.xml
+bin\Debug\System.Printing.xml
