@@ -1,0 +1,9 @@
+bin\Debug\PluginInterface.dll
+bin\Debug\PluginInterface.pdb
+bin\Debug\PresentationCore.dll
+bin\Debug\System.Printing.dll
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\PluginInterface.dll
+obj\Debug\PluginInterface.pdb
+bin\Debug\PresentationCore.xml
+bin\Debug\System.Printing.xml

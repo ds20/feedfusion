@@ -1,0 +1,14 @@
+bin\Debug\Rss1plugin.dll
+bin\Debug\Rss1plugin.pdb
+bin\Debug\PluginInterface.dll
+bin\Debug\PresentationCore.dll
+bin\Debug\PresentationDesignDeveloper.DLL
+bin\Debug\PresentationDesignCore.dll
+bin\Debug\PresentationDesignFramework.dll
+bin\Debug\System.Printing.dll
+bin\Debug\PluginInterface.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\Rss1plugin.dll
+obj\Debug\Rss1plugin.pdb
+bin\Debug\System.Printing.xml
+bin\Debug\PresentationCore.xml
