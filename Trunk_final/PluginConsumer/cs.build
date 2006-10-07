@@ -1,0 +1,31 @@
+<project name="Solution Build Example" default="rebuild">
+    <property name="configuration" value="release"/>
+    
+    <target name="clean" description="Delete all previously compiled binaries.">
+        <delete>
+            <fileset>
+                <include name="**/bin/**" />
+                <include name="**/obj/**" />
+                <include name="**/*.suo" />
+                <include name="**/*.user" />
+            </fileset>
+        </delete>
+    </target>
+    
+    <target name="build" description="Build all targets.">
+        <call target="build.winforms"/>
+    </target>
+    
+    <target name="rebuild" depends="clean, build" />
+
+    <target name="build.winforms">
+	<csc target="exe" output="bin/Simple.exe">
+            <sources>
+                <include name="Program.cs" />
+		<include name="Form1.cs"/>
+		<include name="Form1.Designer.cs" />
+            </sources>
+        </csc>
+    </target>
+    
+</project>
