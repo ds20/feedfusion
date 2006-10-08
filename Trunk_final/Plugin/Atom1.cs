@@ -37,9 +37,9 @@ namespace Plugin
 
         public Atom1()
         {
-            fileName = Environment.CurrentDirectory+"\\www.rss";
-            htmlName = Environment.CurrentDirectory + "\\www.htm";
-            xslName = Environment.CurrentDirectory + "\\atom1.xsl";
+            fileName = Environment.CurrentDirectory+"\\Plugins\\www.rss";
+            htmlName = Environment.CurrentDirectory + "\\Plugins\\www.htm";
+            xslName = Environment.CurrentDirectory + "\\Plugins\\atom1.xsl";
             oldtitlecolor = "maroon";
             oldbackgroundcolor = "#efeff5";
         }

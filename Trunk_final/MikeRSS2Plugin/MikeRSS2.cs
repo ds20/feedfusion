@@ -1,4 +1,5 @@
 using System;
+using System.Reflection; 
 using System.Collections.Generic;
 using System.Text;
 using PluginInterface;
@@ -18,9 +19,9 @@ namespace MikeRSS2Plugin
 
         public MikeRSS2()
         {
-            fileName = "MikeRSS2.rss";
-            htmlName = "MikeRSS2.html";
-            xslName = "MikeRSS2.xsl";
+            fileName = Environment.CurrentDirectory +"\\Plugins\\MikeRSS2.rss";
+            htmlName = Environment.CurrentDirectory + "\\Plugins\\MikeRSS2.html";
+            xslName = Environment.CurrentDirectory + "\\Plugins\\MikeRSS2.xsl";
         }
 
         public void getDataBase(DataBaseEngine data)

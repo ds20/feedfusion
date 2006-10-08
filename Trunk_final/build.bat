@@ -1,3 +1,3 @@
+@echo off
 "nant"
 pause
-"nant"

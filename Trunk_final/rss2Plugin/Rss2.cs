@@ -40,6 +40,7 @@ namespace rss2
         public void loadWindow()
         {           
             win = new System.Windows.Window();
+            win.Title = "Rss2 Plugin Configuration Window";
             win.Width = 400;
             win.Height = 200;
 
@@ -255,11 +256,11 @@ namespace rss2
         public void addToToolbar(System.Windows.Controls.ToolBar ToolBar)
         {
             System.Windows.Controls.Button toolbtn = new System.Windows.Controls.Button();
-            toolbtn.Content = "ggg";
+            toolbtn.ToolTip  = "Shows the Rss2 Plugin Configuration Window";
             Image im = new Image();
             BitmapImage bi = new BitmapImage();
             bi.BeginInit();
-            bi.UriSource = new Uri(Environment.CurrentDirectory + "\\rss2.jpg");
+            bi.UriSource = new Uri(Environment.CurrentDirectory + "\\icons\\textEdit.ico");
             bi.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
             bi.CacheOption = BitmapCacheOption.OnLoad;
             bi.EndInit();
