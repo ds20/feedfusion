@@ -153,11 +153,11 @@ namespace syncroniserFusion
         public void addToToolbar(System.Windows.Controls.ToolBar ToolBar)
         {
             System.Windows.Controls.Button btn = new System.Windows.Controls.Button();
-
+            btn.ToolTip = "Opens Plugin Configuration Window";
             Image im = new Image();
             BitmapImage bi = new BitmapImage();
             bi.BeginInit();
-            bi.UriSource = new Uri(Environment.CurrentDirectory + "\\Sync.jpg");
+            bi.UriSource = new Uri(Environment.CurrentDirectory + "\\icons\\webbrowser.ico");
             bi.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
             bi.CacheOption = BitmapCacheOption.OnLoad;
             bi.EndInit();

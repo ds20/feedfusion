@@ -1,0 +1,82 @@
+<Window x:Class="WinFXConsumer.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+    Title="FeedFusion RSS Reader" Height="592" Width="796" WindowState="Normal" xmlns:d="http://schemas.microsoft.com/expression/interactivedesigner/2006" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" Foreground="sc#1, 0, 0, 0">
+  
+
+
+  <DockPanel LastChildFill="True" x:Name="DockPanel" Style="{DynamicResource DockPanel}">
+
+    <StackPanel DockPanel.Dock="Top" CanVerticallyScroll="False" CanHorizontallyScroll="False">
+      <Menu   HorizontalAlignment="Stretch"  VerticalAlignment="Top"  Height="24.0046839859362"   BorderBrush="sc#1, 0.09835641, 0.128208637, 0.1635694" RenderTransformOrigin="0.5,0.5">
+				
+        
+        <MenuItem Header="_File" Style="{DynamicResource Item}">
+                    
+          <MenuItem Header="Manage Feeds" x:Name="button5" Style="{DynamicResource Item}" />
+          <MenuItem Header="Import/Export" x:Name="button7" Style="{DynamicResource Item}"/>
+        </MenuItem>
+        <MenuItem Header="_Options" Style="{DynamicResource Item}">
+          <MenuItem Header="_Change skin" x:Name="btnO" Style="{DynamicResource Item}"/>         
+					<MenuItem Header="_Plugin Options" x:Name="button6" Style="{DynamicResource Item}"/>
+          <MenuItem Header="_Program Options" x:Name="btnProgramOptions" Style="{DynamicResource Item}"/>
+        </MenuItem>
+        <MenuItem Header="_Help" Style="{DynamicResource Item}">
+          <MenuItem Header="_About" x:Name="button8" Style="{DynamicResource Item}"/>
+        </MenuItem>
+        
+			</Menu>
+
+
+
+			<ToolBarTray  Width="Auto" Height="Auto" x:Name="ToolBarPanel" >
+				  <ToolBar   x:Name="ToolBar" Height="30"  Width="Auto" Opacity="1" />
+        <!-- Style="{DynamicResource ToolBar}" WAS REMOVED BRUTALLY!-->
+			</ToolBarTray>
+      <!--Style="{DynamicResource Button}"-->
+
+
+
+    </StackPanel>
+		
+		<TabControl x:Name="tabs" DockPanel.Dock="Left"  Width="Auto" MinWidth="300" MaxWidth="300" Style="{DynamicResource TabControl}">
+			<TabItem Header="Categories" Opacity="1" Visibility="Visible" Style="{DynamicResource TabItem}">
+        <ListBox    Width="300"  x:Name="categoryList" Style="{DynamicResource TreeView}" Opacity="0.8">
+					<ListBox.ContextMenu>
+						<ContextMenu x:Name="contextMenu">
+              <MenuItem Header="Rename" Click="treeView1_ContextMenuRename" />
+              <MenuItem Header="Remove" Click="treeView1_ContextMenuRemove" />
+            </ContextMenu>
+					</ListBox.ContextMenu>
+				</ListBox>
+			</TabItem>
+      <TabItem Header="History" Style="{DynamicResource TabItem}" Opacity="0.8">
+        <DockPanel    Style="{DynamicResource StackPanel}">
+          <WrapPanel  DockPanel.Dock ="Top" x:Name="DockPanel1"  Style="{DynamicResource DockPanel}">
+            <TextBox x:Name="txtSearch" Width="489.6" Height="25.2766666666667" MaxWidth="200" MinHeight="25" />
+            <Button x:Name="Button" Content="Search" Style="{DynamicResource Button}"/>
+          </WrapPanel>
+          <ListBox DockPanel.Dock ="Bottom" x:Name="listBox1" Height="Auto" Style="{DynamicResource ListBox}"/>
+        </DockPanel>
+      </TabItem>
+    </TabControl>
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*"></RowDefinition>
+        <RowDefinition Height="15"></RowDefinition>
+        <RowDefinition Height="10"></RowDefinition>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition ></ColumnDefinition>
+      </Grid.ColumnDefinitions> 
+      
+
+      <Frame Name="browser" Grid.Column="0" Grid.Row="0" BorderThickness="0,0,0,0" BorderBrush="#FFFF0000" JournalOwnership="OwnsJournal" ContextMenuService.HasDropShadow="False" NavigationUIVisibility="Visible" HorizontalContentAlignment="Stretch" />
+      <StatusBar Grid.Row="1" Grid.Column="0" x:Name="statusBar" Background="#FFFFFFFF" Visibility="Collapsed" />
+      <ProgressBar Grid.Row="2" Grid.Column="0" x:Name="progressBar" Height="10" Width="Auto" Style="{DynamicResource ProgressBar}"/>
+
+    </Grid>
+	</DockPanel>
+
+</Window>
