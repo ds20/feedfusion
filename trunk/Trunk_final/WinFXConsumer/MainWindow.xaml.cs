@@ -14,7 +14,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Controls.Primitives;   
 using System.Windows.Media.Media3D;
-//using System.Drawing;
+
 using System.Windows.Media;
 using System.Windows.Markup;
 using System.Windows.Media.Imaging;  
@@ -65,9 +65,14 @@ namespace WinFXConsumer
             sp=new StackPanel();
             sp.Visibility = Visibility.Collapsed;   
             this.Children.Add(sp);  
-            this.MouseLeave += new System.Windows.Input.MouseEventHandler(ListHeader_MouseLeave);
             this.MouseEnter += new System.Windows.Input.MouseEventHandler(ListHeader_MouseEnter);
+            this.MouseUp += new System.Windows.Input.MouseButtonEventHandler(ListHeader_MouseUp); 
             
+        }
+
+        void ListHeader_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            sp.Visibility = Visibility.Collapsed;
         }
 
         void ListHeader_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
@@ -75,94 +80,9 @@ namespace WinFXConsumer
             sp.Visibility = Visibility.Visible; 
         }
 
-        void ListHeader_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            sp.Visibility = Visibility.Collapsed;  
-        }
 
-        public void Add(XmlFeed feed,System.Windows.RoutedEventHandler handler)
-        {
-            
-            Expander exp = new Expander();
-            exp.Width = l.Width*9/10+100;
-            Grid itemStack = new Grid();
-            ColumnDefinition clm = new ColumnDefinition();
-            clm.Width= new System.Windows.GridLength(exp.Width*2/3-65);
-            itemStack.ColumnDefinitions.Add(clm );
-            itemStack.ColumnDefinitions.Add(new ColumnDefinition());
-            itemStack.RowDefinitions.Add(new RowDefinition());
-            itemStack.RowDefinitions.Add(new RowDefinition());
-            itemStack.RowDefinitions.Add(new RowDefinition());
-            exp.HorizontalContentAlignment = HorizontalAlignment.Right;
-            exp.HorizontalAlignment = HorizontalAlignment.Center ;
-            exp.BorderThickness = new Thickness(1);
-            exp.BorderBrush = Brushes.Gray;
-            Button feedbtn = new Button();
-            feedbtn.Click += handler;
-            feedbtn.Background = Brushes.Transparent;
-            feedbtn.BorderBrush = Brushes.Transparent;
-            feedbtn.FontSize = 16;
-            feedbtn.Foreground = Brushes.SteelBlue; 
-            feedbtn.Content = feed; 
-            exp.Header = feedbtn;
-            exp.Content = itemStack;
-            sp.Children.Add(exp);            
-           
-            TextBox b = new TextBox();
-            b.Background = Brushes.Transparent;
-            b.BorderThickness = new Thickness(0);  
-            b.Width = exp.Width / 2-1;
-            b.Foreground = Brushes.BlueViolet;
-            b.HorizontalAlignment = HorizontalAlignment.Right;
-            b.HorizontalContentAlignment = HorizontalAlignment.Left;
-            b.Tag = feed;
-            b.Text = feed.feedName;
 
-            itemStack.Children.Add(b);
-            
-            Grid.SetColumn(b,1);
-            Grid.SetRow(b,0);
-            TextBox bURL = new TextBox();
-            bURL.Background = Brushes.Transparent;
-            bURL.BorderThickness = new Thickness(0);  
-            bURL.Width = exp.Width / 2-1;
-            bURL.Foreground = Brushes.BlueViolet;
-            bURL.HorizontalAlignment = HorizontalAlignment.Right;
-            bURL.HorizontalContentAlignment = HorizontalAlignment.Left;
-            bURL.Tag = feed;
-            bURL.Text = feed.url;
-            itemStack.Children.Add(bURL);
-            Grid.SetColumn(bURL, 1);
-            Grid.SetRow(bURL, 1);
-
-            ComboBox cmb = new ComboBox();
-            cmb.Background = Brushes.Transparent;
-            cmb.BorderThickness = new Thickness(0);  
-            cmb.Width = exp.Width /2-1;
-            cmb.Items.Add(feed.catName);
-            cmb.SelectedIndex = 0; 
-            itemStack.Children.Add(cmb);
-            Grid.SetColumn(cmb,1);
-            Grid.SetRow(cmb,2);
-            Label lblName = new Label();
-            lblName.Content = "Feed name:";
-            itemStack.Children.Add(lblName);
-            Grid.SetColumn(lblName, 0);
-            Grid.SetRow(lblName, 0);
-
-            Label lblAdress = new Label();
-            lblAdress.Content = "Feed adress:";
-            itemStack.Children.Add(lblAdress);
-            Grid.SetColumn(lblAdress, 0);
-            Grid.SetRow(lblAdress, 1);
-
-            Label lblCat = new Label();
-            lblCat.Content = "Category:";
-            itemStack.Children.Add(lblCat);
-            Grid.SetColumn(lblCat, 0);
-            Grid.SetRow(lblCat, 2);
-        }
-
+        
     }
     
 
@@ -188,7 +108,7 @@ namespace WinFXConsumer
         private delegate void DelegShowhist();
         private DelegShowhist delegShowHist;
         
-        MenuItem M, parent;
+        MenuItem M;
         Color color = new Color();
         protected string[] _styleList;
         protected int _styleIndex = 0;
@@ -270,22 +190,129 @@ namespace WinFXConsumer
         }
 
         void populateCategoryList()
-        { 
+        {
+            categoryList.Width = 300; 
             categoryList.Background = Brushes.Transparent;
             categoryList.BorderThickness = new Thickness(0);  
             foreach (string s in dataBase.getCategories())
             {
+                TreeViewItem t=new TreeViewItem();
+                t.MouseUp += new System.Windows.Input.MouseButtonEventHandler(t_MouseUp);
                 
                 ListHeader  dp=new ListHeader(s,categoryList.Width );
+                t.Header=dp;
 
                 foreach (XmlFeed feed in dataBase.getFeeds(s))
                 {
-                    dp.Add(feed, new System.Windows.RoutedEventHandler(b_MouseDown));
+                    Add(t,feed, new System.Windows.RoutedEventHandler(b_MouseDown));
                     
                 }
-                categoryList.Items.Add(dp);
+                categoryList.Items.Add(t); 
             }
         }
+
+        void t_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            ((TreeViewItem)sender).IsExpanded = !((TreeViewItem)sender).IsExpanded;
+        }
+
+
+        public void Add(TreeViewItem  t,XmlFeed feed, System.Windows.RoutedEventHandler handler)
+        {
+
+            
+            Expander exp = new Expander();
+            t.Items.Add(exp);
+            t.Width = categoryList.Width - 50;
+            exp.Width = t.Width-40;
+
+            Grid itemStack = new Grid();
+            ColumnDefinition clm = new ColumnDefinition();
+            clm.Width = new System.Windows.GridLength(exp.Width * 1 / 2);
+            itemStack.ColumnDefinitions.Add(clm);
+            ColumnDefinition clm2 = new ColumnDefinition();
+            clm2.Width = new System.Windows.GridLength(exp.Width * 1 / 2);
+            itemStack.ColumnDefinitions.Add(clm2);
+            itemStack.RowDefinitions.Add(new RowDefinition());
+            itemStack.RowDefinitions.Add(new RowDefinition());
+            itemStack.RowDefinitions.Add(new RowDefinition());
+            exp.HorizontalContentAlignment = HorizontalAlignment.Right;
+            exp.HorizontalAlignment = HorizontalAlignment.Center;
+            exp.BorderThickness = new Thickness(1);
+            exp.BorderBrush = Brushes.Gray;
+            Button feedbtn = new Button();
+            feedbtn.Click += handler;
+            feedbtn.Background = Brushes.Transparent;
+            feedbtn.BorderBrush = Brushes.Transparent;
+            feedbtn.FontSize = 16;
+            feedbtn.Foreground = Brushes.SteelBlue;
+            feedbtn.Content = feed;
+            exp.Header = feedbtn;
+            exp.Content = itemStack;
+            //sp.Children.Add(exp);
+
+            TextBox b = new TextBox();
+            b.Background = Brushes.Transparent;
+            b.BorderThickness = new Thickness(0);
+            b.Width = exp.Width / 2 - 1;
+            b.Foreground = Brushes.BlueViolet;
+            b.HorizontalAlignment = HorizontalAlignment.Right;
+            b.HorizontalContentAlignment = HorizontalAlignment.Left;
+            b.Tag = feed;
+            b.Text = feed.feedName;
+
+            itemStack.Children.Add(b);
+
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, 0);
+            TextBox bURL = new TextBox();
+            bURL.Background = Brushes.Transparent;
+            bURL.BorderThickness = new Thickness(0);
+            bURL.Width = exp.Width / 2 - 1;
+            bURL.Foreground = Brushes.BlueViolet;
+            bURL.HorizontalAlignment = HorizontalAlignment.Right;
+            bURL.HorizontalContentAlignment = HorizontalAlignment.Left;
+            bURL.Tag = feed;
+            bURL.Text = feed.url;
+            itemStack.Children.Add(bURL);
+            Grid.SetColumn(bURL, 1);
+            Grid.SetRow(bURL, 1);
+
+            ComboBox cmb = new ComboBox();
+            cmb.Background = Brushes.Transparent;
+            cmb.BorderThickness = new Thickness(0);
+            cmb.Width = exp.Width / 2 - 1;
+            foreach (string f in dataBase.getCategories())
+            {
+                cmb.Items.Add(f);
+            }
+            cmb.SelectedIndex = 0;
+            itemStack.Children.Add(cmb);
+            Grid.SetColumn(cmb, 1);
+            Grid.SetRow(cmb, 2);
+            Label lblName = new Label();
+            lblName.Content = "Feed name:";
+            itemStack.Children.Add(lblName);
+            Grid.SetColumn(lblName, 0);
+            Grid.SetRow(lblName, 0);
+
+            Label lblAdress = new Label();
+            lblAdress.Content = "Feed adress:";
+            itemStack.Children.Add(lblAdress);
+            Grid.SetColumn(lblAdress, 0);
+            Grid.SetRow(lblAdress, 1);
+
+            Label lblCat = new Label();
+            lblCat.Content = "Category:";
+            itemStack.Children.Add(lblCat);
+            Grid.SetColumn(lblCat, 0);
+            Grid.SetRow(lblCat, 2);
+        }
+
+
+
+
+
 
         void b_MouseDown(object sender, RoutedEventArgs e)
         {
@@ -294,11 +321,6 @@ namespace WinFXConsumer
             t_nou.Start(feed);
             listBox1.SelectedIndex = 0;  
         }
-
-
-  
-
-
 
         private void Tmrcallback1(object o)
         {
@@ -375,7 +397,7 @@ namespace WinFXConsumer
 
         private void menuitem_ContextMenuRemove(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (parent == null)
+            if (true)
             {
                 Thread t = new Thread(new ParameterizedThreadStart(new OneArgDelegate(dataBase.removeCategory)));
                 t.Start(M.Header);
@@ -391,7 +413,7 @@ namespace WinFXConsumer
        
         private void menuitem_ContextMenuRename(Object sender, EventArgs args)
         {
-            if (parent != null)
+            if (true)
             {
                 RenameWindow rw = new RenameWindow(((XmlFeed)(M.Header)).feedName, this._styleList[_styleIndex]);
                 rw.ShowDialog();

@@ -26,7 +26,7 @@ namespace WinFXConsumer
         //
        public  static XmlReader  ParseURL(string strUrl)
         {
-            string s="";
+            //string s="";
             reader = new XmlTextReader(strUrl);
             reader2 =new XmlTextReader(strUrl);
             try

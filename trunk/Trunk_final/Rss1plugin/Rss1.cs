@@ -142,10 +142,10 @@ namespace rss1
 
         public Rss1()
         {
-            fileName = Environment.CurrentDirectory + "\\rss1.rss";
-            htmlName = Environment.CurrentDirectory + "\\rss1.htm";
-            xslName = Environment.CurrentDirectory + "\\rss1.xsl";
-            xsdName = Environment.CurrentDirectory + "\\rss-1_0.xsd";
+            fileName = Environment.CurrentDirectory + "\\Plugins\\rss1.rss";
+            htmlName = Environment.CurrentDirectory + "\\Plugins\\rss1.htm";
+            xslName = Environment.CurrentDirectory + "\\Plugins\\rss1.xsl";
+            xsdName = Environment.CurrentDirectory + "\\Plugins\\rss-1_0.xsd";
             oldtitlecolor = "<h3 style=\"color:"+"maroon"+"\">";
             oldbackgroundcolor = "<xsl:text/>background-color: " + "#efeff5";
         }
