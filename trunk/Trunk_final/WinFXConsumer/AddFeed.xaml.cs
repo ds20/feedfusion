@@ -90,7 +90,7 @@ namespace WinFXConsumer
             
             if (!dataBase.categoryExists(cat) )
             {
-                MessageBoxResult accept = MessageBox.Show("Nu exista categoria dorita de dumneavoastra.Creem?", "?", MessageBoxButton.YesNo);
+                MessageBoxResult accept = MessageBox.Show("The category you desire is not available. Do you wish to create it?", "Option", MessageBoxButton.YesNo,MessageBoxImage.Question );
                 if (accept==MessageBoxResult.Yes) dataBase.addCategory(cat);
                 else
                 {

@@ -26,7 +26,8 @@ namespace ClipboardMonitor
 
         public  Monitor()
         { 
-            RegisterClipboardViewer(); 
+            RegisterClipboardViewer();
+            
         }
         DataBaseEngine data;
         System.Windows.Window win;
@@ -289,7 +290,7 @@ namespace ClipboardMonitor
             win = new System.Windows.Window();
             win.Width = 300;
             win.Height = 200;
-
+            win.Title = "Feedfusion Clipboard Monitor";
             System.Windows.Controls.Label lblUser = new System.Windows.Controls.Label();
             lblUser.Content = "Do you want to add this feed to the database?";
 
@@ -305,11 +306,11 @@ namespace ClipboardMonitor
             System.Windows.Controls.Label lb = new System.Windows.Controls.Label();
             lb.Content = "Category to add to:";
             lb.Width = 280;
-            lb.Height = 20;
+            lb.Height = 25;
 
             listCat = new System.Windows.Controls.ListBox();
             listCat.Width = 280;
-            listCat.Height = 20;
+            listCat.Height = 25;
             if (data != null)
             {
                 string[] cats = data.getCategories();

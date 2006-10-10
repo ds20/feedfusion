@@ -46,8 +46,9 @@ namespace TrayMinimiser
             {
                 //MessageBox.Show("Minimised");
                 ico = new System.Windows.Forms.NotifyIcon();
-                ico.Icon = new Icon(Environment.CurrentDirectory + @"\icon.ico");
-                ico.Text = "jjj"; 
+                owner.ShowInTaskbar = false; 
+                ico.Icon = new Icon(Environment.CurrentDirectory + @"\Icons\icon.ico");
+                ico.Text = "FeedFusion RSS Reader is up and running"; 
                 ico.Visible = true;
                 ico.DoubleClick += new EventHandler(ico_DoubleClick);
             }
@@ -55,6 +56,8 @@ namespace TrayMinimiser
             {
                 if (ico != null)
                     ico.Visible = false;
+                owner.ShowInTaskbar = true; 
+
                 //ico = null;
             }
 

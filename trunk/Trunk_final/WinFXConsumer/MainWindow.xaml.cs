@@ -26,7 +26,6 @@ namespace WinFXConsumer
     {
         StackPanel sp;
         Label l;
-        double w;
         public ListHeader(string s, double w)
         {
             this.HorizontalAlignment = HorizontalAlignment.Left;   
