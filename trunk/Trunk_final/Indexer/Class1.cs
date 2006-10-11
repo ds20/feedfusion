@@ -61,6 +61,7 @@ namespace Indexer
     public class FeedDB:PluginInterface.DataBaseEngine 
     {
         private Object historyLock = new Object(), feedLock = new Object(), catLock = new Object();
+        private List<PluginInterface.EventsClass> EventsVector=new List<PluginInterface.EventsClass>();  
         String dirCat, dirFeed, dirHistory;
         IndexWriter writerCat, writerFeed, writerHistory;
         IndexSearcher searcherCat, searcherFeed, searcherHistory;
@@ -130,6 +131,10 @@ namespace Indexer
             writerCat = new IndexWriter(dirCat, new StandardAnalyzer(), false); //reopen
             if (searcherCat != null) searcherCat.Close();
             searcherCat = new IndexSearcher(dirCat);
+            foreach (PluginInterface.EventsClass ev in EventsVector)
+            {
+                ev.CategoryAdded("UNKNOWN NAME"); 
+            }
             //if (delegCatFeedChanged != null) delegCatFeedChanged();
         }
 
@@ -143,6 +148,10 @@ namespace Indexer
             if (searcherFeed != null) searcherFeed.Close();
             searcherFeed = new IndexSearcher(dirFeed);
             //if (delegCatFeedChanged != null) delegCatFeedChanged();
+            foreach (PluginInterface.EventsClass ev in EventsVector)
+            {
+                ev.NewFeedAdded("UNKNOWN NAME");
+            }
         }
 
         /// <summary>
@@ -162,9 +171,17 @@ namespace Indexer
                 //if (delegHistoryChanged != null) delegHistoryChanged();
                 
                 Thread.CurrentThread.IsBackground = originalBackgroundState;
+                foreach (PluginInterface.EventsClass ev in EventsVector)
+                {
+                    ev.FeedDownloaded("UNKNOWN NAME");
+                }
             }
         }
 
+        public void RegisterEventHandler(PluginInterface.EventsClass ev)
+        { 
+            EventsVector.Add(ev);  
+        }
         /// <summary>
         /// Checks if the specified category exists in the database.
         /// </summary>

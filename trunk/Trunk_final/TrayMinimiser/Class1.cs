@@ -20,9 +20,29 @@ namespace TrayMinimiser
         public void feedChanged(string name, string category)
         { }
 
+        private class Events : PluginInterface.EventsClass
+        {
+            public void FeedDownloaded(string feed) 
+            {
+                DiffuseDlgDemo.Notification nt = new DiffuseDlgDemo.Notification("Feedfuion has an incoming news article.");
+                nt.Show();
+            }
+            public void NewFeedAdded(string feed) 
+            {
+                DiffuseDlgDemo.Notification nt = new DiffuseDlgDemo.Notification("A new news source has successfully been added to FeedFusion.");
+                nt.Show();
+            }
+            public void CategoryAdded(string cat) 
+            {
+                DiffuseDlgDemo.Notification nt = new DiffuseDlgDemo.Notification("A new category has successfully been added to FeedFusion.");
+                nt.Show(); 
+            }
+        }
 
         public void getDataBase(DataBaseEngine data)
         {
+
+            data.RegisterEventHandler(new Events()); 
         }
   
 
@@ -32,8 +52,7 @@ namespace TrayMinimiser
         }
 
         public void setOwner(System.Windows.Window window)
-        {
-            //MessageBox.Show("Owner set");  
+        { 
             owner = window;
             window.StateChanged += new EventHandler(window_StateChanged);
 
