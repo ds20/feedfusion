@@ -11,7 +11,6 @@ namespace PluginInterface
 
         bool canParse();
 
-
         string parsedHTML();
 
         void showConfiguration();
@@ -44,7 +43,16 @@ namespace PluginInterface
         bool addFeed(String catName, String url, String feedName);
 
         bool addFeed(String catName, String url);
+
+        void RegisterEventHandler(EventsClass e);
         
 
+    }
+
+    public interface EventsClass
+    {
+        void FeedDownloaded(string feed);
+        void NewFeedAdded(string feed);
+        void CategoryAdded(string category);
     }
 }
