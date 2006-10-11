@@ -184,7 +184,7 @@ namespace rss2
                          }
                          catch
                          {
-                             MessageBox.Show("Error. Could not open resource for writing.");
+                             MessageBox.Show("Error. Check that you have sufficient privileges and that there is enough disk space.");
                          }
                          break;
                      case "Title":
@@ -244,7 +244,7 @@ namespace rss2
             rm = ResourceManager.CreateFileBasedResourceManager("Plugin.Properties.resource2", System.Environment.CurrentDirectory, null);
             rm.ReleaseAllResources();
             oldtitleitemcolor = rm.GetString("TitleItemColor");
-            oldtitlecolor =  rm.GetString("TitleColor"); 
+            oldtitlecolor = rm.GetString("TitleColor");
             oldbackgroundcolor = rm.GetString("BackgroundColor");
             rm = null;            
         }

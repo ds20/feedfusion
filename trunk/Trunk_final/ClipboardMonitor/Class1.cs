@@ -21,7 +21,7 @@ namespace ClipboardMonitor
 {
     public class Monitor: System.Windows.Forms.Form ,rssInterface 
     {
-
+        System.Windows.Controls.Button b = new System.Windows.Controls.Button();  
 
         public  Monitor()
         { 
@@ -233,7 +233,7 @@ namespace ClipboardMonitor
 
             foreach (Match rm in rxURL.Matches(strClipboardText))
             {
-                loadWindow(strClipboardText);  
+                if (strClipboardText.Contains(".xml") || strClipboardText.Contains(".rss")) loadWindow(strClipboardText);  
             }
 
 
@@ -252,12 +252,33 @@ namespace ClipboardMonitor
         { }
 
         public void showConfiguration()
-        { 
-            loadWindow("");
+        {
+            MessageBox.Show("This function is not currently implemented", "Info", MessageBoxButtons.OK, MessageBoxIcon.Stop);   
         }
 
         public void addToToolbar(System.Windows.Controls.ToolBar ToolBar)
-        {}
+        {
+            System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
+            myImage.Width = 20;
+            myImage.Height = 20;
+            // Create source
+            System.Windows.Media.Imaging.BitmapImage myBitmapImage = new System.Windows.Media.Imaging.BitmapImage();
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\Palantir.ico");
+            myBitmapImage.DecodePixelWidth = 20;
+            myBitmapImage.EndInit();
+            myImage.Source = myBitmapImage;
+            b.Content = myImage;
+            b.ToolTip = "Configures Clipboard Monitor Plugin options.";
+            b.Click += new System.Windows.RoutedEventHandler(b_Click);
+            ToolBar.Items.Add(b); 
+        
+        }
+
+        void b_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            showConfiguration(); 
+        }
 
 
         public void getDataBase(DataBaseEngine data)

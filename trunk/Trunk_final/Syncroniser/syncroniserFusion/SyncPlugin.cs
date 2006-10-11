@@ -157,7 +157,7 @@ namespace syncroniserFusion
             Image im = new Image();
             BitmapImage bi = new BitmapImage();
             bi.BeginInit();
-            bi.UriSource = new Uri(Environment.CurrentDirectory + "\\icons\\webbrowser.ico");
+            bi.UriSource = new Uri(Environment.CurrentDirectory + "\\icons\\ring.ico");
             bi.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
             bi.CacheOption = BitmapCacheOption.OnLoad;
             bi.EndInit();

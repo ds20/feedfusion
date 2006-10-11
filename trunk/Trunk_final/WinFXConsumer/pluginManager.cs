@@ -26,7 +26,7 @@ namespace WinFXConsumer
             data = ndata;
             bar = tb;
             Type myType = Type.GetType("PluginInterface.rssInterface,PluginInterface");
-            if (myType == null) MessageBox.Show("Critical error. Cannot find plugin Interface.");
+            if (myType == null) MessageBox.Show("Cannot find plugin Interface.","Error",MessageBoxButton.OK,MessageBoxImage.Error);
             loadPlugins(Environment.CurrentDirectory+"\\Plugins\\", myType);
         }
 
