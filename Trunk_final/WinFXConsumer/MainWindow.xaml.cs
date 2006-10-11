@@ -440,12 +440,120 @@ namespace WinFXConsumer
         public Window1()
         { 
             InitializeComponent();
+
+
+            Image myImage = new Image();
+            myImage.Width = 20;
+            myImage.Height = 20;
+            // Create source
+            BitmapImage myBitmapImage = new BitmapImage();
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\search.ico");
+            myBitmapImage.DecodePixelWidth = 20;
+            myBitmapImage.EndInit();
+            myImage.Source = myBitmapImage; 
+            WrapPanel wp=new WrapPanel();
+            Label l=new Label();
+            l.Content ="Search";
+            wp.Children.Add(myImage);
+            wp.Children.Add(l);
+            hist.Header = wp;
+
+            myImage = new Image();
+            myImage.Width = 20;
+            myImage.Height = 20;
+            // Create source
+            myBitmapImage = new BitmapImage();
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\cat.ico");
+            myBitmapImage.DecodePixelWidth = 20;
+            myBitmapImage.EndInit();
+            myImage.Source = myBitmapImage;
+            WrapPanel wp2 = new WrapPanel();
+            Label l2 = new Label();
+            l2.Content = "Categories";
+            wp2.Children.Add(myImage);
+            wp2.Children.Add(l2);
+            cats.Header = wp2;
+
+            myImage = new Image();
+            myImage.Width = 20;
+            myImage.Height = 20;
+            // Create source
+            myBitmapImage = new BitmapImage();
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\cat.ico");
+            myBitmapImage.DecodePixelWidth = 20;
+            myBitmapImage.EndInit();
+            myImage.Source = myBitmapImage;
+            button5.Icon = myImage;
+
+            myImage = new Image();
+            myImage.Width = 20;
+            myImage.Height = 20;
+            // Create source
+            myBitmapImage = new BitmapImage();
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\import.ico");
+            myBitmapImage.DecodePixelWidth = 20;
+            myBitmapImage.EndInit();
+            myImage.Source = myBitmapImage;
+            button7.Icon = myImage;
+
+            myImage = new Image();
+            myImage.Width = 20;
+            myImage.Height = 20;
+            // Create source
+            myBitmapImage = new BitmapImage();
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\skin.ico");
+            myBitmapImage.DecodePixelWidth = 20;
+            myBitmapImage.EndInit();
+            myImage.Source = myBitmapImage;
+            btnO.Icon = myImage;
+
+            myImage = new Image();
+            myImage.Width = 20;
+            myImage.Height = 20;
+            // Create source
+            myBitmapImage = new BitmapImage();
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\ring.ico");
+            myBitmapImage.DecodePixelWidth = 20;
+            myBitmapImage.EndInit();
+            myImage.Source = myBitmapImage;
+            button6.Icon = myImage;
+
+            myImage = new Image();
+            myImage.Width = 20;
+            myImage.Height = 20;
+            // Create source
+            myBitmapImage = new BitmapImage();
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\user.ico");
+            myBitmapImage.DecodePixelWidth = 20;
+            myBitmapImage.EndInit();
+            myImage.Source = myBitmapImage;
+            btnProgramOptions.Icon = myImage;
+
+            myImage = new Image();
+            myImage.Width = 20;
+            myImage.Height = 20;
+            // Create source
+            myBitmapImage = new BitmapImage();
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\about.ico");
+            myBitmapImage.DecodePixelWidth = 20;
+            myBitmapImage.EndInit();
+            myImage.Source = myBitmapImage;
+            button8.Icon = myImage;
+
             this.ContentRendered += Window1_ContentRendered;
             Button cc = new Button();
             dataBase = new FeedDB();
  
             //dataBase.removeAllHistory();
-            dataBase.getHistory("nu exista");
+            dataBase.getHistory("threre isn't any");
             this.Closing += window1_close;
             dataBase.delegCatFeedChanged += ListRefresh;
             button5.Click += button5_Click;

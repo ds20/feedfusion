@@ -12,6 +12,10 @@ namespace TrayMinimiser
 
         Window owner;
         System.Windows.Forms.NotifyIcon ico;
+        System.Windows.Controls.Button b = new System.Windows.Controls.Button();
+        System.Windows.Controls.CheckBox ck1 = new System.Windows.Controls.CheckBox();
+        System.Windows.Controls.CheckBox ck2 = new System.Windows.Controls.CheckBox();
+        System.Windows.Controls.CheckBox ck3 = new System.Windows.Controls.CheckBox();
 
         public void TrayMinimiser()
         {}
@@ -20,11 +24,11 @@ namespace TrayMinimiser
         public void feedChanged(string name, string category)
         { }
 
-        private class Events : PluginInterface.EventsClass
+        public class Events : PluginInterface.EventsClass
         {
             public void FeedDownloaded(string feed) 
             {
-                DiffuseDlgDemo.Notification nt = new DiffuseDlgDemo.Notification("Feedfuion has an incoming news article.");
+                DiffuseDlgDemo.Notification nt = new DiffuseDlgDemo.Notification("FeedFusion has an incoming news article.");
                 nt.Show();
             }
             public void NewFeedAdded(string feed) 
@@ -47,8 +51,27 @@ namespace TrayMinimiser
   
 
         public void addToToolbar(System.Windows.Controls.ToolBar ToolBar)
-        { 
-        
+        {
+
+            System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
+            myImage.Width = 20;
+            myImage.Height = 20; 
+            // Create source
+            System.Windows.Media.Imaging.BitmapImage myBitmapImage = new System.Windows.Media.Imaging.BitmapImage();
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\ElfPin.ico");
+            myBitmapImage.DecodePixelWidth = 20;
+            myBitmapImage.EndInit();
+            myImage.Source = myBitmapImage;
+            b.Content = myImage; 
+            b.ToolTip = "Configures trayMinimiser plugin options.";
+            b.Click += new RoutedEventHandler(b_Click);
+            ToolBar.Items.Add(b); 
+        }
+
+        void b_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("This function is not curently implemented", "Info", MessageBoxButton.OK, MessageBoxImage.Stop);      
         }
 
         public void setOwner(System.Windows.Window window)
@@ -109,11 +132,18 @@ namespace TrayMinimiser
 
         public void showConfiguration()
         {
-            
+            System.Windows.Window w = new Window();
+            System.Windows.Controls.Canvas c=new System.Windows.Controls.Canvas();
+            w.Content = c;
+            ck1.Content = "Alert when adding a new category.";
+            ck2.Content = "Alert when adding a new feed";
+            ck3.Content = "Alert when received news article."; 
+            ck1.IsChecked = true;
+            ck2.IsChecked = true;
+            ck3.IsChecked = true;
+ 
         }
 
-        public void addToToolbar()
-        { }
 
         public string description()
         {

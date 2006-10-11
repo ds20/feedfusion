@@ -19,7 +19,7 @@
         <MenuItem Header="_Options" Style="{DynamicResource Item}">
           <MenuItem Header="_Change skin" x:Name="btnO" Style="{DynamicResource Item}"/>         
 					<MenuItem Header="_Plugin Options" x:Name="button6" Style="{DynamicResource Item}"/>
-          <MenuItem Header="_Program Options" x:Name="btnProgramOptions" Style="{DynamicResource Item}"/>
+          <MenuItem Header="_User Options" x:Name="btnProgramOptions" Style="{DynamicResource Item}"/>
         </MenuItem>
         <MenuItem Header="_Help" Style="{DynamicResource Item}">
           <MenuItem Header="_About" x:Name="button8" Style="{DynamicResource Item}"/>
@@ -30,8 +30,8 @@
 
 
 			<ToolBarTray  Width="Auto" Height="Auto" x:Name="ToolBarPanel" >
-				  <ToolBar   x:Name="ToolBar" Height="30"  Width="Auto" Opacity="1" />
-        <!-- Style="{DynamicResource ToolBar}" WAS REMOVED BRUTALLY!-->
+				  <ToolBar   x:Name="ToolBar" Height="30"  Width="Auto" Opacity="1" Style="{DynamicResource ToolBar}" />
+        
 			</ToolBarTray>
       <!--Style="{DynamicResource Button}"-->
 
@@ -40,7 +40,9 @@
     </StackPanel>
 		
 		<TabControl x:Name="tabs" DockPanel.Dock="Left"  Width="Auto" MinWidth="300" MaxWidth="300" Style="{DynamicResource TabControl}">
-			<TabItem Header="Categories" Opacity="1" Visibility="Visible" Style="{DynamicResource TabItem}">
+			<TabItem 
+        x:Name ="cats"
+        Header="Categories" Opacity="1" Visibility="Visible" Style="{DynamicResource TabItem}">
         <TreeView    Width="300"  x:Name="categoryList" Style="{DynamicResource TreeView}"  Opacity="0.8">
           <TreeView.ContextMenu>
             <ContextMenu x:Name="contextMenu">
@@ -50,7 +52,9 @@
           </TreeView.ContextMenu>
         </TreeView>
 			</TabItem>
-      <TabItem Header="History" Style="{DynamicResource TabItem}" Opacity="0.8">
+      <TabItem 
+        x:Name ="hist"
+        Header="History" Style="{DynamicResource TabItem}" Opacity="0.8">
         <DockPanel    Style="{DynamicResource StackPanel}">
           <WrapPanel  DockPanel.Dock ="Top" x:Name="DockPanel1"  Style="{DynamicResource DockPanel}">
             <TextBox x:Name="txtSearch" Width="489.6" Height="25.2766666666667" MaxWidth="200" MinHeight="25" />

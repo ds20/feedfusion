@@ -97,7 +97,28 @@ namespace WinFXConsumer
         void RefreshList()
         {
             listBox1.Items.Clear();
-            for (int i = 0; i < plugins.number; i++) listBox1.Items.Add(plugins.plugins[i].name());
+            for (int i = 0; i < plugins.number; i++)
+            {
+                WrapPanel p = new WrapPanel();
+                Label l = new Label();
+                l.Content = plugins.plugins[i].name(); 
+
+
+                System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
+                myImage.Width = 20;
+                myImage.Height = 20;
+                // Create source
+                System.Windows.Media.Imaging.BitmapImage myBitmapImage = new System.Windows.Media.Imaging.BitmapImage();
+                myBitmapImage.BeginInit();
+                myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\ring.ico");
+                myBitmapImage.DecodePixelWidth = 20;
+                myBitmapImage.EndInit();
+                myImage.Source = myBitmapImage;
+
+                p.Children.Add(myImage);
+                p.Children.Add(l);
+                listBox1.Items.Add(p);   
+            }
         }
 
         void MoveDown(object sender, RoutedEventArgs e)

@@ -26,7 +26,7 @@
         <Label Style="{DynamicResource Label}" Margin="25.37,15.7233333333333,33,22" Name="label1" HorizontalContentAlignment="Center">Sbarlea Dragos</Label>
         <Label Style="{DynamicResource Label}" Margin="26.3699999999999,22.7233333333334,29.9999999999999,24" Name="label2" Grid.Row="1" HorizontalContentAlignment="Center">Borobocea Mihai</Label>
         <Label Style="{DynamicResource Label}" Margin="32.3700000000001,15.7233333333333,43.0000000000001,26" Name="label3" Grid.Column="1" HorizontalContentAlignment="Center">Simion Alina</Label>
-        <Label Style="{DynamicResource Label}" Grid.Column="1" Grid.Row="1" Margin="33.37,22.7233333333334,43,23" Name="label4" HorizontalContentAlignment="Center">Ionita Laura</Label>
+        <Label Style="{DynamicResource Label}" Grid.Column="1" Grid.Row="1" Margin="33.37,22.7233333333334,43,23" Name="label4" HorizontalContentAlignment="Center"></Label>
       </Grid>
       <Grid Style="{DynamicResource Grid}" Margin="14,16,11,16.0000000000001" MinHeight="50" MinWidth="50" Name="grid3" >
         <TextBlock
