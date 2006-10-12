@@ -92,9 +92,9 @@ namespace WinFXConsumer
     /// </summary>
 
         
-    public partial class Window1 : Window
+    public partial class Window1 : Window,PluginInterface.EventsClass  
     {
-
+        string feedWithNewArticle;
         Random r = new Random();
         FeedDB dataBase;
         pluginManager pManager;
@@ -222,6 +222,7 @@ namespace WinFXConsumer
 
             
             Expander exp = new Expander();
+            exp.Tag = feed; 
             t.Items.Add(exp);
             t.Width = categoryList.Width - 50;
             exp.Width = t.Width-40;
@@ -319,7 +320,9 @@ namespace WinFXConsumer
             String feed = ((XmlFeed)((Button)sender).Content ).url;
             Thread t_nou = new Thread(new ParameterizedThreadStart(getHistoryAsync));
             t_nou.Start(feed);
-            listBox1.SelectedIndex = 0;  
+            listBox1.SelectedIndex = 0;
+            ((Expander)((Button)sender).Parent).BorderThickness = new Thickness(1) ;
+            ((Expander)((Button)sender).Parent).BorderBrush = Brushes.Gray;
         }
 
         private void Tmrcallback1(object o)
@@ -441,7 +444,7 @@ namespace WinFXConsumer
         { 
             InitializeComponent();
 
-
+             
             Image myImage = new Image();
             myImage.Width = 20;
             myImage.Height = 20;
@@ -553,6 +556,7 @@ namespace WinFXConsumer
             dataBase = new FeedDB();
  
             //dataBase.removeAllHistory();
+            dataBase.RegisterEventHandler(this); 
             dataBase.getHistory("threre isn't any");
             this.Closing += window1_close;
             dataBase.delegCatFeedChanged += ListRefresh;
@@ -569,6 +573,37 @@ namespace WinFXConsumer
             populateCategoryList();
              
         }
+
+        public void FeedDownloaded(string feed)
+        {
+            feedWithNewArticle = feed; 
+            categoryList.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new NoArgDelegate(NewMethod));
+        }
+
+        private void NewMethod()
+        {
+            MessageBox.Show("DOWN " + feedWithNewArticle );
+            foreach (TreeViewItem c in categoryList.Items)
+            {
+
+                foreach (Expander f in c.Items)
+                {
+
+                    if (((XmlFeed)f.Tag).url == feedWithNewArticle)
+                    {
+                        f.BorderBrush=Brushes.Blue;
+                        f.BorderThickness = new Thickness(2);  
+                    }
+                }
+            }
+        }
+
+        public void CategoryAdded(string c)
+        { }
+
+        public void NewFeedAdded(string feed)
+        { }  
+
 
         void btnProgramOptions_Click(object sender, RoutedEventArgs e)
         {

@@ -133,7 +133,7 @@ namespace Indexer
             searcherCat = new IndexSearcher(dirCat);
             foreach (PluginInterface.EventsClass ev in EventsVector)
             {
-                ev.CategoryAdded("UNKNOWN NAME"); 
+                ev.CategoryAdded("11"); 
             }
             //if (delegCatFeedChanged != null) delegCatFeedChanged();
         }
@@ -150,7 +150,7 @@ namespace Indexer
             //if (delegCatFeedChanged != null) delegCatFeedChanged();
             foreach (PluginInterface.EventsClass ev in EventsVector)
             {
-                ev.NewFeedAdded("UNKNOWN NAME");
+                ev.NewFeedAdded("22");
             }
         }
 
@@ -171,10 +171,7 @@ namespace Indexer
                 //if (delegHistoryChanged != null) delegHistoryChanged();
                 
                 Thread.CurrentThread.IsBackground = originalBackgroundState;
-                foreach (PluginInterface.EventsClass ev in EventsVector)
-                {
-                    ev.FeedDownloaded("UNKNOWN NAME");
-                }
+
             }
         }
 
@@ -919,6 +916,10 @@ namespace Indexer
 
             if (delegHistoryChanged != null) delegHistoryChanged();
 
+            foreach (PluginInterface.EventsClass ev in EventsVector)
+            {
+                ev.FeedDownloaded(url);
+            }
             return true;
         }
 

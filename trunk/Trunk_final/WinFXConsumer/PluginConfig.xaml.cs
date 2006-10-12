@@ -88,7 +88,7 @@ namespace WinFXConsumer
             this.DiscoverStyles();
             if (this._styleList == null || this._styleList.Length == 0)
             {
-                //MessageBox.Show("No skins available");//eventual mesaj...daca nu exista alta cale(log sau ceva)
+                //MessageBox.Show("No skins available");
                 return;
             }
             this.ApplyStyle(styleName);
