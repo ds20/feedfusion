@@ -93,7 +93,7 @@ namespace Xml.Opml
             return d;
         }
 
-        public Document RetrieveFeeds(XmlNodeList outlineElements, Document d,ref int nrFeeds)
+        public Document RetrieveFeeds(XmlNodeList outlineElements, Document d, ref int nrFeeds)
         {
             TreeViewItem leaf = new TreeViewItem();
             foreach (XmlElement outline in outlineElements)
@@ -122,25 +122,28 @@ namespace Xml.Opml
                         sw.Write("     ");
                         sw.Write(pas);
                         sw.WriteLine("...is leaf...and it's parent is: {0}  ",d.Now.Header);*/
-                        
+
                         f.IsLeaf = true;
                         f.Text = outline.GetAttribute("text");
-                        f.Title = outline.GetAttribute("title");
-                        f.Description = outline.GetAttribute("description");
-                        f.HtmlUrl = outline.GetAttribute("htmlUrl");
-                        f.XmlUrl = outline.GetAttribute("xmlUrl");
-                        d.addFeed(f);
-                        nrFeeds ++;
+                        if (f.Text != null && f.Text != "")
+                        {
+                            f.Title = outline.GetAttribute("title");
+                            f.Description = outline.GetAttribute("description");
+                            f.HtmlUrl = outline.GetAttribute("htmlUrl");
+                            f.XmlUrl = outline.GetAttribute("xmlUrl");
+                            d.addFeed(f);
+                            nrFeeds++;
+                        }
                     }
                     else
                     {
                         /*sw.Write(outline.GetAttribute("text"));
                         sw.Write("     ");
-                        sw.Write(pas);*/                        
+                        sw.Write(pas);*/
                         f.IsLeaf = false;
                         f.Text = outline.GetAttribute("text"); ;
                         TreeViewItem parent = new TreeViewItem();
-                        parent=d.Now;
+                        parent = d.Now;
                         /*sw.Write(" setez parintele vechi ca fiind: {0} ", parent.Header);
                         sw.WriteLine("  ...bla...");*/
                         d.addFeed(f);
@@ -153,6 +156,7 @@ namespace Xml.Opml
             }
             return d;
         }
+        
         
         //netestata...do not use!!!
         public XmlDocument CreateDocument(Document doc)
