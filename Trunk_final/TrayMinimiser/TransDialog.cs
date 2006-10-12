@@ -42,10 +42,10 @@ namespace Abhinaba.TransDlg
         #region Event handlers
         private void TransDialog_Load(object sender, EventArgs e)
         {
-            this.Opacity = 0.0;
+            //MessageBox.Show("HH"); 
+            this.Opacity = 0.6;
             m_bShowing = true;
-
-            m_clock.Start();
+            //m_clock.Start();
         }
 
         private void TransDialog_Closing(object sender, CancelEventArgs e)
