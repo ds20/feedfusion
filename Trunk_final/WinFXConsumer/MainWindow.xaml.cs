@@ -818,7 +818,8 @@ namespace WinFXConsumer
         private void button7_Click(object sender, RoutedEventArgs e)
         {
             OpmlWindow w = new OpmlWindow(dataBase, this._styleList[_styleIndex]);
-            w.ShowDialog();
+            try { w.ShowDialog(); }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void button8_Click(object sender, RoutedEventArgs e)

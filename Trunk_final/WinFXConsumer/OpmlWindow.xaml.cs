@@ -185,12 +185,12 @@ namespace WinFXConsumer
                 f=(Feed)node.Tag;                
                 if (f.IsLeaf==true)
                 {
-                    if (f.XmlUrl == "")
-                        MessageBox.Show("Nu am ce adresa sa adaug");
+                    if (f.XmlUrl == "" || f.XmlUrl == null) { }
+                    //MessageBox.Show("Nu am ce adresa sa adaug");
                     else
                     {
                         feeds[i] = new XmlFeed();
-                        feeds[i].catName =(string) parent.Header;
+                        feeds[i].catName = (string)parent.Header;
                         feeds[i].feedName = f.ToString();
                         feeds[i].url = f.XmlUrl;
                         i++;

@@ -46,8 +46,8 @@ namespace Xml.Opml
             XmlNode bodyNode = xmlDoc.SelectSingleNode("descendant::opml/body");
             Document d=new Document();
 
-            /*string Name = Environment.CurrentDirectory + "\\blablabla.txt";
-            StreamWriter sw = File.CreateText(Name);*/
+            string Name = Environment.CurrentDirectory + "\\temp\\blablabla.txt";
+            StreamWriter sw = File.CreateText(Name);
 
             if (headNode!=null)
             {    
@@ -83,17 +83,17 @@ namespace Xml.Opml
             r.Tag = f;
 
             int nrFeeds = 0;
-            d = RetrieveFeeds(bodyNode.ChildNodes, d, ref nrFeeds);
+            d = RetrieveFeeds(bodyNode.ChildNodes, d, ref nrFeeds,sw);
             d.NrFeeds = nrFeeds;
             /*
             sw.WriteLine("xxxxxxxx");
             sw.WriteLine("now:{0},root:{1}", d.Now.Header, d.Root.Header);*/
-            //sw.Close();
+            sw.Close();
             
             return d;
         }
 
-        public Document RetrieveFeeds(XmlNodeList outlineElements, Document d, ref int nrFeeds)
+        public Document RetrieveFeeds(XmlNodeList outlineElements, Document d, ref int nrFeeds, StreamWriter sw)
         {
             TreeViewItem leaf = new TreeViewItem();
             foreach (XmlElement outline in outlineElements)
@@ -120,17 +120,22 @@ namespace Xml.Opml
                     {
                         /*sw.Write(outline.GetAttribute("text"));
                         sw.Write("     ");
-                        sw.Write(pas);
-                        sw.WriteLine("...is leaf...and it's parent is: {0}  ",d.Now.Header);*/
+                        sw.Write(pas);*/
+                        sw.WriteLine("...is leaf...and it's parent is: {0}  ",d.Now.Header);
 
                         f.IsLeaf = true;
                         f.Text = outline.GetAttribute("text");
-                        if (f.Text != null && f.Text != "")
+                        f.XmlUrl = outline.GetAttribute("xmlUrl");
+                        sw.WriteLine("nodul ce tre adaugat {0}  ", f.XmlUrl);
+                        
+                        if (f.Text != null && f.Text != "" && f.XmlUrl != null && f.XmlUrl != "")
                         {
                             f.Title = outline.GetAttribute("title");
+                            if (f.Title == "" || f.Title == null) f.Title = f.Text;
                             f.Description = outline.GetAttribute("description");
                             f.HtmlUrl = outline.GetAttribute("htmlUrl");
                             f.XmlUrl = outline.GetAttribute("xmlUrl");
+                            sw.WriteLine("adaug {0}  ", f.Text);
                             d.addFeed(f);
                             nrFeeds++;
                         }
@@ -138,8 +143,8 @@ namespace Xml.Opml
                     else
                     {
                         /*sw.Write(outline.GetAttribute("text"));
-                        sw.Write("     ");
-                        sw.Write(pas);*/
+                        sw.Write("     ");*/
+                        sw.Write("Is not leaf");
                         f.IsLeaf = false;
                         f.Text = outline.GetAttribute("text"); ;
                         TreeViewItem parent = new TreeViewItem();
@@ -147,7 +152,7 @@ namespace Xml.Opml
                         /*sw.Write(" setez parintele vechi ca fiind: {0} ", parent.Header);
                         sw.WriteLine("  ...bla...");*/
                         d.addFeed(f);
-                        d = RetrieveFeeds(outline.ChildNodes, d, ref nrFeeds);
+                        d = RetrieveFeeds(outline.ChildNodes, d, ref nrFeeds,sw);
                         d.Now = parent;
                         /*sw.Write(" acum resetez parintele vechi la: {0} ",parent.Header);
                         sw.WriteLine("  ... bla-revenire ...");*/
