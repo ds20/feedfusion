@@ -582,7 +582,7 @@ namespace WinFXConsumer
 
         private void NewMethod()
         {
-            MessageBox.Show("DOWN " + feedWithNewArticle );
+            //MessageBox.Show("DOWN " + feedWithNewArticle );
             foreach (TreeViewItem c in categoryList.Items)
             {
 

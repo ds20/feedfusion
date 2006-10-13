@@ -93,6 +93,24 @@ namespace TrayMinimiser
                 ico.Text = "FeedFusion RSS Reader is up and running"; 
                 ico.Visible = true;
                 ico.DoubleClick += new EventHandler(ico_DoubleClick);
+
+                System.Windows.Forms.ContextMenu contextMenu1;
+                contextMenu1 = new System.Windows.Forms.ContextMenu();
+                System.Windows.Forms.MenuItem menuItem1;
+                menuItem1 = new System.Windows.Forms.MenuItem();
+                System.Windows.Forms.MenuItem menuItem2;
+                menuItem2 = new System.Windows.Forms.MenuItem();
+
+                contextMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] { menuItem1, menuItem2 });
+                menuItem1.Index = 0;
+                menuItem1.Text = "Restore";
+                menuItem1.Click += new EventHandler(ico_DoubleClick);
+                menuItem2.Index = 1;
+                menuItem2.Text = "Close";
+                menuItem2.Click += new EventHandler(Close_Click);
+
+                ico.ContextMenu = contextMenu1; 
+
             }
             else
             {
@@ -103,6 +121,11 @@ namespace TrayMinimiser
                 //ico = null;
             }
 
+        }
+
+        void Close_Click(object sender, EventArgs e)
+        {
+            owner.Close();
         }
 
         void ico_DoubleClick(object sender, EventArgs e)

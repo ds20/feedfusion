@@ -25,9 +25,9 @@ namespace Opml
 
         public opml_xsl()
         {
-            fileName = Environment.CurrentDirectory + "\\opml.opml";
-            htmlName = Environment.CurrentDirectory + "\\opml.htm";
-            xslName = Environment.CurrentDirectory + "\\opml.xsl";
+            fileName = Environment.CurrentDirectory + "\\Plugins\\opml.opml";
+            htmlName = Environment.CurrentDirectory + "\\Plugins\\opml.htm";
+            xslName = Environment.CurrentDirectory + "\\Plugins\\opml.xsl";
             oldtitlecolor = "maroon";
             oldbackgroundcolor = "#efeff5";
         }
@@ -60,8 +60,9 @@ namespace Opml
 
         public bool canParse()
         {
-            return ("opml" == whatStd(doc));
+            //return ("opml" == whatStd(doc));
             //return true;
+            return false;
         }
 
         public void setDocument(XmlDocument doc)

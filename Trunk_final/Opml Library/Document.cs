@@ -202,7 +202,7 @@ namespace Xml.Opml
 
         public StringBuilder TreeToOpml(TreeViewItem node, StringBuilder sb)
         {
-            if ((string)node.Header != "Baza de date")
+            if ((string)node.Header != "My Feeds")
             {
                 Feed f = (Feed)node.Tag;
 

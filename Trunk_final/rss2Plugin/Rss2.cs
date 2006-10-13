@@ -231,12 +231,12 @@ namespace rss2
 
         public Rss2()
         {
-            fileName = Environment.CurrentDirectory+"\\rss2.rss";
-            htmlName = Environment.CurrentDirectory + "\\rss2.htm";
-            xslName = Environment.CurrentDirectory + "\\rss2.xsl";
-            xsdName1 = Environment.CurrentDirectory + "\\rss-0_91.xsd";
-            xsdName2 = Environment.CurrentDirectory + "\\rss-0_92.xsd";
-            xsdName3 = Environment.CurrentDirectory + "\\rss-0_93.xsd";
+            fileName = Environment.CurrentDirectory+"\\Plugins\\rss2.rss";
+            htmlName = Environment.CurrentDirectory + "\\Plugins\\rss2.htm";
+            xslName = Environment.CurrentDirectory + "\\Plugins\\rss2.xsl";
+            xsdName1 = Environment.CurrentDirectory + "\\Plugins\\rss-0_91.xsd";
+            xsdName2 = Environment.CurrentDirectory + "\\Plugins\\rss-0_92.xsd";
+            xsdName3 = Environment.CurrentDirectory + "\\Plugins\\rss-0_93.xsd";
 
 
             

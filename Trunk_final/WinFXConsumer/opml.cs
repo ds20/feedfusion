@@ -16,7 +16,7 @@ namespace WinFXConsumer
         {
             Parser p = new Parser(xmlfilename);
 
-            string fileName = Environment.CurrentDirectory + "\\opml.htm";
+            string fileName = Environment.CurrentDirectory + "\\temp\\opml.htm";
 
             Document doc = new Document();
             doc = p.RetrieveDocument();
@@ -33,7 +33,7 @@ namespace WinFXConsumer
         {
             Parser p = new Parser(xmlfilename);
 
-            string fileName = Environment.CurrentDirectory + "\\opml.htm";
+            string fileName = Environment.CurrentDirectory + "\\temp\\opml.htm";
 
             Document doc = new Document();
             doc = p.RetrieveDocument();
@@ -50,11 +50,11 @@ namespace WinFXConsumer
         public TreeViewItem getRootDataBase(FeedDB database)
         {
             TreeViewItem root = new TreeViewItem();
-            root.Header = ("Baza de date");
+            root.Header = ("My Feeds");
 
             Feed f = new Feed();
             f.IsLeaf = false;
-            f.Text = "Baza de date";
+            f.Text = "My Feeds";
             f.HtmlUrl = f.XmlUrl = "";
 
             root.Tag = f;
@@ -125,7 +125,7 @@ namespace WinFXConsumer
             {                
                 sb.Append(String.Format("&#149;&nbsp;<a href={0}>{1}({2})</a><br/>", f.XmlUrl, f.Title, f.Description));
             }
-            using (StreamWriter sw = File.CreateText(Environment.CurrentDirectory + "\\opml.htm"))
+            using (StreamWriter sw = File.CreateText(Environment.CurrentDirectory + "\\temp\\opml.htm"))
             {
                 sw.Write(sb.ToString());
             }*/
@@ -154,7 +154,7 @@ namespace WinFXConsumer
                 }
 
             }
-            using (StreamWriter sw = File.CreateText(Environment.CurrentDirectory + "\\opml.htm"))
+            using (StreamWriter sw = File.CreateText(Environment.CurrentDirectory + "\\temp\\opml.htm"))
                 {
                     sw.Write(sb.ToString());
                 }
