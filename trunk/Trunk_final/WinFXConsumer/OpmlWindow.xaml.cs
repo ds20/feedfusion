@@ -85,13 +85,13 @@ namespace WinFXConsumer
 
         public void button4_click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start(Environment.CurrentDirectory + "\\opml.htm");            
+            System.Diagnostics.Process.Start(Environment.CurrentDirectory + "\\temp\\opml.htm");            
         }
 
         public void button1_click(object sender, RoutedEventArgs e)
         {
             opml o = new opml();
-            string fileName = Environment.CurrentDirectory + "\\opml.xml";
+            string fileName = Environment.CurrentDirectory + "\\temp\\opml.xml";
             XmlTextWriter w = new XmlTextWriter(fileName, Encoding.UTF8);
             XmlDocument doc = Window1.dldFeed(textBox1.Text.Trim());
             //http://hosting.opml.org/dave/spec/states.opml    
@@ -112,7 +112,7 @@ namespace WinFXConsumer
             TreeViewItem root = new TreeViewItem();
             root = o.getRootDataBase(database);
             
-            string fileName = Environment.CurrentDirectory + "\\baza.opml";
+            string fileName = Environment.CurrentDirectory + "\\temp\\baza.opml";
             using (StreamWriter sw = File.CreateText(fileName))
             {
                 sw.Write(o.makeOpml(database));
@@ -142,7 +142,7 @@ namespace WinFXConsumer
             String enc;
 
             opml o = new opml();
-            string fileName = Environment.CurrentDirectory + "\\opml.xml";
+            string fileName = Environment.CurrentDirectory + "\\temp\\opml.xml";
             
             XmlDocument doc = new XmlDocument();
             try { doc.Load((String)url_o); }
