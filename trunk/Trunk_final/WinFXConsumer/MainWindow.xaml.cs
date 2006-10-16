@@ -755,7 +755,7 @@ namespace WinFXConsumer
             }
             catch (Exception e)
             {
-                //MessageBox.Show(e.Message, url);
+                MessageBox.Show(e.Message, url);
                 statusBar.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new OneArgDelegate(addStatusBarItem), url + "\n" + e.Message);
                 WriteToLogFileAsync(DateTime.Now + "\r\n" + url + "\r\n" + e.Message + "\r\n\r\n");
                 xDoc = null;
@@ -889,6 +889,7 @@ namespace WinFXConsumer
                 if (downloadList.Count < simultaneousDownloads)
                 {
                     Thread t = new Thread(new ParameterizedThreadStart(downloadByDownList));
+                    t.ApartmentState = ApartmentState.STA;  
                     t.IsBackground = true;
                     t.Start(waitQueue.Dequeue());
                 }
