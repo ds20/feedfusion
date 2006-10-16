@@ -479,6 +479,38 @@ namespace WinFXConsumer
             wp2.Children.Add(l2);
             cats.Header = wp2;
 
+
+            myImage = new Image();
+            myImage.Width = 20;
+            myImage.Height = 20;
+            // Create source
+            myBitmapImage = new BitmapImage();
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\latest.ico");
+            myBitmapImage.DecodePixelWidth = 20;
+            myBitmapImage.EndInit();
+            myImage.Source = myBitmapImage;
+            wp2 = new WrapPanel();
+            l2 = new Label();
+            l2.Content = "Latest";
+            wp2.Children.Add(myImage);
+            wp2.Children.Add(l2);
+            latest.Header = wp2;
+
+            myImage = new Image();
+            myImage.Width = 20;
+            myImage.Height = 20;
+            // Create source
+            myBitmapImage = new BitmapImage();
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\refresh.ico");
+            myBitmapImage.DecodePixelWidth = 20;
+            myBitmapImage.EndInit();
+            myImage.Source = myBitmapImage;
+            wp2 = new WrapPanel();
+            wp2.Children.Add(myImage);
+            btnRefresh.Content = wp2;
+
             myImage = new Image();
             myImage.Width = 20;
             myImage.Height = 20;
@@ -490,6 +522,19 @@ namespace WinFXConsumer
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
             button5.Icon = myImage;
+
+
+            myImage = new Image();
+            myImage.Width = 20;
+            myImage.Height = 20;
+            // Create source
+            myBitmapImage = new BitmapImage();
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\user.ico");
+            myBitmapImage.DecodePixelWidth = 20;
+            myBitmapImage.EndInit();
+            myImage.Source = myBitmapImage;
+            btnProgramOptions.Icon = myImage;
 
             myImage = new Image();
             myImage.Width = 20;
@@ -628,11 +673,20 @@ namespace WinFXConsumer
                 this._styleIndex = 0;
 
             //this.ApplyStyle(this._styleIndex);
-            this.InvalidateVisual(); 
+            this.InvalidateVisual();
+            DownloadAll();
+            this.Width += 1;
+        }
+
+        private void Refresh(object sender, RoutedEventArgs e)
+        { DownloadAll(); }
+
+        private void DownloadAll()
+        {
             simultaneousDownloads = 4;
             downloadList = new List<String>(simultaneousDownloads);
             waitQueue = new Queue<String>();
-
+            progressBar.Visibility = Visibility.Visible;    
             XmlFeed[] allFeeds = dataBase.getAllFeeds();
             progressBar.Maximum = allFeeds.Length;
             foreach (XmlFeed feed in allFeeds)
@@ -640,7 +694,6 @@ namespace WinFXConsumer
                 waitQueue.Enqueue(feed.url);
             Thread tWaitQueue = new Thread(new ThreadStart(checkWaitQueue));
             tWaitQueue.Start();
-            this.Width += 1;
         }
 
         private void SetFrameBackground()
