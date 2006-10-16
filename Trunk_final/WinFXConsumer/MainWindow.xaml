@@ -30,7 +30,9 @@
 
 
 			<ToolBarTray  Width="Auto" Height="Auto" x:Name="ToolBarPanel" >
-				  <ToolBar   x:Name="ToolBar" Height="30"  Width="Auto" Opacity="1" Style="{DynamicResource ToolBar}" />
+        <ToolBar   x:Name="ToolBar" Height="30"  Width="Auto" Opacity="1" Style="{DynamicResource ToolBar}" >
+          <Button x:Name ="btnRefresh" Click ="Refresh">Refresh</Button>
+        </ToolBar>
         
 			</ToolBarTray>
       <!--Style="{DynamicResource Button}"-->
@@ -54,7 +56,7 @@
 			</TabItem>
       <TabItem 
         x:Name ="hist"
-        Header="History" Style="{DynamicResource TabItem}" Opacity="0.8">
+        Header="History" Style="{DynamicResource TabItem}" Opacity="1">
         <DockPanel    Style="{DynamicResource StackPanel}">
           <WrapPanel  DockPanel.Dock ="Top" x:Name="DockPanel1"  Style="{DynamicResource DockPanel}">
             <TextBox x:Name="txtSearch" Width="489.6" Height="25.2766666666667" MaxWidth="200" MinHeight="25" />
@@ -62,6 +64,11 @@
           </WrapPanel>
           <ListBox DockPanel.Dock ="Bottom" x:Name="listBox1" Height="Auto" Style="{DynamicResource ListBox}"/>
         </DockPanel>
+      </TabItem>
+      <TabItem
+        x:Name ="latest"
+        Header="Latest" Style="{DynamicResource TabItem}" Opacity="1">
+        <ListBox x:Name ="latestPosts"></ListBox>
       </TabItem>
     </TabControl>
     <Grid>
