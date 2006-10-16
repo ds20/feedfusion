@@ -28,21 +28,27 @@ namespace TrayMinimiser
         {
             public void FeedDownloaded(string feed) 
             {
-                DiffuseDlgDemo.Notification nt = new DiffuseDlgDemo.Notification("FeedFusion has an incoming news article.");
-                nt.Show();
+                NotificationWindow  n = new NotificationWindow(feed) ;  
+                 
+               
             }
+
+
             public void NewFeedAdded(string feed) 
             {
-                DiffuseDlgDemo.Notification nt = new DiffuseDlgDemo.Notification("A new news source has successfully been added to FeedFusion.");
-                nt.Show();
+                NotificationWindow n = new NotificationWindow(feed);
+               
             }
+
+ 
             public void CategoryAdded(string cat) 
             {
-                DiffuseDlgDemo.Notification nt = new DiffuseDlgDemo.Notification("A new category has successfully been added to FeedFusion.");
-                nt.Show(); 
+                NotificationWindow n = new NotificationWindow(cat);
+                
             }
         }
 
+        [System.STAThreadAttribute] 
         public void getDataBase(DataBaseEngine data)
         {
 

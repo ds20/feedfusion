@@ -46,7 +46,7 @@
         <TreeView    Width="300"  x:Name="categoryList" Style="{DynamicResource TreeView}"  Opacity="0.8">
           <TreeView.ContextMenu>
             <ContextMenu x:Name="contextMenu">
-              <MenuItem Header="Rename" Click="treeView1_ContextMenuRename" />
+              <MenuItem Header="Rename111" Click="treeView1_ContextMenuRename" />
               <MenuItem Header="Remove" Click="treeView1_ContextMenuRemove" />
             </ContextMenu>
           </TreeView.ContextMenu>

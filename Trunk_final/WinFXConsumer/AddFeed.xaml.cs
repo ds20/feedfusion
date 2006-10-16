@@ -99,11 +99,12 @@ namespace WinFXConsumer
                 }
             }
             Thread t = new Thread(new ParameterizedThreadStart(DoButton1Job));
+            t.ApartmentState = ApartmentState.STA;  
             Object[] obj = new Object[] { cat, rss, customName };
             t.Start(obj);
             this.DialogResult = true;
         }
-
+        [System.STAThreadAttribute] 
         public void DoButton1Job(Object vect_o)
         {
             String cat = (String)(((Object[])vect_o)[0]), rss = (String)(((Object[])vect_o)[1]), customName = (String)(((Object[])vect_o)[2]);

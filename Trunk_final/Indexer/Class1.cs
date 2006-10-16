@@ -141,6 +141,7 @@ namespace Indexer
         /// <summary>
         /// Saves to disc the changes made to feeds.
         /// </summary>
+        [System.STAThreadAttribute]  
         private void saveFeed()
         {
             writerFeed.Close();  //to save the data
@@ -568,6 +569,7 @@ namespace Indexer
         /// <summary>
         /// Increments the entry showing the index for the next feed
         /// </summary>
+        [System.STAThreadAttribute] 
         private void incrementNextFeedIndex()
         {
             int newNextIndex, nextIndex = -1;
@@ -698,6 +700,7 @@ namespace Indexer
         /// <param name="url">The unique URL of the feed. Two feeds in the database can not have the same URL.</param>
         /// <param name="feedName">A custom name chosen for the feed. It need not be unique.</param>
         /// <returns>True if the feed was added. False otherwise.</returns>
+        [System.STAThreadAttribute] 
         public bool addFeed(String catName, String url, String feedName)
         {
             if (!categoryExists(catName))
