@@ -154,9 +154,12 @@ namespace syncroniserFusion
         {
             System.Windows.Controls.Button btn = new System.Windows.Controls.Button();
             btn.ToolTip = "Opens Plugin Configuration Window";
+            btn.Width = 30;
+            btn.Height = 30;
             Image im = new Image();
             BitmapImage bi = new BitmapImage();
             bi.BeginInit();
+            bi.DecodePixelWidth = 30; 
             bi.UriSource = new Uri(Environment.CurrentDirectory + "\\icons\\ring.ico");
             bi.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
             bi.CacheOption = BitmapCacheOption.OnLoad;

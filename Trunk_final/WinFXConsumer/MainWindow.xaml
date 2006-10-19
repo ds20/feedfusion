@@ -30,8 +30,8 @@
 
 
 			<ToolBarTray  Width="Auto" Height="Auto" x:Name="ToolBarPanel" >
-        <ToolBar   x:Name="ToolBar" Height="30"  Width="Auto" Opacity="1" Style="{DynamicResource ToolBar}" >
-          <Button x:Name ="btnRefresh" Click ="Refresh">Refresh</Button>
+        <ToolBar   x:Name="ToolBar" Height="50"  Width="Auto" Opacity="1" Style="{DynamicResource ToolBar}" >
+          <Button x:Name ="btnRefresh" ToolTip="Check all known feeds for new items."  Click ="Refresh">Refresh</Button>
         </ToolBar>
         
 			</ToolBarTray>
@@ -46,12 +46,6 @@
         x:Name ="cats"
         Header="Categories" Opacity="1" Visibility="Visible" Style="{DynamicResource TabItem}">
         <TreeView    Width="300"  x:Name="categoryList" Style="{DynamicResource TreeView}"  Opacity="0.8">
-          <TreeView.ContextMenu>
-            <ContextMenu x:Name="contextMenu">
-              <MenuItem Header="Rename111" Click="treeView1_ContextMenuRename" />
-              <MenuItem Header="Remove" Click="treeView1_ContextMenuRemove" />
-            </ContextMenu>
-          </TreeView.ContextMenu>
         </TreeView>
 			</TabItem>
       <TabItem 

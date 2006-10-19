@@ -66,13 +66,13 @@ namespace TrayMinimiser
         {
 
             System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
-            myImage.Width = 20;
-            myImage.Height = 20; 
+            myImage.Width = 30;
+            myImage.Height = 30; 
             // Create source
             System.Windows.Media.Imaging.BitmapImage myBitmapImage = new System.Windows.Media.Imaging.BitmapImage();
             myBitmapImage.BeginInit();
             myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\ElfPin.ico");
-            myBitmapImage.DecodePixelWidth = 20;
+            myBitmapImage.DecodePixelWidth = 30;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
             b.Content = myImage; 
