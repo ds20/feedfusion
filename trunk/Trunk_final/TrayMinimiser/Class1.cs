@@ -26,11 +26,11 @@ namespace TrayMinimiser
         public delegate void NoArgDelegate();
         public class Events : PluginInterface.EventsClass
         {
-            NotificationWindow n=new NotificationWindow("FeedFusion has an event."); 
+            //NotificationWindow n=new NotificationWindow("FeedFusion has an event."); 
  
             public void FeedDownloaded(string feed) 
             {
-              n.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal,new NoArgDelegate(n.Show1));     
+              //n.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal,new NoArgDelegate(n.Show1));     
 
                
             }
@@ -43,14 +43,14 @@ namespace TrayMinimiser
 
             public void NewFeedAdded(string feed) 
             {
-                n.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new NoArgDelegate(n.Show1)); 
+                //n.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new NoArgDelegate(n.Show1)); 
                
             }
 
  
             public void CategoryAdded(string cat) 
             {
-                n.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new NoArgDelegate(n.Show1)); 
+                //n.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new NoArgDelegate(n.Show1)); 
             }
         }
 

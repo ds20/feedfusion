@@ -191,7 +191,7 @@ namespace WinFXConsumer
 
         void populateCategoryList()
         {
-            categoryList.Width = 300; 
+            categoryList.Width = 290; 
             categoryList.Background = Brushes.Transparent;
             categoryList.BorderThickness = new Thickness(0);  
             foreach (string s in dataBase.getCategories())
@@ -225,8 +225,8 @@ namespace WinFXConsumer
                
             exp.Tag = feed; 
             t.Items.Add(exp);
-            t.Width = categoryList.Width - 50;
-            exp.Width = t.Width-40;
+            t.Width = categoryList.Width-10;
+            exp.Width = t.Width -70;
 
             Grid itemStack = new Grid();
             ColumnDefinition clm = new ColumnDefinition();
@@ -252,6 +252,23 @@ namespace WinFXConsumer
             feedbtn.Content = feed;
             exp.Header = feedbtn;
             exp.Content = itemStack;
+            /*
+            //Change Expander apparence
+            try
+            {
+                string styleName = AppDomain.CurrentDomain.BaseDirectory + "\\Styles\\" + "Expander_nou.xaml";//Turqoiseskin_style.xaml;
+                using (FileStream fs = new FileStream(styleName, FileMode.Open, FileAccess.Read))
+                {
+                    ResourceDictionary dictionary = (ResourceDictionary)XamlReader.Load(fs);
+                    exp.Resources = dictionary;
+                    fs.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            */
             //sp.Children.Add(exp);
 
             TextBox b = new TextBox();
@@ -344,8 +361,8 @@ namespace WinFXConsumer
             Grid g = (Grid)(((Button)sender).Parent);
             Expander ex = (Expander)g.Parent;
             TreeViewItem t = (TreeViewItem)ex.Parent;
-            ((FeedDB)t.Tag).removeFeed(((XmlFeed)ex.Tag).url);  
-
+            ((FeedDB)t.Tag).removeFeed(((XmlFeed)ex.Tag).url);
+            if (dataBase.delegCatFeedChanged != null) dataBase.delegCatFeedChanged(); 
         }
 
         void b_LostFocus(object sender, RoutedEventArgs e)
