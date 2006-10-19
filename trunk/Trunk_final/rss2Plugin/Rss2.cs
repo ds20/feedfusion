@@ -260,7 +260,7 @@ namespace rss2
             Image im = new Image();
             BitmapImage bi = new BitmapImage();
             bi.BeginInit();
-            bi.UriSource = new Uri(Environment.CurrentDirectory + "\\icons\\textEdit.ico");
+            bi.UriSource = new Uri(Environment.CurrentDirectory + "\\icons\\rss.png");
             bi.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
             bi.CacheOption = BitmapCacheOption.OnLoad;
             bi.EndInit();

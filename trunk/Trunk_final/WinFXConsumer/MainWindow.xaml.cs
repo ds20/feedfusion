@@ -201,7 +201,7 @@ namespace WinFXConsumer
                 
                 ListHeader  dp=new ListHeader(s,categoryList.Width );
                 t.Header=dp;
-
+                t.Tag = dataBase; 
                 foreach (XmlFeed feed in dataBase.getFeeds(s))
                 {
                     Add(t,feed, new System.Windows.RoutedEventHandler(b_MouseDown));
@@ -222,6 +222,7 @@ namespace WinFXConsumer
 
             
             Expander exp = new Expander();
+               
             exp.Tag = feed; 
             t.Items.Add(exp);
             t.Width = categoryList.Width - 50;
@@ -234,6 +235,7 @@ namespace WinFXConsumer
             ColumnDefinition clm2 = new ColumnDefinition();
             clm2.Width = new System.Windows.GridLength(exp.Width * 1 / 2);
             itemStack.ColumnDefinitions.Add(clm2);
+            itemStack.RowDefinitions.Add(new RowDefinition());
             itemStack.RowDefinitions.Add(new RowDefinition());
             itemStack.RowDefinitions.Add(new RowDefinition());
             itemStack.RowDefinitions.Add(new RowDefinition());
@@ -261,7 +263,7 @@ namespace WinFXConsumer
             b.HorizontalContentAlignment = HorizontalAlignment.Left;
             b.Tag = feed;
             b.Text = feed.feedName;
-
+            b.LostFocus += new RoutedEventHandler(b_LostFocus); 
             itemStack.Children.Add(b);
 
             Grid.SetColumn(b, 1);
@@ -308,6 +310,51 @@ namespace WinFXConsumer
             itemStack.Children.Add(lblCat);
             Grid.SetColumn(lblCat, 0);
             Grid.SetRow(lblCat, 2);
+
+            Button delete = new Button(); 
+            itemStack.Children.Add(delete);
+            Grid.SetColumn(delete, 0);
+            Grid.SetRow(delete, 3);
+
+            Image myImage = new Image();
+            myImage.Width = 20;
+            myImage.Height = 20;
+            // Create source
+            BitmapImage myBitmapImage = new BitmapImage();
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\delete.png");
+            myBitmapImage.DecodePixelWidth = 20;
+            myBitmapImage.EndInit();
+            myImage.Source = myBitmapImage;
+            delete.Content = myImage;
+            delete.BorderBrush=new SolidColorBrush(Colors.Transparent);   
+            delete.Background = new SolidColorBrush(Colors.Transparent);   
+            delete.Width = 30;
+            delete.Click += new RoutedEventHandler(delete_Click);
+            MatrixTransform m=new MatrixTransform(-1,0,0,1,200,0);
+            MatrixTransform m1 = new MatrixTransform(-1, 0, 0, 1, 180, 0);
+            exp.RenderTransform = m;
+            feedbtn.RenderTransform = m1;
+            MatrixTransform m2 = new MatrixTransform(-1, 0, 0, 1, 210, 0);
+            itemStack.RenderTransform = m2; 
+        }
+
+        void delete_Click(object sender, RoutedEventArgs e)
+        {
+            Grid g = (Grid)(((Button)sender).Parent);
+            Expander ex = (Expander)g.Parent;
+            TreeViewItem t = (TreeViewItem)ex.Parent;
+            ((FeedDB)t.Tag).removeFeed(((XmlFeed)ex.Tag).url);  
+
+        }
+
+        void b_LostFocus(object sender, RoutedEventArgs e)
+        {
+            Grid gr = (Grid)(((TextBox)sender).Parent);
+            Expander s = (Expander)gr.Parent;
+            XmlFeed f = (XmlFeed)s.Tag;
+            TreeViewItem t = (TreeViewItem)s.Parent;
+            ((FeedDB)(t.Tag)).renameFeed(f.url, ((TextBox)sender).Text);   
         }
 
 
@@ -498,13 +545,13 @@ namespace WinFXConsumer
             latest.Header = wp2;
 
             myImage = new Image();
-            myImage.Width = 20;
-            myImage.Height = 20;
+            myImage.Width = 30;
+            myImage.Height = 30;
             // Create source
             myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\refresh.ico");
-            myBitmapImage.DecodePixelWidth = 20;
+            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\reload.png");
+            myBitmapImage.DecodePixelWidth = 30;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
             wp2 = new WrapPanel();
@@ -686,7 +733,8 @@ namespace WinFXConsumer
             simultaneousDownloads = 4;
             downloadList = new List<String>(simultaneousDownloads);
             waitQueue = new Queue<String>();
-            progressBar.Visibility = Visibility.Visible;    
+            progressBar.Visibility = Visibility.Visible;
+            progressBar.Value = 0; 
             XmlFeed[] allFeeds = dataBase.getAllFeeds();
             progressBar.Maximum = allFeeds.Length;
             foreach (XmlFeed feed in allFeeds)
