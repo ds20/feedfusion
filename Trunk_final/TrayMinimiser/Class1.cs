@@ -26,31 +26,26 @@ namespace TrayMinimiser
         public delegate void NoArgDelegate();
         public class Events : PluginInterface.EventsClass
         {
-            //NotificationWindow n=new NotificationWindow("FeedFusion has an event."); 
- 
+            NotificationWindow nDownload = new NotificationWindow("FeedFusion has downloaded a new article.");
+            NotificationWindow nNewFeed = new NotificationWindow("A new feed has beed added to the FeedFusion database.");
+            NotificationWindow nNewCat = new NotificationWindow("A new category has been added to the FeedFusion database."); 
             public void FeedDownloaded(string feed) 
             {
-              //n.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal,new NoArgDelegate(n.Show1));     
-
+                nDownload.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new NoArgDelegate(nDownload.Show1));
                
             }
-            public void newWindow(object sender )
-            {
 
-                
-                   
-            }
 
             public void NewFeedAdded(string feed) 
             {
-                //n.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new NoArgDelegate(n.Show1)); 
+                nNewFeed.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new NoArgDelegate(nNewFeed.Show1)); 
                
             }
 
  
             public void CategoryAdded(string cat) 
             {
-                //n.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new NoArgDelegate(n.Show1)); 
+                nNewCat.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new NoArgDelegate(nNewCat.Show1)); 
             }
         }
 
@@ -71,7 +66,7 @@ namespace TrayMinimiser
             // Create source
             System.Windows.Media.Imaging.BitmapImage myBitmapImage = new System.Windows.Media.Imaging.BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\ElfPin.ico");
+            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\downarrow.png");
             myBitmapImage.DecodePixelWidth = 30;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;

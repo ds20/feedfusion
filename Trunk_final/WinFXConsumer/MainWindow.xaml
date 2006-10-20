@@ -29,7 +29,7 @@
 
 
 
-			<ToolBarTray  Width="Auto" Height="Auto" x:Name="ToolBarPanel" >
+			<ToolBarTray  Width="Auto" Height="Auto" x:Name="ToolBarPanel">
         <ToolBar   x:Name="ToolBar" Height="50"  Width="Auto" Opacity="1" Style="{DynamicResource ToolBar}" >
           <Button x:Name ="btnRefresh" ToolTip="Check all known feeds for new items."  Click ="Refresh">Refresh</Button>
         </ToolBar>

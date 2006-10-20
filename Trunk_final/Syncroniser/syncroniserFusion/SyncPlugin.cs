@@ -154,13 +154,14 @@ namespace syncroniserFusion
         {
             System.Windows.Controls.Button btn = new System.Windows.Controls.Button();
             btn.ToolTip = "Opens Plugin Configuration Window";
-            btn.Width = 30;
-            btn.Height = 30;
+            
             Image im = new Image();
+            im.Width = 30;
+            im.Height = 30;
             BitmapImage bi = new BitmapImage();
             bi.BeginInit();
             bi.DecodePixelWidth = 30; 
-            bi.UriSource = new Uri(Environment.CurrentDirectory + "\\icons\\ring.ico");
+            bi.UriSource = new Uri(Environment.CurrentDirectory + "\\icons\\bomb.png");
             bi.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
             bi.CacheOption = BitmapCacheOption.OnLoad;
             bi.EndInit();

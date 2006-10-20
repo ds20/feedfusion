@@ -70,7 +70,6 @@
     <Page Include="RenameWindow.xaml" />
     <Page Include="WaitWindow.xaml" />
     <Page Include="AboutWindow.xaml" />
-    <Page Include="Options.xaml" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -128,10 +127,6 @@
     <Compile Include="AboutWindow.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>AboutWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Options.xaml.cs">
-      <SubType>Code</SubType>
-      <DependentUpon>Options.xaml</DependentUpon>
     </Compile>
     <AppDesigner Include="Properties\" />
   </ItemGroup>

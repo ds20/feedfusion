@@ -572,8 +572,8 @@ namespace WinFXConsumer
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
             wp2 = new WrapPanel();
-            wp2.Children.Add(myImage);
-            btnRefresh.Content = wp2;
+            //wp2.Children.Add(myImage);
+            btnRefresh.Content = myImage;
 
             myImage = new Image();
             myImage.Width = 20;
@@ -630,7 +630,7 @@ namespace WinFXConsumer
             // Create source
             myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\ring.ico");
+            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\bomb.png");
             myBitmapImage.DecodePixelWidth = 20;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -738,10 +738,14 @@ namespace WinFXConsumer
 
             //this.ApplyStyle(this._styleIndex);
             this.InvalidateVisual();
-            DownloadAll();
             this.Width += 1;
+            Timer t = new Timer(new TimerCallback(refreshTimerCallback), null, 0, 60 * 15 * 1000); 
+      
         }
-
+        void refreshTimerCallback(object sender)
+        {
+            this.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal,new  NoArgDelegate(DownloadAll));     
+        }
         private void Refresh(object sender, RoutedEventArgs e)
         { DownloadAll(); }
 
