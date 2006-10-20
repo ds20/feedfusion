@@ -34,7 +34,7 @@ namespace TrayMinimiser
         }
         private void InitComponent(string s)
         {
-            this.WindowStyle = System.Windows.WindowStyle.ToolWindow;
+            this.WindowStyle = System.Windows.WindowStyle.None;
             this.ResizeMode = System.Windows.ResizeMode.NoResize;
             this.Visibility = System.Windows.Visibility.Hidden;
             this.Opacity = 1;
