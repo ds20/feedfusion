@@ -13,7 +13,7 @@ using Indexer;
 using System.Resources;
 using System.IO;
 using System.Windows.Markup;
-
+using System.Windows.Media.Imaging;
 namespace WinFXConsumer
 {
     /// <summary>
@@ -81,6 +81,42 @@ namespace WinFXConsumer
         public pluginConfigWindow(FeedDB f, pluginManager pManager,string styleName)
         {
             InitializeComponent();
+            Image myImage = new Image();
+            myImage.Width = 20;
+            myImage.Height = 20;
+            // Create source
+            BitmapImage myBitmapImage = new BitmapImage();
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\down.png");
+            myBitmapImage.DecodePixelWidth = 20;
+            myBitmapImage.EndInit();
+            myImage.Source = myBitmapImage;
+            btnMoveDown.Content = myImage;
+
+            myImage = new Image();
+            myImage.Width = 20;
+            myImage.Height = 20;
+            // Create source
+            myBitmapImage = new BitmapImage();
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\up.png");
+            myBitmapImage.DecodePixelWidth = 20;
+            myBitmapImage.EndInit();
+            myImage.Source = myBitmapImage;
+            btnMoveUp.Content = myImage;
+
+            myImage = new Image();
+            myImage.Width = 20;
+            myImage.Height = 20;
+            // Create source
+            myBitmapImage = new BitmapImage();
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\dr.png");
+            myBitmapImage.DecodePixelWidth = 20;
+            myBitmapImage.EndInit();
+            myImage.Source = myBitmapImage;
+            cmdConfigure.Content = myImage;   
+
             database = f; plugins = pManager;
             listBox1.SelectionChanged += OnSelection;
             RefreshList();
@@ -110,7 +146,7 @@ namespace WinFXConsumer
                 // Create source
                 System.Windows.Media.Imaging.BitmapImage myBitmapImage = new System.Windows.Media.Imaging.BitmapImage();
                 myBitmapImage.BeginInit();
-                myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\ring.ico");
+                myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\bomb.png");
                 myBitmapImage.DecodePixelWidth = 20;
                 myBitmapImage.EndInit();
                 myImage.Source = myBitmapImage;

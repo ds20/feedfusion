@@ -257,16 +257,19 @@ namespace rss2
         {
             System.Windows.Controls.Button toolbtn = new System.Windows.Controls.Button();
             toolbtn.ToolTip  = "Shows the Rss2 Plugin Configuration Window";
+            
             Image im = new Image();
+            im.Width = 30;
+            im.Height = 30;
             BitmapImage bi = new BitmapImage();
             bi.BeginInit();
+            bi.DecodePixelWidth = 30; 
             bi.UriSource = new Uri(Environment.CurrentDirectory + "\\icons\\rss.png");
             bi.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
             bi.CacheOption = BitmapCacheOption.OnLoad;
             bi.EndInit();
             im.Source = bi;
             toolbtn.Content = im;
-
             toolbtn.Click += new System.Windows.RoutedEventHandler(toolbtn_Click);
             ToolBar.Items.Add(toolbtn);
    
