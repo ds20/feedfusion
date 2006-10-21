@@ -225,8 +225,8 @@ namespace WinFXConsumer
                
             exp.Tag = feed; 
             t.Items.Add(exp);
-            t.Width = categoryList.Width-10;
-            exp.Width = t.Width -70;
+            t.Width = categoryList.Width;
+            exp.Width = t.Width -80;
 
             Grid itemStack = new Grid();
             ColumnDefinition clm = new ColumnDefinition();
