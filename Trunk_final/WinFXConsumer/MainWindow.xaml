@@ -65,7 +65,16 @@
         <ListBox x:Name ="latestPosts"></ListBox>
       </TabItem>
     </TabControl>
+    
     <Grid>
+      <!--
+      <Grid.Background>
+        <ImageBrush>
+          <ImageBrush.ImageSource>
+            <BitmapImage UriSource="bal.png" />
+          </ImageBrush.ImageSource>
+        </ImageBrush>
+      </Grid.Background>-->
       <Grid.RowDefinitions>
         <RowDefinition Height="*"></RowDefinition>
         <RowDefinition Height="15"></RowDefinition>
@@ -75,6 +84,7 @@
         <ColumnDefinition ></ColumnDefinition>
       </Grid.ColumnDefinitions> 
       
+
 
       <Frame Name="browser" Grid.Column="0" Grid.Row="0" BorderThickness="0,0,0,0" BorderBrush="#FFFF0000" JournalOwnership="OwnsJournal" ContextMenuService.HasDropShadow="False" NavigationUIVisibility="Visible" HorizontalContentAlignment="Stretch" />
       <StatusBar Grid.Row="1" Grid.Column="0" x:Name="statusBar" Background="#FFFFFFFF" Visibility="Collapsed" />

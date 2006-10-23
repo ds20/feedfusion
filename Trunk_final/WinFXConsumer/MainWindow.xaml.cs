@@ -505,10 +505,10 @@ namespace WinFXConsumer
         }
 
         public Window1()
-        { 
+        {
             InitializeComponent();
+            
 
-             
             Image myImage = new Image();
             myImage.Width = 20;
             myImage.Height = 20;
@@ -518,10 +518,10 @@ namespace WinFXConsumer
             myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\search.ico");
             myBitmapImage.DecodePixelWidth = 20;
             myBitmapImage.EndInit();
-            myImage.Source = myBitmapImage; 
-            WrapPanel wp=new WrapPanel();
-            Label l=new Label();
-            l.Content ="Search";
+            myImage.Source = myBitmapImage;
+            WrapPanel wp = new WrapPanel();
+            Label l = new Label();
+            l.Content = "Search";
             wp.Children.Add(myImage);
             wp.Children.Add(l);
             hist.Header = wp;
@@ -663,24 +663,24 @@ namespace WinFXConsumer
             this.ContentRendered += Window1_ContentRendered;
             Button cc = new Button();
             dataBase = new FeedDB();
- 
+
             //dataBase.removeAllHistory();
-            dataBase.RegisterEventHandler(this); 
+            dataBase.RegisterEventHandler(this);
             dataBase.getHistory("threre isn't any");
-            this.Closing += window1_close;
+            this.Closing += Window1_Closing;
             dataBase.delegCatFeedChanged += ListRefresh;
             button5.Click += button5_Click;
             button6.Click += button6_Click;
             button7.Click += button7_Click;
             button8.Click += button8_Click;
-            btnProgramOptions.Click += new RoutedEventHandler(btnProgramOptions_Click);  
+            btnProgramOptions.Click += new RoutedEventHandler(btnProgramOptions_Click);
             btnO.Click += new RoutedEventHandler(btnO_Click);
             categoryList.MouseDoubleClick += treeView1_MouseDoubleClick;
             listBox1.SelectionChanged += listBox1_SelectionChanged;
             txtSearch.KeyDown += txtSearch_KeyDown;
             Button.Click += Button_Click;
             populateCategoryList();
-             
+        
         }
 
         public void FeedDownloaded(string feed)
@@ -877,7 +877,7 @@ namespace WinFXConsumer
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, url);
+                //MessageBox.Show(e.Message, url);
                 statusBar.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new OneArgDelegate(addStatusBarItem), url + "\n" + e.Message);
                 WriteToLogFileAsync(DateTime.Now + "\r\n" + url + "\r\n" + e.Message + "\r\n\r\n");
                 xDoc = null;
@@ -1090,6 +1090,12 @@ namespace WinFXConsumer
         {
             closeAllThreads = true;
             dataBase.Optimize();
+        }
+
+        void Window1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            foreach (Window f in Application.Current.Windows) if (f != this) f.Close();
+            Application.Current.Shutdown();
         }
 
     }
