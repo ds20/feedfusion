@@ -146,7 +146,8 @@ namespace WinFXConsumer
             
             XmlDocument doc = new XmlDocument();
             try { doc.Load((String)url_o); }
-            catch (Exception e) { MessageBox.Show(e.Message, (String)url_o); }
+            catch (Exception e) { MessageBox.Show(e.Message, (String)url_o); 
+            }
 
             XmlNode xn = doc.FirstChild;
             while (xn!=null && xn.NodeType != XmlNodeType.XmlDeclaration)
