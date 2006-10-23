@@ -22,15 +22,14 @@ namespace TrayMinimiser
         }
         public void ca(object sender)
         {
-            if (i == 0) i++;
-            else this.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new NoArgDelegate(this.Hide));     
+            this.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new NoArgDelegate(this.Hide));     
         }
 
         public void Show1()
         {
             base.Show();
             i = 0;
-            System.Threading.Timer t = new System.Threading.Timer(new System.Threading.TimerCallback(ca), null, 0, 3000);
+            System.Threading.Timer t = new System.Threading.Timer(new System.Threading.TimerCallback(ca), null, 2000, 3000);
         }
         private void InitComponent(string s)
         {
@@ -38,7 +37,7 @@ namespace TrayMinimiser
             this.ResizeMode = System.Windows.ResizeMode.NoResize;
             this.Visibility = System.Windows.Visibility.Hidden;
             this.Opacity = 1;
-            this.Width = 300;
+            this.Width = 500;
             this.Height = 100;
 
             this.Title = "FeedFusion";
