@@ -1,0 +1,624 @@
+﻿<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="http://blogs.msdn.com/utility/FeedStylesheets/rss.xsl" media="screen"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" xmlns:wfw="http://wellformedweb.org/CommentAPI/"><channel><title>The Old New Thing</title><link>http://blogs.msdn.com/oldnewthing/default.aspx</link><description>not actually a .NET blog</description><dc:language>en</dc:language><generator>CommunityServer 2.1 (Build: 60926.958)</generator><item><title>A very brief return to part 6 of Loading the Chinese/English dictionary</title><link>http://blogs.msdn.com/oldnewthing/archive/2006/10/06/796395.aspx</link><pubDate>Fri, 06 Oct 2006 14:00:04 GMT</pubDate><guid isPermaLink="false">91d46819-8472-40ad-a661-2c78acb4018c:796395</guid><dc:creator>oldnewthing</dc:creator><slash:comments>8</slash:comments><comments>http://blogs.msdn.com/oldnewthing/comments/796395.aspx</comments><wfw:commentRss>http://blogs.msdn.com/oldnewthing/commentrss.aspx?PostID=796395</wfw:commentRss><wfw:comment>http://blogs.msdn.com/oldnewthing/rsscomments.aspx?PostID=796395</wfw:comment><description>&lt;P&gt;
+Back in
+&lt;A HREF="http://blogs.msdn.com/oldnewthing/archive/2005/05/19/420038.aspx"&gt;
+Part 6 of the first phase of the
+"Chinese/English dictionary" series&lt;/A&gt;
+(a series which I intend to get back to someday but somehow that
+day never arrives),
+I left an exercise related to the &lt;CODE&gt;alignment&lt;/CODE&gt; member
+of the &lt;CODE&gt;HEADER&lt;/CODE&gt; union.
+&lt;/P&gt;
+&lt;P&gt;
+Alignment is one of those issues that
+&lt;A HREF="http://blogs.msdn.com/oldnewthing/archive/2004/09/14/229387.aspx"&gt;
+people who grew up with a forgiving processor architecture tend to ignore&lt;/A&gt;.
+In this case, the &lt;CODE&gt;WCHAR alignment&lt;/CODE&gt; member
+ensures that the total size of the &lt;CODE&gt;HEADER&lt;/CODE&gt; union
+is suitably chosen so that a &lt;CODE&gt;WCHAR&lt;/CODE&gt; can appear
+immediately after it.
+Since we're going to put characters immediately after the
+&lt;CODE&gt;HEADER&lt;/CODE&gt;, we'd better make sure those characters
+are aligned.
+If not, then processors that are alignment-sensitive will raise
+a &lt;CODE&gt;STATUS_DATATYPE_MISALIGNMENT&lt;/CODE&gt; exception,
+and even processors that are alignment-forgiving will suffer
+performance penalties when accessing unaligned data.
+&lt;/P&gt;
+&lt;P&gt;
+There are many variations on the alignment trick, some of them
+more effective than others.
+A common variation is the
+&lt;A HREF="http://blogs.msdn.com/oldnewthing/archive/2004/08/26/220873.aspx"&gt;
+one-element-array trick&lt;/A&gt;:
+&lt;/P&gt;
+&lt;PRE&gt;
+struct HEADER {
+ HEADER* m_phdrPrev;
+ SIZE_T  m_cb;
+ WCHAR   m_rgwchData[1];
+};
+
+// you can also use "offsetof" if you included &amp;lt;stddef.h&amp;gt;
+#define HEADER_SIZE FIELD_OFFSET(HEADER, m_rgwchData)
+&lt;/PRE&gt;
+&lt;P&gt;
+We would then use &lt;CODE&gt;HEADER_SIZE&lt;/CODE&gt; instead of
+&lt;CODE&gt;sizeof(HEADER)&lt;/CODE&gt;.
+This technique does make it explicit
+that an array of &lt;CODE&gt;WCHAR&lt;/CODE&gt;s will come after the header,
+but it means that the code that wants to allocate a &lt;CODE&gt;HEADER&lt;/CODE&gt;
+needs to be careful to use &lt;CODE&gt;HEADER_SIZE&lt;/CODE&gt; instead of
+the more natural &lt;CODE&gt;sizeof(HEADER)&lt;/CODE&gt;.
+&lt;/P&gt;
+&lt;P&gt;
+A common mistake is to use this incorrect definition for
+&lt;CODE&gt;HEADER_SIZE&lt;/CODE&gt;:
+&lt;/P&gt;
+&lt;PRE&gt;
+&lt;I&gt;#define HEADER_SIZE (sizeof(HEADER) - sizeof(WCHAR)) // wrong&lt;/I&gt;
+&lt;/PRE&gt;
+&lt;P&gt;
+This incorrect
+macro inadvertently commits the mistake it is trying to protect against!
+There might be (and indeed, will almost certainly be in this instance)
+structure padding after &lt;CODE&gt;m_rgwchData&lt;/CODE&gt;, which this macro
+fails to take into account.
+On a 32-bit machine, there will likely be two bytes of padding after
+the &lt;CODE&gt;m_rgwchData&lt;/CODE&gt; in order to bring the total structure
+size back to a value that permits another &lt;CODE&gt;HEADER&lt;/CODE&gt; to appear
+directly after the previous one.
+In its excitement over dealing with internal padding, the above
+macro forgot to deal with trail padding!
+&lt;/P&gt;
+&lt;P&gt;
+It is the "array of &lt;CODE&gt;HEADER&lt;/CODE&gt;s" that makes the original
+&lt;CODE&gt;union&lt;/CODE&gt; trick work.
+Since the compiler has to be prepared for the possibility of allocating
+an array of &lt;CODE&gt;HEADER&lt;/CODE&gt;s, it must provide padding at
+the end of the &lt;CODE&gt;HEADER&lt;/CODE&gt; to ensure that the next &lt;CODE&gt;HEADER&lt;/CODE&gt;
+begins at a suitably-aligned boundary.
+Yes, the &lt;CODE&gt;union&lt;/CODE&gt; trick can result in "excess padding",
+since the type used for alignment may have less stringent alignment
+requirements than the other members of the aggregate,
+but better to have too much than too little.
+&lt;/P&gt;
+&lt;P&gt;
+&lt;A HREF="http://blogs.msdn.com/oldnewthing/archive/2005/05/19/420038.aspx#420053"&gt;
+Another minor point&lt;/A&gt;
+was brought up by commenter Dan McCarty:
+"Why is &lt;CODE&gt;MIN_CBCHUNK&lt;/CODE&gt; set to 32,000 instead of 32K?"
+Notice that &lt;CODE&gt;MIN_CBCHUNK&lt;/CODE&gt; is added to &lt;CODE&gt;sizeof(HEADER)&lt;/CODE&gt;
+before it is rounded up.
+If the allocation granularity were 32768, then rounding up the sum to the
+nearest multiple would have taken us to 65536.
+Nothing wrong with that, but it means that our minimum chunk size is twice as
+big as the &lt;CODE&gt;#define&lt;/CODE&gt; suggests.
+(Of course, since in practice
+&lt;A HREF="http://blogs.msdn.com/oldnewthing/archive/2003/10/08/55239.aspx"&gt;
+the allocation granularity is 64KB&lt;/A&gt;,
+this distinction is only theoretical right now.)
+&lt;/P&gt;
+&lt;img src="http://blogs.msdn.com/aggbug.aspx?PostID=796395" width="1" height="1"&gt;</description><category domain="http://blogs.msdn.com/oldnewthing/archive/tags/Code/default.aspx">Code</category></item><item><title>Why does Windows hide keyboard accelerators and focus rectangles by default?</title><link>http://blogs.msdn.com/oldnewthing/archive/2006/10/05/792913.aspx</link><pubDate>Thu, 05 Oct 2006 14:00:00 GMT</pubDate><guid isPermaLink="false">91d46819-8472-40ad-a661-2c78acb4018c:792913</guid><dc:creator>oldnewthing</dc:creator><slash:comments>77</slash:comments><comments>http://blogs.msdn.com/oldnewthing/comments/792913.aspx</comments><wfw:commentRss>http://blogs.msdn.com/oldnewthing/commentrss.aspx?PostID=792913</wfw:commentRss><wfw:comment>http://blogs.msdn.com/oldnewthing/rsscomments.aspx?PostID=792913</wfw:comment><description>&lt;P&gt;
+The release of Windows&amp;nbsp;2000
+&lt;A HREF="http://blogs.msdn.com/oldnewthing/archive/2005/05/03/414317.aspx#414586"&gt;
+introduced a new setting&lt;/A&gt;:
+"Hide underlined letters for keyboard navigation until I press
+the Alt key,"
+which defaults on for most Western languages.
+What's the story behind this setting?
+&lt;/P&gt;
+&lt;P&gt;
+I still have the rationale from the user interface designer who
+introduced this feature.  Here's a redacted copy:
+&lt;/P&gt;
+&lt;BLOCKQUOTE CLASS=q&gt;
+&lt;P&gt;
+To support our goal of greater simplicity,
+we plan to suppress keyboard navigation
+indicators by default. Don't be frightened...
+&lt;/P&gt;
+&lt;P&gt;
+The idea is to reduce visual noise in Windows, namely focus indicators
+and access key underlines in menus and windows.
+Aesthetically, these things are distracting and intimidating.
+Functionally, they're only useful when you're navigating by keyboard.
+They don't add significant value when you're just using the mouse.
+In fact, they're often redundant.
+&lt;/P&gt;
+&lt;P&gt;
+Why now?
+Every good thing must start somewhere.
+Windows will look cleaner and simpler.
+&lt;/P&gt;
+&lt;P&gt;
+What's so bad about the way things are?
+Access key underlines are largely underutilized and are often
+redundant with Ctrl+ shortcuts within the same menu.
+There's no indication that you have to type the Alt key to use these shortcuts.
+Plus, it's just odd to see characters underlined within text
+all over your display. 
+Focus rectangles lack graphic integrity,
+and they're often redundant with the highlight
+on selected items or the default button. 
+&lt;/P&gt;
+&lt;P&gt;
+Of course, the keyboard indicators will come back when there is any
+demonstration of keyboard navigation by the user.
+The indicators will appear and disappear appropriately.
+Finally, if you don't like the behavior at all,
+you can disable it from the Display control panel.
+&lt;/P&gt;
+&lt;P&gt;
+For what it's worth, this is one of the things I [the interface designer]
+came to Microsoft to fix.
+&lt;/P&gt;
+&lt;/BLOCKQUOTE&gt;
+&lt;P&gt;
+An additional point not mentioned in the original rationale is
+that with the rise of the web browser as the primary use of
+a computer,
+users have increasingly been conditioned to treat underlined
+text as "Click me" rather than "Use me in conjunction with the
+Alt key to activate this item".
+&lt;/P&gt;
+&lt;P&gt;
+The thing about seeing randomly-underlined letters all over
+the screen is a point many technically-inclined people miss.
+To a typical user, all these indicators scream
+"Entering a propeller-head zone!"
+and "You are not smart enough to use this computer."
+&lt;/P&gt;
+&lt;P&gt;
+What does frustrate me about this setting, though, is not its design
+but its implementation.
+Using the arrow keys to navigate a pop-up menu doesn't appear to
+count as a "demonstration of keyboard navigation by the user",
+which is particularly frustrating since you can't use the Alt key
+to make that demonstration, for the Alt key dismisses the menu!
+To see what the keyboard accelerators are for a pop-up
+menu, you have to find a way to cause the menu to pop up based on
+a keyboard action (usually hitting Shift+F10 when focus is on the
+appropriate element).
+This is often harder than it sounds.
+&lt;/P&gt;
+&lt;img src="http://blogs.msdn.com/aggbug.aspx?PostID=792913" width="1" height="1"&gt;</description><category domain="http://blogs.msdn.com/oldnewthing/archive/tags/History/default.aspx">History</category></item><item><title>You can invent new adjectives too</title><link>http://blogs.msdn.com/oldnewthing/archive/2006/10/04/789820.aspx</link><pubDate>Wed, 04 Oct 2006 14:00:00 GMT</pubDate><guid isPermaLink="false">91d46819-8472-40ad-a661-2c78acb4018c:789820</guid><dc:creator>oldnewthing</dc:creator><slash:comments>25</slash:comments><comments>http://blogs.msdn.com/oldnewthing/comments/789820.aspx</comments><wfw:commentRss>http://blogs.msdn.com/oldnewthing/commentrss.aspx?PostID=789820</wfw:commentRss><wfw:comment>http://blogs.msdn.com/oldnewthing/rsscomments.aspx?PostID=789820</wfw:comment><description>&lt;P&gt;It's not just verbs and nouns. &lt;/P&gt;
+&lt;P&gt;I just saw the adjective "planful" in a piece of email. &lt;/P&gt;
+&lt;P&gt;I don't know what that is supposed to mean. &lt;/P&gt;
+&lt;P&gt;Neither do &lt;A href="http://dictionary.reference.com/search?q=planful" mce_href="http://dictionary.reference.com/search?q=planful"&gt;dictionary.com&lt;/A&gt; or &lt;A href="http://encarta.msn.com/dictionary_/planful.html" mce_href="http://encarta.msn.com/dictionary_/planful.html"&gt;Encarta&lt;/A&gt;. &lt;/P&gt;&lt;img src="http://blogs.msdn.com/aggbug.aspx?PostID=789820" width="1" height="1"&gt;</description><category domain="http://blogs.msdn.com/oldnewthing/archive/tags/Non-Computer/default.aspx">Non-Computer</category></item><item><title>There's a reason why envelopes have backs</title><link>http://blogs.msdn.com/oldnewthing/archive/2006/10/03/785925.aspx</link><pubDate>Tue, 03 Oct 2006 14:00:00 GMT</pubDate><guid isPermaLink="false">91d46819-8472-40ad-a661-2c78acb4018c:785925</guid><dc:creator>oldnewthing</dc:creator><slash:comments>31</slash:comments><comments>http://blogs.msdn.com/oldnewthing/comments/785925.aspx</comments><wfw:commentRss>http://blogs.msdn.com/oldnewthing/commentrss.aspx?PostID=785925</wfw:commentRss><wfw:comment>http://blogs.msdn.com/oldnewthing/rsscomments.aspx?PostID=785925</wfw:comment><description>&lt;P&gt;For some reason, people are upset that &lt;A href="http://blogs.msdn.com/oldnewthing/archive/2006/04/19/578991.aspx#580805" mce_href="http://blogs.msdn.com/oldnewthing/archive/2006/04/19/578991.aspx#580805"&gt;I don't have hard data for the cost difference between "slow" and "fast" mode enumeration&lt;/A&gt;. I already did &lt;A href="http://blogs.msdn.com/oldnewthing/archive/2006/04/07/570801.aspx" mce_href="http://blogs.msdn.com/oldnewthing/archive/2006/04/07/570801.aspx"&gt;a back-of-the-envelope calculation&lt;/A&gt; that showed that fast mode reduces the total time to enumerate the items in a folder from five minutes to two seconds. That's what's so great about back-of-the-envelope calculations: They let you make decisions &lt;STRONG&gt;without actually having to implement every possible solution&lt;/STRONG&gt;. &lt;/P&gt;
+&lt;P&gt;Some quick estimation shows that using slow mode enumeration would be 200 times slower than fast mode. Does it really matter whether the speed-up is 195.1231 times or even 103.4761 times? Even if the estimate were off by an order of magnitude, a 20-fold speed-up is still worth it. &lt;/P&gt;
+&lt;P&gt;Imagine if people had to carry out experiments for every possible optimization (both before and after) to prove that it was worthwhile. &lt;/P&gt;
+&lt;P&gt;"Could you please deliver these letters?" &lt;/P&gt;
+&lt;P&gt;"Sure, here let me grab them." &lt;/P&gt;
+&lt;P&gt;"Why are you doing that? Why don't you take one letter at a time?" &lt;/P&gt;
+&lt;P&gt;"Um, because it'll be faster to take all of them at once so I don't have to keep coming back here." &lt;/P&gt;
+&lt;P&gt;"Do you have any hard data to support that? I'm not going to believe you until you show me some hard data." &lt;/P&gt;&lt;img src="http://blogs.msdn.com/aggbug.aspx?PostID=785925" width="1" height="1"&gt;</description><category domain="http://blogs.msdn.com/oldnewthing/archive/tags/Other/default.aspx">Other</category></item><item><title>If only he'd known to offer to back up their PC instead</title><link>http://blogs.msdn.com/oldnewthing/archive/2006/10/03/785927.aspx</link><pubDate>Tue, 03 Oct 2006 14:00:00 GMT</pubDate><guid isPermaLink="false">91d46819-8472-40ad-a661-2c78acb4018c:785927</guid><dc:creator>oldnewthing</dc:creator><slash:comments>2</slash:comments><comments>http://blogs.msdn.com/oldnewthing/comments/785927.aspx</comments><wfw:commentRss>http://blogs.msdn.com/oldnewthing/commentrss.aspx?PostID=785927</wfw:commentRss><wfw:comment>http://blogs.msdn.com/oldnewthing/rsscomments.aspx?PostID=785927</wfw:comment><description>&lt;P&gt;I love it when two unrelated stories conspire to create amusement beyond what each one provided separately. &lt;/P&gt;
+&lt;P&gt;We start with this report from &lt;A href="http://www.boingboing.net/" mce_href="http://www.boingboing.net/"&gt;BoingBoing&lt;/A&gt; of a man on Craigslist who offered to &lt;A href="http://www.boingboing.net/2006/09/20/man_fixes_pcs_in_exc.html" mce_href="http://www.boingboing.net/2006/09/20/man_fixes_pcs_in_exc.html"&gt;perform computer maintenance and repair in exchange for second base&lt;/A&gt;. (For those not familar with North American high school sexual slang—and that includes me—I refer you to &lt;A href="http://en.wikipedia.org/wiki/Baseball_Metaphor" mce_href="http://en.wikipedia.org/wiki/Baseball_Metaphor"&gt;this schedule of bases on Wikipedia&lt;/A&gt;, accompanied by a disturbingly elaborate list of secondary metaphors.) &lt;/P&gt;
+&lt;P&gt;That story provided momentary amusement, but it was subsequently recalled by this unrelated story of a man who was ruled to have been &lt;A href="http://www.news.com.au/story/0,23599,20471214-13762,00.html" mce_href="http://www.news.com.au/story/0,23599,20471214-13762,00.html"&gt;overcharged for breast fondling&lt;/A&gt;. If only he'd known to offer to back up their PC instead. &lt;/P&gt;&lt;img src="http://blogs.msdn.com/aggbug.aspx?PostID=785927" width="1" height="1"&gt;</description><category domain="http://blogs.msdn.com/oldnewthing/archive/tags/Non-Computer/default.aspx">Non-Computer</category></item><item><title>Any similarity to actual German or Swedish words is purely coincidental</title><link>http://blogs.msdn.com/oldnewthing/archive/2006/10/02/780270.aspx</link><pubDate>Mon, 02 Oct 2006 14:00:59 GMT</pubDate><guid isPermaLink="false">91d46819-8472-40ad-a661-2c78acb4018c:780270</guid><dc:creator>oldnewthing</dc:creator><slash:comments>25</slash:comments><comments>http://blogs.msdn.com/oldnewthing/comments/780270.aspx</comments><wfw:commentRss>http://blogs.msdn.com/oldnewthing/commentrss.aspx?PostID=780270</wfw:commentRss><wfw:comment>http://blogs.msdn.com/oldnewthing/rsscomments.aspx?PostID=780270</wfw:comment><description>&lt;P&gt;
+Earlier this year,
+the Advertising Standards Authority (the UK's advertising watchdog)
+ruled that
+&lt;A HREF="http://www.theregister.co.uk/2006/04/20/moben_umlaut_ruling/"&gt;
+the use of umlauts in the name of kitchen furniture manufacturer
+M&amp;ouml;ben is
+purely decorative&lt;/A&gt;
+and not intended to mislead consumers into believing that the
+company is German or Scandinavian.
+The fact that the name is only one letter away from
+both the German word
+("&lt;A HREF="http://www.dict.cc/?s=M%F6bel"&gt;M&amp;ouml;bel&lt;/A&gt;") and Swedish word
+("&lt;A HREF="http://lexikon.nada.kth.se/cgi-bin/swe-eng?m|bel"&gt;m&amp;ouml;bel&lt;/A&gt;")
+for "furniture" is not intended to mislead
+but rather is simply a coincidence.
+&lt;/P&gt;
+&lt;P&gt;
+This appears to be a variation of the
+&lt;A HREF="http://en.wikipedia.org/wiki/Heavy_metal_umlaut"&gt;
+heavy metal umlaut&lt;/A&gt;.
+(Not to be confused with a diaeresis.
+I used to use diaereses, but you mocked me so I stopped.)
+It troubles me to see the umlaut being treated as a decorative element,
+for it dooms another generation of language students to treating
+umlauted and non-umlauted vowels as just typographical variations of
+each other rather than being distinct vowels with different pronunciations.
+An "&amp;ouml;" is not an "o" with dots over it any more than a "Q" is an "O"
+with a squiggly tail.
+Treating umlauts as just decorative dots is
+sort of the German version of
+the tattoo consisting of meaningless Chinese characters that "look pretty".
+&lt;/P&gt;
+&lt;img src="http://blogs.msdn.com/aggbug.aspx?PostID=780270" width="1" height="1"&gt;</description><category domain="http://blogs.msdn.com/oldnewthing/archive/tags/Non-Computer/default.aspx">Non-Computer</category></item><item><title>Does a dual-core processor count as one or two for licensing purposes?</title><link>http://blogs.msdn.com/oldnewthing/archive/2006/10/02/780255.aspx</link><pubDate>Mon, 02 Oct 2006 14:00:00 GMT</pubDate><guid isPermaLink="false">91d46819-8472-40ad-a661-2c78acb4018c:780255</guid><dc:creator>oldnewthing</dc:creator><slash:comments>24</slash:comments><comments>http://blogs.msdn.com/oldnewthing/comments/780255.aspx</comments><wfw:commentRss>http://blogs.msdn.com/oldnewthing/commentrss.aspx?PostID=780255</wfw:commentRss><wfw:comment>http://blogs.msdn.com/oldnewthing/rsscomments.aspx?PostID=780255</wfw:comment><description>&lt;P&gt;
+Now that dual-core processors are gaining in popularity,
+there has been some confusion over whether a dual-core processor
+counts as one or two.
+&lt;A HREF="http://www.microsoft.com/licensing/highlights/multicore.mspx"&gt;
+This discussion of multicore processor licensing&lt;/A&gt;
+may clear things up.
+The short answer is that a dual-core processor still counts as one
+processor.
+&lt;/P&gt;
+&lt;P&gt;
+For example, Windows XP Professional supports up to two processors.
+If you have two dual-core processors, Windows XP will use them both,
+for a total of four processing units.
+And if you enable hyperthreading on those processors, you get
+eight virtual processors out of the deal!
+Similarly, Windows XP Home supports one processor, but you if your
+one processor is a dual-core processor, then it will use both cores.
+&lt;/P&gt;
+&lt;P&gt;
+Now, I'm not so lucky as to actually have a dual-core machine,
+so I'm just taking it on faith that the linked article is correct.
+I haven't been able to run experiments to confirm.
+&lt;/P&gt;
+&lt;img src="http://blogs.msdn.com/aggbug.aspx?PostID=780255" width="1" height="1"&gt;</description><category domain="http://blogs.msdn.com/oldnewthing/archive/tags/Other/default.aspx">Other</category></item><item><title>Eating Belgian food at Brouwer's Cafe in Fremont</title><link>http://blogs.msdn.com/oldnewthing/archive/2006/09/29/776927.aspx</link><pubDate>Fri, 29 Sep 2006 14:00:22 GMT</pubDate><guid isPermaLink="false">91d46819-8472-40ad-a661-2c78acb4018c:776927</guid><dc:creator>oldnewthing</dc:creator><slash:comments>38</slash:comments><comments>http://blogs.msdn.com/oldnewthing/comments/776927.aspx</comments><wfw:commentRss>http://blogs.msdn.com/oldnewthing/commentrss.aspx?PostID=776927</wfw:commentRss><wfw:comment>http://blogs.msdn.com/oldnewthing/rsscomments.aspx?PostID=776927</wfw:comment><description>&lt;P&gt;
+Last year, some friends and I went for dinner at
+&lt;A HREF="http://www.brouwerscafe.com/"&gt;
+Brouwer's Caf&amp;eacute;&lt;/A&gt;,
+a
+&lt;A HREF="http://www.nwsource.com/ae/scr/edb_vd.cfm?c=c&amp;ven=25945&amp;&amp;s=nws"&gt;
+Belgian pub/restaurant&lt;/A&gt;
+in the Fremont neighborhood of Seattle.
+The menu is pub food, which means that everything comes with
+&lt;I LANG=fr&gt;&lt;A HREF="http://www.belgianfries.com/"&gt;frites&lt;/A&gt;&lt;/I&gt;
+and a choice of several dipping sauces,
+none of which is ketchup.
+One of my friends spent some formative years of her life
+in the Netherlands, so she was familiar with &lt;I&gt;frites&lt;/I&gt;
+and asked for curry ketchup.
+Unfortunately, they didn't have it.
+(But I know a great German deli that does carry curry ketchup...)
+&lt;/P&gt;
+&lt;P&gt;
+I tried to stay somewhat healthy with a salad,
+but the &lt;I LANG=fr&gt;croque monsieur&lt;/I&gt; pretty much cancelled out
+any fat-avoidance forgoing the &lt;I&gt;frites&lt;/I&gt; may have offered.
+As we munched on our &lt;I&gt;frites&lt;/I&gt;, I wondered how the
+Belgians managed to
+&lt;A HREF="http://www.boston.com/news/globe/health_science/articles/2003/10/21/livin_large/"&gt;
+eat such profoundly fatty food&lt;/A&gt; and not
+blimp up like Americans.
+My friends revealed the secret in one word:
+&lt;A HREF="http://www.slate.com/id/2127949/"&gt;
+nicotine&lt;/A&gt;.
+&lt;/P&gt;
+&lt;img src="http://blogs.msdn.com/aggbug.aspx?PostID=776927" width="1" height="1"&gt;</description><category domain="http://blogs.msdn.com/oldnewthing/archive/tags/Non-Computer/default.aspx">Non-Computer</category></item><item><title>Quotation marks around spaces aren't necessary in the PATH environment variable</title><link>http://blogs.msdn.com/oldnewthing/archive/2006/09/29/776926.aspx</link><pubDate>Fri, 29 Sep 2006 14:00:06 GMT</pubDate><guid isPermaLink="false">91d46819-8472-40ad-a661-2c78acb4018c:776926</guid><dc:creator>oldnewthing</dc:creator><slash:comments>27</slash:comments><comments>http://blogs.msdn.com/oldnewthing/comments/776926.aspx</comments><wfw:commentRss>http://blogs.msdn.com/oldnewthing/commentrss.aspx?PostID=776926</wfw:commentRss><wfw:comment>http://blogs.msdn.com/oldnewthing/rsscomments.aspx?PostID=776926</wfw:comment><description>&lt;P&gt;
+The purpose of quotation marks is to allow a character that
+would normally be interpreted as a delimiter to be included
+as part of a file name.
+Most of the time, this delimiter is the space.
+The &lt;CODE&gt;CreateProcess&lt;/CODE&gt; function uses a space to
+separate the program name from its arguments.
+Most programs separate their command line arguments with a space.
+But the &lt;CODE&gt;PATH&lt;/CODE&gt; environment variable doesn't use spaces
+to separate directories.
+It uses semicolons.
+&lt;/P&gt;
+&lt;P&gt;
+This means that if you want to add a directory with spaces in its
+name to the path, you don't need quotation marks since spaces
+mean nothing to the &lt;CODE&gt;PATH&lt;/CODE&gt; environment variable.
+The quotation marks don't hurt, mind you, but they don't help either.
+&lt;/P&gt;
+&lt;P&gt;
+On the other hand, if the directory you want to add contains
+a semicolon in its name, then you do need the quotation marks,
+because it's the semicolon that you need to protect.
+&lt;/P&gt;
+&lt;img src="http://blogs.msdn.com/aggbug.aspx?PostID=776926" width="1" height="1"&gt;</description><category domain="http://blogs.msdn.com/oldnewthing/archive/tags/Tips_2F00_Support/default.aspx">Tips/Support</category></item><item><title>When you crash, make sure you crash in the right place</title><link>http://blogs.msdn.com/oldnewthing/archive/2006/09/28/775446.aspx</link><pubDate>Thu, 28 Sep 2006 14:00:04 GMT</pubDate><guid isPermaLink="false">91d46819-8472-40ad-a661-2c78acb4018c:775446</guid><dc:creator>oldnewthing</dc:creator><slash:comments>19</slash:comments><comments>http://blogs.msdn.com/oldnewthing/comments/775446.aspx</comments><wfw:commentRss>http://blogs.msdn.com/oldnewthing/commentrss.aspx?PostID=775446</wfw:commentRss><wfw:comment>http://blogs.msdn.com/oldnewthing/rsscomments.aspx?PostID=775446</wfw:comment><description>&lt;P&gt;
+Last time, I recommended that functions should just crash
+when given invalid pointers.
+There's a subtlety to this advice, however,
+and that's making sure you crash in the right place.
+&lt;/P&gt;
+&lt;P&gt;
+If your function and your function's caller both reside on the same
+side of a security boundary, then go ahead and crash inside your
+function.
+If the caller is a bad guy who is trying to get your function to crash,
+then there's nothing the caller has accomplished if your function
+runs in the same security context as the caller.
+After all, if the caller wanted to make your program do something bad,
+it could've just done that bad thing itself!
+If it gave you a pointer to invalid memory and you crashed trying to
+access it,
+well the caller could have accomplished the same thing by just
+accessing the invalid memory directly.
+&lt;/P&gt;
+&lt;P&gt;
+If your function resides on the other side of a security boundary,
+however, then having your function crash or behave erratically
+gives the malicious caller a power which he did not already have.
+For example, your function may reside in a service or local server,
+where the call arrives from another process.
+A malicious caller can pass intentionally malformed data to you
+via some form of IPC, causing your service or local server to crash.
+Or your function might reside in the same process as the caller
+but under a different security context.
+For example, it might be impersonating,
+or it may be operating on untrusted data.
+&lt;/P&gt;
+&lt;P&gt;
+Another example of a security boundary is the boundary between
+user mode and kernel mode.
+Kernel mode cannot crash on parameters passed from user mode,
+because kernel mode runs at a higher protection level from user mode.
+&lt;/P&gt;
+&lt;P&gt;
+In these cases, you want to make sure you crash in the correct
+context.
+In the IPC case, there typically will be a stub on the client side
+that does the hard work of taking the parameters and packaging
+them up for IPC.
+If the stub is given an invalid pointer,
+it should crash &lt;STRONG&gt;in the stub&lt;/STRONG&gt;,
+so that the crash occurs in the same security
+context as the caller.
+A caller who passes an invalid pointer by mistake can then
+debug the crash in a context that is meaningful to the caller.
+(Of course, a malicious caller won't use your stub but will
+instead package the data manually and IPC it directly to the server.
+Your server can't crash on malicious inbound data, since that
+data came from a different security context.)
+&lt;/P&gt;
+&lt;P&gt;
+If you're feeling really ambitious (and few people do),
+you can have the server
+react to malformed data by returning a special error code,
+which the stub detects and converts to an exception.
+Again, this doesn't do anything to crash the malicious caller,
+because the malicious caller is bypassing your stub.
+But it may help the caller who thought it was passing a valid pointer.
+&lt;/P&gt;
+&lt;img src="http://blogs.msdn.com/aggbug.aspx?PostID=775446" width="1" height="1"&gt;</description><category domain="http://blogs.msdn.com/oldnewthing/archive/tags/Code/default.aspx">Code</category></item><item><title>Saturday is Museum Day, courtesy of Smithsonian Magazine</title><link>http://blogs.msdn.com/oldnewthing/archive/2006/09/28/775447.aspx</link><pubDate>Thu, 28 Sep 2006 14:00:00 GMT</pubDate><guid isPermaLink="false">91d46819-8472-40ad-a661-2c78acb4018c:775447</guid><dc:creator>oldnewthing</dc:creator><slash:comments>2</slash:comments><comments>http://blogs.msdn.com/oldnewthing/comments/775447.aspx</comments><wfw:commentRss>http://blogs.msdn.com/oldnewthing/commentrss.aspx?PostID=775447</wfw:commentRss><wfw:comment>http://blogs.msdn.com/oldnewthing/rsscomments.aspx?PostID=775447</wfw:comment><description>&lt;P&gt;
+September 30, 2006 is the first
+&lt;A HREF="http://www.smithsonianmag.com/museumday/"&gt;
+Museum Day&lt;/A&gt; open to the general public.
+(Apparently, previous Museum Days were limited to subscribers of
+Smithsonian Magazine.)
+&lt;/P&gt;
+&lt;P&gt;
+You will have to print out the
+&lt;A HREF="http://www.smithsonianmag.com/files/md_card.html"&gt;
+Museum Day Admissions Coupon&lt;/A&gt;
+to get in.
+Some restrictions apply.
+Read the fine print.
+&lt;/P&gt;
+&lt;P&gt;
+Even the
+&lt;A HREF="http://www.icr.org/event/221/"&gt;Institute for Creation
+Research&lt;/A&gt; (an actual museum!) is getting into the act.
+&lt;/P&gt;
+&lt;img src="http://blogs.msdn.com/aggbug.aspx?PostID=775447" width="1" height="1"&gt;</description><category domain="http://blogs.msdn.com/oldnewthing/archive/tags/Non-Computer/default.aspx">Non-Computer</category></item><item><title>IsBadXxxPtr should really be called CrashProgramRandomly</title><link>http://blogs.msdn.com/oldnewthing/archive/2006/09/27/773741.aspx</link><pubDate>Wed, 27 Sep 2006 14:00:07 GMT</pubDate><guid isPermaLink="false">91d46819-8472-40ad-a661-2c78acb4018c:773741</guid><dc:creator>oldnewthing</dc:creator><slash:comments>77</slash:comments><comments>http://blogs.msdn.com/oldnewthing/comments/773741.aspx</comments><wfw:commentRss>http://blogs.msdn.com/oldnewthing/commentrss.aspx?PostID=773741</wfw:commentRss><wfw:comment>http://blogs.msdn.com/oldnewthing/rsscomments.aspx?PostID=773741</wfw:comment><description>&lt;P&gt;
+Often I'll see code that tries to "protect" against invalid
+pointer parameters.
+This is usually done by calling a function like
+&lt;CODE&gt;IsBadWritePtr&lt;/CODE&gt;.
+But this is a bad idea.
+&lt;CODE&gt;IsBadWritePtr&lt;/CODE&gt; should really be called
+&lt;CODE&gt;CrashProgramRandomly&lt;/CODE&gt;.
+&lt;/P&gt;
+&lt;P&gt;
+The documentation for the &lt;CODE&gt;IsBadXxxPtr&lt;/CODE&gt; functions
+presents the technical reasons why, but I'm going to dig a little
+deeper.
+For one thing, if the "bad pointer" points into a guard
+page, then probing the memory will raise a guard page exception.
+The &lt;CODE&gt;IsBadXxxPtr&lt;/CODE&gt; function will catch the exception and
+return "not a valid pointer".
+But guard page exceptions are raised only once.
+&lt;STRONG&gt;You just blew your one chance.&lt;/STRONG&gt;
+When the code that is managing the guard page accesses the
+memory for what it thinks is the first time (but is really the second),
+it won't get the guard page exception but will
+instead get a normal access violation.
+&lt;/P&gt;
+&lt;P&gt;
+Alternatively,
+it's possible that your function was called by some code
+that intentionally passed a pointer to a guard page (or
+a &lt;CODE&gt;PAGE_NOACCESS&lt;/CODE&gt; page)
+and was
+expecting to receive that guard page exception or access violation
+exception
+so that it could
+dynamically generate the data that should go onto that page.
+(Simulation of large address spaces via pointer-swizzling is one
+scenario where this can happen.)
+Swallowing the exception in &lt;CODE&gt;IsBadXxxPtr&lt;/CODE&gt;
+means that the caller's exception handler doesn't get a chance
+to run,
+which means that your code rejected a pointer that would
+actually have been okay,
+if only you had let the exception handler do its thing.
+&lt;/P&gt;
+&lt;P&gt;
+"Yeah, but my code doesn't use guard pages or play games with
+&lt;CODE&gt;PAGE_NOACCESS&lt;/CODE&gt; pages, so I don't care."
+Well, for one thing, just because your code doesn't use these features
+pages doesn't mean that no other code in your process uses them.
+One of the DLLs that you link to might use guard pages, and your
+use of &lt;CODE&gt;IsBadXxxPtr&lt;/CODE&gt; to test a pointer into a guard page
+will break that other DLL.
+&lt;/P&gt;
+&lt;P&gt;
+And second, your program does use guard pages; you just don't realize it.
+The dynamic growth of the stack is performed via guard pages:
+Just past the last valid page on the stack is a guard page.
+When the stack grows into the guard page, a guard page exception is
+raised, which the default exception handler handles by
+committing a new stack page and setting the &lt;STRONG&gt;next&lt;/STRONG&gt; page
+to be a guard page.
+&lt;/P&gt;
+&lt;P&gt;
+(I suspect this design was chosen in order to avoid having to commit
+the entire memory necessary for all thread stacks.
+Since the default thread stack size is a megabyte, this would have
+meant that a program with ten threads would commit ten megabytes
+of memory, even though each thread probably uses only 24KB of that
+commitment.
+When you have a small pagefile or are running without a pagefile entirely,
+you don't want to waste 97% of your commit limit on unused stack memory.)
+&lt;/P&gt;
+&lt;P&gt;
+"But what should I do, then, if somebody passes me a bad pointer?"
+&lt;/P&gt;
+&lt;P&gt;
+You should crash.
+&lt;/P&gt;
+&lt;P&gt;
+No, really.
+&lt;/P&gt;
+&lt;P&gt;
+In the Win32 programming model, exceptions are truly exceptional.
+As a general rule, you shouldn't try to catch them.
+And even if you decide you want to catch them, you need to be
+very careful that you catch exactly what you want and no more.
+&lt;/P&gt;
+&lt;P&gt;
+Trying to intercept the invalid pointer and returning an error code
+creates nondeterministic behavior.
+Where do invalid pointers come from?
+Typically they are caused by programming errors.
+Using memory after freeing it,
+using uninitialized memory,
+that sort of thing.
+Consequently, an invalid pointer might actually point to
+valid memory, if for example the heap page that used to contain
+the memory has not been decomitted, or if the uninitialized memory
+contains a value that when reinterpreted as a pointer
+just happens to be a pointer to memory that is valid right now.
+On the other hand, it might point to truly invalid memory.
+If you use &lt;CODE&gt;IsBadWritePtr&lt;/CODE&gt; to "validate" your pointers
+before writing to them,
+then in the case where it happens to point to memory that is valid,
+you end up corrupting memory (since the pointer is "valid"
+and you therefore decide to write to it).
+And in the case where it happens to point to an invalid address,
+you return an error code.
+In both cases, &lt;STRONG&gt;the program keeps on running&lt;/STRONG&gt;,
+and then that memory corruption manifests itself as an
+"impossible" crash two hours later.
+&lt;/P&gt;
+&lt;P&gt;
+In other words &lt;CODE&gt;IsBadWritePtr&lt;/CODE&gt; is really
+&lt;CODE&gt;CorruptMemoryIfPossible&lt;/CODE&gt;.
+It tries to corrupt memory, but if doing so raises an exception,
+it merely fails the operation.
+&lt;/P&gt;
+&lt;P&gt;
+Many teams at Microsoft have rediscovered that &lt;CODE&gt;IsBadXxxPtr&lt;/CODE&gt;
+causes bugs rather than fixes them.
+It's not fun getting a bucketful of crash dumps and finding that
+they are all of the "impossible" sort.
+You hunt through your code in search of this impossible bug.
+Maybe you find somebody who was using &lt;CODE&gt;IsBadXxxPtr&lt;/CODE&gt; or
+equivalently an exception handler that swallows access violation
+exceptions and converts them to error codes.
+You remove the &lt;CODE&gt;IsBadXxxPtr&lt;/CODE&gt; in order to let
+the exception escape unhandled and crash the program.
+Then you run the scenario again.
+And wow, look, the program crashes &lt;STRONG&gt;in that function&lt;/STRONG&gt;,
+and when you debug it, you find the code that was, say,
+using a pointer after freeing it.
+That bug has been there for years, and it was manifesting itself
+as an "impossible" bug because the function was trying to be helpful
+by "validating" its pointers, when in fact what it was doing was
+taking a straightforward problem and turning it into an "impossible" bug.
+&lt;/P&gt;
+&lt;P&gt;
+There is a subtlety to this advice that you should just crash
+when given invalid input, which I'll take up next time.
+&lt;/P&gt;
+&lt;img src="http://blogs.msdn.com/aggbug.aspx?PostID=773741" width="1" height="1"&gt;</description><category domain="http://blogs.msdn.com/oldnewthing/archive/tags/Code/default.aspx">Code</category></item><item><title>News flash: The heart produces urine</title><link>http://blogs.msdn.com/oldnewthing/archive/2006/09/26/772224.aspx</link><pubDate>Tue, 26 Sep 2006 14:00:19 GMT</pubDate><guid isPermaLink="false">91d46819-8472-40ad-a661-2c78acb4018c:772224</guid><dc:creator>oldnewthing</dc:creator><slash:comments>16</slash:comments><comments>http://blogs.msdn.com/oldnewthing/comments/772224.aspx</comments><wfw:commentRss>http://blogs.msdn.com/oldnewthing/commentrss.aspx?PostID=772224</wfw:commentRss><wfw:comment>http://blogs.msdn.com/oldnewthing/rsscomments.aspx?PostID=772224</wfw:comment><description>&lt;P&gt;
+In an attempt to explain why astronaut
+Heidemarie Stefanyshyn-Piper fainted during a welcome ceremony,
+ABC News reported
+&lt;/P&gt;
+&lt;BLOCKQUOTE CLASS=q&gt;
+The heart of an average person on Earth pumps blood throughout the body.
+But when an astronaut is in space, Levine explained,
+the blood remains predominantly in their chest cavity.
+Because of this, he said,
+&lt;A HREF="http://abcnews.go.com/Technology/story?id=2479744"&gt;
+the heart tries to get rid of excess blood through urination&lt;/A&gt;.
+&lt;/BLOCKQUOTE&gt;
+&lt;img src="http://blogs.msdn.com/aggbug.aspx?PostID=772224" width="1" height="1"&gt;</description><category domain="http://blogs.msdn.com/oldnewthing/archive/tags/Non-Computer/default.aspx">Non-Computer</category></item><item><title>Isn't DDE all asynchronous anyway?</title><link>http://blogs.msdn.com/oldnewthing/archive/2006/09/26/772222.aspx</link><pubDate>Tue, 26 Sep 2006 14:00:05 GMT</pubDate><guid isPermaLink="false">91d46819-8472-40ad-a661-2c78acb4018c:772222</guid><dc:creator>oldnewthing</dc:creator><slash:comments>11</slash:comments><comments>http://blogs.msdn.com/oldnewthing/comments/772222.aspx</comments><wfw:commentRss>http://blogs.msdn.com/oldnewthing/commentrss.aspx?PostID=772222</wfw:commentRss><wfw:comment>http://blogs.msdn.com/oldnewthing/rsscomments.aspx?PostID=772222</wfw:comment><description>&lt;P&gt;
+"&lt;A HREF="http://blogs.msdn.com/oldnewthing/archive/2005/06/27/432303.aspx#433091"
+&gt;Isn't DDE all asynchronous anyway?&lt;/A&gt;"
+asks commenter KaiArnold.
+&lt;/P&gt;
+&lt;P&gt;
+It's mostly asynchronous, but not entirely.
+&lt;/P&gt;
+&lt;P&gt;
+You can read about
+&lt;A HREF="http://msdn.microsoft.com/library/en-us/winui/winui/windowsuserinterface/dataexchange/dynamicdataexchange.asp"&gt;
+how DDE works&lt;/A&gt; in MSDN,
+but since it seems people are reluctant to read the formal
+documentation, I'll repeat here the points relevant to the discussion.
+&lt;/P&gt;
+&lt;P&gt;
+The DDE process begins with a search for a service provider.
+This is done by broadcasting the &lt;CODE&gt;WM_DDE_INITIATE&lt;/CODE&gt;
+message and collecting the responses.
+Each server that wishes to respond to the request sends
+back a &lt;CODE&gt;WM_DDE_ACK&lt;/CODE&gt; message.
+The DDE client then chooses which of the servers it wishes
+to continue the conversation with (possible more than one).
+The remainder of the DDE conversation is carried out with
+posted messages, the details of which are not important here.
+&lt;/P&gt;
+&lt;P&gt;
+As you can see, everything in DDE is asynchronous with the
+exception of the &lt;CODE&gt;WM_DDE_INITIATE&lt;/CODE&gt;.
+Why is &lt;CODE&gt;WM_DDE_INITIATE&lt;/CODE&gt; synchronous?
+&lt;/P&gt;
+&lt;P&gt;
+Remember that DDE was developed back in the 16-bit days,
+&lt;A HREF="http://blogs.msdn.com/oldnewthing/archive/2005/06/27/432303.aspx"&gt;
+when it was safe to broadcast messages&lt;/A&gt;.
+The initiate message and its &lt;CODE&gt;WM_DDE_ACK&lt;/CODE&gt; replies
+are synchronous to ensure that the client doesn't have to
+wait indefinitely to build a list of servers.
+If it were asynchronous, then the client would post the
+&lt;CODE&gt;WM_DDE_INITIATE&lt;/CODE&gt; and then wait
+"a while" to see if anybody responded.
+But how does it know when it should give up waiting and just
+go with whatever it has?
+What happens if a response comes in after the client already
+proceeded based on the assumption that that server was unavailable?
+What if a response comes in five minutes later, when the client
+had started a &lt;STRONG&gt;second&lt;/STRONG&gt; DDE discovery query?
+Would that response have been to the first or the second discovery
+broadcast?
+&lt;/P&gt;
+&lt;P&gt;
+In particular,
+it is important for the client to know whether there are any
+servers out there at all,
+because the way the shell
+&lt;A HREF="http://msdn.microsoft.com/library/en-us/shellcc/platform/shell/programmersguide/shell_basics/shell_basics_extending/fileassociations/fa_verbs.asp"&gt;
+interprets DDE-based file associations&lt;/A&gt;
+is first to attempt a &lt;CODE&gt;WM_DDE_INITIATE&lt;/CODE&gt;
+with the application and topic specified in the registration.
+If no server is found, then it launches the server manually
+and then tries to connect to the server via DDE a second time.
+(The second time should work, since the responsible server
+was explicitly launched!)
+&lt;/P&gt;
+&lt;img src="http://blogs.msdn.com/aggbug.aspx?PostID=772222" width="1" height="1"&gt;</description><category domain="http://blogs.msdn.com/oldnewthing/archive/tags/Code/default.aspx">Code</category></item><item><title>Filming for The Battle in Seattle has begun</title><link>http://blogs.msdn.com/oldnewthing/archive/2006/09/25/770539.aspx</link><pubDate>Mon, 25 Sep 2006 14:00:15 GMT</pubDate><guid isPermaLink="false">91d46819-8472-40ad-a661-2c78acb4018c:770539</guid><dc:creator>oldnewthing</dc:creator><slash:comments>21</slash:comments><comments>http://blogs.msdn.com/oldnewthing/comments/770539.aspx</comments><wfw:commentRss>http://blogs.msdn.com/oldnewthing/commentrss.aspx?PostID=770539</wfw:commentRss><wfw:comment>http://blogs.msdn.com/oldnewthing/rsscomments.aspx?PostID=770539</wfw:comment><description>&lt;P&gt;
+A few weeks ago,
+filming for the movie
+&lt;A HREF="http://www.imdb.com/title/tt0850253/"&gt;
+&lt;I&gt;Battle in Seattle&lt;/I&gt;&lt;/A&gt;
+began.
+&lt;/P&gt;
+&lt;P&gt;
+&lt;A HREF="http://seattletimes.nwsource.com/html/movies/2003248943_wto08m.html"&gt;
+In Vancouver&lt;/A&gt;.
+&lt;/P&gt;
+&lt;P&gt;
+Serves us right.
+&lt;/P&gt;
+&lt;img src="http://blogs.msdn.com/aggbug.aspx?PostID=770539" width="1" height="1"&gt;</description><category domain="http://blogs.msdn.com/oldnewthing/archive/tags/Non-Computer/default.aspx">Non-Computer</category></item></channel></rss>
