@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using PluginInterface;
 using System.IO;
 using System.Xml;
 using System.Threading;
 using System.Xml.XPath;
 using System.Xml.Xsl;
 using System.Resources;
-using System.Reflection; 
+using System.Reflection;
 
+using PluginInterface;
 
 namespace Plugin
 {
@@ -37,20 +37,19 @@ namespace Plugin
 
         public Atom1()
         {
-            fileName = Environment.CurrentDirectory+"\\Plugins\\www.rss";
-            htmlName = Environment.CurrentDirectory + "\\Plugins\\www.htm";
-            xslName = Environment.CurrentDirectory + "\\Plugins\\atom1.xsl";
+            fileName = Environment.CurrentDirectory + @"\Plugins\www.rss";
+            htmlName = Environment.CurrentDirectory + @"\Plugins\www.htm";
+            xslName = Environment.CurrentDirectory + @"\Plugins\atom1.xsl";
+
             oldtitlecolor = "maroon";
             oldbackgroundcolor = "#efeff5";
         }
-
-
-
-        public string whatStd(XmlDocument rssdocument)
+        
+        public string whatStd(XmlDocument rssdoc)
         {
             try
             {
-                string standard = rssdocument.DocumentElement.SelectSingleNode("/*").Name;
+                string standard = rssdoc.DocumentElement.SelectSingleNode("/*").Name;
                 return standard;
             }
             catch (System.NullReferenceException nullRef)
@@ -189,12 +188,9 @@ namespace Plugin
                     sw.Write(s);
                 }
             }
-
-
             // perform the transformation
 
             transform.Transform(fileName,htmlName, resolver);
-
         }
     }
 }
