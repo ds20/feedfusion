@@ -182,7 +182,7 @@ namespace Xml.Opml
             StringBuilder sb = new StringBuilder();
             sb.Append(String.Format("<h2 style=\"color:blue\">{0}</h2><br/><h3 style=\"color:maroon\">Author: {1}</h3><br/><h3 style=\"color:maroon\">{2}</h3><br/>Created: {3}<br/>Modified: {4}<br/></br></br>", Title, AuthorName, AuthorEmail, DateCreated, DateModified));
             /*
-            string Name = Environment.CurrentDirectory + "\\blablabla.txt";
+            string Name =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\blablabla.txt";
             StreamWriter sw = File.CreateText(Name);
             */
             StringBuilder sb2 = new StringBuilder();
@@ -280,7 +280,7 @@ namespace Xml.Opml
             sb.Append("<body>");
             sb.Append(Environment.NewLine); 
             /*
-            string Name = Environment.CurrentDirectory + "\\blablabla.txt";
+            string Name =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\blablabla.txt";
             StreamWriter sw = File.CreateText(Name);
             */
             StringBuilder sb2 = new StringBuilder();

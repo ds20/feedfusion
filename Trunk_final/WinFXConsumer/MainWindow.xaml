@@ -13,7 +13,7 @@
         
         <MenuItem Header="_File" Style="{DynamicResource Item}">
                     
-          <MenuItem Header="Manage Feeds" x:Name="button5" Style="{DynamicResource Item}" />
+          <MenuItem Header="Add Feed" x:Name="button5" Style="{DynamicResource Item}" />
           <MenuItem Header="Import/Export" x:Name="button7" Style="{DynamicResource Item}"/>
         </MenuItem>
         <MenuItem Header="_Options" Style="{DynamicResource Item}">

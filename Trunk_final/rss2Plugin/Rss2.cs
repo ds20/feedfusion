@@ -174,7 +174,7 @@ namespace rss2
                          changeBackgroundColor((string)list.SelectedValue);
                          try
                          {
-                             ResourceWriter writer = new ResourceWriter(Environment.CurrentDirectory + @"\" + "Plugin.Properties.resource2.resources");
+                             ResourceWriter writer = new ResourceWriter( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\" + "Plugin.Properties.resource2.resources");
                              writer.AddResource("BackgroundColor", (string)list.SelectedValue);
                              writer.AddResource("TitleItemColor", oldtitleitemcolor);
                              writer.AddResource("TitleColor", oldtitlecolor);
@@ -191,7 +191,7 @@ namespace rss2
                          changeTitleColor((string)list.SelectedValue);
                          try
                          {
-                             ResourceWriter writer = new ResourceWriter(Environment.CurrentDirectory + @"\" + "Plugin.Properties.resource2.resources");
+                             ResourceWriter writer = new ResourceWriter( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\" + "Plugin.Properties.resource2.resources");
                              writer.AddResource("BackgroundColor", oldbackgroundcolor);
                              writer.AddResource("TitleItemColor", oldtitleitemcolor);
                              writer.AddResource("TitleColor", (string)list.SelectedValue);                             
@@ -208,7 +208,7 @@ namespace rss2
                          changeTitleItemColor((string)list.SelectedValue);
                          try
                          {
-                             ResourceWriter writer = new ResourceWriter(Environment.CurrentDirectory + @"\" + "Plugin.Properties.resource2.resources");
+                             ResourceWriter writer = new ResourceWriter( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\" + "Plugin.Properties.resource2.resources");
                              writer.AddResource("BackgroundColor", oldbackgroundcolor);
                              writer.AddResource("TitleItemColor", (string)list.SelectedValue);
                              writer.AddResource("TitleColor", oldtitlecolor);
@@ -231,17 +231,17 @@ namespace rss2
 
         public Rss2()
         {
-            fileName = Environment.CurrentDirectory+"\\Plugins\\rss2.rss";
-            htmlName = Environment.CurrentDirectory + "\\Plugins\\rss2.htm";
-            xslName = Environment.CurrentDirectory + "\\Plugins\\rss2.xsl";
-            xsdName1 = Environment.CurrentDirectory + "\\Plugins\\rss-0_91.xsd";
-            xsdName2 = Environment.CurrentDirectory + "\\Plugins\\rss-0_92.xsd";
-            xsdName3 = Environment.CurrentDirectory + "\\Plugins\\rss-0_93.xsd";
+            fileName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)+"\\Plugins\\rss2.rss";
+            htmlName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\rss2.htm";
+            xslName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\rss2.xsl";
+            xsdName1 =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\rss-0_91.xsd";
+            xsdName2 =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\rss-0_92.xsd";
+            xsdName3 =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\rss-0_93.xsd";
 
 
             
             Assembly asm = Assembly.GetExecutingAssembly();
-            rm = ResourceManager.CreateFileBasedResourceManager("Plugin.Properties.resource2", System.Environment.CurrentDirectory, null);
+            rm = ResourceManager.CreateFileBasedResourceManager("Plugin.Properties.resource2", System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), null);
             rm.ReleaseAllResources();
             oldtitleitemcolor = rm.GetString("TitleItemColor");
             oldtitlecolor = rm.GetString("TitleColor");
@@ -264,7 +264,7 @@ namespace rss2
             BitmapImage bi = new BitmapImage();
             bi.BeginInit();
             bi.DecodePixelWidth = 30; 
-            bi.UriSource = new Uri(Environment.CurrentDirectory + "\\icons\\rss.png");
+            bi.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\icons\\rss.png");
             bi.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
             bi.CacheOption = BitmapCacheOption.OnLoad;
             bi.EndInit();

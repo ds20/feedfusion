@@ -16,7 +16,7 @@ namespace WinFXConsumer
         {
             Parser p = new Parser(xmlfilename);
 
-            string fileName = Environment.CurrentDirectory + "\\temp\\opml.htm";
+            string fileName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\temp\\opml.htm";
 
             Document doc = new Document();
             doc = p.RetrieveDocument();
@@ -33,7 +33,7 @@ namespace WinFXConsumer
         {
             Parser p = new Parser(xmlfilename);
 
-            string fileName = Environment.CurrentDirectory + "\\temp\\opml.htm";
+            string fileName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\temp\\opml.htm";
 
             Document doc = new Document();
             doc = p.RetrieveDocument();
@@ -125,7 +125,7 @@ namespace WinFXConsumer
             {                
                 sb.Append(String.Format("&#149;&nbsp;<a href={0}>{1}({2})</a><br/>", f.XmlUrl, f.Title, f.Description));
             }
-            using (StreamWriter sw = File.CreateText(Environment.CurrentDirectory + "\\temp\\opml.htm"))
+            using (StreamWriter sw = File.CreateText( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\temp\\opml.htm"))
             {
                 sw.Write(sb.ToString());
             }*/
@@ -154,7 +154,7 @@ namespace WinFXConsumer
                 }
 
             }
-            using (StreamWriter sw = File.CreateText(Environment.CurrentDirectory + "\\temp\\opml.htm"))
+            using (StreamWriter sw = File.CreateText( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\temp\\opml.htm"))
                 {
                     sw.Write(sb.ToString());
                 }

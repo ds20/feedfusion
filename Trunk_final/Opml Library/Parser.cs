@@ -46,7 +46,7 @@ namespace Xml.Opml
             XmlNode bodyNode = xmlDoc.SelectSingleNode("descendant::opml/body");
             Document d=new Document();
             /*
-            string Name = Environment.CurrentDirectory + "\\temp\\blablabla.txt";
+            string Name =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\temp\\blablabla.txt";
             StreamWriter sw = File.CreateText(Name);
             */
             if (headNode!=null)
