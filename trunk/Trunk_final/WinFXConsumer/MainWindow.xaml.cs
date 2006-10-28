@@ -50,7 +50,7 @@ namespace WinFXConsumer
             // Create source
             BitmapImage myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory+@"\icons\AddressBook.ico"  );
+            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)+@"\icons\AddressBook.ico"  );
             myBitmapImage.DecodePixelWidth = 20;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage; 
@@ -339,7 +339,7 @@ namespace WinFXConsumer
             // Create source
             BitmapImage myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\delete.png");
+            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\delete.png");
             myBitmapImage.DecodePixelWidth = 20;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -444,65 +444,6 @@ namespace WinFXConsumer
 
         }
 
-        private void menuitem_MakeMenuRightClick(object sender, System.Windows.RoutedEventArgs e)
-        {
-            M = (MenuItem)sender;
-            ContextMenu menuRightClick = new ContextMenu();
-            MenuItem menuRightItem1 = new MenuItem();
-            menuRightItem1.Header = "Remove";
-            menuRightItem1.Click += menuitem_ContextMenuRemove;
-            menuRightClick.Items.Add(menuRightItem1);
-            MenuItem menuRightItem2 = new MenuItem();
-            menuRightItem2.Header = "Rename";
-            menuRightItem2.Click += menuitem_ContextMenuRename;
-            menuRightClick.Items.Add(menuRightItem2);
-            M.ContextMenu = menuRightClick;
-            
-
-
-        }
-
-        private void menuitem_ContextMenuRemove(object sender, System.Windows.RoutedEventArgs e)
-        {
-            if (true)
-            {
-                Thread t = new Thread(new ParameterizedThreadStart(new OneArgDelegate(dataBase.removeCategory)));
-                t.Start(M.Header);
-            }
-            else
-            {
-                
-                Thread t = new Thread(new ParameterizedThreadStart(new OneArgDelegate(dataBase.removeFeed)));
-                t.Start(((XmlFeed)(M.Header)).url);
-            }
-
-        }
-       
-        private void menuitem_ContextMenuRename(Object sender, EventArgs args)
-        {
-            if (true)
-            {
-                RenameWindow rw = new RenameWindow(((XmlFeed)(M.Header)).feedName, this._styleList[_styleIndex]);
-                rw.ShowDialog();
-                if (rw.DialogResult == true)
-                {
-                    String url = ((XmlFeed)(M.Header)).url;
-                    String newName = rw.txtNewName.Text.Trim();
-                    dataBase.renameFeed(url, newName);
-                }
-            }
-            else
-            {
-                RenameWindow rw = new RenameWindow((String)(M.Header), this._styleList[_styleIndex]);
-                rw.ShowDialog();
-                if (rw.DialogResult == true)
-                {
-                    String oldName = (String)(M.Header);
-                    String newName = rw.txtNewName.Text.Trim();
-                    dataBase.renameCategory(oldName, newName);
-                }
-            }
-        }
 
         public Window1()
         {
@@ -515,7 +456,7 @@ namespace WinFXConsumer
             // Create source
             BitmapImage myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\search.ico");
+            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\search.ico");
             myBitmapImage.DecodePixelWidth = 20;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -532,7 +473,7 @@ namespace WinFXConsumer
             // Create source
             myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\cat.ico");
+            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\cat.ico");
             myBitmapImage.DecodePixelWidth = 20;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -550,7 +491,7 @@ namespace WinFXConsumer
             // Create source
             myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\latest.ico");
+            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\latest.ico");
             myBitmapImage.DecodePixelWidth = 20;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -567,7 +508,7 @@ namespace WinFXConsumer
             // Create source
             myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\reload.png");
+            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\reload.png");
             myBitmapImage.DecodePixelWidth = 30;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -581,7 +522,7 @@ namespace WinFXConsumer
             // Create source
             myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\cat.ico");
+            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\cat.ico");
             myBitmapImage.DecodePixelWidth = 20;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -594,7 +535,7 @@ namespace WinFXConsumer
             // Create source
             myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\user.ico");
+            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\user.ico");
             myBitmapImage.DecodePixelWidth = 20;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -606,7 +547,7 @@ namespace WinFXConsumer
             // Create source
             myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\import.ico");
+            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\import.ico");
             myBitmapImage.DecodePixelWidth = 20;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -618,7 +559,7 @@ namespace WinFXConsumer
             // Create source
             myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\skin.ico");
+            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\skin.ico");
             myBitmapImage.DecodePixelWidth = 20;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -630,7 +571,7 @@ namespace WinFXConsumer
             // Create source
             myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\bomb.png");
+            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\bomb.png");
             myBitmapImage.DecodePixelWidth = 20;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -642,7 +583,7 @@ namespace WinFXConsumer
             // Create source
             myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\user.ico");
+            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\user.ico");
             myBitmapImage.DecodePixelWidth = 20;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -654,7 +595,7 @@ namespace WinFXConsumer
             // Create source
             myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\about.ico");
+            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\about.ico");
             myBitmapImage.DecodePixelWidth = 20;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -666,7 +607,7 @@ namespace WinFXConsumer
 
             //dataBase.removeAllHistory();
             dataBase.RegisterEventHandler(this);
-            dataBase.getHistory("threre isn't any");
+            dataBase.getHistory("there isn't any");
             this.Closing += Window1_Closing;
             dataBase.delegCatFeedChanged += ListRefresh;
             button5.Click += button5_Click;
@@ -680,6 +621,7 @@ namespace WinFXConsumer
             txtSearch.KeyDown += txtSearch_KeyDown;
             Button.Click += Button_Click;
             populateCategoryList();
+
         
         }
 
@@ -739,7 +681,13 @@ namespace WinFXConsumer
             //this.ApplyStyle(this._styleIndex);
             this.InvalidateVisual();
             this.Width += 1;
-            Timer t = new Timer(new TimerCallback(refreshTimerCallback), null, 0, 60 * 15 * 1000); 
+            Timer t = new Timer(new TimerCallback(refreshTimerCallback), null, 0, 60 * 15 * 1000);
+            string[] arguments = Environment.GetCommandLineArgs();
+            if (arguments.Length > 1)
+            {
+                Window2 addWindow = new Window2(dataBase, this._styleList[_styleIndex], arguments[0]);
+                addWindow.ShowDialog();
+            }
       
         }
         void refreshTimerCallback(object sender)
@@ -767,7 +715,7 @@ namespace WinFXConsumer
 
         private void SetFrameBackground()
         {
-            ImageSource s = new BitmapImage(new Uri(Environment.CurrentDirectory + "\\Icons\\bal.png"));
+            ImageSource s = new BitmapImage(new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Icons\\bal.png"));
             ImageBrush ib = new ImageBrush(s);
             ib.Opacity = 0.5;
             ib.Stretch = Stretch.Fill;
@@ -834,7 +782,7 @@ namespace WinFXConsumer
         {
 
             double d = r.NextDouble();
-            string htmlFile = Environment.CurrentDirectory + @"\temp\" + d.ToString() + ".htm";
+            string htmlFile =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\temp\" + d.ToString() + ".htm";
             TextWriter  f = new StreamWriter(htmlFile);
             f.Write((string)parsedHTML_o);
             f.Close();

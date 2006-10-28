@@ -44,7 +44,7 @@ namespace TrayMinimiser
             WrapPanel p = new WrapPanel();
             this.Content = p;
 
-            ImageSource v = new BitmapImage(new Uri(Environment.CurrentDirectory + "\\icons\\feather.png"));
+            ImageSource v = new BitmapImage(new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\icons\\feather.png"));
             ImageBrush ib = new ImageBrush(v);
             ib.Opacity = 0.5;
             ib.Stretch = Stretch.Fill;

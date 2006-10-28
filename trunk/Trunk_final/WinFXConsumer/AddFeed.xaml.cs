@@ -79,6 +79,11 @@ namespace WinFXConsumer
             }
             this.ApplyStyle(styleName);
         }
+        
+        public Window2(FeedDB dataBase, string styleName, string feedURL):this(dataBase,styleName)
+        {
+            textBox1.Text = feedURL;  
+        }
 
         public void button1_Click(object sender, RoutedEventArgs e)
         { 

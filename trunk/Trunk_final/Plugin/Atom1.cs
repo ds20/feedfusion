@@ -37,9 +37,9 @@ namespace Plugin
 
         public Atom1()
         {
-            fileName = Environment.CurrentDirectory+"\\Plugins\\www.rss";
-            htmlName = Environment.CurrentDirectory + "\\Plugins\\www.htm";
-            xslName = Environment.CurrentDirectory + "\\Plugins\\atom1.xsl";
+            fileName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)+"\\Plugins\\www.rss";
+            htmlName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\www.htm";
+            xslName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\atom1.xsl";
             oldtitlecolor = "maroon";
             oldbackgroundcolor = "#efeff5";
         }

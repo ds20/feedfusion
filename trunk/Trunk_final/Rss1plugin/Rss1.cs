@@ -51,7 +51,7 @@ namespace rss1
             {
                 try 
                 { 
-                    ResourceWriter writer = new ResourceWriter(Environment.CurrentDirectory + @"\" + "Plugin.Properties.resource1.resources"); 
+                    ResourceWriter writer = new ResourceWriter( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\" + "Plugin.Properties.resource1.resources"); 
                     writer.AddResource("TextColor",txt.Text);                    
                     MessageBox.Show("Resources saved");
                     writer.Close(); 
@@ -116,7 +116,7 @@ namespace rss1
                 txt.Left = 100;
                 
                 Assembly asm = Assembly.GetExecutingAssembly();
-                rm = ResourceManager.CreateFileBasedResourceManager("Plugin.Properties.resource1", System.Environment.CurrentDirectory, null);  
+                rm = ResourceManager.CreateFileBasedResourceManager("Plugin.Properties.resource1", System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), null);  
                 rm.ReleaseAllResources();
                 try
                 {
@@ -142,10 +142,10 @@ namespace rss1
 
         public Rss1()
         {
-            fileName = Environment.CurrentDirectory + "\\Plugins\\rss1.rss";
-            htmlName = Environment.CurrentDirectory + "\\Plugins\\rss1.htm";
-            xslName = Environment.CurrentDirectory + "\\Plugins\\rss1.xsl";
-            xsdName = Environment.CurrentDirectory + "\\Plugins\\rss-1_0.xsd";
+            fileName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\rss1.rss";
+            htmlName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\rss1.htm";
+            xslName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\rss1.xsl";
+            xsdName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\rss-1_0.xsd";
             oldtitlecolor = "<h3 style=\"color:"+"maroon"+"\">";
             oldbackgroundcolor = "<xsl:text/>background-color: " + "#efeff5";
         }

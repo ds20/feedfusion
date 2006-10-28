@@ -23,9 +23,9 @@
           <RowDefinition Height="0.474074074074074*" />
           <RowDefinition Height="0.525925925925926*" />
         </Grid.RowDefinitions>
-        <Label Style="{DynamicResource Label}" Margin="25.37,15.7233333333333,33,22" Name="label1" HorizontalContentAlignment="Center">Sbarlea Dragos</Label>
-        <Label Style="{DynamicResource Label}" Margin="26.3699999999999,22.7233333333334,29.9999999999999,24" Name="label2" Grid.Row="1" HorizontalContentAlignment="Center">Borobocea Mihai</Label>
-        <Label Style="{DynamicResource Label}" Margin="32.3700000000001,15.7233333333333,43.0000000000001,26" Name="label3" Grid.Column="1" HorizontalContentAlignment="Center">Simion Alina</Label>
+        <Label Style="{DynamicResource Label}" Margin="25.37,15.7233333333333,33,22" Name="label1" HorizontalContentAlignment="Center"></Label>
+        <Label Style="{DynamicResource Label}" Margin="26.3699999999999,25.7233333333334,16.1224489795918,24" Name="label2" Grid.Row="1" HorizontalContentAlignment="Center" Grid.ColumnSpan="2"></Label>
+        <Label Style="{DynamicResource Label}" Margin="7.24755102040814,10.7233333333333,7.00000000000011,26" Name="label3" HorizontalContentAlignment="Center" Grid.ColumnSpan="2">Icons used with permisssion of http://tidav.deviantart.com/ </Label>
         <Label Style="{DynamicResource Label}" Grid.Column="1" Grid.Row="1" Margin="33.37,22.7233333333334,43,23" Name="label4" HorizontalContentAlignment="Center"></Label>
       </Grid>
       <Grid Style="{DynamicResource Grid}" Margin="14,16,11,16.0000000000001" MinHeight="50" MinWidth="50" Name="grid3" >

@@ -25,9 +25,9 @@ namespace Opml
 
         public opml_xsl()
         {
-            fileName = Environment.CurrentDirectory + "\\Plugins\\opml.opml";
-            htmlName = Environment.CurrentDirectory + "\\Plugins\\opml.htm";
-            xslName = Environment.CurrentDirectory + "\\Plugins\\opml.xsl";
+            fileName = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\opml.opml";
+            htmlName = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\opml.htm";
+            xslName = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\opml.xsl";
             oldtitlecolor = "maroon";
             oldbackgroundcolor = "#efeff5";
         }

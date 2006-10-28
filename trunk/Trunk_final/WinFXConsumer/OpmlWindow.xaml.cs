@@ -85,13 +85,13 @@ namespace WinFXConsumer
 
         public void button4_click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start(Environment.CurrentDirectory + "\\temp\\opml.htm");            
+            System.Diagnostics.Process.Start( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\temp\\opml.htm");            
         }
 
         public void button1_click(object sender, RoutedEventArgs e)
         {
             opml o = new opml();
-            string fileName = Environment.CurrentDirectory + "\\temp\\opml.xml";
+            string fileName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\temp\\opml.xml";
             XmlTextWriter w = new XmlTextWriter(fileName, Encoding.UTF8);
             XmlDocument doc = Window1.dldFeed(textBox1.Text.Trim());
             //http://hosting.opml.org/dave/spec/states.opml    
@@ -112,7 +112,7 @@ namespace WinFXConsumer
             TreeViewItem root = new TreeViewItem();
             root = o.getRootDataBase(database);
             
-            string fileName = Environment.CurrentDirectory + "\\temp\\baza.opml";
+            string fileName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\temp\\baza.opml";
             using (StreamWriter sw = File.CreateText(fileName))
             {
                 sw.Write(o.makeOpml(database));
@@ -142,7 +142,7 @@ namespace WinFXConsumer
             String enc;
 
             opml o = new opml();
-            string fileName = Environment.CurrentDirectory + "\\temp\\opml.xml";
+            string fileName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\temp\\opml.xml";
             
             XmlDocument doc = new XmlDocument();
             try { doc.Load((String)url_o); }
@@ -167,7 +167,7 @@ namespace WinFXConsumer
             int nrFeeds = 0;
             root = o.Parse(fileName,ref nrFeeds);
 
-           /* string Name = Environment.CurrentDirectory + "\\blablabla.txt";
+           /* string Name =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\blablabla.txt";
             StreamWriter sw = File.CreateText(Name);
             */
             //add(root, root, sw);
@@ -203,7 +203,7 @@ namespace WinFXConsumer
                     {
                         TreeToVector(it, node, feeds, ref i);
                         /*
-                        string Name = Environment.CurrentDirectory + "\\blablabla.txt";
+                        string Name =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\blablabla.txt";
                         StreamWriter sw = File.CreateText(Name);
                         sw.Write(i.Header);
                         sw.Close();*/
@@ -245,7 +245,7 @@ namespace WinFXConsumer
         //        {
         //            add(i,node,sw);
         //            /*
-        //            string Name = Environment.CurrentDirectory + "\\blablabla.txt";
+        //            string Name =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\blablabla.txt";
         //            StreamWriter sw = File.CreateText(Name);
         //            sw.Write(i.Header);
         //            sw.Close();*/

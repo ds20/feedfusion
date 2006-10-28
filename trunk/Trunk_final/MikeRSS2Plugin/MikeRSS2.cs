@@ -19,9 +19,9 @@ namespace MikeRSS2Plugin
 
         public MikeRSS2()
         {
-            fileName = Environment.CurrentDirectory +"\\Plugins\\MikeRSS2.rss";
-            htmlName = Environment.CurrentDirectory + "\\Plugins\\MikeRSS2.html";
-            xslName = Environment.CurrentDirectory + "\\Plugins\\MikeRSS2.xsl";
+            fileName = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\MikeRSS2.rss";
+            htmlName = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\MikeRSS2.html";
+            xslName = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\MikeRSS2.xsl";
         }
 
         public void getDataBase(DataBaseEngine data)

@@ -264,7 +264,7 @@ namespace ClipboardMonitor
             // Create source
             System.Windows.Media.Imaging.BitmapImage myBitmapImage = new System.Windows.Media.Imaging.BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\circle.png");
+            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\circle.png");
             myBitmapImage.DecodePixelWidth = 30;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;

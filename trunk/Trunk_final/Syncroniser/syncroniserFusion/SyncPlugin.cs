@@ -160,8 +160,8 @@ namespace syncroniserFusion
             im.Height = 30;
             BitmapImage bi = new BitmapImage();
             bi.BeginInit();
-            bi.DecodePixelWidth = 30; 
-            bi.UriSource = new Uri(Environment.CurrentDirectory + "\\icons\\bomb.png");
+            bi.DecodePixelWidth = 30;
+            bi.UriSource = new Uri(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\icons\\bomb.png");
             bi.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
             bi.CacheOption = BitmapCacheOption.OnLoad;
             bi.EndInit();

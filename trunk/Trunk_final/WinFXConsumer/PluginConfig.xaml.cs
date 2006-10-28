@@ -87,7 +87,7 @@ namespace WinFXConsumer
             // Create source
             BitmapImage myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\down.png");
+            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\down.png");
             myBitmapImage.DecodePixelWidth = 20;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -99,7 +99,7 @@ namespace WinFXConsumer
             // Create source
             myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\up.png");
+            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\up.png");
             myBitmapImage.DecodePixelWidth = 20;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -111,7 +111,7 @@ namespace WinFXConsumer
             // Create source
             myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\dr.png");
+            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\dr.png");
             myBitmapImage.DecodePixelWidth = 20;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -146,7 +146,7 @@ namespace WinFXConsumer
                 // Create source
                 System.Windows.Media.Imaging.BitmapImage myBitmapImage = new System.Windows.Media.Imaging.BitmapImage();
                 myBitmapImage.BeginInit();
-                myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\bomb.png");
+                myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\bomb.png");
                 myBitmapImage.DecodePixelWidth = 20;
                 myBitmapImage.EndInit();
                 myImage.Source = myBitmapImage;
@@ -201,7 +201,7 @@ namespace WinFXConsumer
         void savePluginCollectionSetting()
         {
             
-            /*ResourceWriter writer = new ResourceWriter(Environment.CurrentDirectory + "\\PluginPriority.resources");
+            /*ResourceWriter writer = new ResourceWriter( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\PluginPriority.resources");
             writer.AddResource("PluginCollection", Properties.Settings.Default.PluginCollection);
             writer.Close();*/
         }

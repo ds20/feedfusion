@@ -66,7 +66,7 @@ namespace TrayMinimiser
             // Create source
             System.Windows.Media.Imaging.BitmapImage myBitmapImage = new System.Windows.Media.Imaging.BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(Environment.CurrentDirectory + @"\icons\downarrow.png");
+            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\downarrow.png");
             myBitmapImage.DecodePixelWidth = 30;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -96,7 +96,7 @@ namespace TrayMinimiser
                 //MessageBox.Show("Minimised");
                 ico = new System.Windows.Forms.NotifyIcon();
                 owner.ShowInTaskbar = false; 
-                ico.Icon = new Icon(Environment.CurrentDirectory + @"\Icons\icon.ico");
+                ico.Icon = new Icon( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\Icons\icon.ico");
                 ico.Text = "FeedFusion RSS Reader is up and running"; 
                 ico.Visible = true;
                 ico.DoubleClick += new EventHandler(ico_DoubleClick);
