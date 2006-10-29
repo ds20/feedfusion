@@ -62,6 +62,6 @@
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
-    <PostBuildEvent>copy $(TargetPath) $(SolutionDir)temp</PostBuildEvent>
+    <PostBuildEvent>copy "$(Targetpath)" "$(SolutionDir)temp\$(TargetFileName)"</PostBuildEvent>
   </PropertyGroup>
 </Project>

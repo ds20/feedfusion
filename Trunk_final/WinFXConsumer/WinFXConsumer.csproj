@@ -153,6 +153,8 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.WinFX.targets" />
   <PropertyGroup>
-    <PreBuildEvent>copy  $(SolutionDir)temp\*.* $(TargetDir)Plugins</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>copy  "$(SolutionDir)temp\*.*" "$(TargetDir)Plugins"</PostBuildEvent>
   </PropertyGroup>
 </Project>
