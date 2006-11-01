@@ -62,7 +62,7 @@
       <TabItem
         x:Name ="latest"
         Header="Latest" Style="{DynamicResource TabItem}" Opacity="1">
-        <ListBox x:Name ="latestPosts"></ListBox>
+        <ListBox x:Name ="latestPosts" Style="{DynamicResource ListBox}"/>
       </TabItem>
     </TabControl>
     
