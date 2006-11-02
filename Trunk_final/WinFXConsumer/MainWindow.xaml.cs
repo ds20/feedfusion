@@ -22,78 +22,13 @@ using System.Windows.Media.Imaging;
 namespace WinFXConsumer
 {
 
-    public class ListHeader : StackPanel
-    {
-        StackPanel sp;
-        Label l;
-        public ListHeader(string s, double w)
-        {
-            this.HorizontalAlignment = HorizontalAlignment.Left;   
-            this.Background = Brushes.WhiteSmoke;   
-            l=new Label();
-            l.BitmapEffect = new System.Windows.Media.Effects.EmbossBitmapEffect();  
-            Grid headerPanel = new Grid();
-            headerPanel.BitmapEffect =new System.Windows.Media.Effects.DropShadowBitmapEffect();      
-            headerPanel.RowDefinitions.Add(new RowDefinition() );
-            ColumnDefinition clm = new ColumnDefinition();
-            clm.Width = new GridLength(100);
-            headerPanel.ColumnDefinitions.Add(clm);   
-            headerPanel.ColumnDefinitions.Add(new ColumnDefinition());   
-            l.Content=s;
-            l.Foreground = new SolidColorBrush(Colors.Blue);
-            l.FontSize = 22;
-            l.FontStyle = FontStyles.Oblique;
-            headerPanel.Children.Add(l);
-            Image myImage = new Image();
-            myImage.Width = 20;
-            myImage.Height = 20;
-            // Create source
-            BitmapImage myBitmapImage = new BitmapImage();
-            myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)+@"\icons\AddressBook.ico"  );
-            myBitmapImage.DecodePixelWidth = 20;
-            myBitmapImage.EndInit();
-            myImage.Source = myBitmapImage; 
-  
-            headerPanel.Children.Add(myImage );
-            myImage.HorizontalAlignment = HorizontalAlignment.Center ;   
-            Grid.SetColumn(l, 1);
-            l.Width = w * 16 / 17-100;
-            l.HorizontalAlignment = HorizontalAlignment.Left;
-            l.HorizontalContentAlignment = HorizontalAlignment.Left ;
-            this.Children.Add(headerPanel); 
-            sp=new StackPanel();
-            sp.Visibility = Visibility.Collapsed;   
-            this.Children.Add(sp);  
-            this.MouseEnter += new System.Windows.Input.MouseEventHandler(ListHeader_MouseEnter);
-            this.MouseUp += new System.Windows.Input.MouseButtonEventHandler(ListHeader_MouseUp); 
-            
-        }
-
-        void ListHeader_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            sp.Visibility = Visibility.Collapsed;
-        }
-
-        void ListHeader_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            sp.Visibility = Visibility.Visible; 
-        }
-
-
-
-        
-    }
-    
-
-
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
 
-        
     public partial class Window1 : Window,PluginInterface.EventsClass  
     {
+        FeedTree categoryList;
         string feedWithNewArticle;
         Random r = new Random();
         FeedDB dataBase;
@@ -108,11 +43,10 @@ namespace WinFXConsumer
         private delegate void DelegShowhist();
         private DelegShowhist delegShowHist;
         
-        MenuItem M;
-        Color color = new Color();
+
         protected string[] _styleList;
         protected int _styleIndex = 0;
-        
+#region styles
         protected void DiscoverStyles()
         {
             _styleList = Directory.GetFiles(System.AppDomain.CurrentDomain.BaseDirectory+@"\Styles\", "*_style.xaml");
@@ -188,275 +122,136 @@ namespace WinFXConsumer
         {
             this.ApplyStyle(this._styleIndex);
         }
-
+#endregion
+#region feedList
         void populateCategoryList()
         {
-            categoryList.Width = 290; 
+            categoryList.Width = 290;
+            categoryList.deleteClick += new FeedTree.deleteFeedDelegate(categoryList_deleteClick);
+            categoryList.feedRename += new FeedTree.feedRenameDelegate(categoryList_feedRename);
+            categoryList.viewFeed += new FeedTree.viewFeedDelegate(categoryList_viewFeed);
             categoryList.Background = Brushes.Transparent;
             categoryList.BorderThickness = new Thickness(0);  
+            TreeViewItem father=new TreeViewItem();
+
             foreach (string s in dataBase.getCategories())
             {
-                TreeViewItem t=new TreeViewItem();
-                t.MouseUp += new System.Windows.Input.MouseButtonEventHandler(t_MouseUp);
-                
-                ListHeader  dp=new ListHeader(s,categoryList.Width );
-                t.Header=dp;
-                t.Tag = dataBase; 
+
+                TreeViewItem catNode = new TreeViewItem();
+                catNode.Tag = s;
+                father.Items.Add(catNode);
+                //t.MouseUp += new System.Windows.Input.MouseButtonEventHandler(t_MouseUp);
+
                 foreach (XmlFeed feed in dataBase.getFeeds(s))
                 {
-                    Add(t,feed, new System.Windows.RoutedEventHandler(b_MouseDown));
-                    
-                }
-                categoryList.Items.Add(t); 
-            }
-        }
+                    TreeViewItem feedNode = new TreeViewItem();
+                    feedNode.Tag = feed;
+                    catNode.Items.Add(feedNode);
 
-        void t_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            ((TreeViewItem)sender).IsExpanded = !((TreeViewItem)sender).IsExpanded;
-        }
-
-
-        public void Add(TreeViewItem  t,XmlFeed feed, System.Windows.RoutedEventHandler handler)
-        {
-
-            
-            Expander exp = new Expander();
-               
-            exp.Tag = feed; 
-            t.Items.Add(exp);
-            t.Width = categoryList.Width;
-            exp.Width = t.Width -80;
-
-            Grid itemStack = new Grid();
-            ColumnDefinition clm = new ColumnDefinition();
-            clm.Width = new System.Windows.GridLength(exp.Width * 1 / 2);
-            itemStack.ColumnDefinitions.Add(clm);
-            ColumnDefinition clm2 = new ColumnDefinition();
-            clm2.Width = new System.Windows.GridLength(exp.Width * 1 / 2);
-            itemStack.ColumnDefinitions.Add(clm2);
-            itemStack.RowDefinitions.Add(new RowDefinition());
-            itemStack.RowDefinitions.Add(new RowDefinition());
-            itemStack.RowDefinitions.Add(new RowDefinition());
-            itemStack.RowDefinitions.Add(new RowDefinition());
-            exp.HorizontalContentAlignment = HorizontalAlignment.Right;
-            exp.HorizontalAlignment = HorizontalAlignment.Center;
-            exp.BorderThickness = new Thickness(1);
-            exp.BorderBrush = Brushes.Gray;
-            Button feedbtn = new Button();
-            feedbtn.Click += handler;
-            feedbtn.Background = Brushes.Transparent;
-            feedbtn.BorderBrush = Brushes.Transparent;
-            feedbtn.FontSize = 16;
-            feedbtn.Foreground = Brushes.SteelBlue;
-            feedbtn.Content = feed;
-            exp.Header = feedbtn;
-            exp.Content = itemStack;
-            /*
-            //Change Expander apparence
-            try
-            {
-                string styleName = AppDomain.CurrentDomain.BaseDirectory + "\\Styles\\" + "Expander_nou.xaml";//Turqoiseskin_style.xaml;
-                using (FileStream fs = new FileStream(styleName, FileMode.Open, FileAccess.Read))
-                {
-                    ResourceDictionary dictionary = (ResourceDictionary)XamlReader.Load(fs);
-                    exp.Resources = dictionary;
-                    fs.Close();
                 }
             }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-            */
-            //sp.Children.Add(exp);
-
-            TextBox b = new TextBox();
-            b.Background = Brushes.Transparent;
-            b.BorderThickness = new Thickness(0);
-            b.Width = exp.Width / 2 - 1;
-            b.Foreground = Brushes.BlueViolet;
-            b.HorizontalAlignment = HorizontalAlignment.Right;
-            b.HorizontalContentAlignment = HorizontalAlignment.Left;
-            b.Tag = feed;
-            b.Text = feed.feedName;
-            b.LostFocus += new RoutedEventHandler(b_LostFocus); 
-            itemStack.Children.Add(b);
-
-            Grid.SetColumn(b, 1);
-            Grid.SetRow(b, 0);
-            TextBox bURL = new TextBox();
-            bURL.Background = Brushes.Transparent;
-            bURL.BorderThickness = new Thickness(0);
-            bURL.Width = exp.Width / 2 - 1;
-            bURL.Foreground = Brushes.BlueViolet;
-            bURL.HorizontalAlignment = HorizontalAlignment.Right;
-            bURL.HorizontalContentAlignment = HorizontalAlignment.Left;
-            bURL.Tag = feed;
-            bURL.Text = feed.url;
-            itemStack.Children.Add(bURL);
-            Grid.SetColumn(bURL, 1);
-            Grid.SetRow(bURL, 1);
-
-            ComboBox cmb = new ComboBox();
-            cmb.Background = Brushes.Transparent;
-            cmb.BorderThickness = new Thickness(0);
-            cmb.Width = exp.Width / 2 - 1;
-            foreach (string f in dataBase.getCategories())
-            {
-                cmb.Items.Add(f);
-            }
-            cmb.SelectedIndex = 0;
-            itemStack.Children.Add(cmb);
-            Grid.SetColumn(cmb, 1);
-            Grid.SetRow(cmb, 2);
-            Label lblName = new Label();
-            lblName.Content = "Feed name:";
-            itemStack.Children.Add(lblName);
-            Grid.SetColumn(lblName, 0);
-            Grid.SetRow(lblName, 0);
-
-            Label lblAdress = new Label();
-            lblAdress.Content = "Feed adress:";
-            itemStack.Children.Add(lblAdress);
-            Grid.SetColumn(lblAdress, 0);
-            Grid.SetRow(lblAdress, 1);
-
-            Label lblCat = new Label();
-            lblCat.Content = "Category:";
-            itemStack.Children.Add(lblCat);
-            Grid.SetColumn(lblCat, 0);
-            Grid.SetRow(lblCat, 2);
-
-            Button delete = new Button(); 
-            itemStack.Children.Add(delete);
-            Grid.SetColumn(delete, 0);
-            Grid.SetRow(delete, 3);
-
-            Image myImage = new Image();
-            myImage.Width = 20;
-            myImage.Height = 20;
-            // Create source
-            BitmapImage myBitmapImage = new BitmapImage();
-            myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\delete.png");
-            myBitmapImage.DecodePixelWidth = 20;
-            myBitmapImage.EndInit();
-            myImage.Source = myBitmapImage;
-            delete.Content = myImage;
-            delete.BorderBrush=new SolidColorBrush(Colors.Transparent);   
-            delete.Background = new SolidColorBrush(Colors.Transparent);   
-            delete.Width = 30;
-            delete.Click += new RoutedEventHandler(delete_Click);
-            MatrixTransform m=new MatrixTransform(-1,0,0,1,200,0);
-            MatrixTransform m1 = new MatrixTransform(-1, 0, 0, 1, 180, 0);
-            exp.RenderTransform = m;
-            feedbtn.RenderTransform = m1;
-            MatrixTransform m2 = new MatrixTransform(-1, 0, 0, 1, 210, 0);
-            itemStack.RenderTransform = m2; 
+            categoryList.Populate(father,dataBase.getCategories() );
         }
 
-        void delete_Click(object sender, RoutedEventArgs e)
+        void categoryList_viewFeed(XmlFeed f)
         {
-            Grid g = (Grid)(((Button)sender).Parent);
-            Expander ex = (Expander)g.Parent;
-            TreeViewItem t = (TreeViewItem)ex.Parent;
-            ((FeedDB)t.Tag).removeFeed(((XmlFeed)ex.Tag).url);
-            if (dataBase.delegCatFeedChanged != null) dataBase.delegCatFeedChanged(); 
-        }
-
-        void b_LostFocus(object sender, RoutedEventArgs e)
-        {
-            Grid gr = (Grid)(((TextBox)sender).Parent);
-            Expander s = (Expander)gr.Parent;
-            XmlFeed f = (XmlFeed)s.Tag;
-            TreeViewItem t = (TreeViewItem)s.Parent;
-            ((FeedDB)(t.Tag)).renameFeed(f.url, ((TextBox)sender).Text);   
-        }
-
-
-
-
-
-
-        void b_MouseDown(object sender, RoutedEventArgs e)
-        {
-            String feed = ((XmlFeed)((Button)sender).Content ).url;
+            String histContents = (dataBase.getHistory(f.url)[0].contents);
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(histContents);
+            findPluginFor(doc);
             Thread t_nou = new Thread(new ParameterizedThreadStart(getHistoryAsync));
-            t_nou.Start(feed);
-            listBox1.SelectedIndex = 0;
-            ((Expander)((Button)sender).Parent).BorderThickness = new Thickness(1) ;
-            ((Expander)((Button)sender).Parent).BorderBrush = Brushes.Gray;
+            t_nou.Start(f.url);
         }
 
-        private void Tmrcallback1(object o)
+        void categoryList_feedRename(XmlFeed f, string newName)
         {
-            M.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new NoArgDelegate(transform));
+            dataBase.renameFeed(f.url, newName);   
         }
 
-        private void transform()
+        void categoryList_deleteClick(XmlFeed f)
         {
-            if (color.R > 100)
-                color.R -= 100;
-            else
-                color.R = 0;
-            if (color.G > 100)
-                color.G -= 100;
-            else
-                color.G = 0;
-            M.Foreground = new SolidColorBrush(color);
+            dataBase.removeFeed(f.url);   
         }
-
-        private void menuitemback_MouseEnter(object sender, System.Windows.RoutedEventArgs e)
-        {
-            MenuItem M = (MenuItem)sender;
-            M.Background = new LinearGradientBrush(Colors.LightBlue, Colors.SlateBlue, 90);
-        }
-
-        private void menuitemback_MouseLeave(object sender, System.Windows.RoutedEventArgs e)
-        {
-            MenuItem M = (MenuItem)sender;
-            //M.Background = new SolidColorBrush(Colors.White);
-
-        }
-
-        private void menuitem1_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            listBox1.Items.Clear();
-            M = (MenuItem)sender;
-            String feed = ((XmlFeed)(M.Header)).url;
-            Thread t_nou = new Thread(new ParameterizedThreadStart(getHistoryAsync));
-            t_nou.Start(feed);
-        }
-
-
-
 
         private void ListRefresh()
         {
-            categoryList.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send,new NoArgDelegate(ListRefresh2));
+            categoryList.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send,new NoArgDelegate(ListRefreshUIThread));
         }
 
-        private void ListRefresh2()
+        private void ListRefreshUIThread()
         {
             categoryList.Items.Clear();
             populateCategoryList();
 
         }
 
+        private void MarkUnreadFeeds()
+        {
+            foreach (TreeViewItem c in categoryList.Items)
+            {
+                foreach (TreeViewItem f in c.Items)
+                {
+                    if (((XmlFeed)f.Tag).url == feedWithNewArticle)
+                    {
+                        ((Expander)f.Header).BorderBrush = Brushes.Blue;
+                        ((Expander)f.Header).BorderThickness = new Thickness(2);
+                        latestPosts.Items.Insert(0, (XmlFeed)f.Tag);
+                    }
+                }
+                  
+            }
+        }
 
+#endregion
         public Window1()
         {
             InitializeComponent();
-            
+            InitializeImages();
 
+            categoryList=new FeedTree();
+            cats.Content = categoryList;
+
+
+
+            this.ContentRendered += Window1_ContentRendered;
+            this.Closing += Window1_Closing;
+
+            dataBase = new FeedDB();
+            dataBase.RegisterEventHandler(this);
+            dataBase.getHistory("there isn't any");
+            dataBase.delegCatFeedChanged += ListRefresh;
+
+            btnAddFeed.Click += button5_Click;
+            btnPluginOptions.Click += button6_Click;
+            btnOpml.Click += button7_Click;
+            btnAbout.Click += button8_Click;
+            btnProgramOptions.Click += new RoutedEventHandler(btnProgramOptions_Click);
+            btnO.Click += new RoutedEventHandler(btnO_Click);
+            listBox1.SelectionChanged += listBox1_SelectionChanged;
+            txtSearch.KeyDown += txtSearch_KeyDown;
+            btnSearch.Click += Button_Click;
+            latestPosts.SelectionChanged += new SelectionChangedEventHandler(latestPosts_SelectionChanged);
+            populateCategoryList();
+        
+        }
+
+        void latestPosts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            String histContents = (dataBase.getHistory(((XmlFeed)latestPosts.SelectedItem).url)[0].contents);
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(histContents);
+            findPluginFor(doc); 
+        }
+
+        private void InitializeImages()
+        {
             Image myImage = new Image();
             myImage.Width = 20;
             myImage.Height = 20;
             // Create source
             BitmapImage myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\search.ico");
+            myBitmapImage.UriSource = new Uri(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\search.ico");
             myBitmapImage.DecodePixelWidth = 20;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -473,7 +268,7 @@ namespace WinFXConsumer
             // Create source
             myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\cat.ico");
+            myBitmapImage.UriSource = new Uri(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\cat.ico");
             myBitmapImage.DecodePixelWidth = 20;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -491,7 +286,7 @@ namespace WinFXConsumer
             // Create source
             myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\latest.ico");
+            myBitmapImage.UriSource = new Uri(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\latest.ico");
             myBitmapImage.DecodePixelWidth = 20;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -508,7 +303,7 @@ namespace WinFXConsumer
             // Create source
             myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\reload.png");
+            myBitmapImage.UriSource = new Uri(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\reload.png");
             myBitmapImage.DecodePixelWidth = 30;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -522,11 +317,11 @@ namespace WinFXConsumer
             // Create source
             myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\cat.ico");
+            myBitmapImage.UriSource = new Uri(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\cat.ico");
             myBitmapImage.DecodePixelWidth = 20;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
-            button5.Icon = myImage;
+            btnAddFeed.Icon = myImage;
 
 
             myImage = new Image();
@@ -535,7 +330,7 @@ namespace WinFXConsumer
             // Create source
             myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\user.ico");
+            myBitmapImage.UriSource = new Uri(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\user.ico");
             myBitmapImage.DecodePixelWidth = 20;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -547,11 +342,11 @@ namespace WinFXConsumer
             // Create source
             myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\import.ico");
+            myBitmapImage.UriSource = new Uri(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\import.ico");
             myBitmapImage.DecodePixelWidth = 20;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
-            button7.Icon = myImage;
+            btnOpml.Icon = myImage;
 
             myImage = new Image();
             myImage.Width = 20;
@@ -559,7 +354,7 @@ namespace WinFXConsumer
             // Create source
             myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\skin.ico");
+            myBitmapImage.UriSource = new Uri(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\skin.ico");
             myBitmapImage.DecodePixelWidth = 20;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -571,11 +366,11 @@ namespace WinFXConsumer
             // Create source
             myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\bomb.png");
+            myBitmapImage.UriSource = new Uri(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\bomb.png");
             myBitmapImage.DecodePixelWidth = 20;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
-            button6.Icon = myImage;
+            btnPluginOptions.Icon = myImage;
 
             myImage = new Image();
             myImage.Width = 20;
@@ -583,7 +378,7 @@ namespace WinFXConsumer
             // Create source
             myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\user.ico");
+            myBitmapImage.UriSource = new Uri(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\user.ico");
             myBitmapImage.DecodePixelWidth = 20;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -595,59 +390,20 @@ namespace WinFXConsumer
             // Create source
             myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\about.ico");
+            myBitmapImage.UriSource = new Uri(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\about.ico");
             myBitmapImage.DecodePixelWidth = 20;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
-            button8.Icon = myImage;
-
-            this.ContentRendered += Window1_ContentRendered;
-            Button cc = new Button();
-            dataBase = new FeedDB();
-
-            //dataBase.removeAllHistory();
-            dataBase.RegisterEventHandler(this);
-            dataBase.getHistory("there isn't any");
-            this.Closing += Window1_Closing;
-            dataBase.delegCatFeedChanged += ListRefresh;
-            button5.Click += button5_Click;
-            button6.Click += button6_Click;
-            button7.Click += button7_Click;
-            button8.Click += button8_Click;
-            btnProgramOptions.Click += new RoutedEventHandler(btnProgramOptions_Click);
-            btnO.Click += new RoutedEventHandler(btnO_Click);
-            categoryList.MouseDoubleClick += treeView1_MouseDoubleClick;
-            listBox1.SelectionChanged += listBox1_SelectionChanged;
-            txtSearch.KeyDown += txtSearch_KeyDown;
-            Button.Click += Button_Click;
-            populateCategoryList();
-
-        
+            btnAbout.Icon = myImage;
         }
 
         public void FeedDownloaded(string feed)
         {
             feedWithNewArticle = feed; 
-            categoryList.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new NoArgDelegate(NewMethod));
+            categoryList.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new NoArgDelegate(MarkUnreadFeeds));
         }
 
-        private void NewMethod()
-        {
-            //MessageBox.Show("DOWN " + feedWithNewArticle );
-            foreach (TreeViewItem c in categoryList.Items)
-            {
 
-                foreach (Expander f in c.Items)
-                {
-
-                    if (((XmlFeed)f.Tag).url == feedWithNewArticle)
-                    {
-                        f.BorderBrush=Brushes.Blue;
-                        f.BorderThickness = new Thickness(2);  
-                    }
-                }
-            }
-        }
 
         public void CategoryAdded(string c)
         { }
@@ -736,14 +492,7 @@ namespace WinFXConsumer
             XmlHistory[] hist = dataBase.searchHistory(txtSearch.Text);
             putHistoryInList(hist);
         }
-       
 
-        //procesare feed
-        private void startDld()
-        {
-            //nu se face asa... tre sa facem altfel...
-            //findPluginFor(dldFeed(textBox1.Text));
-        }
 
         //dld feed
         public static XmlDocument dldFeed(string url)
@@ -865,11 +614,7 @@ namespace WinFXConsumer
                 findPluginFor(xDoc);
         }
         
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            Thread t1 = new Thread(new ThreadStart(startDld));
-            t1.Start();
-        }
+        
 
 
         private void button5_Click(object sender, RoutedEventArgs e)
@@ -898,30 +643,15 @@ namespace WinFXConsumer
             w.ShowDialog();
         }
 
-        private void treeView1_MouseDoubleClick(Object sender, EventArgs e)
-        {
-            System.Windows.Controls.TreeViewItem t = (System.Windows.Controls.TreeViewItem)categoryList.SelectedItem;
-            if (t == null) return;
-            if (t.Parent != categoryList)
-            {
-                String url = ((XmlFeed)(t.Header)).url;
-                Thread thr = new Thread(new ParameterizedThreadStart(downloadFeed));
-                thr.Start(url);
-
-                listBox1.Items.Clear();
-                Thread t_nou = new Thread(new ParameterizedThreadStart(getHistoryAsync));
-                t_nou.Start(url);
-            }
-        }
         
         delegate void DelegPutHistoryInList(Object hist_o_vect);
 
         private void putHistoryInList(Object hist_o_vect)
         {
-            listBox1.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new OneArgDelegate(putHistoryInList2), hist_o_vect);
+            listBox1.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new OneArgDelegate(pugHistoryInListUIThread), hist_o_vect);
         }
 
-        private void putHistoryInList2(Object hist_o_vect)
+        private void pugHistoryInListUIThread(Object hist_o_vect)
         {
             listBox1.Items.Clear();
             XmlHistory[] hist = (XmlHistory[])hist_o_vect;
@@ -986,51 +716,6 @@ namespace WinFXConsumer
                 if (progressBar.Maximum == progressBar.Value)
                     progressBar.Visibility  = Visibility.Hidden ;
             }
-        }
-
-
-        private void treeView1_ContextMenuRemove(Object sender, EventArgs args)
-        {
-            if (categoryList.SelectedItem != null)
-                if (((TreeViewItem)categoryList.SelectedItem).Parent != categoryList)
-                {
-                    Thread t = new Thread(new ParameterizedThreadStart(new OneArgDelegate(dataBase.removeFeed)));
-                    t.Start(((XmlFeed)(((TreeViewItem)categoryList.SelectedItem).Header)).url);
-                    ((TreeViewItem)((TreeViewItem)categoryList.SelectedItem).Parent).Items.Remove((TreeViewItem)categoryList.SelectedItem);
-                }
-                else
-                {
-                    Thread t = new Thread(new ParameterizedThreadStart(new OneArgDelegate(dataBase.removeCategory)));
-                    t.Start((String)(((TreeViewItem)categoryList.SelectedItem).Header));
-                    categoryList.Items.Remove((TreeViewItem)categoryList.SelectedItem);
-                }
-        }
-
-        private void treeView1_ContextMenuRename(Object sender, EventArgs args)
-        {
-            if (categoryList.SelectedItem != null)
-                if (((TreeViewItem)categoryList.SelectedItem).Parent != categoryList)
-                {
-                    RenameWindow rw = new RenameWindow(((XmlFeed)(((TreeViewItem)categoryList.SelectedItem).Header)).feedName, this._styleList[_styleIndex]);
-                    rw.ShowDialog();
-                    if (rw.DialogResult == true)
-                    {
-                        String url = ((XmlFeed)(((TreeViewItem)categoryList.SelectedItem).Header)).url;
-                        String newName = rw.txtNewName.Text.Trim();
-                        dataBase.renameFeed(url, newName);
-                    }
-                }
-                else
-                {
-                    RenameWindow rw = new RenameWindow((String)(((TreeViewItem)categoryList.SelectedItem).Header), this._styleList[_styleIndex]);
-                    rw.ShowDialog();
-                    if (rw.DialogResult == true)
-                    {
-                        String oldName = (String)(((TreeViewItem)categoryList.SelectedItem).Header);
-                        String newName = rw.txtNewName.Text.Trim();
-                        dataBase.renameCategory(oldName, newName);
-                    }
-                }
         }
 
 

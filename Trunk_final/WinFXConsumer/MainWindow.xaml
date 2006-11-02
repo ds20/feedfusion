@@ -13,16 +13,16 @@
         
         <MenuItem Header="_File" Style="{DynamicResource Item}">
                     
-          <MenuItem Header="Add Feed" x:Name="button5" Style="{DynamicResource Item}" />
-          <MenuItem Header="Import/Export" x:Name="button7" Style="{DynamicResource Item}"/>
+          <MenuItem Header="Add Feed" x:Name="btnAddFeed" Style="{DynamicResource Item}" />
+          <MenuItem Header="Import/Export" x:Name="btnOpml" Style="{DynamicResource Item}"/>
         </MenuItem>
         <MenuItem Header="_Options" Style="{DynamicResource Item}">
           <MenuItem Header="_Change skin" x:Name="btnO" Style="{DynamicResource Item}"/>         
-					<MenuItem Header="_Plugin Options" x:Name="button6" Style="{DynamicResource Item}"/>
+					<MenuItem Header="_Plugin Options" x:Name="btnPluginOptions" Style="{DynamicResource Item}"/>
           <MenuItem Header="_User Options" x:Name="btnProgramOptions" Style="{DynamicResource Item}"/>
         </MenuItem>
         <MenuItem Header="_Help" Style="{DynamicResource Item}">
-          <MenuItem Header="_About" x:Name="button8" Style="{DynamicResource Item}"/>
+          <MenuItem Header="_About" x:Name="btnAbout" Style="{DynamicResource Item}"/>
         </MenuItem>
         
 			</Menu>
@@ -45,8 +45,7 @@
 			<TabItem 
         x:Name ="cats"
         Header="Categories" Opacity="1" Visibility="Visible" Style="{DynamicResource TabItem}">
-        <TreeView    Width="300"  x:Name="categoryList" Style="{DynamicResource TreeView}"  Opacity="0.8">
-        </TreeView>
+        
 			</TabItem>
       <TabItem 
         x:Name ="hist"
@@ -54,7 +53,7 @@
         <DockPanel    Style="{DynamicResource StackPanel}">
           <WrapPanel  DockPanel.Dock ="Top" x:Name="DockPanel1"  Style="{DynamicResource DockPanel}">
             <TextBox x:Name="txtSearch" Width="489.6" Height="25.2766666666667" MaxWidth="200" MinHeight="25" />
-            <Button x:Name="Button" Content="Search" Style="{DynamicResource Button}"/>
+            <Button x:Name="btnSearch" Content="Search" Style="{DynamicResource Button}"/>
           </WrapPanel>
           <ListBox DockPanel.Dock ="Bottom" x:Name="listBox1" Height="Auto" Style="{DynamicResource ListBox}"/>
         </DockPanel>
@@ -77,7 +76,7 @@
       </Grid.Background>-->
       <Grid.RowDefinitions>
         <RowDefinition Height="*"></RowDefinition>
-        <RowDefinition Height="15"></RowDefinition>
+        <RowDefinition Height="1"></RowDefinition>
         <RowDefinition Height="10"></RowDefinition>
       </Grid.RowDefinitions>
       <Grid.ColumnDefinitions>
