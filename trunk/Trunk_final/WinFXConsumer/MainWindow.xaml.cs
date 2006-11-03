@@ -28,7 +28,7 @@ namespace WinFXConsumer
 
     public partial class Window1 : Window,PluginInterface.EventsClass  
     {
-        FeedTree categoryList;
+        FeedTree feedTree;
         string feedWithNewArticle;
         Random r = new Random();
         FeedDB dataBase;
@@ -42,8 +42,9 @@ namespace WinFXConsumer
         public delegate void OneArgDelegate(Object arg);
         private delegate void DelegShowhist();
         private DelegShowhist delegShowHist;
-        
 
+
+        private double progressBarIncrement;
         protected string[] _styleList;
         protected int _styleIndex = 0;
 #region styles
@@ -123,15 +124,15 @@ namespace WinFXConsumer
             this.ApplyStyle(this._styleIndex);
         }
 #endregion
-#region feedList
+#region feedTree
         void populateCategoryList()
         {
-            categoryList.Width = 290;
-            categoryList.deleteClick += new FeedTree.deleteFeedDelegate(categoryList_deleteClick);
-            categoryList.feedRename += new FeedTree.feedRenameDelegate(categoryList_feedRename);
-            categoryList.viewFeed += new FeedTree.viewFeedDelegate(categoryList_viewFeed);
-            categoryList.Background = Brushes.Transparent;
-            categoryList.BorderThickness = new Thickness(0);  
+            feedTree.Width = 290;
+            feedTree.deleteClick += new FeedTree.deleteFeedDelegate(categoryList_deleteClick);
+            feedTree.feedRename += new FeedTree.feedRenameDelegate(categoryList_feedRename);
+            feedTree.viewFeed += new FeedTree.viewFeedDelegate(categoryList_viewFeed);
+            feedTree.Background = Brushes.Transparent;
+            feedTree.BorderThickness = new Thickness(0);  
             TreeViewItem father=new TreeViewItem();
 
             foreach (string s in dataBase.getCategories())
@@ -150,17 +151,21 @@ namespace WinFXConsumer
 
                 }
             }
-            categoryList.Populate(father,dataBase.getCategories() );
+            feedTree.Populate(father,dataBase.getCategories() );
         }
 
         void categoryList_viewFeed(XmlFeed f)
         {
-            String histContents = (dataBase.getHistory(f.url)[0].contents);
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(histContents);
-            findPluginFor(doc);
-            Thread t_nou = new Thread(new ParameterizedThreadStart(getHistoryAsync));
-            t_nou.Start(f.url);
+            XmlHistory[] hist=dataBase.getHistory(f.url);
+            if ((hist!=null) && (hist.Length>0)) 
+            {
+                String histContents = (hist[0].contents);
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(histContents);
+                findPluginFor(doc);
+                Thread t_nou = new Thread(new ParameterizedThreadStart(getHistoryAsync));
+                t_nou.Start(f.url);
+            }
         }
 
         void categoryList_feedRename(XmlFeed f, string newName)
@@ -175,19 +180,19 @@ namespace WinFXConsumer
 
         private void ListRefresh()
         {
-            categoryList.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send,new NoArgDelegate(ListRefreshUIThread));
+            feedTree.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send,new NoArgDelegate(ListRefreshUIThread));
         }
 
         private void ListRefreshUIThread()
         {
-            categoryList.Items.Clear();
+            feedTree.Items.Clear();
             populateCategoryList();
 
         }
 
         private void MarkUnreadFeeds()
         {
-            foreach (TreeViewItem c in categoryList.Items)
+            foreach (TreeViewItem c in feedTree.Items)
             {
                 foreach (TreeViewItem f in c.Items)
                 {
@@ -207,9 +212,11 @@ namespace WinFXConsumer
         {
             InitializeComponent();
             InitializeImages();
-
-            categoryList=new FeedTree();
-            cats.Content = categoryList;
+            this.SizeChanged += new SizeChangedEventHandler(Window1_SizeChanged); 
+            feedTree=new FeedTree();
+            feedTree.HorizontalAlignment = HorizontalAlignment.Stretch;
+            feedTree.Width = cats.Width;   
+            cats.Content = feedTree;
 
 
 
@@ -232,7 +239,15 @@ namespace WinFXConsumer
             btnSearch.Click += Button_Click;
             latestPosts.SelectionChanged += new SelectionChangedEventHandler(latestPosts_SelectionChanged);
             populateCategoryList();
+            progressBarIncrement = this.Width / dataBase.getAllFeeds().Length;
+            progressBar.Width = 0;
         
+        }
+
+        void Window1_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            feedTree.Width = cats.Width;
+               
         }
 
         void latestPosts_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -278,6 +293,23 @@ namespace WinFXConsumer
             wp2.Children.Add(myImage);
             wp2.Children.Add(l2);
             cats.Header = wp2;
+
+            myImage = new Image();
+            myImage.Width = 18;
+            myImage.Height = 18;
+            // Create source
+            myBitmapImage = new BitmapImage();
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\searchButtonImage.png");
+            myBitmapImage.DecodePixelWidth = 18;
+            myBitmapImage.EndInit();
+            myImage.Source = myBitmapImage;
+            wp2 = new WrapPanel();
+            l2 = new Label();
+            l2.Content = "Go";
+            wp2.Children.Add(myImage);
+            wp2.Children.Add(l2);
+            btnSearch.Content = wp2;
 
 
             myImage = new Image();
@@ -400,7 +432,7 @@ namespace WinFXConsumer
         public void FeedDownloaded(string feed)
         {
             feedWithNewArticle = feed; 
-            categoryList.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new NoArgDelegate(MarkUnreadFeeds));
+            feedTree.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new NoArgDelegate(MarkUnreadFeeds));
         }
 
 
@@ -461,7 +493,9 @@ namespace WinFXConsumer
             progressBar.Visibility = Visibility.Visible;
             progressBar.Value = 0; 
             XmlFeed[] allFeeds = dataBase.getAllFeeds();
+            progressBar.Minimum = 0;  
             progressBar.Maximum = allFeeds.Length;
+            progressBar.Width = 0;
             foreach (XmlFeed feed in allFeeds)
                 //ThreadPool.QueueUserWorkItem(new WaitCallback(downloadByDownList), feed.url);
                 waitQueue.Enqueue(feed.url);
@@ -480,7 +514,7 @@ namespace WinFXConsumer
 
         void txtSearch_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if (e.Key.CompareTo(System.Windows.Input.Key.Enter) == 0)
+            if ((e.Key.CompareTo(System.Windows.Input.Key.Enter) == 0)&&(txtSearch.Text!=""))
             {
                 XmlHistory[] hist = dataBase.searchHistory(txtSearch.Text);
                 putHistoryInList(hist);
@@ -489,8 +523,11 @@ namespace WinFXConsumer
 
         void Button_Click(Object sender, EventArgs e)
         {
-            XmlHistory[] hist = dataBase.searchHistory(txtSearch.Text);
-            putHistoryInList(hist);
+            if (txtSearch.Text != "")
+            {
+                XmlHistory[] hist = dataBase.searchHistory(txtSearch.Text);
+                putHistoryInList(hist);
+            }
         }
 
 
@@ -596,7 +633,7 @@ namespace WinFXConsumer
         private void WriteToLogFile(Object msg_o){
             lock (lockLogFile)
             {
-                FileStream f = new FileStream("LogFile.txt", FileMode.Append);
+                FileStream f = new FileStream("feedfusion.log", FileMode.Append);
                 char[] caractere = ((String)msg_o).ToCharArray();
                 System.Text.Encoder enc = System.Text.Encoding.Default.GetEncoder();
                 byte[] bitiDeScris = new byte[2048];
@@ -710,12 +747,15 @@ namespace WinFXConsumer
 
         private void IncrementProgressBar()
         {
-            lock (lockProgressBar)
-            {
+            //lock (lockProgressBar)
+            //{
                 progressBar.Value = progressBar.Value + 1;
+                progressBar.Width+=progressBarIncrement;
+                progressBar.UpdateLayout();
+                progressBar.InvalidateVisual(); 
                 if (progressBar.Maximum == progressBar.Value)
                     progressBar.Visibility  = Visibility.Hidden ;
-            }
+            //}
         }
 
 
