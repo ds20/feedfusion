@@ -2,17 +2,11 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="FeedFusion RSS Reader" Height="592" Width="796" WindowState="Normal"  xmlns:d="http://schemas.microsoft.com/expression/interactivedesigner/2006" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Foreground="sc#1, 0, 0, 0">
-  
-
-
+ 
   <DockPanel LastChildFill="True" x:Name="DockPanel" Style="{DynamicResource DockPanel}">
-
     <StackPanel DockPanel.Dock="Top" CanVerticallyScroll="False" CanHorizontallyScroll="False">
       <Menu   HorizontalAlignment="Stretch"  VerticalAlignment="Top"  Height="24.0046839859362"   BorderBrush="sc#1, 0.09835641, 0.128208637, 0.1635694" RenderTransformOrigin="0.5,0.5">
-				
-        
         <MenuItem Header="_File" Style="{DynamicResource Item}">
-                    
           <MenuItem Header="Add Feed" x:Name="btnAddFeed" Style="{DynamicResource Item}" />
           <MenuItem Header="Import/Export" x:Name="btnOpml" Style="{DynamicResource Item}"/>
         </MenuItem>
@@ -24,10 +18,7 @@
         <MenuItem Header="_Help" Style="{DynamicResource Item}">
           <MenuItem Header="_About" x:Name="btnAbout" Style="{DynamicResource Item}"/>
         </MenuItem>
-        
 			</Menu>
-
-
 
 			<ToolBarTray  Width="Auto" Height="Auto" x:Name="ToolBarPanel">
         <ToolBar   x:Name="ToolBar" Height="50"  Width="Auto" Opacity="1" Style="{DynamicResource ToolBar}" >
@@ -36,36 +27,13 @@
         
 			</ToolBarTray>
       <!--Style="{DynamicResource Button}"-->
-
-
-
     </StackPanel>
-		
-		<TabControl x:Name="tabs" DockPanel.Dock="Left"  Width="Auto" MinWidth="300" MaxWidth="300" Style="{DynamicResource TabControl}">
-			<TabItem 
-        x:Name ="cats"
-        Header="Categories" Opacity="1" Visibility="Visible" Style="{DynamicResource TabItem}">
-        
-			</TabItem>
-      <TabItem 
-        x:Name ="hist"
-        Header="History" Style="{DynamicResource TabItem}" Opacity="1">
-        <DockPanel    Style="{DynamicResource StackPanel}">
-          <WrapPanel  DockPanel.Dock ="Top" x:Name="DockPanel1"  Style="{DynamicResource DockPanel}">
-            <TextBox x:Name="txtSearch" Width="489.6" Height="25.2766666666667" MaxWidth="200" MinHeight="25" />
-            <Button x:Name="btnSearch" Content="Search" Style="{DynamicResource Button}"/>
-          </WrapPanel>
-          <ListBox DockPanel.Dock ="Bottom" x:Name="listBox1" Height="Auto" Style="{DynamicResource ListBox}"/>
-        </DockPanel>
-      </TabItem>
-      <TabItem
-        x:Name ="latest"
-        Header="Latest" Style="{DynamicResource TabItem}" Opacity="1">
-        <ListBox x:Name ="latestPosts" Style="{DynamicResource ListBox}"/>
-      </TabItem>
-    </TabControl>
-    
-    <Grid>
+
+    <StatusBar   x:Name="statusBar" DockPanel.Dock="Bottom">
+
+      <ProgressBar    x:Name="progressBar" Height="Auto" Width="200" />
+    </StatusBar >
+    <Grid DockPanel.Dock="Left">
       <!--
       <Grid.Background>
         <ImageBrush>
@@ -75,21 +43,41 @@
         </ImageBrush>
       </Grid.Background>-->
       <Grid.RowDefinitions>
-        <RowDefinition Height="*"></RowDefinition>
-        <RowDefinition Height="1"></RowDefinition>
-        <RowDefinition Height="10"></RowDefinition>
+        <RowDefinition></RowDefinition>
       </Grid.RowDefinitions>
       <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"></ColumnDefinition>
         <ColumnDefinition ></ColumnDefinition>
-      </Grid.ColumnDefinitions> 
-      
+      </Grid.ColumnDefinitions>
+        <TabControl Grid.Row="0" Grid.Column ="0" HorizontalAlignment ="Stretch" VerticalAlignment ="Stretch"   x:Name="tabs"   Style="{DynamicResource TabControl}">
+          <TabItem 
+            x:Name ="cats"
+            Header="Categories" Opacity="1" Visibility="Visible" Style="{DynamicResource TabItem}">
+
+          </TabItem>
+          <TabItem 
+            x:Name ="hist"
+            Header="History" Style="{DynamicResource TabItem}" Opacity="1">
+            <DockPanel    Style="{DynamicResource StackPanel}">
+              <WrapPanel  DockPanel.Dock ="Top" x:Name="DockPanel1"  Style="{DynamicResource DockPanel}">
+                <TextBox x:Name="txtSearch" Width="450" Height="27" MaxWidth="200" MinHeight="27" />
+                <Button x:Name="btnSearch" Height="26" Content="Search" Style="{DynamicResource Button}"/>
+              </WrapPanel>
+              <ListBox DockPanel.Dock ="Bottom" x:Name="listBox1" Height="Auto" Style="{DynamicResource ListBox}"/>
+            </DockPanel>
+          </TabItem>
+          <TabItem
+            x:Name ="latest"
+            Header="Latest" Style="{DynamicResource TabItem}" Opacity="1">
+            <ListBox x:Name ="latestPosts" Style="{DynamicResource ListBox}"/>
+          </TabItem>
+        </TabControl>
+      <GridSplitter Grid.Column="0" Grid.Row="0" Width="5"/>
+      <Frame Name="browser" Grid.Column="1" Grid.Row="0" BorderThickness="0,0,0,0" BorderBrush="#FFFF0000" JournalOwnership="OwnsJournal" ContextMenuService.HasDropShadow="False" NavigationUIVisibility="Visible" HorizontalContentAlignment="Stretch" />
+
+    </Grid >
 
 
-      <Frame Name="browser" Grid.Column="0" Grid.Row="0" BorderThickness="0,0,0,0" BorderBrush="#FFFF0000" JournalOwnership="OwnsJournal" ContextMenuService.HasDropShadow="False" NavigationUIVisibility="Visible" HorizontalContentAlignment="Stretch" />
-      <StatusBar Grid.Row="1" Grid.Column="0" x:Name="statusBar" Background="#FFFFFFFF" Visibility="Collapsed" />
-      <ProgressBar Grid.Row="2" Grid.Column="0" x:Name="progressBar" Height="10" Width="Auto" Style="{DynamicResource ProgressBar}"/>
-
-    </Grid>
-	</DockPanel>
+  </DockPanel>
 
 </Window>

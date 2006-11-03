@@ -32,7 +32,7 @@ public class FeedTree : System.Windows.Controls.TreeView
     public FeedTree()
         : base()
     {
-
+        this.HorizontalAlignment = HorizontalAlignment.Stretch;   
     }
     
     public void Populate(TreeViewItem t, string[] categories)
@@ -42,13 +42,15 @@ public class FeedTree : System.Windows.Controls.TreeView
        {
             catNode = (TreeViewItem)t.Items[0];
             t.Items.RemoveAt(0); 
-            ListHeader l = new ListHeader((string)(catNode.Tag), this.Width-60);
+            ListHeader l = new ListHeader((string)(catNode.Tag),this.Width-60);
             catNode.Header = l;
-            this.Items.Add(catNode);
+            
+            if (catNode.Items.Count>0) this.Items.Add(catNode);
             foreach (TreeViewItem feedNode in catNode.Items)
             {
+                feedNode.Width = this.Width-40 ;
                 AddVisualTree(feedNode, categories);
-                feedNode.IsExpanded = true; 
+
             }
             catNode.IsExpanded = true;
             
@@ -64,16 +66,42 @@ public class FeedTree : System.Windows.Controls.TreeView
     {
         XmlFeed feed = (XmlFeed)feedNode.Tag;
         Expander exp = new Expander();
+        exp.Expanded += new RoutedEventHandler(exp_Expanded); 
+        feedNode.HorizontalAlignment = HorizontalAlignment.Stretch;  
         feedNode.Header=exp;
-        feedNode.Width = this.Width-20;
-        exp.Width = feedNode.Width - 80;
+        exp.HorizontalAlignment = HorizontalAlignment.Stretch;
+        Button feedbtn = new Button();
+        feedbtn.Click += b_MouseDown;
+        feedbtn.Background = Brushes.Transparent;
+        feedbtn.BorderBrush = Brushes.Transparent;
+        feedbtn.FontSize = 16;
+        feedbtn.Foreground = Brushes.SteelBlue;
+        feedbtn.Content = feed.feedName.Substring(0, Math.Min(22, feed.feedName.Length));
+        feedbtn.HorizontalAlignment = HorizontalAlignment.Stretch;
+        exp.Header = feedbtn;
+        exp.BorderThickness = new Thickness(1);
+        exp.BorderBrush = Brushes.Gray;
+        //feedNode.Width = this.Width-20;
+        exp.Width = feedNode.Width-40;
 
+        //addExpandedOptions(categories, feed, exp);
+    }
+
+    void exp_Expanded(object sender, RoutedEventArgs e)
+    {
+        if (((Expander)sender).IsExpanded) addExpandedOptions(null, (XmlFeed)((TreeViewItem)((Expander)sender).Parent).Tag, (Expander)sender);
+        else
+            ((Expander)sender).Content = null; 
+    }
+
+    private void addExpandedOptions(string[] categories, XmlFeed feed, Expander exp)
+    {
         Grid itemStack = new Grid();
         ColumnDefinition clm = new ColumnDefinition();
-        clm.Width = new System.Windows.GridLength(exp.Width * 1 / 2);
+        //clm.Width = new System.Windows.GridLength(exp.Width * 1 / 2);
         itemStack.ColumnDefinitions.Add(clm);
         ColumnDefinition clm2 = new ColumnDefinition();
-        clm2.Width = new System.Windows.GridLength(exp.Width * 1 / 2);
+        //clm2.Width = new System.Windows.GridLength(exp.Width * 1 / 2);
         itemStack.ColumnDefinitions.Add(clm2);
         itemStack.RowDefinitions.Add(new RowDefinition());
         itemStack.RowDefinitions.Add(new RowDefinition());
@@ -81,16 +109,8 @@ public class FeedTree : System.Windows.Controls.TreeView
         itemStack.RowDefinitions.Add(new RowDefinition());
         //exp.HorizontalContentAlignment = HorizontalAlignment.Right;
         //exp.HorizontalAlignment = HorizontalAlignment.Center;
-        exp.BorderThickness = new Thickness(1);
-        exp.BorderBrush = Brushes.Gray;
-        Button feedbtn = new Button();
-        feedbtn.Click += b_MouseDown;
-        feedbtn.Background = Brushes.Transparent;
-        feedbtn.BorderBrush = Brushes.Transparent;
-        feedbtn.FontSize = 16;
-        feedbtn.Foreground = Brushes.SteelBlue;
-        feedbtn.Content = feed;
-        exp.Header = feedbtn;
+
+        
         exp.Content = itemStack;
         /*
         //Change Expander apearence
@@ -114,7 +134,7 @@ public class FeedTree : System.Windows.Controls.TreeView
         TextBox btnFeedName = new TextBox();
         btnFeedName.Background = Brushes.Transparent;
         btnFeedName.BorderThickness = new Thickness(0);
-        btnFeedName.Width = exp.Width / 2 - 1;
+        //btnFeedName.Width = exp.Width / 2 - 1;
         btnFeedName.Foreground = Brushes.BlueViolet;
         //b.HorizontalAlignment = HorizontalAlignment.Right;
         //b.HorizontalContentAlignment = HorizontalAlignment.Left;
@@ -141,11 +161,12 @@ public class FeedTree : System.Windows.Controls.TreeView
         ComboBox cmb = new ComboBox();
         cmb.Background = Brushes.Transparent;
         cmb.BorderThickness = new Thickness(0);
-        cmb.Width = exp.Width / 2 - 1;
-        foreach (string f in categories)
-        {
-            cmb.Items.Add(f);
-        }
+        //cmb.Width = exp.Width / 2 - 1;
+        if (categories!=null)
+            foreach (string f in categories)
+            {
+                cmb.Items.Add(f);
+            }
         cmb.SelectedIndex = 0;
         itemStack.Children.Add(cmb);
         Grid.SetColumn(cmb, 1);
@@ -186,7 +207,7 @@ public class FeedTree : System.Windows.Controls.TreeView
         delete.Content = myImage;
         delete.BorderBrush = new SolidColorBrush(Colors.Transparent);
         delete.Background = new SolidColorBrush(Colors.Transparent);
-        delete.Width = 30;
+        //delete.Width = 30;
         delete.Click += new RoutedEventHandler(delete_Click);
         //MatrixTransform m = new MatrixTransform(-1, 0, 0, 1, 180, 0);
         //MatrixTransform m1 = new MatrixTransform(-1, 0, 0, 1, 160, 0);
@@ -215,7 +236,7 @@ public class FeedTree : System.Windows.Controls.TreeView
 
     void b_MouseDown(object sender, RoutedEventArgs e)
     {
-        XmlFeed feed = (XmlFeed)((Button)sender).Content;
+        XmlFeed feed = ((XmlFeed)((TreeViewItem)((Expander)((Button)sender).Parent).Parent).Tag);
         if (viewFeed!=null) viewFeed(feed);
         ((Expander)((Button)sender).Parent).BorderThickness = new Thickness(1);
         ((Expander)((Button)sender).Parent).BorderBrush = Brushes.Gray;
@@ -233,8 +254,10 @@ public class ListHeader : StackPanel
         //this.HorizontalAlignment = HorizontalAlignment.Left;
         this.Background = Brushes.WhiteSmoke;
         l = new Label();
+        l.Width = w; 
         l.BitmapEffect = new System.Windows.Media.Effects.EmbossBitmapEffect();
         Grid headerPanel = new Grid();
+        headerPanel.HorizontalAlignment = HorizontalAlignment.Stretch;    
         headerPanel.BitmapEffect = new System.Windows.Media.Effects.DropShadowBitmapEffect();
         headerPanel.RowDefinitions.Add(new RowDefinition());
         ColumnDefinition clm = new ColumnDefinition();
@@ -245,6 +268,7 @@ public class ListHeader : StackPanel
         l.Foreground = new SolidColorBrush(Colors.Blue);
         l.FontSize = 22;
         l.FontStyle = FontStyles.Oblique;
+        l.HorizontalAlignment = HorizontalAlignment.Stretch;   
         headerPanel.Children.Add(l);
         Image myImage = new Image();
         myImage.Width = 20;
@@ -260,7 +284,7 @@ public class ListHeader : StackPanel
         headerPanel.Children.Add(myImage);
         //myImage.HorizontalAlignment = HorizontalAlignment.Center;
         Grid.SetColumn(l, 1);
-        l.Width = w * 16 / 17 - 100;
+        //l.Width = w * 16 / 17 - 100;
         //l.HorizontalAlignment = HorizontalAlignment.Left;
         //l.HorizontalContentAlignment = HorizontalAlignment.Left;
         this.Children.Add(headerPanel);
