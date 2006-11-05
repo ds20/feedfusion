@@ -30,8 +30,19 @@
     </StackPanel>
 
     <StatusBar   x:Name="statusBar" DockPanel.Dock="Bottom">
-
-      <ProgressBar    x:Name="progressBar" Height="Auto" Width="200" />
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="15"></RowDefinition>
+        </Grid.RowDefinitions> 
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="30"></ColumnDefinition>
+          <ColumnDefinition Width="*"></ColumnDefinition> 
+        </Grid.ColumnDefinitions>
+        <WrapPanel  x:Name="statusIconPanel" Grid.Row ="0" Grid.Column ="0">
+          
+        </WrapPanel>
+        <ProgressBar Grid.Column ="1" Grid.Row="0" x:Name="progressBar" HorizontalAlignment ="Stretch" MinWidth ="100"/>
+      </Grid>
     </StatusBar >
     <Grid DockPanel.Dock="Left">
       <!--
