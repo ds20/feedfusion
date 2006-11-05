@@ -29,6 +29,12 @@ public class FeedTree : System.Windows.Controls.TreeView
     public delegate void viewFeedDelegate(XmlFeed f);
     public event viewFeedDelegate viewFeed;
 
+    public delegate void categoryClick(string cat);
+    public event categoryClick categoryOptions;
+
+    public delegate void categoryNameChange(string cat, string newCat);
+    public event categoryNameChange categoryNameChanged;
+
     public FeedTree()
         : base()
     {
@@ -43,6 +49,8 @@ public class FeedTree : System.Windows.Controls.TreeView
             catNode = (TreeViewItem)t.Items[0];
             t.Items.RemoveAt(0); 
             ListHeader l = new ListHeader((string)(catNode.Tag),this.Width-60);
+            l.myImage.MouseDown += new System.Windows.Input.MouseButtonEventHandler(myImage_MouseDown);
+            l.editCatName.LostFocus += new RoutedEventHandler(editCatName_LostFocus);  
             catNode.Header = l;
             
             if (catNode.Items.Count>0) this.Items.Add(catNode);
@@ -55,6 +63,16 @@ public class FeedTree : System.Windows.Controls.TreeView
             catNode.IsExpanded = true;
             
         }
+    }
+
+    void editCatName_LostFocus(object sender, RoutedEventArgs e)
+    {
+        if (categoryNameChanged != null) categoryNameChanged(((TextBox)sender).Text, (string)((TextBox)sender).Tag);  
+    }
+
+    void myImage_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (categoryOptions != null) categoryOptions("GG"); 
     }
 
     void t_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -248,42 +266,78 @@ public class FeedTree : System.Windows.Controls.TreeView
 public class ListHeader : StackPanel
 {
     StackPanel sp;
-    Label l;
+    WrapPanel p;
+    public TextBox editCatName = new TextBox();  
+    Label catNameTextbox;
+    public Image myImage;
     public ListHeader(string s, double w)
     {
         //this.HorizontalAlignment = HorizontalAlignment.Left;
         this.Background = Brushes.WhiteSmoke;
-        l = new Label();
-        l.Width = w; 
-        l.BitmapEffect = new System.Windows.Media.Effects.EmbossBitmapEffect();
+        catNameTextbox = new Label();
+        //catNameTextbox.Width = w;
+        catNameTextbox.HorizontalAlignment = HorizontalAlignment.Stretch;
+        //catNameTextbox.ToolTip = t;
+        p=new WrapPanel();
+       
+        Label lblChangeName = new Label();
+        lblChangeName.Content = "Change name:";
+        p.Children.Add(lblChangeName); 
+        editCatName = new TextBox();
+        editCatName.BorderBrush = Brushes.Transparent;
+        editCatName.Background = Brushes.Transparent;    
+        editCatName.Width = 200;  
+        editCatName.Text = s;
+        editCatName.Tag = s; 
+        p.Children.Add(editCatName);
+        Image deleteCatImage = new Image();
+        deleteCatImage.Width = 20;
+        BitmapImage myBitmapImage = new BitmapImage();
+        myBitmapImage.BeginInit();
+        myBitmapImage.UriSource = new Uri(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\delete.png");
+        myBitmapImage.DecodePixelWidth = 20;
+        myBitmapImage.EndInit();
+        deleteCatImage.Source = myBitmapImage;
+        deleteCatImage.MouseEnter += myImage_MouseEnter;
+        deleteCatImage.MouseLeave += myImage_MouseLeave;
+        deleteCatImage.ToolTip = "Delete this whole category from the databse.";  
+        p.Children.Add(deleteCatImage);
+
+
+        //catNameTextbox.BorderBrush = Brushes.Transparent;   
+        //catNameTextbox.Background =Brushes.Transparent;
+        //catNameTextbox.IsEnabled = false;
+        catNameTextbox.BitmapEffect = new System.Windows.Media.Effects.EmbossBitmapEffect();
         Grid headerPanel = new Grid();
         headerPanel.HorizontalAlignment = HorizontalAlignment.Stretch;    
-        headerPanel.BitmapEffect = new System.Windows.Media.Effects.DropShadowBitmapEffect();
+        //headerPanel.BitmapEffect = new System.Windows.Media.Effects.DropShadowBitmapEffect();
         headerPanel.RowDefinitions.Add(new RowDefinition());
         ColumnDefinition clm = new ColumnDefinition();
         clm.Width = new GridLength(100);
         headerPanel.ColumnDefinitions.Add(clm);
         headerPanel.ColumnDefinitions.Add(new ColumnDefinition());
-        l.Content = s;
-        l.Foreground = new SolidColorBrush(Colors.Blue);
-        l.FontSize = 22;
-        l.FontStyle = FontStyles.Oblique;
-        l.HorizontalAlignment = HorizontalAlignment.Stretch;   
-        headerPanel.Children.Add(l);
-        Image myImage = new Image();
+        catNameTextbox.Content = s;
+        catNameTextbox.Foreground = new SolidColorBrush(Colors.Blue);
+        catNameTextbox.FontSize = 22;
+        catNameTextbox.FontStyle = FontStyles.Oblique;
+        catNameTextbox.HorizontalAlignment = HorizontalAlignment.Stretch;   
+        headerPanel.Children.Add(catNameTextbox);
+        myImage = new Image();
         myImage.Width = 20;
         myImage.Height = 20;
         // Create source
-        BitmapImage myBitmapImage = new BitmapImage();
+        myBitmapImage = new BitmapImage();
         myBitmapImage.BeginInit();
         myBitmapImage.UriSource = new Uri(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\AddressBook.ico");
         myBitmapImage.DecodePixelWidth = 20;
         myBitmapImage.EndInit();
         myImage.Source = myBitmapImage;
-
+        myImage.MouseEnter += new System.Windows.Input.MouseEventHandler(myImage_MouseEnter);
+        myImage.MouseLeave += new System.Windows.Input.MouseEventHandler(myImage_MouseLeave);
+        myImage.MouseDown += new System.Windows.Input.MouseButtonEventHandler(myImage_MouseDown); 
         headerPanel.Children.Add(myImage);
         //myImage.HorizontalAlignment = HorizontalAlignment.Center;
-        Grid.SetColumn(l, 1);
+        Grid.SetColumn(catNameTextbox, 1);
         //l.Width = w * 16 / 17 - 100;
         //l.HorizontalAlignment = HorizontalAlignment.Left;
         //l.HorizontalContentAlignment = HorizontalAlignment.Left;
@@ -293,8 +347,32 @@ public class ListHeader : StackPanel
         this.Children.Add(sp);
         this.MouseEnter += new System.Windows.Input.MouseEventHandler(ListHeader_MouseEnter);
         this.MouseUp += new System.Windows.Input.MouseButtonEventHandler(ListHeader_MouseUp);
-        this.Visibility = Visibility.Visible;  
+        this.Visibility = Visibility.Visible;
+        this.Children.Add(p);
+        p.Visibility = Visibility.Collapsed;
 
+    }
+
+    void myImage_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (p.Visibility == Visibility.Visible) p.Visibility = Visibility.Collapsed;
+        else p.Visibility = Visibility.Visible;  
+        
+    }
+
+
+
+
+
+
+    void myImage_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+    {
+        ((Image)sender).Opacity = 1; 
+    }
+
+    void myImage_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+    {
+        ((Image)sender).Opacity = 0.5; 
     }
 
     void ListHeader_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)

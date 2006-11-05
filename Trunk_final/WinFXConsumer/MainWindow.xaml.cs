@@ -28,21 +28,21 @@ namespace WinFXConsumer
 
     public partial class Window1 : Window,PluginInterface.EventsClass  
     {
-        FeedTree feedTree;
-        string feedWithNewArticle;
-        Random r = new Random();
-        FeedDB dataBase;
-        pluginManager pManager;
-        int simultaneousDownloads;
-        Queue<String> waitQueue;
-        List<String> downloadList;
-        Boolean closeAllThreads = false;
-        Object lockProgressBar = new Object(), lockLogFile = new Object();
+        private FeedTree feedTree;
+        private string FeedWithNewArticle;
+        private Random r = new Random();
+        private FeedDB dataBase;
+        private pluginManager pManager;
+        private int simultaneousDownloads;
+        private Queue<String> waitQueue;
+        private List<String> downloadList;
+        private Boolean closeAllThreads = false;
+        private Object lockProgressBar = new Object(), lockLogFile = new Object();
         public delegate void NoArgDelegate();
         public delegate void OneArgDelegate(Object arg);
         private delegate void DelegShowhist();
         private DelegShowhist delegShowHist;
-
+        private Image imgStatus;
 
         private double progressBarIncrement;
         protected string[] _styleList;
@@ -128,6 +128,7 @@ namespace WinFXConsumer
         void populateCategoryList()
         {
             feedTree.Width = 290;
+            feedTree.categoryNameChanged += new FeedTree.categoryNameChange(feedTree_categoryNameChanged);   
             feedTree.deleteClick += new FeedTree.deleteFeedDelegate(categoryList_deleteClick);
             feedTree.feedRename += new FeedTree.feedRenameDelegate(categoryList_feedRename);
             feedTree.viewFeed += new FeedTree.viewFeedDelegate(categoryList_viewFeed);
@@ -153,6 +154,12 @@ namespace WinFXConsumer
             }
             feedTree.Populate(father,dataBase.getCategories() );
         }
+
+        void feedTree_categoryNameChanged(string cat, string newCat)
+        {
+            dataBase.renameCategory(cat, newCat);  
+        }
+
 
         void categoryList_viewFeed(XmlFeed f)
         {
@@ -196,7 +203,7 @@ namespace WinFXConsumer
             {
                 foreach (TreeViewItem f in c.Items)
                 {
-                    if (((XmlFeed)f.Tag).url == feedWithNewArticle)
+                    if (((XmlFeed)f.Tag).url == FeedWithNewArticle)
                     {
                         ((Expander)f.Header).BorderBrush = Brushes.Blue;
                         ((Expander)f.Header).BorderThickness = new Thickness(2);
@@ -240,16 +247,13 @@ namespace WinFXConsumer
             latestPosts.SelectionChanged += new SelectionChangedEventHandler(latestPosts_SelectionChanged);
             populateCategoryList();
             progressBarIncrement = this.Width / dataBase.getAllFeeds().Length;
-            progressBar.Width = 0;
+            //progressBar.Width = 0;
         
         }
-
         void Window1_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            feedTree.Width = cats.Width;
-               
+            feedTree.Width = cats.Width;     
         }
-
         void latestPosts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             String histContents = (dataBase.getHistory(((XmlFeed)latestPosts.SelectedItem).url)[0].contents);
@@ -306,11 +310,11 @@ namespace WinFXConsumer
             myImage.Source = myBitmapImage;
             wp2 = new WrapPanel();
             l2 = new Label();
+            l2.Height = 33;
             l2.Content = "Go";
             wp2.Children.Add(myImage);
             wp2.Children.Add(l2);
             btnSearch.Content = wp2;
-
 
             myImage = new Image();
             myImage.Width = 20;
@@ -355,6 +359,17 @@ namespace WinFXConsumer
             myImage.Source = myBitmapImage;
             btnAddFeed.Icon = myImage;
 
+            imgStatus = new Image();
+            imgStatus.Width = 15;
+            imgStatus.Height = 15;
+            // Create source
+            myBitmapImage = new BitmapImage();
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\statusOK.png");
+            myBitmapImage.DecodePixelWidth = 15;
+            myBitmapImage.EndInit();
+            imgStatus.Source = myBitmapImage;
+            statusIconPanel.Children.Add(imgStatus);  
 
             myImage = new Image();
             myImage.Width = 20;
@@ -431,7 +446,7 @@ namespace WinFXConsumer
 
         public void FeedDownloaded(string feed)
         {
-            feedWithNewArticle = feed; 
+            FeedWithNewArticle = feed; 
             feedTree.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new NoArgDelegate(MarkUnreadFeeds));
         }
 
@@ -495,7 +510,7 @@ namespace WinFXConsumer
             XmlFeed[] allFeeds = dataBase.getAllFeeds();
             progressBar.Minimum = 0;  
             progressBar.Maximum = allFeeds.Length;
-            progressBar.Width = 0;
+            //progressBar.Width = 0;
             foreach (XmlFeed feed in allFeeds)
                 //ThreadPool.QueueUserWorkItem(new WaitCallback(downloadByDownList), feed.url);
                 waitQueue.Enqueue(feed.url);
@@ -612,16 +627,15 @@ namespace WinFXConsumer
             catch (Exception e)
             {
                 //MessageBox.Show(e.Message, url);
-                statusBar.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new OneArgDelegate(addStatusBarItem), url + "\n" + e.Message);
-                WriteToLogFileAsync(DateTime.Now + "\r\n" + url + "\r\n" + e.Message + "\r\n\r\n");
+                statusBar.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, new OneArgDelegate(addStatusBarItem), url + "   " + e.Message);
+                WriteToLogFileAsync(DateTime.Now + "::" + url + "::" + e.Message + "\r\n");
                 xDoc = null;
             }
         }
 
         private void addStatusBarItem(Object msg_o)
         {
-            statusBar.Items.Clear();
-            statusBar.Items.Add((String)msg_o);
+            statusBar.ToolTip=msg_o;
         }
         
         private void WriteToLogFileAsync(String msg)
@@ -750,7 +764,7 @@ namespace WinFXConsumer
             //lock (lockProgressBar)
             //{
                 progressBar.Value = progressBar.Value + 1;
-                progressBar.Width+=progressBarIncrement;
+                //progressBar.Width+=progressBarIncrement;
                 progressBar.UpdateLayout();
                 progressBar.InvalidateVisual(); 
                 if (progressBar.Maximum == progressBar.Value)
