@@ -25,13 +25,13 @@
         </Grid.RowDefinitions>
         <StackPanel>
           <TextBlock>
-            FeedFusion icons are used with permission from <Hyperlink NavigateUri="http://tidav.deviantart.com/"> here</Hyperlink>
+            FeedFusion icons are used with permission from <Hyperlink x:Name="tidav"  NavigateUri="http://tidav.deviantart.com/"> here</Hyperlink>
           </TextBlock>
           <TextBlock>
-            The FeedFusion RSS Reader Homepage is located <Hyperlink NavigateUri="http://feedfusion.googlepages.com/home"> here</Hyperlink>
+            The FeedFusion RSS Reader Homepage is located <Hyperlink x:Name="homepage" NavigateUri="http://feedfusion.googlepages.com/home"> here</Hyperlink>
           </TextBlock>
           <TextBlock>
-            If you have any problems with FeedFusion, go <Hyperlink NavigateUri="http://groups.google.com/group/feedfusion-discuss"> here</Hyperlink>
+            If you have any problems with FeedFusion, go <Hyperlink x:Name="group" NavigateUri="http://groups.google.com/group/feedfusion-discuss"> here</Hyperlink>
           </TextBlock>
         </StackPanel>
       </Grid>

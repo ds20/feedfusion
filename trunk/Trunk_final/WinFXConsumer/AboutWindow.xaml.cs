@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
 using System.Windows.Markup;
-
+using System.Diagnostics; 
 namespace WinFXConsumer
 {
     /// <summary>
@@ -66,12 +66,29 @@ namespace WinFXConsumer
             this.DiscoverStyles();
             if (this._styleList == null || this._styleList.Length == 0)
             {
-                //MessageBox.Show("No skins available");//eventual mesaj...daca nu exista alta cale(log sau ceva)
                 return;
             }
             this.ApplyStyle(styleName);
-            
+            tidav.Click += new RoutedEventHandler(tidav_Click);
+            homepage.Click += new RoutedEventHandler(homepage_Click);
+            group.Click += new RoutedEventHandler(group_Click);
         }
+
+        void group_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("http://groups.google.com/group/feedfusion-discuss"); 
+        }
+
+        void homepage_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("http://feedfusion.googlepages.com/home");  
+        }
+
+        void tidav_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("http://tidav.deviantart.com/");  
+        }
+
 
     }
 }
