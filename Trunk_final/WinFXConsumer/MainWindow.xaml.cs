@@ -128,10 +128,7 @@ namespace WinFXConsumer
         void populateCategoryList()
         {
             feedTree.Width = 290;
-            feedTree.categoryNameChanged += new FeedTree.categoryNameChange(feedTree_categoryNameChanged);   
-            feedTree.deleteClick += new FeedTree.deleteFeedDelegate(categoryList_deleteClick);
-            feedTree.feedRename += new FeedTree.feedRenameDelegate(categoryList_feedRename);
-            feedTree.viewFeed += new FeedTree.viewFeedDelegate(categoryList_viewFeed);
+            
             feedTree.Background = Brushes.Transparent;
             feedTree.BorderThickness = new Thickness(0);  
             TreeViewItem father=new TreeViewItem();
@@ -197,22 +194,7 @@ namespace WinFXConsumer
 
         }
 
-        private void MarkUnreadFeeds()
-        {
-            foreach (TreeViewItem c in feedTree.Items)
-            {
-                foreach (TreeViewItem f in c.Items)
-                {
-                    if (((XmlFeed)f.Tag).url == FeedWithNewArticle)
-                    {
-                        ((Expander)f.Header).BorderBrush = Brushes.Blue;
-                        ((Expander)f.Header).BorderThickness = new Thickness(2);
-                        latestPosts.Items.Insert(0, (XmlFeed)f.Tag);
-                    }
-                }
-                  
-            }
-        }
+
 
 #endregion
         public Window1()
@@ -222,7 +204,11 @@ namespace WinFXConsumer
             this.SizeChanged += new SizeChangedEventHandler(Window1_SizeChanged); 
             feedTree=new FeedTree();
             feedTree.HorizontalAlignment = HorizontalAlignment.Stretch;
-            feedTree.Width = cats.Width;   
+            feedTree.Width = cats.Width;
+            feedTree.categoryNameChanged += new FeedTree.categoryNameChange(feedTree_categoryNameChanged);
+            feedTree.deleteClick += new FeedTree.deleteFeedDelegate(categoryList_deleteClick);
+            feedTree.feedRename += new FeedTree.feedRenameDelegate(categoryList_feedRename);
+            feedTree.viewFeed += new FeedTree.viewFeedDelegate(categoryList_viewFeed);
             cats.Content = feedTree;
 
 
@@ -446,8 +432,8 @@ namespace WinFXConsumer
 
         public void FeedDownloaded(string feed)
         {
-            FeedWithNewArticle = feed; 
-            feedTree.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new NoArgDelegate(MarkUnreadFeeds));
+            feedTree.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new OneArgDelegate(feedTree.MarkUnreadFeed),feed);
+            latestPosts.Items.Insert(0, feed);
         }
 
 

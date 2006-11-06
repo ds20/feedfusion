@@ -20,6 +20,7 @@ using System.Windows.Markup;
 using System.Windows.Media.Imaging;  
 public class FeedTree : System.Windows.Controls.TreeView
 {
+    private string[] cats;
     public delegate void deleteFeedDelegate(XmlFeed f);
     public event deleteFeedDelegate deleteClick;
 
@@ -38,12 +39,36 @@ public class FeedTree : System.Windows.Controls.TreeView
     public FeedTree()
         : base()
     {
-        this.HorizontalAlignment = HorizontalAlignment.Stretch;   
+        this.HorizontalAlignment = HorizontalAlignment.Stretch;
+        this.SelectedItemChanged += new RoutedPropertyChangedEventHandler<object>(FeedTree_SelectedItemChanged); 
+
+    }
+
+    void FeedTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+    {
+    }
+
+    public void MarkUnreadFeed(Object FeedWithNewItems)
+    {
+        foreach (TreeViewItem c in this.Items)
+        {
+            foreach (TreeViewItem f in c.Items)
+            {
+                if (((XmlFeed)f.Tag).url == ((string)FeedWithNewItems))
+                {
+
+                    ((FeedExpander)(f.Header)).myImage.Visibility = Visibility.Visible;    
+                }
+            }
+
+        }
+
     }
     
     public void Populate(TreeViewItem t, string[] categories)
     {
         TreeViewItem catNode;
+        cats=categories;
         while  (t.Items.Count>0 )
        {
             catNode = (TreeViewItem)t.Items[0];
@@ -56,13 +81,31 @@ public class FeedTree : System.Windows.Controls.TreeView
             if (catNode.Items.Count>0) this.Items.Add(catNode);
             foreach (TreeViewItem feedNode in catNode.Items)
             {
-                feedNode.Width = this.Width-40 ;
-                AddVisualTree(feedNode, categories);
+                string s=((string)l.totalFeedsNo.Content) ;
+                int i=int.Parse(s);
+                i++;
+                
+                l.totalFeedsNo.Content =i.ToString() ;    
+                feedNode.Width = this.Width;
+                FeedExpander fn=new FeedExpander((XmlFeed)feedNode.Tag, categories,true);
+                fn.Expanded += exp_Expanded; 
+                feedNode.Header = fn;
+                fn.feedbtn.Click += new RoutedEventHandler(feedbtn_Click);   
 
             }
             catNode.IsExpanded = true;
             
         }
+    }
+
+    void feedbtn_Click(object sender, RoutedEventArgs e)
+    {
+        FrameworkElement f = (FrameworkElement)sender;
+        while (!(f is TreeViewItem)) f = (FrameworkElement)f.Parent;
+        XmlFeed feed = (XmlFeed)(f.Tag);
+
+        if (viewFeed != null) viewFeed(feed);
+        ((FeedExpander)(((TreeViewItem)f).Header)).myImage.Visibility = Visibility.Collapsed;    
     }
 
     void editCatName_LostFocus(object sender, RoutedEventArgs e)
@@ -80,37 +123,13 @@ public class FeedTree : System.Windows.Controls.TreeView
         ((TreeViewItem)sender).IsExpanded = !((TreeViewItem)sender).IsExpanded;
     }
 
-    public void AddVisualTree(TreeViewItem feedNode, string[] categories)
-    {
-        XmlFeed feed = (XmlFeed)feedNode.Tag;
-        Expander exp = new Expander();
-        exp.Expanded += new RoutedEventHandler(exp_Expanded); 
-        feedNode.HorizontalAlignment = HorizontalAlignment.Stretch;  
-        feedNode.Header=exp;
-        exp.HorizontalAlignment = HorizontalAlignment.Stretch;
-        Button feedbtn = new Button();
-        feedbtn.Click += b_MouseDown;
-        feedbtn.Background = Brushes.Transparent;
-        feedbtn.BorderBrush = Brushes.Transparent;
-        feedbtn.FontSize = 16;
-        feedbtn.Foreground = Brushes.SteelBlue;
-        feedbtn.Content = feed.feedName.Substring(0, Math.Min(22, feed.feedName.Length));
-        feedbtn.HorizontalAlignment = HorizontalAlignment.Stretch;
-        exp.Header = feedbtn;
-        exp.BorderThickness = new Thickness(1);
-        exp.BorderBrush = Brushes.Gray;
-        //feedNode.Width = this.Width-20;
-        exp.Width = feedNode.Width-40;
-
-        //addExpandedOptions(categories, feed, exp);
-    }
-
     void exp_Expanded(object sender, RoutedEventArgs e)
     {
         if (((Expander)sender).IsExpanded) addExpandedOptions(null, (XmlFeed)((TreeViewItem)((Expander)sender).Parent).Tag, (Expander)sender);
         else
-            ((Expander)sender).Content = null; 
+            ((Expander)sender).Content = null;
     }
+    
 
     private void addExpandedOptions(string[] categories, XmlFeed feed, Expander exp)
     {
@@ -252,22 +271,62 @@ public class FeedTree : System.Windows.Controls.TreeView
     }
 
 
-    void b_MouseDown(object sender, RoutedEventArgs e)
+
+
+}
+public class FeedExpander : Expander 
+{
+    public Button feedbtn;
+    public Image myImage;
+
+    public FeedExpander(XmlFeed feed,string[] categories,bool isRead)
     {
-        XmlFeed feed = ((XmlFeed)((TreeViewItem)((Expander)((Button)sender).Parent).Parent).Tag);
-        if (viewFeed!=null) viewFeed(feed);
-        ((Expander)((Button)sender).Parent).BorderThickness = new Thickness(1);
-        ((Expander)((Button)sender).Parent).BorderBrush = Brushes.Gray;
+        this.BorderBrush = Brushes.Transparent;  
+        this.Tag = feed;
+        this.HorizontalAlignment = HorizontalAlignment.Stretch;
+        feedbtn = new Button();
+        //feedbtn.Background = Brushes.Transparent;
+        feedbtn.BorderBrush = Brushes.Transparent;
+        feedbtn.Width = 240;  
+        feedbtn.HorizontalAlignment = HorizontalAlignment.Stretch;    
+        feedbtn.FontSize = 16;
+        feedbtn.Foreground = Brushes.SteelBlue;
+        Label l = new Label();
+        l.FontSize = 16;
+        l.Background = Brushes.Transparent;
+        l.Content = feed.feedName.Substring(0, Math.Min(22, feed.feedName.Length));
+        feedbtn.HorizontalAlignment = HorizontalAlignment.Stretch;
+        WrapPanel pp = new WrapPanel();
+            myImage = new Image();
+            myImage.Width = 20;
+            myImage.Height = 20;
+            // Create source
+            BitmapImage myBitmapImage = new BitmapImage();
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\icons\newItem.png");
+            myBitmapImage.DecodePixelWidth = 20;
+            myBitmapImage.EndInit();
+            myImage.Source = myBitmapImage;
+            pp.Children.Add(myImage);
+            if (isRead) myImage.Visibility = Visibility.Collapsed;  
+        pp.Children.Add(l);
+        feedbtn.Content = pp;
+        this.Header = feedbtn;
+        this.BorderThickness = new Thickness(1);
+        //this.BorderBrush = Brushes.Gray;
+        //feedNode.Width = this.Width-20;
+        this.Width = 270;
     }
 
 }
-
 
 public class ListHeader : StackPanel
 {
     StackPanel sp;
     WrapPanel p;
-    public TextBox editCatName = new TextBox();  
+    public TextBox editCatName = new TextBox();
+    public Label unreadFeedsNo;
+    public Label totalFeedsNo;
     Label catNameTextbox;
     public Image myImage;
     public ListHeader(string s, double w)
@@ -290,6 +349,7 @@ public class ListHeader : StackPanel
         editCatName.Text = s;
         editCatName.Tag = s; 
         p.Children.Add(editCatName);
+        
         Image deleteCatImage = new Image();
         deleteCatImage.Width = 20;
         BitmapImage myBitmapImage = new BitmapImage();
@@ -320,8 +380,17 @@ public class ListHeader : StackPanel
         catNameTextbox.Foreground = new SolidColorBrush(Colors.Blue);
         catNameTextbox.FontSize = 22;
         catNameTextbox.FontStyle = FontStyles.Oblique;
-        catNameTextbox.HorizontalAlignment = HorizontalAlignment.Stretch;   
-        headerPanel.Children.Add(catNameTextbox);
+        catNameTextbox.HorizontalAlignment = HorizontalAlignment.Stretch;
+        WrapPanel pp = new WrapPanel();
+        pp.Children.Add(catNameTextbox);
+        unreadFeedsNo = new Label();
+        p.Children.Add(unreadFeedsNo);
+        totalFeedsNo = new Label();
+        string ss = "0";
+        totalFeedsNo.Content = ss;
+        pp.Children.Add(totalFeedsNo); 
+        headerPanel.Children.Add(pp);
+        Grid.SetColumn(pp, 1);
         myImage = new Image();
         myImage.Width = 20;
         myImage.Height = 20;
@@ -337,7 +406,6 @@ public class ListHeader : StackPanel
         myImage.MouseDown += new System.Windows.Input.MouseButtonEventHandler(myImage_MouseDown); 
         headerPanel.Children.Add(myImage);
         //myImage.HorizontalAlignment = HorizontalAlignment.Center;
-        Grid.SetColumn(catNameTextbox, 1);
         //l.Width = w * 16 / 17 - 100;
         //l.HorizontalAlignment = HorizontalAlignment.Left;
         //l.HorizontalContentAlignment = HorizontalAlignment.Left;
@@ -385,8 +453,6 @@ public class ListHeader : StackPanel
         sp.Visibility = Visibility.Visible;
     }
 
-
-
-
+    
 }
 
