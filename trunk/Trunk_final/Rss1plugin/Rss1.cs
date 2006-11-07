@@ -142,10 +142,11 @@ namespace rss1
 
         public Rss1()
         {
-            fileName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\rss1.rss";
-            htmlName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\rss1.htm";
-            xslName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\rss1.xsl";
-            xsdName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\rss-1_0.xsd";
+            string path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            fileName =  path + "\\rss1.rss";
+            htmlName = path + "\\rss1.htm";
+            xslName =  path + "\\rss1.xsl";
+            xsdName =  path + "\\rss-1_0.xsd";
             oldtitlecolor = "<h3 style=\"color:"+"maroon"+"\">";
             oldbackgroundcolor = "<xsl:text/>background-color: " + "#efeff5";
         }
