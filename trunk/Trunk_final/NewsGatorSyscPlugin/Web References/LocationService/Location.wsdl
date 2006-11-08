@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://services.newsgator.com/svc/Location.asmx" xmlns:s1="http://services.newsgator.com/ngws/Impersonate" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://services.newsgator.com/svc/Location.asmx" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">NewsGator Online - operations on Location resources</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://services.newsgator.com/svc/Location.asmx">
+      <s:element name="GetLocations">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetLocationsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLocationsResult" type="tns:ArrayOfLocation" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfLocation">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Location" nillable="true" type="tns:Location" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Location">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="contentOnline" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="autoAddSubs" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="isPublic" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="NGAPIToken" type="tns:NGAPIToken" />
+      <s:complexType name="NGAPIToken">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="CreateLocation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="autoAddSubs" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateLocationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateLocationResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteLocation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteLocationResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Update">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="location" type="tns:Location" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetUnreadCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUnreadCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetUnreadCountResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddSubscription">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="locId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="feedId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddSubscriptionResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="RemoveSubscription">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="locId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="feedId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveSubscriptionResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ArrayOfLocation" nillable="true" type="tns:ArrayOfLocation" />
+      <s:element name="int" type="s:int" />
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://services.newsgator.com/ngws/Impersonate">
+      <s:element name="NGImpersonate" type="s1:NGImpersonate" />
+      <s:complexType name="NGImpersonate">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ImpersonateUser" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetLocationsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLocations" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLocationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationsNGImpersonate">
+    <wsdl:part name="NGImpersonate" element="s1:NGImpersonate" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationsNGAPIToken">
+    <wsdl:part name="NGAPIToken" element="tns:NGAPIToken" />
+  </wsdl:message>
+  <wsdl:message name="CreateLocationSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateLocation" />
+  </wsdl:message>
+  <wsdl:message name="CreateLocationSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateLocationResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateLocationNGImpersonate">
+    <wsdl:part name="NGImpersonate" element="s1:NGImpersonate" />
+  </wsdl:message>
+  <wsdl:message name="CreateLocationNGAPIToken">
+    <wsdl:part name="NGAPIToken" element="tns:NGAPIToken" />
+  </wsdl:message>
+  <wsdl:message name="DeleteLocationSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteLocation" />
+  </wsdl:message>
+  <wsdl:message name="DeleteLocationSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteLocationResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteLocationNGImpersonate">
+    <wsdl:part name="NGImpersonate" element="s1:NGImpersonate" />
+  </wsdl:message>
+  <wsdl:message name="DeleteLocationNGAPIToken">
+    <wsdl:part name="NGAPIToken" element="tns:NGAPIToken" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:Update" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateNGImpersonate">
+    <wsdl:part name="NGImpersonate" element="s1:NGImpersonate" />
+  </wsdl:message>
+  <wsdl:message name="UpdateNGAPIToken">
+    <wsdl:part name="NGAPIToken" element="tns:NGAPIToken" />
+  </wsdl:message>
+  <wsdl:message name="GetUnreadCountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUnreadCount" />
+  </wsdl:message>
+  <wsdl:message name="GetUnreadCountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUnreadCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUnreadCountNGImpersonate">
+    <wsdl:part name="NGImpersonate" element="s1:NGImpersonate" />
+  </wsdl:message>
+  <wsdl:message name="GetUnreadCountNGAPIToken">
+    <wsdl:part name="NGAPIToken" element="tns:NGAPIToken" />
+  </wsdl:message>
+  <wsdl:message name="AddSubscriptionSoapIn">
+    <wsdl:part name="parameters" element="tns:AddSubscription" />
+  </wsdl:message>
+  <wsdl:message name="AddSubscriptionSoapOut">
+    <wsdl:part name="parameters" element="tns:AddSubscriptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddSubscriptionNGImpersonate">
+    <wsdl:part name="NGImpersonate" element="s1:NGImpersonate" />
+  </wsdl:message>
+  <wsdl:message name="AddSubscriptionNGAPIToken">
+    <wsdl:part name="NGAPIToken" element="tns:NGAPIToken" />
+  </wsdl:message>
+  <wsdl:message name="RemoveSubscriptionSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveSubscription" />
+  </wsdl:message>
+  <wsdl:message name="RemoveSubscriptionSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveSubscriptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveSubscriptionNGImpersonate">
+    <wsdl:part name="NGImpersonate" element="s1:NGImpersonate" />
+  </wsdl:message>
+  <wsdl:message name="RemoveSubscriptionNGAPIToken">
+    <wsdl:part name="NGAPIToken" element="tns:NGAPIToken" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationsHttpPostIn" />
+  <wsdl:message name="GetLocationsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfLocation" />
+  </wsdl:message>
+  <wsdl:message name="CreateLocationHttpPostIn">
+    <wsdl:part name="name" type="s:string" />
+    <wsdl:part name="autoAddSubs" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateLocationHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="DeleteLocationHttpPostIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteLocationHttpPostOut" />
+  <wsdl:message name="GetUnreadCountHttpPostIn">
+    <wsdl:part name="name" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUnreadCountHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="AddSubscriptionHttpPostIn">
+    <wsdl:part name="locId" type="s:string" />
+    <wsdl:part name="feedId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddSubscriptionHttpPostOut" />
+  <wsdl:message name="RemoveSubscriptionHttpPostIn">
+    <wsdl:part name="locId" type="s:string" />
+    <wsdl:part name="feedId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveSubscriptionHttpPostOut" />
+  <wsdl:portType name="LocationWebServiceSoap">
+    <wsdl:operation name="GetLocations">
+      <wsdl:input message="tns:GetLocationsSoapIn" />
+      <wsdl:output message="tns:GetLocationsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateLocation">
+      <wsdl:input message="tns:CreateLocationSoapIn" />
+      <wsdl:output message="tns:CreateLocationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteLocation">
+      <wsdl:input message="tns:DeleteLocationSoapIn" />
+      <wsdl:output message="tns:DeleteLocationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <wsdl:input message="tns:UpdateSoapIn" />
+      <wsdl:output message="tns:UpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUnreadCount">
+      <wsdl:input message="tns:GetUnreadCountSoapIn" />
+      <wsdl:output message="tns:GetUnreadCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddSubscription">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Add an existing subscription to a location</wsdl:documentation>
+      <wsdl:input message="tns:AddSubscriptionSoapIn" />
+      <wsdl:output message="tns:AddSubscriptionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveSubscription">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Remove an existing subscription from a location</wsdl:documentation>
+      <wsdl:input message="tns:RemoveSubscriptionSoapIn" />
+      <wsdl:output message="tns:RemoveSubscriptionSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="LocationWebServiceHttpPost">
+    <wsdl:operation name="GetLocations">
+      <wsdl:input message="tns:GetLocationsHttpPostIn" />
+      <wsdl:output message="tns:GetLocationsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateLocation">
+      <wsdl:input message="tns:CreateLocationHttpPostIn" />
+      <wsdl:output message="tns:CreateLocationHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteLocation">
+      <wsdl:input message="tns:DeleteLocationHttpPostIn" />
+      <wsdl:output message="tns:DeleteLocationHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUnreadCount">
+      <wsdl:input message="tns:GetUnreadCountHttpPostIn" />
+      <wsdl:output message="tns:GetUnreadCountHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddSubscription">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Add an existing subscription to a location</wsdl:documentation>
+      <wsdl:input message="tns:AddSubscriptionHttpPostIn" />
+      <wsdl:output message="tns:AddSubscriptionHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveSubscription">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Remove an existing subscription from a location</wsdl:documentation>
+      <wsdl:input message="tns:RemoveSubscriptionHttpPostIn" />
+      <wsdl:output message="tns:RemoveSubscriptionHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="LocationWebServiceSoap" type="tns:LocationWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetLocations">
+      <soap:operation soapAction="http://services.newsgator.com/svc/Location.asmx/GetLocations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetLocationsNGImpersonate" part="NGImpersonate" use="literal" />
+        <soap:header message="tns:GetLocationsNGAPIToken" part="NGAPIToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateLocation">
+      <soap:operation soapAction="http://services.newsgator.com/svc/Location.asmx/CreateLocation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CreateLocationNGImpersonate" part="NGImpersonate" use="literal" />
+        <soap:header message="tns:CreateLocationNGAPIToken" part="NGAPIToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteLocation">
+      <soap:operation soapAction="http://services.newsgator.com/svc/Location.asmx/DeleteLocation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:DeleteLocationNGImpersonate" part="NGImpersonate" use="literal" />
+        <soap:header message="tns:DeleteLocationNGAPIToken" part="NGAPIToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap:operation soapAction="http://services.newsgator.com/svc/Location.asmx/Update" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:UpdateNGImpersonate" part="NGImpersonate" use="literal" />
+        <soap:header message="tns:UpdateNGAPIToken" part="NGAPIToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUnreadCount">
+      <soap:operation soapAction="http://services.newsgator.com/svc/Location.asmx/GetUnreadCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetUnreadCountNGImpersonate" part="NGImpersonate" use="literal" />
+        <soap:header message="tns:GetUnreadCountNGAPIToken" part="NGAPIToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddSubscription">
+      <soap:operation soapAction="http://services.newsgator.com/svc/Location.asmx/AddSubscription" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AddSubscriptionNGImpersonate" part="NGImpersonate" use="literal" />
+        <soap:header message="tns:AddSubscriptionNGAPIToken" part="NGAPIToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveSubscription">
+      <soap:operation soapAction="http://services.newsgator.com/svc/Location.asmx/RemoveSubscription" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:RemoveSubscriptionNGImpersonate" part="NGImpersonate" use="literal" />
+        <soap:header message="tns:RemoveSubscriptionNGAPIToken" part="NGAPIToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LocationWebServiceSoap12" type="tns:LocationWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetLocations">
+      <soap12:operation soapAction="http://services.newsgator.com/svc/Location.asmx/GetLocations" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetLocationsNGImpersonate" part="NGImpersonate" use="literal" />
+        <soap12:header message="tns:GetLocationsNGAPIToken" part="NGAPIToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateLocation">
+      <soap12:operation soapAction="http://services.newsgator.com/svc/Location.asmx/CreateLocation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CreateLocationNGImpersonate" part="NGImpersonate" use="literal" />
+        <soap12:header message="tns:CreateLocationNGAPIToken" part="NGAPIToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteLocation">
+      <soap12:operation soapAction="http://services.newsgator.com/svc/Location.asmx/DeleteLocation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:DeleteLocationNGImpersonate" part="NGImpersonate" use="literal" />
+        <soap12:header message="tns:DeleteLocationNGAPIToken" part="NGAPIToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap12:operation soapAction="http://services.newsgator.com/svc/Location.asmx/Update" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:UpdateNGImpersonate" part="NGImpersonate" use="literal" />
+        <soap12:header message="tns:UpdateNGAPIToken" part="NGAPIToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUnreadCount">
+      <soap12:operation soapAction="http://services.newsgator.com/svc/Location.asmx/GetUnreadCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetUnreadCountNGImpersonate" part="NGImpersonate" use="literal" />
+        <soap12:header message="tns:GetUnreadCountNGAPIToken" part="NGAPIToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddSubscription">
+      <soap12:operation soapAction="http://services.newsgator.com/svc/Location.asmx/AddSubscription" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AddSubscriptionNGImpersonate" part="NGImpersonate" use="literal" />
+        <soap12:header message="tns:AddSubscriptionNGAPIToken" part="NGAPIToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveSubscription">
+      <soap12:operation soapAction="http://services.newsgator.com/svc/Location.asmx/RemoveSubscription" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:RemoveSubscriptionNGImpersonate" part="NGImpersonate" use="literal" />
+        <soap12:header message="tns:RemoveSubscriptionNGAPIToken" part="NGAPIToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LocationWebServiceHttpPost" type="tns:LocationWebServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetLocations">
+      <http:operation location="/GetLocations" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateLocation">
+      <http:operation location="/CreateLocation" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteLocation">
+      <http:operation location="/DeleteLocation" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetUnreadCount">
+      <http:operation location="/GetUnreadCount" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddSubscription">
+      <http:operation location="/AddSubscription" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveSubscription">
+      <http:operation location="/RemoveSubscription" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="LocationWebService">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">NewsGator Online - operations on Location resources</wsdl:documentation>
+    <wsdl:port name="LocationWebServiceSoap" binding="tns:LocationWebServiceSoap">
+      <soap:address location="http://services.newsgator.com/ngws/svc/Location.asmx" />
+    </wsdl:port>
+    <wsdl:port name="LocationWebServiceSoap12" binding="tns:LocationWebServiceSoap12">
+      <soap12:address location="http://services.newsgator.com/ngws/svc/Location.asmx" />
+    </wsdl:port>
+    <wsdl:port name="LocationWebServiceHttpPost" binding="tns:LocationWebServiceHttpPost">
+      <http:address location="http://services.newsgator.com/ngws/svc/Location.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
