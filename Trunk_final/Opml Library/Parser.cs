@@ -214,7 +214,7 @@ namespace Xml.Opml
         public Boolean ValidOpml()
         {
             return true;
-            //validare opml:  exista fis xml+ e corect xml(fara taguri lipsa)-->throw exception daca nu e
+           
         }
 
     }
