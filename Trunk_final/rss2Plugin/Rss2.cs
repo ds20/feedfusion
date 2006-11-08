@@ -32,203 +32,136 @@ namespace rss2
 
         Window win;
         ListBox list;
-        Label[] txt;
-        TextBox hide;
+        ComboBox combo;
         Button btn;
         ResourceManager rm;
+        string clr,act;
 
         public void loadWindow()
-        {           
+        {
+            clr = "";
+            act = "";
             win = new System.Windows.Window();
             win.Title = "Rss2 Plugin Configuration Window";
-            win.Width = 400;
+            win.Width = 450;
             win.Height = 200;
-
-            hide = new TextBox();
-            hide.Text = "";
-            hide.Visibility = Visibility.Hidden;
-
-            txt = new Label[4];
-            
-            txt[0] = new Label();
-            txt[0].Content = "Background";            
-            txt[0].Width = 100;
-            txt[0].Height = 30;         
-            txt[0].MouseEnter += new System.Windows.Input.MouseEventHandler(txt_MouseEnter);
-            txt[0].MouseLeave += new System.Windows.Input.MouseEventHandler(txt_MouseLeave);
-            txt[0].MouseDown += new System.Windows.Input.MouseButtonEventHandler(txt_MouseDown);
-            txt[0].FontWeight = FontWeights.Bold;
-            txt[1] = new Label();
-            txt[1].Content = "Title";
-            txt[1].Width = 100;
-            txt[1].Height = 30;
-            txt[1].MouseEnter += new System.Windows.Input.MouseEventHandler(txt_MouseEnter);
-            txt[1].MouseLeave += new System.Windows.Input.MouseEventHandler(txt_MouseLeave);
-            txt[1].MouseDown += new System.Windows.Input.MouseButtonEventHandler(txt_MouseDown);
-            txt[1].FontWeight = FontWeights.Bold;
-            txt[2] = new Label();
-            txt[2].Content = "Title item";
-            txt[2].Width = 100;
-            txt[2].Height = 30;            
-            txt[2].MouseEnter += new System.Windows.Input.MouseEventHandler(txt_MouseEnter);
-            txt[2].MouseLeave += new System.Windows.Input.MouseEventHandler(txt_MouseLeave);
-            txt[2].MouseDown += new System.Windows.Input.MouseButtonEventHandler(txt_MouseDown);
-            txt[2].FontWeight = FontWeights.Bold;
-
-            txt[3] = new Label();
-            txt[3].Width = 150;
-            txt[3].Height = 30;
-            txt[3].Visibility = Visibility.Hidden;
-            
-            btn = new Button();
-            btn.Content = "<<Back";
-            btn.Visibility = Visibility.Hidden;
-            btn.Width = 100;
-            btn.Height = 30;
-            btn.Click += new RoutedEventHandler(btn_Click);
-                      
-
             list = new ListBox();            
-            list.Height = 150;
+            list.Height = 170;
             list.Width = 80;
-            list.Visibility = Visibility.Hidden;
-            list.Items.Add("red");
-            list.Items.Add("green");
-            list.Items.Add("blue");
-            list.Items.Add("maroon");
-            list.Items.Add("#efeff5");
+            list.VerticalAlignment = VerticalAlignment.Stretch;
+            list.Items.Add("Background");
+            list.Items.Add("Title");
+            list.Items.Add("Title item");
+            DockPanel.SetDock(list, Dock.Left);
             list.SelectionChanged += new SelectionChangedEventHandler(OnSelection);
-                        
-            StackPanel rootPanel = new StackPanel();
+
+            combo = new ComboBox();
+            combo.Height = 20;
+            combo.VerticalAlignment = VerticalAlignment.Top;
+            combo.HorizontalAlignment = HorizontalAlignment.Stretch;
+            combo.Items.Add("red");
+            combo.Items.Add("green");
+            combo.Items.Add("blue");
+            combo.Items.Add("maroon");
+            combo.Items.Add("very light gray");
+            DockPanel.SetDock(combo, Dock.Top);
+            combo.SelectionChanged += new SelectionChangedEventHandler(combo_SelectionChanged);
+
+            btn = new Button();
+            btn.Content = "Change";            
+            btn.Width = 100;
+            btn.Height = 30;            
+            DockPanel.SetDock(btn, Dock.Bottom);
+            btn.Click += new RoutedEventHandler(btn_Click);
+
+            DockPanel rootPanel = new DockPanel();
             
-            rootPanel.Children.Add(txt[0]);
-            rootPanel.Children.Add(txt[1]);
-            rootPanel.Children.Add(txt[2]);
-            rootPanel.Children.Add(txt[3]);
             rootPanel.Children.Add(btn);
+            rootPanel.Children.Add(combo);            
             
+
             DockPanel dockPanel = new DockPanel();
-            dockPanel.Children.Add(rootPanel);
             dockPanel.Children.Add(list);
+            dockPanel.Children.Add(rootPanel);
             win.Content = dockPanel;
             win.Show();
         }
 
-        void txt_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void btn_Click(object sender, RoutedEventArgs e)
         {
-            Label l = new Label();
-            l = (Label)sender;
-            hide.Text = (string)l.Content;
-            int i = 0;
-            switch (hide.Text)
+            switch (act)
             {
                 case "Background":
-                    i = 0;
+                    changeBackgroundColor(clr);
+                    try
+                    {
+                        ResourceWriter writer = new ResourceWriter(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\" + "Plugin.Properties.resource2.resources");
+                        writer.AddResource("BackgroundColor", clr);
+                        writer.AddResource("TitleItemColor", oldtitleitemcolor);
+                        writer.AddResource("TitleColor", oldtitlecolor);
+
+                        oldbackgroundcolor = clr;
+                        writer.Close();
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Error. Check that you have sufficient privileges and that there is enough disk space.");
+                    }
                     break;
                 case "Title":
-                    i = 1;
+                    changeTitleColor(clr);
+                    try
+                    {
+                        ResourceWriter writer = new ResourceWriter(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\" + "Plugin.Properties.resource2.resources");
+                        writer.AddResource("BackgroundColor", oldbackgroundcolor);
+                        writer.AddResource("TitleItemColor", oldtitleitemcolor);
+                        writer.AddResource("TitleColor", clr);
+
+                        oldtitlecolor = clr;
+                        writer.Close();
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Error. Could not open resource for writing.");
+                    }
                     break;
                 case "Title item":
-                    i = 2;
+                    changeTitleItemColor(clr);
+                    try
+                    {
+                        ResourceWriter writer = new ResourceWriter(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\" + "Plugin.Properties.resource2.resources");
+                        writer.AddResource("BackgroundColor", oldbackgroundcolor);
+                        writer.AddResource("TitleItemColor", clr);
+                        writer.AddResource("TitleColor", oldtitlecolor);
+
+                        oldtitleitemcolor = clr;
+                        writer.Close();
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Error. Could not open resource for writing.");
+                    }
                     break;
             }
-            for (int j = 0; j < 3; j++)
-                if (i != j)
-                    txt[j].Visibility = Visibility.Hidden;
-            txt[3].Content = "Color for:  " + (string)l.Content;
-            txt[3].Visibility = Visibility.Visible;
-            list.Visibility = Visibility.Visible;
-            btn.Visibility = Visibility.Visible;          
         }
 
-        void txt_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        private void combo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            txt[3].Visibility = Visibility.Hidden;
+            if (combo.SelectedIndex != -1)
+            {
+                clr=(string)combo.SelectedValue;
+                if (clr == "very light gray")
+                    clr = "#efeff5";
+            }
         }
-
-        
-         void txt_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-         {
-             Label l = new Label();
-             l = (Label)sender;
-             hide.Text = (string)l.Content;
-             txt[3].Content = "Color for:  " + (string)l.Content;
-             txt[3].Visibility = Visibility.Visible;                     
-         }
-        
-         private void btn_Click(object sender, RoutedEventArgs e)
-         {
-             for (int j = 0; j < 3; j++)
-                 txt[j].Visibility = Visibility.Visible;
-             btn.Visibility = Visibility.Hidden;
-             list.Visibility = Visibility.Hidden;
-         }         
-         
         private void OnSelection(object sender, SelectionChangedEventArgs aArgs)
         {
             if (list.SelectedIndex != -1)
             {
-                switch (hide.Text)
-                 {
-                     case "Background":
-                         changeBackgroundColor((string)list.SelectedValue);
-                         try
-                         {
-                             ResourceWriter writer = new ResourceWriter( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\" + "Plugin.Properties.resource2.resources");
-                             writer.AddResource("BackgroundColor", (string)list.SelectedValue);
-                             writer.AddResource("TitleItemColor", oldtitleitemcolor);
-                             writer.AddResource("TitleColor", oldtitlecolor);
-
-                             oldbackgroundcolor = (string)list.SelectedValue;                             
-                             writer.Close();
-                         }
-                         catch
-                         {
-                             MessageBox.Show("Error. Check that you have sufficient privileges and that there is enough disk space.");
-                         }
-                         break;
-                     case "Title":
-                         changeTitleColor((string)list.SelectedValue);
-                         try
-                         {
-                             ResourceWriter writer = new ResourceWriter( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\" + "Plugin.Properties.resource2.resources");
-                             writer.AddResource("BackgroundColor", oldbackgroundcolor);
-                             writer.AddResource("TitleItemColor", oldtitleitemcolor);
-                             writer.AddResource("TitleColor", (string)list.SelectedValue);                             
-                             
-                             oldtitlecolor = (string)list.SelectedValue;                             
-                             writer.Close();
-                         }
-                         catch
-                         {
-                             MessageBox.Show("Error. Could not open resource for writing.");
-                         }
-                         break;
-                     case "Title item":
-                         changeTitleItemColor((string)list.SelectedValue);
-                         try
-                         {
-                             ResourceWriter writer = new ResourceWriter( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\" + "Plugin.Properties.resource2.resources");
-                             writer.AddResource("BackgroundColor", oldbackgroundcolor);
-                             writer.AddResource("TitleItemColor", (string)list.SelectedValue);
-                             writer.AddResource("TitleColor", oldtitlecolor);
-
-                             oldtitleitemcolor = (string)list.SelectedValue;                            
-                             writer.Close();
-                         }
-                         catch
-                         {
-                             MessageBox.Show("Error. Could not open resource for writing.");
-                         }                         
-                         break;
-                 }
-                 list.Visibility = Visibility.Hidden;
-                 for (int j = 0; j < 3; j++)
-                     txt[j].Visibility = Visibility.Visible;
-                 btn.Visibility = Visibility.Hidden; 
-            }                
+                act=(string)list.SelectedValue;
+            }
         }
-
+       
         public Rss2()
         {
             fileName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)+"\\Plugins\\rss2.rss";
@@ -535,9 +468,7 @@ namespace rss2
             {
 
             }
-            return "The version of this rss in unknown to us";
-
-            
+            return "The version of this rss in unknown to us";            
         }
 
         public void showConfiguration()
@@ -547,12 +478,12 @@ namespace rss2
 
         public string description()
         {
-            return "Default parsing mechanism for RSS 2.0 and 0.93";
+            return "Default parsing mechanism for RSS 2.0 ,0.91, 0.92 and 0.93";
         }
 
         public string name()
         {
-            return "rss2.0 & rss0.93";
+            return "rss0.93 & rss2.0";
         }
 
         private  void TransformXML()

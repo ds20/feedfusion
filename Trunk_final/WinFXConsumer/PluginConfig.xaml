@@ -9,7 +9,7 @@
   <Grid Style="{DynamicResource Grid}">
     <Label Height="25" HorizontalAlignment="Right" Margin="0,54,104,0" Name="pluginDescription" VerticalAlignment="Top" Width="35.6566666666667"/>
     <Label Style="{DynamicResource Label}" Height="27"  Margin="17.3433333333333,8,22.9999999999998,0" Name="label2" VerticalAlignment="Top">Click a plugin to view its description. Then, modify its priority using the Move up/down buttons.</Label>
-    <Label Margin="232.343333333333,41,24,119" Name="label1"   ></Label>
+    <Label Margin="225.343333333333,41,17,119" Name="label1"   ></Label>
     <Button Style="{DynamicResource Button}"  Margin="210,0,0,13.04" Name="cmdConfigure" Tag="Open plugin configuration dialog" VerticalAlignment="Bottom" Click="ConfigurePlugin" Content="Configure" Height="27.96" HorizontalAlignment="Left" Width="50" />
     <Button Style="{DynamicResource Button}" Margin="0,0,184,13" Name="btnMoveUp" Tag="Increase plugin priority" Click="MoveUp" Content="Move Up" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="50" />
     <Button Style="{DynamicResource Button}" Margin="266,0,234,13.04" Name="btnMoveDown" Tag="Decrease plugin priority" Click="MoveDown" Content="Move Down" Height="27.96" VerticalAlignment="Bottom" Width="50"/>
