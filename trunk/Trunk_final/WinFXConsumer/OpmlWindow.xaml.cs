@@ -138,80 +138,9 @@ namespace WinFXConsumer
 
         private void DoButton3Job(Object url_o)
         {
-            TreeViewItem root = new TreeViewItem();
-            String enc;
-
             opml o = new opml();
-            string fileName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\temp\\opml.xml";
-            
-            XmlDocument doc = new XmlDocument();
-            try { doc.Load((String)url_o); }
-            catch (Exception e) { MessageBox.Show(e.Message, (String)url_o); 
-            }
-
-            XmlNode xn = doc.FirstChild;
-            while (xn!=null && xn.NodeType != XmlNodeType.XmlDeclaration)
-                xn = xn.NextSibling;
-            if (xn == null || xn.NodeType != XmlNodeType.XmlDeclaration) enc = "UTF-8";     //default encoding
-            else
-            {
-                enc = ((XmlDeclaration)xn).Encoding;
-                if (enc == null || enc == "") enc = "UTF-8";   //default encoding
-            }
-
-            XmlTextWriter w = new XmlTextWriter(fileName, Encoding.GetEncoding(enc));
-            doc.Save(w);
-            w.Flush();
-            w.Close();
-
-            int nrFeeds = 0;
-            root = o.Parse(fileName,ref nrFeeds);
-
-           /* string Name =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\blablabla.txt";
-            StreamWriter sw = File.CreateText(Name);
-            */
-            //add(root, root, sw);
-            XmlFeed[] feeds = new XmlFeed[nrFeeds];
-            int i=0;
-            TreeToVector(root,root, feeds,ref i);
-            //MessageBox.Show(nrFeeds.ToString());
-            database.addFeeds(feeds);
-            //MessageBox.Show("gata add...");
-            //sw.Close();          
-        }
-
-        public void TreeToVector(TreeViewItem node,TreeViewItem parent, XmlFeed[] feeds,ref int i)
-        {
-                Feed f = new Feed();
-                f=(Feed)node.Tag;                
-                if (f.IsLeaf==true)
-                {
-                    if (f.XmlUrl == "" || f.XmlUrl == null) { }
-                    //MessageBox.Show("Nu am ce adresa sa adaug");
-                    else
-                    {
-                        feeds[i] = new XmlFeed();
-                        feeds[i].catName = (string)parent.Header;
-                        feeds[i].feedName = f.ToString();
-                        feeds[i].url = f.XmlUrl;
-                        i++;
-                    }
-                }
-                else
-                {
-                    foreach (TreeViewItem it in node.Items)
-                    {
-                        TreeToVector(it, node, feeds, ref i);
-                        /*
-                        string Name =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\blablabla.txt";
-                        StreamWriter sw = File.CreateText(Name);
-                        sw.Write(i.Header);
-                        sw.Close();*/
-                    }
-
-                }
-
-        }
+            o.import(url_o, database);           
+        }       
         
         //public void add(TreeViewItem node, TreeViewItem parent,StreamWriter sw)
         //{
