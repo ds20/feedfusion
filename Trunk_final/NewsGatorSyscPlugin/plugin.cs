@@ -7,16 +7,25 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Net;
 using System.IO;
+using System.Xml;
 using PluginInterface;
 namespace NewsGatorSyscPlugin
 {
     public class plugin:rssInterface  
     {
+        Opml op;
         DataBaseEngine db;
         Window loginWindow;
         TextBox txtAccountName;
         TextBox txtAccountPassword;
+        SubscriptionService.SubscriptionWebService s;
+        string locName;
         #region rssInterface Members
+
+        public void setOpml(Opml opml) 
+        {
+            op = opml;
+        }  
 
         void rssInterface.setDocument(System.Xml.XmlDocument doc)
         {
@@ -58,36 +67,13 @@ namespace NewsGatorSyscPlugin
             toolbtn.Click += new RoutedEventHandler(toolbtn_Click);
             ToolBar.Items.Add(toolbtn);
 
-            loginWindow = new Window();
-            loginWindow.Width = 260;
-            loginWindow.Height = 120; 
-            StackPanel sp = new StackPanel();
-            WrapPanel wpAccountName = new WrapPanel();
-            Label lblAccountName = new Label();
-            lblAccountName.Content = "Account name:";
-            lblAccountName.Width = 120;  
-            txtAccountName = new TextBox();
-            txtAccountName.Width = 130;
-            wpAccountName.Children.Add(lblAccountName);
-            wpAccountName.Children.Add(txtAccountName);
 
-            WrapPanel wpAccountPassword = new WrapPanel();
-            Label lblAccountPassword = new Label();
-            lblAccountPassword.Content="Password";
-            lblAccountPassword.Width = 120;  
-            txtAccountPassword = new TextBox();
-            txtAccountPassword.Width = 130;
-            wpAccountPassword.Children.Add(lblAccountPassword);
-            wpAccountPassword.Children.Add(txtAccountPassword);
+        }
 
-            Button btnSync = new Button();
-            btnSync.Content = "Sync!";
-            btnSync.Click += new RoutedEventHandler(btnSync_Click);  
-            StackPanel spMain=new StackPanel();
-            spMain.Children.Add(wpAccountName );
-            spMain.Children.Add(wpAccountPassword );
-            spMain.Children.Add(btnSync); 
-            loginWindow.Content = spMain;
+        void btnExport_Click(object sender, RoutedEventArgs e)
+        {
+            op.makeOpml(db); 
+            //then send on the server for processing
         }
 
         void btnSync_Click(object sender, RoutedEventArgs e)
@@ -96,11 +82,12 @@ namespace NewsGatorSyscPlugin
             LocationService.LocationWebService ls = new LocationService.LocationWebService();
             ls.Credentials = new NetworkCredential(txtAccountName.Text, txtAccountPassword.Text);
             LocationService.Location[] locs = ls.GetLocations();
-            MessageBox.Show(locs[0].name);
-            SubscriptionService.SubscriptionWebService s = new SubscriptionService.SubscriptionWebService();
+            locName=locs[0].name;
+            s = new SubscriptionService.SubscriptionWebService();
             s.Credentials = new NetworkCredential(txtAccountName.Text, txtAccountPassword.Text);
             s.GetSubscriptionListCompleted += new NewsGatorSyscPlugin.SubscriptionService.GetSubscriptionListCompletedEventHandler(s_GetSubscriptionListCompleted);
-            s.GetSubscriptionListAsync(locs[0].name, null);
+            s.GetSubscriptionListAsync(locName, null);
+ 
         }
 
         void s_GetSubscriptionListCompleted(object sender, NewsGatorSyscPlugin.SubscriptionService.GetSubscriptionListCompletedEventArgs e)
@@ -116,12 +103,63 @@ namespace NewsGatorSyscPlugin
                 System.Xml.XmlTextWriter writer = new  System.Xml.XmlTextWriter(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\opml.opml",null);
                 e.Result.WriteTo(writer);
                 writer.Flush();
-                writer.Close();  
+                writer.Close();
+                op.import(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\opml.opml", db);
+                string opmlContent=op.makeOpml(db);
+                System.Xml.XmlElement opmlNode = (new System.Xml.XmlDocument()).CreateElement("HH"); ;   
+
+                XmlDocument xmlDocument = new XmlDocument();
+                xmlDocument.LoadXml(opmlContent);
+                s.MergeSubscriptionsCompleted += new NewsGatorSyscPlugin.SubscriptionService.MergeSubscriptionsCompletedEventHandler(s_MergeSubscriptionsCompleted);
+                s.MergeSubscriptionsAsync(locName, xmlDocument.DocumentElement , false); 
             }
+        }
+
+        void s_MergeSubscriptionsCompleted(object sender, NewsGatorSyscPlugin.SubscriptionService.MergeSubscriptionsCompletedEventArgs e)
+        {
+            if (e.Error != null) MessageBox.Show(e.Error.Message);
+            else { MessageBox.Show("Good news! The sync operation was successfully completed."); }
         }
 
         void toolbtn_Click(object sender, RoutedEventArgs e)
         {
+            loginWindow = new Window();
+            loginWindow.Width = 280;
+            loginWindow.Title = "Login";
+            loginWindow.ResizeMode = ResizeMode.NoResize;    
+            loginWindow.Height = 120;
+            StackPanel sp = new StackPanel();
+            WrapPanel wpAccountName = new WrapPanel();
+            Label lblAccountName = new Label();
+            lblAccountName.Margin = new Thickness(3);   
+            lblAccountName.Content = "Account name:";
+            lblAccountName.Width = 120;
+            txtAccountName = new TextBox();
+            txtAccountName.Margin = new Thickness(3);    
+            txtAccountName.Width = 130;
+            wpAccountName.Children.Add(lblAccountName);
+            wpAccountName.Children.Add(txtAccountName);
+
+            WrapPanel wpAccountPassword = new WrapPanel();
+            Label lblAccountPassword = new Label();
+            lblAccountPassword.Margin = new Thickness(3);    
+            lblAccountPassword.Content = "Password";
+            lblAccountPassword.Width = 120;
+            txtAccountPassword = new TextBox();
+            txtAccountPassword.Margin = new Thickness(3);    
+            txtAccountPassword.Width = 130;
+            wpAccountPassword.Children.Add(lblAccountPassword);
+            wpAccountPassword.Children.Add(txtAccountPassword);
+
+            Button btnImport = new Button();
+            btnImport.Content = "Login";
+            btnImport.Margin = new Thickness(3);    
+            btnImport.Click += new RoutedEventHandler(btnSync_Click);
+            StackPanel spMain = new StackPanel();
+            spMain.Children.Add(wpAccountName);
+            spMain.Children.Add(wpAccountPassword);
+            spMain.Children.Add(btnImport);
+            loginWindow.Content = spMain;
             loginWindow.Show(); 
         }
 

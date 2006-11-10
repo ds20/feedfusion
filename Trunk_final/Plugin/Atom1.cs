@@ -29,7 +29,7 @@ namespace Plugin
         string oldtitlecolor;
         string oldbackgroundcolor;
         //configWindow conf = new configWindow();
-
+        public void setOpml(Opml opml) { }  
         public void getDataBase(DataBaseEngine data)
         {
         }

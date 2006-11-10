@@ -43,7 +43,7 @@ namespace WinFXConsumer
         private delegate void DelegShowhist();
         private DelegShowhist delegShowHist;
         private Image imgStatus;
-
+        private double catListSize=-1;
         private double progressBarIncrement;
         protected string[] _styleList;
         protected int _styleIndex = 0;
@@ -127,7 +127,7 @@ namespace WinFXConsumer
 #region feedTree
         void populateCategoryList()
         {
-            feedTree.Width = 290;
+            //feedTree.Width = 290;
             
             feedTree.Background = Brushes.Transparent;
             feedTree.BorderThickness = new Thickness(0);  
@@ -201,17 +201,20 @@ namespace WinFXConsumer
         {
             InitializeComponent();
             InitializeImages();
-            this.SizeChanged += new SizeChangedEventHandler(Window1_SizeChanged); 
+          
             feedTree=new FeedTree();
-            feedTree.HorizontalAlignment = HorizontalAlignment.Stretch;
-            feedTree.Width = cats.Width;
+            //feedTree.HorizontalContentAlignment = HorizontalAlignment.Stretch;   
+            //feedTree.Width = cats.Width;
             feedTree.categoryNameChanged += new FeedTree.categoryNameChange(feedTree_categoryNameChanged);
             feedTree.deleteClick += new FeedTree.deleteFeedDelegate(categoryList_deleteClick);
             feedTree.feedRename += new FeedTree.feedRenameDelegate(categoryList_feedRename);
             feedTree.viewFeed += new FeedTree.viewFeedDelegate(categoryList_viewFeed);
             cats.Content = feedTree;
-
-
+            //feedTree.BorderBrush = Brushes.AliceBlue;   
+            //feedTree.HorizontalAlignment = HorizontalAlignment.Stretch;    
+            System.Windows.Data.Binding  b= new System.Windows.Data.Binding("Width");
+            b.Source = columnLeft;
+            feedTree.SetBinding(FeedTree.WidthProperty,b);    
 
             this.ContentRendered += Window1_ContentRendered;
             this.Closing += Window1_Closing;
@@ -236,10 +239,8 @@ namespace WinFXConsumer
             //progressBar.Width = 0;
         
         }
-        void Window1_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            feedTree.Width = cats.Width;     
-        }
+
+
         void latestPosts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             String histContents = (dataBase.getHistory(((XmlFeed)latestPosts.SelectedItem).url)[0].contents);
@@ -453,7 +454,7 @@ namespace WinFXConsumer
         void Window1_ContentRendered(Object sender, EventArgs e)
         {
             SetFrameBackground();
-            pManager = new pluginManager(ToolBar, dataBase, this);
+            pManager = new pluginManager(ToolBar, dataBase, this,new opml() );
             for (int i = 0; i < pManager.number; i++) pManager.plugins[i].addToToolbar(this.ToolBar);
             ToolBar.Items.Refresh();
             this.WindowState = WindowState.Normal;      

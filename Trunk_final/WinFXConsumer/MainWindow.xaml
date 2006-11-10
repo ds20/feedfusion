@@ -57,13 +57,13 @@
         <RowDefinition></RowDefinition>
       </Grid.RowDefinitions>
       <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="*"></ColumnDefinition>
+        <ColumnDefinition x:Name ="columnLeft" Width="Auto"></ColumnDefinition>
         <ColumnDefinition ></ColumnDefinition>
       </Grid.ColumnDefinitions>
-        <TabControl Grid.Row="0" Grid.Column ="0" HorizontalAlignment ="Stretch" VerticalAlignment ="Stretch"   x:Name="tabs"   Style="{DynamicResource TabControl}">
+        <TabControl Grid.Row="0" Grid.Column ="0"  VerticalAlignment ="Stretch"   x:Name="tabs"   Style="{DynamicResource TabControl}">
           <TabItem 
             x:Name ="cats"
-            Header="Categories" Opacity="1" Visibility="Visible" Style="{DynamicResource TabItem}">
+            Header="Categories" Style="{DynamicResource TabItem}">
 
           </TabItem>
           <TabItem 
@@ -83,7 +83,7 @@
             <ListBox x:Name ="latestPosts" Style="{DynamicResource ListBox}"/>
           </TabItem>
         </TabControl>
-      <GridSplitter Grid.Column="0" Grid.Row="0" Width="5"/>
+      <GridSplitter x:Name ="splitter" Grid.Column="0" Grid.Row="0" Width="5"/>
       <Frame Name="browser" Grid.Column="1" Grid.Row="0" BorderThickness="0,0,0,0" BorderBrush="#FFFF0000" JournalOwnership="OwnsJournal" ContextMenuService.HasDropShadow="False" NavigationUIVisibility="Visible" HorizontalContentAlignment="Stretch" />
 
     </Grid >
