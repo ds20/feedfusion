@@ -20,7 +20,7 @@ namespace WinFXConsumer
         DataBaseEngine data;
         Window wnd;
 
-        public pluginManager(ToolBar tb,DataBaseEngine ndata,Window window)
+        public pluginManager(ToolBar tb,DataBaseEngine ndata,Window window,opml opml)
         {
             wnd = window;
             data = ndata;
@@ -96,7 +96,8 @@ namespace WinFXConsumer
                                         pluginCollection.Add(crtFileName);  //and in the FileNameList
                                     }
                                     myUnwrappedObj.setOwner(wnd); 
-                                    myUnwrappedObj.getDataBase(data);  
+                                    myUnwrappedObj.getDataBase(data);
+                                    myUnwrappedObj.setOpml(new opml());  
                                 }
                                 
                             }

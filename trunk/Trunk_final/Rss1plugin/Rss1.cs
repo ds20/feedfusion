@@ -32,6 +32,8 @@ namespace rss1
         {
         }
 
+        public void setOpml(Opml opml) { }  
+
         public void feedChanged(string name, string category)
         { }
 

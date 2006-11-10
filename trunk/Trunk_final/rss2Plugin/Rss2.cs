@@ -42,12 +42,15 @@ namespace rss2
             clr = "";
             act = "";
             win = new System.Windows.Window();
+            win.ResizeMode = ResizeMode.NoResize;   
             win.Title = "Rss2 Plugin Configuration Window";
             win.Width = 450;
-            win.Height = 200;
-            list = new ListBox();            
-            list.Height = 170;
-            list.Width = 80;
+            win.Height = 100;
+            
+            list = new ListBox();
+            list.Margin = new Thickness(3); 
+            list.Height = 50;
+            list.Width = 82;
             list.VerticalAlignment = VerticalAlignment.Stretch;
             list.Items.Add("Background");
             list.Items.Add("Title");
@@ -56,21 +59,23 @@ namespace rss2
             list.SelectionChanged += new SelectionChangedEventHandler(OnSelection);
 
             combo = new ComboBox();
+            combo.Margin = new Thickness(3,8,3,3);  
             combo.Height = 20;
             combo.VerticalAlignment = VerticalAlignment.Top;
             combo.HorizontalAlignment = HorizontalAlignment.Stretch;
-            combo.Items.Add("red");
-            combo.Items.Add("green");
-            combo.Items.Add("blue");
-            combo.Items.Add("maroon");
-            combo.Items.Add("very light gray");
+            combo.Items.Add("Red");
+            combo.Items.Add("Green");
+            combo.Items.Add("Blue");
+            combo.Items.Add("Maroon");
+            combo.Items.Add("Light gray");
             DockPanel.SetDock(combo, Dock.Top);
             combo.SelectionChanged += new SelectionChangedEventHandler(combo_SelectionChanged);
 
             btn = new Button();
-            btn.Content = "Change";            
+            btn.Margin = new Thickness(3);  
+            btn.Content = "Set";            
             btn.Width = 100;
-            btn.Height = 30;            
+            //btn.Height = 30;            
             DockPanel.SetDock(btn, Dock.Bottom);
             btn.Click += new RoutedEventHandler(btn_Click);
 
@@ -86,7 +91,7 @@ namespace rss2
             win.Content = dockPanel;
             win.Show();
         }
-
+        public void setOpml(Opml opml) { }  
         private void btn_Click(object sender, RoutedEventArgs e)
         {
             switch (act)
@@ -149,8 +154,8 @@ namespace rss2
         {
             if (combo.SelectedIndex != -1)
             {
-                clr=(string)combo.SelectedValue;
-                if (clr == "very light gray")
+                clr=((string)combo.SelectedValue).ToLower() ;
+                if (clr == "light gray")
                     clr = "#efeff5";
             }
         }
@@ -228,7 +233,6 @@ namespace rss2
             catch (System.NullReferenceException)
             {
                 return null;
-                //return nullRef.Message;
             }
         }
 

@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-
+using PluginInterface;
 namespace syncroniserFusion
 {
     public class syncroniser:PluginInterface.rssInterface  
@@ -21,11 +21,11 @@ namespace syncroniserFusion
         TextBox txtPassword;
         CheckBox chkCreateAccount;
         Window owner;
-        System.Windows.Forms.NotifyIcon ico;  
+        System.Windows.Forms.NotifyIcon ico;
 
 
-        
 
+        public void setOpml(Opml opml) { }  
         public void loadWindow()
         {
             srv = new syncroniserFusion.localhost1.Service();
@@ -153,7 +153,7 @@ namespace syncroniserFusion
         public void addToToolbar(System.Windows.Controls.ToolBar ToolBar)
         {
             System.Windows.Controls.Button btn = new System.Windows.Controls.Button();
-            btn.ToolTip = "Opens Plugin Configuration Window";
+            btn.ToolTip = "Opens FusionSyncroniser Plugin Configuration Window";
             
             Image im = new Image();
             im.Width = 30;

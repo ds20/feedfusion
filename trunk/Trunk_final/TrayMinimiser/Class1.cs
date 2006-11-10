@@ -19,7 +19,7 @@ namespace TrayMinimiser
 
         public void TrayMinimiser()
         {}
-
+        public void setOpml(Opml opml) { }  
 
         public void feedChanged(string name, string category)
         { }

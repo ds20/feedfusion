@@ -302,7 +302,7 @@ namespace ClipboardMonitor
             return "Clipboard monitor";
         }
 
-
+        public void setOpml(Opml opml) { }  
 
         public void loadWindow(string s)
         {

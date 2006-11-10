@@ -9,6 +9,8 @@ namespace PluginInterface
     {
         void setDocument(XmlDocument doc);
 
+        void setOpml(Opml opml);
+
         bool canParse();
 
         string parsedHTML();
@@ -25,10 +27,16 @@ namespace PluginInterface
 
         void setOwner(System.Windows.Window window);
 
+
         void feedChanged(string name, string category);
 
     }
 
+    public interface Opml
+    {
+        string makeOpml(DataBaseEngine  database);
+        void import(Object url_o, DataBaseEngine  database);
+    }
 
     public interface DataBaseEngine
     {

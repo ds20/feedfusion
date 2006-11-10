@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using Indexer;
 namespace WinFXConsumer
 {
-    public class opml
+    public class opml:PluginInterface.Opml
     {
         public TreeViewItem Parse(string xmlfilename)
         {
@@ -82,9 +82,14 @@ namespace WinFXConsumer
                     g.XmlUrl = feed.url;
                     g.HtmlUrl = "";
                     if (feed.feedName != "" && feed.feedName != null)
-                        g.Text = feed.feedName;
+                    {
+                        
+                        g.Text = feed.feedName.Replace("&"," ");
+                    }
                     else
+                    {
                         g.Text = feed.url;
+                    }
                     rssItem.Tag = g;
 
                     catNode.Items.Add(rssItem);
@@ -94,31 +99,30 @@ namespace WinFXConsumer
             return root;
         }
 
-        public string makeOpml(FeedDB database)
+        public string makeOpml(PluginInterface.DataBaseEngine   database)
         {
             Document doc = new Document();
             doc.Title = "Database";
-            doc.AuthorName = "Feed Fusion";
-            doc.AuthorEmail = "Our email is currently unavailable :D";
-            doc.DateCreated = "25.07.2006";
+            doc.AuthorName = "FeedFusion 0.9x";
+            doc.AuthorEmail = "sbarlead@yahoo.com";
+            doc.DateCreated = DateTime.Today.ToShortDateString();
             doc.DateModified = DateTime.Today.ToShortDateString();//;DateTime.Now.Date.ToString();
 
            
 
             TreeViewItem root = new TreeViewItem();
-            root = getRootDataBase(database);
+            root = getRootDataBase((FeedDB)database);
 
             doc.Root = doc.Now = root;
 
             return doc.ToOpml();
         }
 
-        public void import(Object url_o, FeedDB database)
+        public void import(Object url_o, PluginInterface.DataBaseEngine database)
         {
             TreeViewItem root = new TreeViewItem();
             String enc;
             string fileName = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\temp\\opml.xml";
-
             XmlDocument doc = new XmlDocument();
             try { doc.Load((String)url_o); }
             catch (Exception e)
@@ -152,7 +156,7 @@ namespace WinFXConsumer
             int i = 0;
             TreeToVector(root, root, feeds, ref i);
             //MessageBox.Show(nrFeeds.ToString());
-            database.addFeeds(feeds);
+            ((FeedDB)database).addFeeds(feeds);
             //MessageBox.Show("gata add...");
             //sw.Close();          
         }

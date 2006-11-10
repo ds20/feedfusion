@@ -75,7 +75,7 @@ namespace WinFXConsumer
         private void OnSelection(object sender, SelectionChangedEventArgs aArgs)
         {
             if (listBox1.SelectedIndex != -1)
-                label1.Content = plugins.plugins[listBox1.SelectedIndex].description();
+                label1.Text = plugins.plugins[listBox1.SelectedIndex].description();
         }
 
         public pluginConfigWindow(FeedDB f, pluginManager pManager,string styleName)

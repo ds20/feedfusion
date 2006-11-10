@@ -27,6 +27,7 @@ namespace MikeRSS2Plugin
         public void getDataBase(DataBaseEngine data)
         {
         }
+        public void setOpml(Opml opml) { }  
 
         public void setOwner(System.Windows.Window window)
         { }
