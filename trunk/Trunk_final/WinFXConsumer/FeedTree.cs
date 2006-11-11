@@ -110,7 +110,8 @@ public class FeedTree : System.Windows.Controls.TreeView
         XmlFeed feed = (XmlFeed)(f.Tag);
 
         if (viewFeed != null) viewFeed(feed);
-        ((FeedExpander)(((TreeViewItem)f).Header)).myImage.Visibility = Visibility.Collapsed;    
+        ((FeedExpander)(((TreeViewItem)f).Header)).myImage.Visibility = Visibility.Collapsed;
+        ((ListHeader)((TreeViewItem)((TreeViewItem)f).Parent).Header).DecrementUnreadFeeds();  
     }
 
     void editCatName_LostFocus(object sender, RoutedEventArgs e)

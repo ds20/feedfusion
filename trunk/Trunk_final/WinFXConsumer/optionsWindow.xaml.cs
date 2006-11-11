@@ -19,7 +19,7 @@ namespace WinFXConsumer
     public partial class optionsWindow : System.Windows.Window
     {
         Indexer.FeedDB db;  
-        public optionsWindow(Indexer.FeedDB db) 
+        public optionsWindow(Indexer.FeedDB db):this() 
         {
             this.db = db;
         } 

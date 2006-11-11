@@ -444,7 +444,7 @@ namespace WinFXConsumer
 
         void btnProgramOptions_Click(object sender, RoutedEventArgs e)
         {
-            optionsWindow ow = new optionsWindow();
+            optionsWindow ow = new optionsWindow(dataBase);
             ow.ShowDialog(); 
         }
 
@@ -567,7 +567,7 @@ namespace WinFXConsumer
         {
 
             double d = r.NextDouble();
-            string htmlFile =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\temp\" + d.ToString() + ".htm";
+            string htmlFile = Path.GetTempPath()  + d.ToString() + ".htm";
             TextWriter  f = new StreamWriter(htmlFile);
             f.Write((string)parsedHTML_o);
             f.Close();
