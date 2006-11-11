@@ -74,7 +74,7 @@ namespace Indexer
         /// Uses standard directories
         /// </summary>
         public FeedDB()
-            : this( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\data\\cat",  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\data\\feed",  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\data\\history")
+            : this(Environment.SpecialFolder.ApplicationData + "\\data\\cat", Environment.SpecialFolder.ApplicationData + "\\data\\feed", Environment.SpecialFolder.ApplicationData + "\\data\\history")
         {
         }
 

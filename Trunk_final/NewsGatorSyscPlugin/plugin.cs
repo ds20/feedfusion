@@ -100,11 +100,11 @@ namespace NewsGatorSyscPlugin
             {
                 
 
-                System.Xml.XmlTextWriter writer = new  System.Xml.XmlTextWriter(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\opml.opml",null);
+                System.Xml.XmlTextWriter writer = new  System.Xml.XmlTextWriter(Path.GetTempPath()+ "\\opml.opml",null);
                 e.Result.WriteTo(writer);
                 writer.Flush();
                 writer.Close();
-                op.import(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\opml.opml", db);
+                op.import(Path.GetTempPath() + "\\opml.opml", db);
                 string opmlContent=op.makeOpml(db);
                 System.Xml.XmlElement opmlNode = (new System.Xml.XmlDocument()).CreateElement("HH"); ;   
 
