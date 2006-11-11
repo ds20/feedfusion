@@ -65,6 +65,7 @@
     <ApplicationDefinition Include="App.xaml" />
     <Page Include="MainWindow.xaml" />
     <Page Include="AddFeed.xaml" />
+    <Page Include="optionsWindow.xaml" />
     <Page Include="PluginConfig.xaml" />
     <Page Include="OpmlWindow.xaml" />
     <Page Include="RenameWindow.xaml" />
@@ -82,6 +83,10 @@
   <ItemGroup>
     <Compile Include="FeedTree.cs" />
     <Compile Include="opml.cs" />
+    <Compile Include="optionsWindow.xaml.cs">
+      <DependentUpon>optionsWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

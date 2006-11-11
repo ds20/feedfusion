@@ -145,8 +145,8 @@ namespace rss1
         public Rss1()
         {
             string path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            fileName =  path + "\\rss1.rss";
-            htmlName = path + "\\rss1.htm";
+            fileName = Path.GetTempPath() + "\\rss1.rss";
+            htmlName = Path.GetTempPath() + "\\rss1.htm";
             xslName =  path + "\\rss1.xsl";
             xsdName =  path + "\\rss-1_0.xsd";
             oldtitlecolor = "<h3 style=\"color:"+"maroon"+"\">";

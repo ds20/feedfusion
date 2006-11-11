@@ -273,7 +273,7 @@ public class FeedExpander : Expander
         this.Tag = feed;
         this.HorizontalAlignment = HorizontalAlignment.Stretch;
         feedbtn = new Button();
-        //feedbtn.Background = Brushes.Transparent;
+        feedbtn.Background = Brushes.Transparent;
         feedbtn.BorderBrush = Brushes.Transparent;
         feedbtn.Width = 240;  
         feedbtn.HorizontalAlignment = HorizontalAlignment.Stretch;    

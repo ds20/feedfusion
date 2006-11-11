@@ -169,8 +169,8 @@ namespace rss2
        
         public Rss2()
         {
-            fileName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)+"\\Plugins\\rss2.rss";
-            htmlName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\rss2.htm";
+            fileName =  Path.GetTempPath()+"\\rss2.rss";
+            htmlName =  Path.GetTempPath()+  "\\rss2.htm";
             xslName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\rss2.xsl";
             xsdName1 =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\rss-0_91.xsd";
             xsdName2 =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\rss-0_92.xsd";

@@ -33,5 +33,29 @@ namespace WinFXConsumer.Properties {
                 this["PluginCollection"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        public uint autorefreshInterval {
+            get {
+                return ((uint)(this["autorefreshInterval"]));
+            }
+            set {
+                this["autorefreshInterval"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool deleteHistoryOnExit {
+            get {
+                return ((bool)(this["deleteHistoryOnExit"]));
+            }
+            set {
+                this["deleteHistoryOnExit"] = value;
+            }
+        }
     }
 }
