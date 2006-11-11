@@ -37,9 +37,9 @@ namespace Plugin
 
         public Atom1()
         {
-            fileName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)+"\\Plugins\\www.rss";
-            htmlName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\www.htm";
-            xslName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\atom1.xsl";
+            fileName = Path.GetTempPath()+"\\www.rss";
+            htmlName = Path.GetTempPath() + "\\www.htm";
+            xslName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\atom1.xsl";
             oldtitlecolor = "maroon";
             oldbackgroundcolor = "#efeff5";
         }
@@ -123,6 +123,8 @@ namespace Plugin
 
         public string parsedHTML()
         {
+            FileStream file = new FileStream(fileName,FileMode.Create,   FileAccess.Write,FileShare.ReadWrite);
+            file.Close(); 
 
             XmlTextWriter w = new XmlTextWriter( fileName,Encoding.UTF8); 
             doc.Save(w);

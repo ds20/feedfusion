@@ -203,15 +203,11 @@ namespace WinFXConsumer
             InitializeImages();
           
             feedTree=new FeedTree();
-            //feedTree.HorizontalContentAlignment = HorizontalAlignment.Stretch;   
-            //feedTree.Width = cats.Width;
             feedTree.categoryNameChanged += new FeedTree.categoryNameChange(feedTree_categoryNameChanged);
             feedTree.deleteClick += new FeedTree.deleteFeedDelegate(categoryList_deleteClick);
             feedTree.feedRename += new FeedTree.feedRenameDelegate(categoryList_feedRename);
             feedTree.viewFeed += new FeedTree.viewFeedDelegate(categoryList_viewFeed);
-            cats.Content = feedTree;
-            //feedTree.BorderBrush = Brushes.AliceBlue;   
-            //feedTree.HorizontalAlignment = HorizontalAlignment.Stretch;    
+            cats.Content = feedTree; 
             System.Windows.Data.Binding  b= new System.Windows.Data.Binding("Width");
             b.Source = columnLeft;
             feedTree.SetBinding(FeedTree.WidthProperty,b);    
@@ -448,7 +444,8 @@ namespace WinFXConsumer
 
         void btnProgramOptions_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("For now, feedFusion has no Options Dialog of its own, relying entierly on plugin options.","Info",MessageBoxButton.OK,MessageBoxImage.Information);  
+            optionsWindow ow = new optionsWindow();
+            ow.ShowDialog(); 
         }
 
         void Window1_ContentRendered(Object sender, EventArgs e)
@@ -471,7 +468,7 @@ namespace WinFXConsumer
             //this.ApplyStyle(this._styleIndex);
             this.InvalidateVisual();
             this.Width += 1;
-            Timer t = new Timer(new TimerCallback(refreshTimerCallback), null, 0, 60 * 15 * 1000);
+            Timer t = new Timer(new TimerCallback(refreshTimerCallback), null, 0, 60 * Properties.Settings.Default.autorefreshInterval * 1000);
             string[] arguments = Environment.GetCommandLineArgs();
             if (arguments.Length > 1)
             {
@@ -768,6 +765,7 @@ namespace WinFXConsumer
 
         void Window1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (Properties.Settings.Default.deleteHistoryOnExit) dataBase.removeAllHistory();   
             foreach (Window f in Application.Current.Windows) if (f != this) f.Close();
             Application.Current.Shutdown();
         }
