@@ -239,7 +239,7 @@ namespace WinFXConsumer
 
         void latestPosts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            String histContents = (dataBase.getHistory(((XmlFeed)latestPosts.SelectedItem).url)[0].contents);
+            String histContents = (dataBase.getHistory((string)latestPosts.SelectedItem)[0].contents);
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(histContents);
             findPluginFor(doc); 
@@ -554,12 +554,13 @@ namespace WinFXConsumer
                 {
                     gasit = true;
                     //MessageBox.Show("Pluginul care parseaza este " + pManager.plugins[i].description());
+                    imgStatus.ToolTip = "Parsing with the " +pManager.plugins[i].name()+  " plugin";  
                     String parsedHTML = pManager.plugins[i].parsedHTML();
                     setBrowserDocumentText(parsedHTML);
                 }
                 i++;
             }
-            if (!gasit) setBrowserDocumentText("<html><body><h2><font color=\"red\">There is no plugin installed for this RSS type.</font></h2></body></html>");
+            if (!gasit) setBrowserDocumentText("<html><body><h2><font color=\"red\">No plugin.</font>There is no plugin installed for this RSS type.</h2></body></html>");
         }
 
         delegate void DelegSetDocumentText(Object parsedHTML_o);

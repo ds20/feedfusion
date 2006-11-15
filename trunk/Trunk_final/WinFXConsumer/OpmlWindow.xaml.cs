@@ -8,7 +8,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+//using System.Windows.Shapes;
 using System.Xml;
 using Xml.Opml;
 using Indexer;
@@ -70,6 +70,7 @@ namespace WinFXConsumer
         {
             InitializeComponent();
             database = f;
+            //textBox1.Text = @"http://hosting.opml.org/dave/spec/subscriptionList.opml"; 
             button1.Click += button1_click;
             button2.Click += button2_click;
             button3.Click += button3_click;
@@ -85,13 +86,13 @@ namespace WinFXConsumer
 
         public void button4_click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\temp\\opml.htm");            
+            System.Diagnostics.Process.Start(Path.GetTempPath() + "\\opml.htm");            
         }
 
         public void button1_click(object sender, RoutedEventArgs e)
         {
             opml o = new opml();
-            string fileName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\temp\\opml.xml";
+            string fileName = Path.GetTempPath() + "\\opml.xml";
             XmlTextWriter w = new XmlTextWriter(fileName, Encoding.UTF8);
             XmlDocument doc = Window1.dldFeed(textBox1.Text.Trim());
             //http://hosting.opml.org/dave/spec/states.opml    
@@ -111,15 +112,16 @@ namespace WinFXConsumer
 
             TreeViewItem root = new TreeViewItem();
             root = o.getRootDataBase(database);
-            
-            string fileName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\temp\\baza.opml";
+
+            string fileName = Path.GetTempPath() + "\\baza.opml";
             using (StreamWriter sw = File.CreateText(fileName))
             {
                 sw.Write(o.makeOpml(database));
             }
 
             treeView1.Items.Clear();
-            treeView1.Items.Add(root);        
+            treeView1.Items.Add(root);
+            MessageBox.Show("Opml File saved to: " + Path.GetTempPath()+"\\baza.opml .","Success",MessageBoxButton.OK,MessageBoxImage.Information); 
         }
 
         public void button3_click(object sender, RoutedEventArgs e)

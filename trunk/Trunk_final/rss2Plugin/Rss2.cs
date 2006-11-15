@@ -45,12 +45,12 @@ namespace rss2
             win.ResizeMode = ResizeMode.NoResize;   
             win.Title = "Rss2 Plugin Configuration Window";
             win.Width = 450;
-            win.Height = 100;
+            win.Height = 120;
             
             list = new ListBox();
             list.Margin = new Thickness(3); 
-            list.Height = 50;
-            list.Width = 82;
+            list.Height = 60;
+            list.Width = 92;
             list.VerticalAlignment = VerticalAlignment.Stretch;
             list.Items.Add("Background");
             list.Items.Add("Title");
@@ -88,7 +88,12 @@ namespace rss2
             DockPanel dockPanel = new DockPanel();
             dockPanel.Children.Add(list);
             dockPanel.Children.Add(rootPanel);
-            win.Content = dockPanel;
+            StackPanel sp = new StackPanel();
+            Label lblInfo = new Label();
+            lblInfo.Content = "Please select an element to change its color";
+            sp.Children.Add(lblInfo);
+            sp.Children.Add(dockPanel);
+            win.Content = sp;
             win.Show();
         }
         public void setOpml(Opml opml) { }  
@@ -171,10 +176,10 @@ namespace rss2
         {
             fileName =  Path.GetTempPath()+"\\rss2.rss";
             htmlName =  Path.GetTempPath()+  "\\rss2.htm";
-            xslName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\rss2.xsl";
-            xsdName1 =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\rss-0_91.xsd";
-            xsdName2 =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\rss-0_92.xsd";
-            xsdName3 =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Plugins\\rss-0_93.xsd";
+            xslName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\rss2.xsl";
+            xsdName1 =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\rss-0_91.xsd";
+            xsdName2 =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\rss-0_92.xsd";
+            xsdName3 =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\rss-0_93.xsd";
 
 
             
@@ -363,7 +368,7 @@ namespace rss2
             }
             catch (XmlException XmlExp)
             {
-                return XmlExp.Message;
+                return "<b>Plugin Error. Parsing xml failed due XML parsing error.</b> "+ XmlExp.Message;
             }
             
             catch (Exception GenExp)
@@ -412,7 +417,7 @@ namespace rss2
             }
             catch (XmlException XmlExp)
             {
-                return XmlExp.Message;
+                return "<h2>Parsing error: </h2> "+XmlExp.Message;
             }
 
             catch (Exception GenExp)
@@ -472,7 +477,7 @@ namespace rss2
             {
 
             }
-            return "The version of this rss in unknown to us";            
+            return "<h2><b>Plugin error.<b> RSS2 plugin: Parsing failed. This feed does not meet any standard specifications.</h2>";            
         }
 
         public void showConfiguration()

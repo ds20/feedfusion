@@ -15,7 +15,7 @@ namespace WinFXConsumer
         {
             Parser p = new Parser(xmlfilename);
 
-            string fileName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\temp\\opml.htm";
+            string fileName =  Path.GetTempPath() + "\\opml.htm";
 
             Document doc = new Document();
             doc = p.RetrieveDocument();
@@ -32,7 +32,7 @@ namespace WinFXConsumer
         {
             Parser p = new Parser(xmlfilename);
 
-            string fileName =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\temp\\opml.htm";
+            string fileName = Path.GetTempPath() + "\\opml.htm";
 
             Document doc = new Document();
             doc = p.RetrieveDocument();
@@ -122,7 +122,7 @@ namespace WinFXConsumer
         {
             TreeViewItem root = new TreeViewItem();
             String enc;
-            string fileName = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\temp\\opml.xml";
+            string fileName = Path.GetTempPath() + "\\opml.xml";
             XmlDocument doc = new XmlDocument();
             try { doc.Load((String)url_o); }
             catch (Exception e)

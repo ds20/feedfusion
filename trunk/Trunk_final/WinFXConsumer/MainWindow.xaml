@@ -11,7 +11,7 @@
           <MenuItem Header="Import/Export" x:Name="btnOpml" Style="{DynamicResource Item}"/>
         </MenuItem>
         <MenuItem Header="_Options" Style="{DynamicResource Item}">
-          <MenuItem Header="_Change skin" x:Name="btnO" Style="{DynamicResource Item}"/>         
+          <MenuItem Visibility ="Collapsed" Header="_Change skin" x:Name="btnO" Style="{DynamicResource Item}"/>         
 					<MenuItem Header="_Plugin Options" x:Name="btnPluginOptions" Style="{DynamicResource Item}"/>
           <MenuItem Header="_User Options" x:Name="btnProgramOptions" Style="{DynamicResource Item}"/>
         </MenuItem>
