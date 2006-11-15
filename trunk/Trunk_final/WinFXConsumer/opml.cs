@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xml.Opml;
 using System.Xml;
+using System.Xml.Schema;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -130,35 +131,89 @@ namespace WinFXConsumer
                 MessageBox.Show(e.Message, (String)url_o);
             }
 
-            XmlNode xn = doc.FirstChild;
-            while (xn != null && xn.NodeType != XmlNodeType.XmlDeclaration)
-                xn = xn.NextSibling;
-            if (xn == null || xn.NodeType != XmlNodeType.XmlDeclaration) enc = "UTF-8";     //default encoding
-            else
+            string s = OpmlValidation(doc);
+            if (s == "ok")
             {
-                enc = ((XmlDeclaration)xn).Encoding;
-                if (enc == null || enc == "") enc = "UTF-8";   //default encoding
+                XmlNode xn = doc.FirstChild;
+                while (xn != null && xn.NodeType != XmlNodeType.XmlDeclaration)
+                    xn = xn.NextSibling;
+                if (xn == null || xn.NodeType != XmlNodeType.XmlDeclaration) enc = "UTF-8";     //default encoding
+                else
+                {
+                    enc = ((XmlDeclaration)xn).Encoding;
+                    if (enc == null || enc == "") enc = "UTF-8";   //default encoding
+                }
+
+                XmlTextWriter w = new XmlTextWriter(fileName, Encoding.GetEncoding(enc));
+                doc.Save(w);
+                w.Flush();
+                w.Close();
+
+                int nrFeeds = 0;
+                root = Parse(fileName, ref nrFeeds);
+
+                /* string Name =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\blablabla.txt";
+                 StreamWriter sw = File.CreateText(Name);
+                 */
+                //add(root, root, sw);
+                XmlFeed[] feeds = new XmlFeed[nrFeeds];
+                int i = 0;
+                TreeToVector(root, root, feeds, ref i);
+                //MessageBox.Show(nrFeeds.ToString());
+                ((FeedDB)database).addFeeds(feeds);
+                //MessageBox.Show("gata add...");
+                //sw.Close(); 
+            }
+            else
+                MessageBox.Show(s);
+        }
+
+        public string OpmlValidation(XmlDocument doc)
+        {
+            try
+            {
+                //http://hosting.opml.org/dave/spec/states.opml    
+                //http://hosting.opml.org/dave/spec/subscriptionList.opml
+                string fileName = Path.GetTempPath() + "\\opml.xml";
+                XmlValidatingReader reader = null;
+                XmlSchemaCollection myschema = new XmlSchemaCollection();
+                //Create the XML fragment to be parsed.
+
+                //Create the XmlParserContext.
+                XmlParserContext context = new XmlParserContext(null, null, "", XmlSpace.None);
+
+                //Implement the reader. 
+                reader = new XmlValidatingReader(doc.OuterXml, XmlNodeType.Element, context);
+                //Add the schema.
+                string xsdName = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\contents.xsd";
+                myschema.Add("", xsdName);
+
+                //Set the schema type and add the schema to the reader.
+                reader.ValidationType = ValidationType.Schema;
+                reader.Schemas.Add(myschema);
+                while (reader.Read())
+                {
+                }
+            }
+            catch (XmlSchemaException XmlSchExp)
+            {
+                if (XmlSchExp.Message != "The 'version' attribute has an invalid value according to its data type.")
+                    return XmlSchExp.Message;
+            }
+            catch (XmlException XmlExp)
+            {
+                return "<b>Opml Error. Parsing xml failed due XML parsing error.</b> " + XmlExp.Message;
             }
 
-            XmlTextWriter w = new XmlTextWriter(fileName, Encoding.GetEncoding(enc));
-            doc.Save(w);
-            w.Flush();
-            w.Close();
+            catch (Exception GenExp)
+            {
+                return GenExp.Message;
+            }
+            finally
+            {
 
-            int nrFeeds = 0;
-            root = Parse(fileName, ref nrFeeds);
-
-            /* string Name =  System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\blablabla.txt";
-             StreamWriter sw = File.CreateText(Name);
-             */
-            //add(root, root, sw);
-            XmlFeed[] feeds = new XmlFeed[nrFeeds];
-            int i = 0;
-            TreeToVector(root, root, feeds, ref i);
-            //MessageBox.Show(nrFeeds.ToString());
-            ((FeedDB)database).addFeeds(feeds);
-            //MessageBox.Show("gata add...");
-            //sw.Close();          
+            }
+            return "ok";
         }
 
         public void TreeToVector(TreeViewItem node, TreeViewItem parent, XmlFeed[] feeds, ref int i)
@@ -193,52 +248,6 @@ namespace WinFXConsumer
             }
 
         }
-            /*
-            XmlTextWriter w = new XmlTextWriter(fileName, Encoding.UTF8);
-            w.WriteString(doc.ToString());
-            w.Close();*/
-
-            /*  //Libraria cu VB
-            StringBuilder sb = new StringBuilder();
-            sb.Append(String.Format("<a href={0}>{1}({2})</a><br/>{3}<br/>{4}<br/>",doc.AuthorEmail,doc.Title,doc.AuthorName,doc.DateCreated,doc.DateModified));
-            foreach (Feed f in doc.Feeds)
-            {                
-                sb.Append(String.Format("&#149;&nbsp;<a href={0}>{1}({2})</a><br/>", f.XmlUrl, f.Title, f.Description));
-            }
-            using (StreamWriter sw = File.CreateText( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\temp\\opml.htm"))
-            {
-                sw.Write(sb.ToString());
-            }*/
-        
-        /*
-        public void Load()
-        {
-            StringBuilder sb = new StringBuilder();
-            XmlDocument doc = new XmlDocument();
-            doc.Load(Validator.ParseURL("blogroll.opml"));
-            MessageBox.Show("S-a dld feedul.");
-            int NumToDisp = int.Parse(doc.SelectSingleNode("/opml/@numberToDisplay").InnerText);
-            XmlNodeList rss = doc.SelectNodes("//outline/@xmlUrl");
-            foreach (XmlNode r in rss)
-            {
-                XmlDocument blogdoc=new XmlDocument();
-                blogdoc.Load(r.Value);
-                XmlNodeList items = blogdoc.SelectNodes("//item");
-                for (int i = 0; i < items.Count && i < NumToDisp; i++)
-                {
-                    string author = "";
-                    XmlNode authorNode = items[i].SelectSingleNode("*[local-name()='author'or local-name()='creator']");
-                    if (authorNode != null)
-                        author = authorNode.InnerText;
-                    sb.Append(String.Format("&#149;&nbsp;<a href={0}>{1}({2})</a><br/>",items[i].SelectSingleNode("link").InnerText,items[i].SelectSingleNode("title").InnerText,author));
-                }
-
-            }
-            using (StreamWriter sw = File.CreateText( System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\temp\\opml.htm"))
-                {
-                    sw.Write(sb.ToString());
-                }
             
-        }*/
     }
 }

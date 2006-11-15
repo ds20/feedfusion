@@ -88,24 +88,32 @@ namespace WinFXConsumer
         {
             System.Diagnostics.Process.Start(Path.GetTempPath() + "\\opml.htm");            
         }
-
+        
         public void button1_click(object sender, RoutedEventArgs e)
         {
             if (textBox1.Text.Trim().Length > 5)
-            {
-                opml o = new opml();
-                string fileName = Path.GetTempPath() + "\\opml.xml";
-                XmlTextWriter w = new XmlTextWriter(fileName, Encoding.UTF8);
-                XmlDocument doc = Window1.dldFeed(textBox1.Text.Trim());
-                //http://hosting.opml.org/dave/spec/states.opml    
-                //http://hosting.opml.org/dave/spec/subscriptionList.opml
-                doc.Save(w);
-                w.Flush();
-                w.Close();
-                button4.Visibility = Visibility.Visible;
+            {               
+                opml o = new opml();     
 
-                treeView1.Items.Clear();
-                treeView1.Items.Add(o.Parse(fileName));
+                     string fileName = Path.GetTempPath() + "\\opml.xml";
+                     XmlDocument doc = Window1.dldFeed(textBox1.Text.Trim());
+                     string s=o.OpmlValidation(doc);
+                    //http://hosting.opml.org/dave/spec/states.opml    
+                    //http://hosting.opml.org/dave/spec/subscriptionList.opml
+                     if (s == "ok")
+                     {
+                         XmlTextWriter w = new XmlTextWriter(fileName, Encoding.UTF8);
+                         doc.Save(w);
+                         w.Flush();
+                         w.Close();
+                         button4.Visibility = Visibility.Visible;
+
+                         treeView1.Items.Clear();
+                         treeView1.Items.Add(o.Parse(fileName));
+                     }
+                     else
+                         MessageBox.Show(s);
+               
             }
         }
 
@@ -150,9 +158,9 @@ namespace WinFXConsumer
 
         private void DoButton3Job(Object url_o)
         {
-            opml o = new opml();
+            opml o = new opml();            
             o.import(url_o, database);
-            MessageBox.Show("OPML import completed","FeedFusion Import"); 
+            MessageBox.Show("OPML import completed", "FeedFusion Import");            
         }       
         
         //public void add(TreeViewItem node, TreeViewItem parent,StreamWriter sw)
