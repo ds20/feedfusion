@@ -58,7 +58,7 @@ namespace WinFXConsumer
 
             catch (XmlException e)
             {
-                MessageBox.Show("Parsing error: INSERT COMMENTS HERE");
+                MessageBox.Show("Parsing error: Unspecified error.");
             }
 
             return reader2;
