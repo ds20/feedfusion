@@ -110,13 +110,13 @@ public class FeedTree : System.Windows.Controls.TreeView
         XmlFeed feed = (XmlFeed)(f.Tag);
 
         if (viewFeed != null) viewFeed(feed);
+        if (((FeedExpander)(((TreeViewItem)f).Header)).myImage.Visibility==Visibility.Visible)   ((ListHeader)((TreeViewItem)((TreeViewItem)f).Parent).Header).DecrementUnreadFeeds();
         ((FeedExpander)(((TreeViewItem)f).Header)).myImage.Visibility = Visibility.Collapsed;
-        ((ListHeader)((TreeViewItem)((TreeViewItem)f).Parent).Header).DecrementUnreadFeeds();  
     }
 
     void editCatName_LostFocus(object sender, RoutedEventArgs e)
     {
-        if (categoryNameChanged != null) categoryNameChanged(((TextBox)sender).Text, (string)((TextBox)sender).Tag);  
+        if (categoryNameChanged != null) categoryNameChanged((string)((TextBox)sender).Tag, ((TextBox)sender).Text);  
     }
 
     void myImage_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -248,7 +248,13 @@ public class FeedTree : System.Windows.Controls.TreeView
         Grid g = (Grid)(((Button)sender).Parent);
         Expander ex = (Expander)g.Parent;
         TreeViewItem t = (TreeViewItem)ex.Parent;
-        if (deleteClick!=null) deleteClick(((XmlFeed)(((TreeViewItem)ex.Parent).Tag)));
+        DeleteFeedCommand(ex);
+        t.Visibility = Visibility.Collapsed;   
+    }
+
+    public void DeleteFeedCommand(Expander ex)
+    {
+        if (deleteClick != null) deleteClick(((XmlFeed)(((TreeViewItem)ex.Parent).Tag)));
     }
 
     void b_LostFocus(object sender, RoutedEventArgs e)
@@ -358,7 +364,8 @@ public class ListHeader : StackPanel
         deleteCatImage.Source = myBitmapImage;
         deleteCatImage.MouseEnter += myImage_MouseEnter;
         deleteCatImage.MouseLeave += myImage_MouseLeave;
-        deleteCatImage.ToolTip = "Delete the whole category from the databse.";  
+        deleteCatImage.ToolTip = "Delete the whole category from the databse.";
+        deleteCatImage.MouseDown += new System.Windows.Input.MouseButtonEventHandler(deleteCatImage_MouseDown);  
         p.Children.Add(deleteCatImage);
 
 
@@ -419,16 +426,24 @@ public class ListHeader : StackPanel
 
     }
 
+    void deleteCatImage_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        TreeViewItem i = (TreeViewItem)(this.Parent);
+        Object o=this.Parent;
+        while (o is TreeViewItem) o=((TreeViewItem)o).Parent;
+        FeedTree ft=(FeedTree)o;
+        foreach (TreeViewItem t in i.Items)
+        {
+            ft.DeleteFeedCommand((Expander)t.Header);  
+        }
+    }
+
     void myImage_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
         if (p.Visibility == Visibility.Visible) p.Visibility = Visibility.Collapsed;
         else p.Visibility = Visibility.Visible;  
         
     }
-
-
-
-
 
 
     void myImage_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)

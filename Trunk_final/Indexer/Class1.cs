@@ -65,8 +65,10 @@ namespace Indexer
         String dirCat, dirFeed, dirHistory;
         IndexWriter writerCat, writerFeed, writerHistory;
         IndexSearcher searcherCat, searcherFeed, searcherHistory;
+
         public delegate void DelegateCatFeedChanged();
         public DelegateCatFeedChanged delegCatFeedChanged;
+
         public delegate void DelegateHistoryChanged();
         public DelegateHistoryChanged delegHistoryChanged;
 
@@ -901,6 +903,7 @@ namespace Indexer
             incrementNextHistoryIndex();
 
             Document doc = new Document();
+
             doc.Add(Field.Text("historyIndex", "" + nextIndex));
             doc.Add(Field.Text("feedIndex", "" + getFeedIndex(url)));
             doc.Add(Field.Text("contents", "z" + xmlContents));

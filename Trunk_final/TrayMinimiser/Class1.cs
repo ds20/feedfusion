@@ -38,14 +38,14 @@ namespace TrayMinimiser
 
             public void NewFeedAdded(string feed) 
             {
-                nNewFeed.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new NoArgDelegate(nNewFeed.Show1)); 
+                //nNewFeed.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new NoArgDelegate(nNewFeed.Show1)); 
                
             }
 
  
             public void CategoryAdded(string cat) 
             {
-                nNewCat.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new NoArgDelegate(nNewCat.Show1)); 
+                //nNewCat.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new NoArgDelegate(nNewCat.Show1)); 
             }
         }
 

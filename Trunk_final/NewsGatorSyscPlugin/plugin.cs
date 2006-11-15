@@ -17,7 +17,7 @@ namespace NewsGatorSyscPlugin
         DataBaseEngine db;
         Window loginWindow;
         TextBox txtAccountName;
-        TextBox txtAccountPassword;
+        PasswordBox txtAccountPassword;
         SubscriptionService.SubscriptionWebService s;
         string locName;
         #region rssInterface Members
@@ -78,16 +78,21 @@ namespace NewsGatorSyscPlugin
 
         void btnSync_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(txtAccountName.Text+ " "+txtAccountPassword.Text   );
-            LocationService.LocationWebService ls = new LocationService.LocationWebService();
-            ls.Credentials = new NetworkCredential(txtAccountName.Text, txtAccountPassword.Text);
-            LocationService.Location[] locs = ls.GetLocations();
-            locName=locs[0].name;
-            s = new SubscriptionService.SubscriptionWebService();
-            s.Credentials = new NetworkCredential(txtAccountName.Text, txtAccountPassword.Text);
-            s.GetSubscriptionListCompleted += new NewsGatorSyscPlugin.SubscriptionService.GetSubscriptionListCompletedEventHandler(s_GetSubscriptionListCompleted);
-            s.GetSubscriptionListAsync(locName, null);
- 
+            try
+            {
+                LocationService.LocationWebService ls = new LocationService.LocationWebService();
+                ls.Credentials = new NetworkCredential(txtAccountName.Text, txtAccountPassword.Password);
+                LocationService.Location[] locs = ls.GetLocations();
+                locName = locs[0].name;
+                s = new SubscriptionService.SubscriptionWebService();
+                s.Credentials = new NetworkCredential(txtAccountName.Text, txtAccountPassword.Password);
+                s.GetSubscriptionListCompleted += new NewsGatorSyscPlugin.SubscriptionService.GetSubscriptionListCompletedEventHandler(s_GetSubscriptionListCompleted);
+                s.GetSubscriptionListAsync(locName, null);
+            }
+            catch 
+            {
+                MessageBox.Show("Login failed. Please check that you have typed the correct credentials."); 
+            }
         }
 
         void s_GetSubscriptionListCompleted(object sender, NewsGatorSyscPlugin.SubscriptionService.GetSubscriptionListCompletedEventArgs e)
@@ -127,8 +132,15 @@ namespace NewsGatorSyscPlugin
             loginWindow.Width = 280;
             loginWindow.Title = "Login";
             loginWindow.ResizeMode = ResizeMode.NoResize;    
-            loginWindow.Height = 120;
-            StackPanel sp = new StackPanel();
+            loginWindow.Height = 180;
+            Label l = new Label();
+            l.Content = "Please login to your NewsGator account, or";
+
+            Label l2 = new Label();
+            l2.Foreground = Brushes.Blue; 
+            l2.Content = "create a new account";
+            l2.MouseDown += new System.Windows.Input.MouseButtonEventHandler(l2_MouseDown);
+            
             WrapPanel wpAccountName = new WrapPanel();
             Label lblAccountName = new Label();
             lblAccountName.Margin = new Thickness(3);   
@@ -145,7 +157,7 @@ namespace NewsGatorSyscPlugin
             lblAccountPassword.Margin = new Thickness(3);    
             lblAccountPassword.Content = "Password";
             lblAccountPassword.Width = 120;
-            txtAccountPassword = new TextBox();
+            txtAccountPassword = new PasswordBox();
             txtAccountPassword.Margin = new Thickness(3);    
             txtAccountPassword.Width = 130;
             wpAccountPassword.Children.Add(lblAccountPassword);
@@ -156,11 +168,19 @@ namespace NewsGatorSyscPlugin
             btnImport.Margin = new Thickness(3);    
             btnImport.Click += new RoutedEventHandler(btnSync_Click);
             StackPanel spMain = new StackPanel();
+            spMain.Children.Add(l);
             spMain.Children.Add(wpAccountName);
             spMain.Children.Add(wpAccountPassword);
+            spMain.Children.Add(l2); 
             spMain.Children.Add(btnImport);
             loginWindow.Content = spMain;
             loginWindow.Show(); 
+        }
+
+        void l2_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.newsgator.com/ngs/order1.aspx"); 
+
         }
 
         string rssInterface.description()
