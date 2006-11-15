@@ -91,19 +91,22 @@ namespace WinFXConsumer
 
         public void button1_click(object sender, RoutedEventArgs e)
         {
-            opml o = new opml();
-            string fileName = Path.GetTempPath() + "\\opml.xml";
-            XmlTextWriter w = new XmlTextWriter(fileName, Encoding.UTF8);
-            XmlDocument doc = Window1.dldFeed(textBox1.Text.Trim());
-            //http://hosting.opml.org/dave/spec/states.opml    
-            //http://hosting.opml.org/dave/spec/subscriptionList.opml
-            doc.Save(w);
-            w.Flush();
-            w.Close();
-            button4.Visibility = Visibility.Visible;
+            if (textBox1.Text.Trim().Length > 5)
+            {
+                opml o = new opml();
+                string fileName = Path.GetTempPath() + "\\opml.xml";
+                XmlTextWriter w = new XmlTextWriter(fileName, Encoding.UTF8);
+                XmlDocument doc = Window1.dldFeed(textBox1.Text.Trim());
+                //http://hosting.opml.org/dave/spec/states.opml    
+                //http://hosting.opml.org/dave/spec/subscriptionList.opml
+                doc.Save(w);
+                w.Flush();
+                w.Close();
+                button4.Visibility = Visibility.Visible;
 
-            treeView1.Items.Clear();
-            treeView1.Items.Add(o.Parse(fileName));
+                treeView1.Items.Clear();
+                treeView1.Items.Add(o.Parse(fileName));
+            }
         }
 
         public void button2_click(object sender, RoutedEventArgs e)
@@ -132,16 +135,24 @@ namespace WinFXConsumer
             t.Start(textBox1.Text.Trim());*/
 
             //DoButton3Job(textBox1.Text.Trim());
-
-            Window1.OneArgDelegate delegOpml = DoButton3Job;
-            WaitWindow w = new WaitWindow(delegOpml, textBox1.Text.Trim(), "Adding OPML feeds to database");
-            w.ShowDialog();
+            if (textBox1.Text.Trim().Length > 5)
+            {
+                Window1.OneArgDelegate delegOpml = DoButton3Job;
+                WaitWindow w = new WaitWindow(delegOpml, textBox1.Text.Trim(), "Adding OPML feeds to database");
+                w.ShowDialog();
+                //w.Visibility = Visibility.Hidden;   
+                //progressBar.Visibility = Visibility.Visible;
+                progressBar.IsIndeterminate = true;
+               
+                
+            }
         }
 
         private void DoButton3Job(Object url_o)
         {
             opml o = new opml();
-            o.import(url_o, database);           
+            o.import(url_o, database);
+            MessageBox.Show("OPML import completed","FeedFusion Import"); 
         }       
         
         //public void add(TreeViewItem node, TreeViewItem parent,StreamWriter sw)
