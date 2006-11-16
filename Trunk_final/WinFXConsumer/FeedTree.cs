@@ -305,6 +305,7 @@ public class FeedExpander : Expander
         pp.Children.Add(myImage);
         if (isRead) myImage.Visibility = Visibility.Collapsed;  
         pp.Children.Add(l);
+        feedbtn.HorizontalContentAlignment = HorizontalAlignment.Left;   
         feedbtn.Content = pp;
         this.Header = feedbtn;
         this.BorderThickness = new Thickness(1);

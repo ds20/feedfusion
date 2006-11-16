@@ -33,7 +33,7 @@ namespace ClipboardMonitor
         System.Windows.Controls.TextBox txtPassword;
         System.Windows.Controls.Label lblUser;
         System.Windows.Controls.Button btnAdd;
-        System.Windows.Controls.ListBox listCat; 
+        System.Windows.Controls.ComboBox  listCat; 
 
         string[] formatsAll = new string[] 
 		{
@@ -233,7 +233,7 @@ namespace ClipboardMonitor
 
             foreach (Match rm in rxURL.Matches(strClipboardText))
             {
-                if (strClipboardText.Contains(".xml") || strClipboardText.Contains(".rss")) loadWindow(strClipboardText);  
+                if ((strClipboardText.Contains(".xml") || strClipboardText.Contains(".rss") || strClipboardText.Contains(".asp")) && (data != null)) loadWindow(strClipboardText);  
             }
 
 
@@ -295,7 +295,7 @@ namespace ClipboardMonitor
 
 
         public string description()
-        { return "The plugin checks the clipboard for links to rss feeds."; }
+        { return "The plugin checks the clipboard for links to rss  ( *.xml, *.rss )feeds."; }
 
         public string name()
         {
@@ -328,7 +328,7 @@ namespace ClipboardMonitor
             lb.Width = 280;
             lb.Height = 25;
 
-            listCat = new System.Windows.Controls.ListBox();
+            listCat = new System.Windows.Controls.ComboBox();
             listCat.Width = 280;
             listCat.Height = 25;
             if (data != null)
@@ -338,6 +338,7 @@ namespace ClipboardMonitor
                 {
                     listCat.Items.Add(cat);
                 }
+                listCat.SelectedIndex = 0;  
             }
 
             btnAdd = new System.Windows.Controls.Button();

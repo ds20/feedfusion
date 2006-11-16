@@ -658,7 +658,8 @@ namespace WinFXConsumer
         private void button5_Click(object sender, RoutedEventArgs e)
         {
             Window2 addWindow = new Window2(dataBase, this._styleList[_styleIndex]);
-            addWindow.ShowDialog(); 
+            addWindow.ShowDialog();
+            DownloadAll(); 
 
         }
 
@@ -673,6 +674,7 @@ namespace WinFXConsumer
             OpmlWindow w = new OpmlWindow(dataBase, this._styleList[_styleIndex]);
             try { w.ShowDialog(); }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
+            DownloadAll(); 
         }
 
         private void button8_Click(object sender, RoutedEventArgs e)
