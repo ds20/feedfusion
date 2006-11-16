@@ -127,20 +127,16 @@ namespace WinFXConsumer
 #region feedTree
         void populateCategoryList()
         {
-            //feedTree.Width = 290;
-            
             feedTree.Background = Brushes.Transparent;
             feedTree.BorderThickness = new Thickness(0);  
             TreeViewItem father=new TreeViewItem();
-
+            string[] caty = dataBase.getCategories();  
             foreach (string s in dataBase.getCategories())
             {
 
                 TreeViewItem catNode = new TreeViewItem();
                 catNode.Tag = s;
                 father.Items.Add(catNode);
-                //t.MouseUp += new System.Windows.Input.MouseButtonEventHandler(t_MouseUp);
-
                 foreach (XmlFeed feed in dataBase.getFeeds(s))
                 {
                     TreeViewItem feedNode = new TreeViewItem();
@@ -149,7 +145,7 @@ namespace WinFXConsumer
 
                 }
             }
-            feedTree.Populate(father,dataBase.getCategories() );
+            feedTree.Populate(father,caty );
         }
 
         void feedTree_categoryNameChanged(string cat, string newCat)
@@ -225,6 +221,7 @@ namespace WinFXConsumer
             btnOpml.Click += button7_Click;
             btnAbout.Click += button8_Click;
             btnProgramOptions.Click += new RoutedEventHandler(btnProgramOptions_Click);
+            btnNotes.Click += new RoutedEventHandler(btnNotes_Click);  
             btnO.Click += new RoutedEventHandler(btnO_Click);
             listBox1.SelectionChanged += listBox1_SelectionChanged;
             txtSearch.KeyDown += txtSearch_KeyDown;
@@ -234,6 +231,11 @@ namespace WinFXConsumer
             progressBarIncrement = this.Width / dataBase.getAllFeeds().Length;
             //progressBar.Width = 0;
         
+        }
+
+        void btnNotes_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)+"\\release_notes.txt");  
         }
 
 
