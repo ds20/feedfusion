@@ -30,7 +30,16 @@ namespace WinFXConsumer
             btndelete.Click += new RoutedEventHandler(btndelete_Click);  
             txtInterval.Text = Properties.Settings.Default.autorefreshInterval.ToString(); 
             btnApply.Click += new RoutedEventHandler(btnApply_Click);
-            chkDelete.Checked += new RoutedEventHandler(chkDelete_Checked);  
+            chkDelete.IsChecked = Properties.Settings.Default.deleteHistoryOnExit;
+            chkDelete.Checked += new RoutedEventHandler(chkDelete_Checked);
+            openWindows.IsChecked = Properties.Settings.Default.openLinksInNewWindows;
+            openWindows.Checked += new RoutedEventHandler(openWindows_Checked);
+        }
+
+        void openWindows_Checked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.openLinksInNewWindows = (bool)openWindows.IsChecked;
+            Properties.Settings.Default.Save();
         }
 
         void btndelete_Click(object sender, RoutedEventArgs e)

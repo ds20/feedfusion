@@ -566,13 +566,15 @@ namespace WinFXConsumer
         }
 
         delegate void DelegSetDocumentText(Object parsedHTML_o);
-        void setBrowserDocumentText(Object parsedHTML_o)
+        void setBrowserDocumentText(string parsedHTML)
         {
 
             double d = r.NextDouble();
             string htmlFile = Path.GetTempPath()  + d.ToString() + ".htm";
             TextWriter  f = new StreamWriter(htmlFile);
-            f.Write((string)parsedHTML_o);
+            if (!Properties.Settings.Default.openLinksInNewWindows)
+                parsedHTML = parsedHTML.Replace("target=\"_blank\"", "");
+            f.Write(parsedHTML);
             f.Close();
             browser.Navigate(new Uri(htmlFile)); 
             SetFrameBackground();
