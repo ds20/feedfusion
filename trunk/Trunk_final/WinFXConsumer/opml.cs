@@ -131,9 +131,9 @@ namespace WinFXConsumer
                 MessageBox.Show(e.Message, (String)url_o);
             }
 
-            string s = OpmlValidation(doc);
-            if (s == "ok")
-            {
+            //string s = OpmlValidation(doc);
+            //if (s == "ok")
+            //{
                 XmlNode xn = doc.FirstChild;
                 while (xn != null && xn.NodeType != XmlNodeType.XmlDeclaration)
                     xn = xn.NextSibling;
@@ -163,9 +163,9 @@ namespace WinFXConsumer
                 ((FeedDB)database).addFeeds(feeds);
                 //MessageBox.Show("gata add...");
                 //sw.Close(); 
-            }
-            else
-                MessageBox.Show(s);
+            //}
+            //else
+            //    MessageBox.Show(s);
         }
 
         public string OpmlValidation(XmlDocument doc)

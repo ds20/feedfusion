@@ -97,11 +97,12 @@ namespace WinFXConsumer
 
                      string fileName = Path.GetTempPath() + "\\opml.xml";
                      XmlDocument doc = Window1.dldFeed(textBox1.Text.Trim());
-                     string s=o.OpmlValidation(doc);
+                     
                     //http://hosting.opml.org/dave/spec/states.opml    
                     //http://hosting.opml.org/dave/spec/subscriptionList.opml
-                     if (s == "ok")
-                     {
+                    string s=o.OpmlValidation(doc);
+                    if (s == "ok")
+                    {
                          XmlTextWriter w = new XmlTextWriter(fileName, Encoding.UTF8);
                          doc.Save(w);
                          w.Flush();
@@ -111,8 +112,8 @@ namespace WinFXConsumer
                          treeView1.Items.Clear();
                          treeView1.Items.Add(o.Parse(fileName));
                      }
-                     else
-                         MessageBox.Show(s);
+                    else
+                        MessageBox.Show(s);
                
             }
         }
