@@ -16,6 +16,7 @@ Changes in this release:
 	-autorefresh interval
 	-delete history
 	-autodelete history
+    -choose whether to open links in new windows
 
 - Read/unread indicator for feeds
 
