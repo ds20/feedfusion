@@ -100,9 +100,9 @@ namespace WinFXConsumer
                      
                     //http://hosting.opml.org/dave/spec/states.opml    
                     //http://hosting.opml.org/dave/spec/subscriptionList.opml
-                    string s=o.OpmlValidation(doc);
-                    if (s == "ok")
-                    {
+                    //string s=o.OpmlValidation(doc);
+                    //if (s == "ok")
+                    //{
                          XmlTextWriter w = new XmlTextWriter(fileName, Encoding.UTF8);
                          doc.Save(w);
                          w.Flush();
@@ -111,9 +111,9 @@ namespace WinFXConsumer
 
                          treeView1.Items.Clear();
                          treeView1.Items.Add(o.Parse(fileName));
-                     }
-                    else
-                        MessageBox.Show(s);
+                    // }
+                    //else
+                    //    MessageBox.Show(s);
                
             }
         }
