@@ -103,20 +103,26 @@ namespace NewsGatorSyscPlugin
             }
             else
             {
-                
 
-                System.Xml.XmlTextWriter writer = new  System.Xml.XmlTextWriter(Path.GetTempPath()+ "\\opml.opml",null);
-                e.Result.WriteTo(writer);
-                writer.Flush();
-                writer.Close();
-                op.import(Path.GetTempPath() + "\\opml.opml", db);
-                string opmlContent=op.makeOpml(db);
-                System.Xml.XmlElement opmlNode = (new System.Xml.XmlDocument()).CreateElement("HH"); ;   
+                try
+                {
+                    System.Xml.XmlTextWriter writer = new System.Xml.XmlTextWriter(Path.GetTempPath() + "\\opml.opml", null);
+                    e.Result.WriteTo(writer);
+                    writer.Flush();
+                    writer.Close();
+                    op.import(Path.GetTempPath() + "\\opml.opml", db);
+                    string opmlContent = op.makeOpml(db);
+                    System.Xml.XmlElement opmlNode = (new System.Xml.XmlDocument()).CreateElement("HH"); ;
 
-                XmlDocument xmlDocument = new XmlDocument();
-                xmlDocument.LoadXml(opmlContent);
-                s.MergeSubscriptionsCompleted += new NewsGatorSyscPlugin.SubscriptionService.MergeSubscriptionsCompletedEventHandler(s_MergeSubscriptionsCompleted);
-                s.MergeSubscriptionsAsync(locName, xmlDocument.DocumentElement , false); 
+                    XmlDocument xmlDocument = new XmlDocument();
+                    xmlDocument.LoadXml(opmlContent);
+                    s.MergeSubscriptionsCompleted += new NewsGatorSyscPlugin.SubscriptionService.MergeSubscriptionsCompletedEventHandler(s_MergeSubscriptionsCompleted);
+                    s.MergeSubscriptionsAsync(locName, xmlDocument.DocumentElement, false);
+                }
+                catch 
+                {
+                    MessageBox.Show("Program error. Please try again."); 
+                }
             }
         }
 

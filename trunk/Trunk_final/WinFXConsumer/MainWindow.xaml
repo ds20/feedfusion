@@ -16,6 +16,7 @@
           <MenuItem Header="_User Options" x:Name="btnProgramOptions" Style="{DynamicResource Item}"/>
         </MenuItem>
         <MenuItem Header="_Help" Style="{DynamicResource Item}">
+          <MenuItem Header="_ReleaseNotes" x:Name="btnNotes" Style="{DynamicResource Item}"/>
           <MenuItem Header="_About" x:Name="btnAbout" Style="{DynamicResource Item}"/>
         </MenuItem>
 			</Menu>

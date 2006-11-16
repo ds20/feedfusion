@@ -98,7 +98,7 @@ public class FeedTree : System.Windows.Controls.TreeView
                 fn.feedbtn.Click += new RoutedEventHandler(feedbtn_Click);   
 
             }
-            catNode.IsExpanded = true;
+            catNode.IsExpanded = false;
             
         }
     }
@@ -131,7 +131,7 @@ public class FeedTree : System.Windows.Controls.TreeView
 
     void exp_Expanded(object sender, RoutedEventArgs e)
     {
-        if (((Expander)sender).IsExpanded) addExpandedOptions(null, (XmlFeed)((TreeViewItem)((Expander)sender).Parent).Tag, (Expander)sender);
+        if (((Expander)sender).IsExpanded) addExpandedOptions(cats, (XmlFeed)((TreeViewItem)((Expander)sender).Parent).Tag, (Expander)sender);
         else
             ((Expander)sender).Content = null;
     }
@@ -390,12 +390,12 @@ public class ListHeader : StackPanel
         pp.Children.Add(lblCatName);
         unreadFeedsNo = new Label();
         string ss = "0";
-        unreadFeedsNo.Width = 22;
+        unreadFeedsNo.Width = 35;
         unreadFeedsNo.Content = s; 
         IncrementUnreadFeeds();  
         pp.Children.Add(unreadFeedsNo);
         totalFeedsNo = new Label();
-        totalFeedsNo.Width = 22; 
+        totalFeedsNo.Width = 32; 
         totalFeedsNo.Content = ss;
         pp.Children.Add(totalFeedsNo); 
         headerPanel.Children.Add(pp);
