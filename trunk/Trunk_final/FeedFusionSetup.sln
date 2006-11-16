@@ -46,6 +46,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrayMinimiser", "TrayMinimi
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "FeedFusionSetup", "FeedFusionSetup\FeedFusionSetup.vdproj", "{9B09AE9C-5AC6-42E0-B571-A6401E063E75}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsGatorSyscPlugin", "NewsGatorSyscPlugin\NewsGatorSyscPlugin.csproj", "{6EC1034C-E086-4432-AAC3-64118B81DB9C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -98,6 +100,10 @@ Global
 		{3A051400-AF37-418C-897D-D27106068C84}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9B09AE9C-5AC6-42E0-B571-A6401E063E75}.Debug|Any CPU.ActiveCfg = Debug
 		{9B09AE9C-5AC6-42E0-B571-A6401E063E75}.Release|Any CPU.ActiveCfg = Release
+		{6EC1034C-E086-4432-AAC3-64118B81DB9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EC1034C-E086-4432-AAC3-64118B81DB9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EC1034C-E086-4432-AAC3-64118B81DB9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EC1034C-E086-4432-AAC3-64118B81DB9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

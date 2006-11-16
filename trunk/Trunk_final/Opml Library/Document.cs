@@ -199,7 +199,20 @@ namespace Xml.Opml
 
 
         }
-
+        public string special(string d)
+        {
+            if (d.Contains("&"))
+                d.Replace("&", "&amp;");
+            if (d.Contains("\""))
+                d.Replace("\"", "&qout;");
+            if (d.Contains("<"))
+                d.Replace("<", "&lt;");
+            if (d.Contains(">"))
+                d.Replace(">", "&gt;");
+            if (d.Contains(" "))
+                d.Replace(" ", "&nbsp;");
+            return d;
+        }
         public StringBuilder TreeToOpml(TreeViewItem node, StringBuilder sb)
         {
             if ((string)node.Header != "My Feeds")
@@ -209,14 +222,14 @@ namespace Xml.Opml
                 if (f.IsLeaf == true)
                 {
                     sb.Append(String.Format("<outline text=\"{0}\" ", f.Text));
-                    if ((f.Title != "") && (f.Title != null))
-                        sb.Append(String.Format("title=\"{0}\" ", f.Title));
+                    if ((f.Title != "") && (f.Title != null))                    
+                        sb.Append(String.Format("title=\"{0}\" ",special(f.Title)));                    
                     if ((f.XmlUrl != "") && (f.XmlUrl != null))
                         sb.Append(String.Format("xmlUrl=\"{0}\" ", f.XmlUrl));
                     if ((f.HtmlUrl != "") && (f.HtmlUrl != null))
                         sb.Append(String.Format("htmlUrl=\"{0}\" ", f.HtmlUrl));
-                    if ((f.Description != "") && (f.Description != null))
-                        sb.Append(String.Format("description=\"{0}\" ", f.Description));
+                    if ((f.Description != "") && (f.Description != null))                                         
+                        sb.Append(String.Format("description=\"{0}\" ", special(f.Description)));                    
                     sb.Append("/>");
                     sb.Append(Environment.NewLine);
                 }
@@ -253,13 +266,13 @@ namespace Xml.Opml
             sb.Append(Environment.NewLine);            
             sb.Append("<head>");
             sb.Append(Environment.NewLine);            
-            sb.Append(String.Format("<title>{0}</title>", Title));
+            sb.Append(String.Format("<title>{0}</title>", special(Title)));
             sb.Append(Environment.NewLine);
             sb.Append(String.Format("<dateCreated>{0}</dateCreated>", DateCreated));
             sb.Append(Environment.NewLine);
             sb.Append(String.Format("<dateModified>{0}</dateModified>", DateModified));
             sb.Append(Environment.NewLine);
-            sb.Append(String.Format("<ownerName>{0}</ownerName>",AuthorName));
+            sb.Append(String.Format("<ownerName>{0}</ownerName>",special(AuthorName)));
             sb.Append(Environment.NewLine);
             sb.Append(String.Format("<ownerEmail>{0}</ownerEmail>",AuthorEmail));
             sb.Append(Environment.NewLine);

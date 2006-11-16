@@ -27,12 +27,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_06A6C3B790C940138742F4E56951145F"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_0EAB172B34CE231D1CC587552D67EBF7"
         "OwnerKey" = "8:_A1918D0474F7272FCFBDF76B6972C8FE"
         "MsmSig" = "8:_UNDEFINED"
@@ -57,12 +51,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_11BEE2E6CF084BD9A4CD052AB7E46AA9"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_13931B0B2CE74C7581475C0CF6AB82C9"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -70,12 +58,6 @@
         "Entry"
         {
         "MsmKey" = "8:_14800E00386649B09EA3561F7EDA837A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_14A769A18C6B4C42B391D0A33B0A2218"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -105,6 +87,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_1F2AF469B8474EA68BCB144A7C50EFC3"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_1FF9B62A9F724A0FBE2869FD7B55462C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -124,6 +112,12 @@
         "Entry"
         {
         "MsmKey" = "8:_24092D9D843936899653C1DA8F45DA21"
+        "OwnerKey" = "8:_E817D6ABEF616E78B306A7B5251E85F7"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_24092D9D843936899653C1DA8F45DA21"
         "OwnerKey" = "8:_56D748FDE8944C7D9C6AF7D87F7C1A11"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -131,12 +125,6 @@
         {
         "MsmKey" = "8:_24092D9D843936899653C1DA8F45DA21"
         "OwnerKey" = "8:_52936B1166F74734B69C9AE151BD0753"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_24092D9D843936899653C1DA8F45DA21"
-        "OwnerKey" = "8:_E817D6ABEF616E78B306A7B5251E85F7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -178,19 +166,7 @@
         "Entry"
         {
         "MsmKey" = "8:_2B3839789A4648928D9F5DED35B13B28"
-        "OwnerKey" = "8:_D5E95D6FB2094B0C867A446428C46183"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_2B3839789A4648928D9F5DED35B13B28"
-        "OwnerKey" = "8:_C2A3655DF8D74A62BADD39375BAD1F46"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_2B3839789A4648928D9F5DED35B13B28"
-        "OwnerKey" = "8:_9F060B72267D42C8AF4C467266C39EEE"
+        "OwnerKey" = "8:_E368E03146D24B6BAEF5DD87790DBB51"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -221,6 +197,24 @@
         {
         "MsmKey" = "8:_2B3839789A4648928D9F5DED35B13B28"
         "OwnerKey" = "8:_A1918D0474F7272FCFBDF76B6972C8FE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2B3839789A4648928D9F5DED35B13B28"
+        "OwnerKey" = "8:_D5E95D6FB2094B0C867A446428C46183"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2B3839789A4648928D9F5DED35B13B28"
+        "OwnerKey" = "8:_C2A3655DF8D74A62BADD39375BAD1F46"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2B3839789A4648928D9F5DED35B13B28"
+        "OwnerKey" = "8:_9F060B72267D42C8AF4C467266C39EEE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -309,13 +303,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_2EA2024E5450488BA2F1FE32BFCE237E"
+        "MsmKey" = "8:_2FE4AC7B9BCF4FC5830244DE237BC376"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_2FE4AC7B9BCF4FC5830244DE237BC376"
+        "MsmKey" = "8:_30B5CA22868A48A7ABACE3F4A106B323"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -323,6 +317,24 @@
         {
         "MsmKey" = "8:_343E1FEAD1D97882DEDE03C8D1365B24"
         "OwnerKey" = "8:_3C61C632644FF42E06D8482999D5B6F1"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_343E1FEAD1D97882DEDE03C8D1365B24"
+        "OwnerKey" = "8:_0EAB172B34CE231D1CC587552D67EBF7"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_343E1FEAD1D97882DEDE03C8D1365B24"
+        "OwnerKey" = "8:_E817D6ABEF616E78B306A7B5251E85F7"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_343E1FEAD1D97882DEDE03C8D1365B24"
+        "OwnerKey" = "8:_A1918D0474F7272FCFBDF76B6972C8FE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -359,24 +371,6 @@
         {
         "MsmKey" = "8:_343E1FEAD1D97882DEDE03C8D1365B24"
         "OwnerKey" = "8:_45FE12CD536A4D79B882CAC3503AE27C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_343E1FEAD1D97882DEDE03C8D1365B24"
-        "OwnerKey" = "8:_0EAB172B34CE231D1CC587552D67EBF7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_343E1FEAD1D97882DEDE03C8D1365B24"
-        "OwnerKey" = "8:_E817D6ABEF616E78B306A7B5251E85F7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_343E1FEAD1D97882DEDE03C8D1365B24"
-        "OwnerKey" = "8:_A1918D0474F7272FCFBDF76B6972C8FE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -465,13 +459,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_36E563576893453D83B030634B1736B7"
+        "MsmKey" = "8:_3768D3AB073E418481284FEAD0CA686D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_3768D3AB073E418481284FEAD0CA686D"
+        "MsmKey" = "8:_3B679002A5EC46A9AA6EDEF5A61A6774"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -495,12 +489,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_3F71B36543BD4A3AA91D3B8D9DFE6FAC"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_417876AB27BD4982905756C60D4A01D5"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -514,18 +502,6 @@
         "Entry"
         {
         "MsmKey" = "8:_4660C1E3557E4B64BC8C5A9185C2515D"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_46C7A0DF861544EABC4C663D43AA5D20"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_4B60ED8538844930B6255C85B0FA3A87"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -609,6 +585,24 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_53FA413E29F24DCB85BBA9A9A52231AA"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_54FFD5F4A59F4C5D92CF52A07310460A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_556A342E5A7B48F8B00104203270361F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_560A2A5D8CB5083636C138B9980AD593"
         "OwnerKey" = "8:_50AF1DDB43B74968A6298EF333B31944"
         "MsmSig" = "8:_UNDEFINED"
@@ -616,12 +610,6 @@
         "Entry"
         {
         "MsmKey" = "8:_56D748FDE8944C7D9C6AF7D87F7C1A11"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_57A15958C09D4B5BA79DECAC74926108"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -639,13 +627,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_65F3B51FDD0742559E378F6003E117E7"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_68C6D4FD324540BF82ECCB7E29DCE325"
+        "MsmKey" = "8:_6ACF8D0EDDFC44A393446A4118B13C49"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -689,6 +671,12 @@
         {
         "MsmKey" = "8:_74E65CF3E9B1A1D6FEB257D0BA660B66"
         "OwnerKey" = "8:_8D74D02B6D8DBC522D5A30718B7E5FFB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_756707562D964BA992781833EEB5CC65"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -760,6 +748,12 @@
         "Entry"
         {
         "MsmKey" = "8:_7E911B1C1FF731522001F23815024A8F"
+        "OwnerKey" = "8:_E368E03146D24B6BAEF5DD87790DBB51"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7E911B1C1FF731522001F23815024A8F"
         "OwnerKey" = "8:_B72F412981D840908EE2D1C53B91DA80"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -825,6 +819,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_81307F253A504B0CB8EE0BA28DE0EA91"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_85203CC652F9422FA5C0580F879A1ACA"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -867,14 +867,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_8F9542E8A3E44531A357831B6772DC0F"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_906534712B3BC13A0FF7A8790B58AA21"
+        "OwnerKey" = "8:_50AF1DDB43B74968A6298EF333B31944"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_906534712B3BC13A0FF7A8790B58AA21"
-        "OwnerKey" = "8:_50AF1DDB43B74968A6298EF333B31944"
+        "MsmKey" = "8:_97F39689A6AF4B5EA9427A442B6A8BAD"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -897,13 +897,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A416717708A34FAFB76ED1CCB2B7AEAD"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A936354713384BF4BE57DB7F8E413152"
+        "MsmKey" = "8:_A4C29F8FD7EE48769DEC8DFCDB805F85"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -951,6 +945,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_BDD647B915B7482895AE07829708D68E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_BF03441900F74C098781C4D869FC8366"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -963,7 +963,37 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_C2C5BAACD9BF4CD2A2E9EDA0CEA9FF5F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C3F7FC83F7204D02A998482B3C1B8D93"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_C4EB61D78BA342B78BEF11AD4E17B5BF"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C8E1E46CACD5457190ADF5724503B058"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CD4A5162C159488F9A3DABC82B0AC82E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CE81E1A5C5D0443786693120F2EE24B0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -981,6 +1011,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_D3E443BC842D405FB6ADF598BE79B658"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_D5E95D6FB2094B0C867A446428C46183"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -993,19 +1029,19 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_D8DF7870CA784FF2AE4D4A6C899BB242"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_DE6282C332754D059F3435DFA3119530"
+        "MsmKey" = "8:_D90FC0302214446E947A27DE01E48326"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_E0CC36A2593B4B568496BFE632E8EFE1"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E368E03146D24B6BAEF5DD87790DBB51"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1065,18 +1101,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_EB100FE0EB0C456ABA09187CA15A6956"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F4E62DAADBE540A1ABD79DF60577EE48"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_F56BAE14C76ACF08B2346EE996052116"
         "OwnerKey" = "8:_2A3E6A9C63054DBC8991E122E7A3DA64"
         "MsmSig" = "8:_UNDEFINED"
@@ -1084,19 +1108,7 @@
         "Entry"
         {
         "MsmKey" = "8:_F56BAE14C76ACF08B2346EE996052116"
-        "OwnerKey" = "8:_D5E95D6FB2094B0C867A446428C46183"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F56BAE14C76ACF08B2346EE996052116"
-        "OwnerKey" = "8:_C2A3655DF8D74A62BADD39375BAD1F46"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F56BAE14C76ACF08B2346EE996052116"
-        "OwnerKey" = "8:_52936B1166F74734B69C9AE151BD0753"
+        "OwnerKey" = "8:_E368E03146D24B6BAEF5DD87790DBB51"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1115,6 +1127,24 @@
         {
         "MsmKey" = "8:_F56BAE14C76ACF08B2346EE996052116"
         "OwnerKey" = "8:_A1918D0474F7272FCFBDF76B6972C8FE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F56BAE14C76ACF08B2346EE996052116"
+        "OwnerKey" = "8:_D5E95D6FB2094B0C867A446428C46183"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F56BAE14C76ACF08B2346EE996052116"
+        "OwnerKey" = "8:_C2A3655DF8D74A62BADD39375BAD1F46"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F56BAE14C76ACF08B2346EE996052116"
+        "OwnerKey" = "8:_52936B1166F74734B69C9AE151BD0753"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1221,12 +1251,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_FCA4D37594F340D7A365CECC4A370142"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_FE920AAA178E4199AA0A86A8AC2C8E64"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1235,6 +1259,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_343E1FEAD1D97882DEDE03C8D1365B24"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_E368E03146D24B6BAEF5DD87790DBB51"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1641,26 +1671,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_06A6C3B790C940138742F4E56951145F"
-            {
-            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\icon.ico"
-            "TargetName" = "8:icon.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0EAB172B34CE231D1CC587552D67EBF7"
             {
             "AssemblyRegister" = "3:1"
@@ -1696,26 +1706,6 @@
             {
             "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\AddressBook.ico"
             "TargetName" = "8:AddressBook.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_11BEE2E6CF084BD9A4CD052AB7E46AA9"
-            {
-            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\WebBrowser.ico"
-            "TargetName" = "8:WebBrowser.ico"
             "Tag" = "8:"
             "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
             "Condition" = "8:"
@@ -1769,26 +1759,6 @@
             "TargetName" = "8:Xml.Opml.pdb"
             "Tag" = "8:"
             "Folder" = "8:_ABAD15E13A4C44ABA129B5281F1BF0F1"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_14A769A18C6B4C42B391D0A33B0A2218"
-            {
-            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\TextEdit.ico"
-            "TargetName" = "8:TextEdit.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1902,6 +1872,26 @@
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_ABAD15E13A4C44ABA129B5281F1BF0F1"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1F2AF469B8474EA68BCB144A7C50EFC3"
+            {
+            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\bal.png"
+            "TargetName" = "8:bal.png"
+            "Tag" = "8:"
+            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2060,12 +2050,12 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2EA2024E5450488BA2F1FE32BFCE237E"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2FE4AC7B9BCF4FC5830244DE237BC376"
             {
-            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\reload.png"
-            "TargetName" = "8:reload.png"
+            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\Plugins\\rss-2_0.xsd"
+            "TargetName" = "8:rss-2_0.xsd"
             "Tag" = "8:"
-            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
+            "Folder" = "8:_A5D24862E4FE4531B4359E9BFD1AFCE4"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2080,12 +2070,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2FE4AC7B9BCF4FC5830244DE237BC376"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_30B5CA22868A48A7ABACE3F4A106B323"
             {
-            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\Plugins\\rss-2_0.xsd"
-            "TargetName" = "8:rss-2_0.xsd"
+            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\StatusOK.png"
+            "TargetName" = "8:StatusOK.png"
             "Tag" = "8:"
-            "Folder" = "8:_A5D24862E4FE4531B4359E9BFD1AFCE4"
+            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2162,10 +2152,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_36E563576893453D83B030634B1736B7"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3768D3AB073E418481284FEAD0CA686D"
             {
-            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\Plugins\\Plugin.Properties.resource2.resources"
-            "TargetName" = "8:Plugin.Properties.resource2.resources"
+            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\Plugins\\rss-0_92.xsd"
+            "TargetName" = "8:rss-0_92.xsd"
             "Tag" = "8:"
             "Folder" = "8:_A5D24862E4FE4531B4359E9BFD1AFCE4"
             "Condition" = "8:"
@@ -2182,12 +2172,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3768D3AB073E418481284FEAD0CA686D"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3B679002A5EC46A9AA6EDEF5A61A6774"
             {
-            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\Plugins\\rss-0_92.xsd"
-            "TargetName" = "8:rss-0_92.xsd"
+            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\TextEdit.ico"
+            "TargetName" = "8:TextEdit.ico"
             "Tag" = "8:"
-            "Folder" = "8:_A5D24862E4FE4531B4359E9BFD1AFCE4"
+            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2237,26 +2227,6 @@
             {
             "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\ring.ico"
             "TargetName" = "8:ring.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3F71B36543BD4A3AA91D3B8D9DFE6FAC"
-            {
-            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\downArrow.png"
-            "TargetName" = "8:downArrow.png"
             "Tag" = "8:"
             "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
             "Condition" = "8:"
@@ -2355,46 +2325,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_46C7A0DF861544EABC4C663D43AA5D20"
-            {
-            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\feather.png"
-            "TargetName" = "8:feather.png"
-            "Tag" = "8:"
-            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4B60ED8538844930B6255C85B0FA3A87"
-            {
-            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\dr.png"
-            "TargetName" = "8:dr.png"
-            "Tag" = "8:"
-            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4FE347226740151EC89E5AFDB3C4CD05"
             {
             "AssemblyRegister" = "3:1"
@@ -2461,7 +2391,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:FeedFusion, Version=0.8.2502.915, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:FeedFusion, Version=0.8.2511.34247, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_50AF1DDB43B74968A6298EF333B31944"
@@ -2559,6 +2489,66 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_53FA413E29F24DCB85BBA9A9A52231AA"
+            {
+            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\feather.png"
+            "TargetName" = "8:feather.png"
+            "Tag" = "8:"
+            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_54FFD5F4A59F4C5D92CF52A07310460A"
+            {
+            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\contents.xsd"
+            "TargetName" = "8:contents.xsd"
+            "Tag" = "8:"
+            "Folder" = "8:_ABAD15E13A4C44ABA129B5281F1BF0F1"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_556A342E5A7B48F8B00104203270361F"
+            {
+            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\reload.png"
+            "TargetName" = "8:reload.png"
+            "Tag" = "8:"
+            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_560A2A5D8CB5083636C138B9980AD593"
             {
             "AssemblyRegister" = "3:1"
@@ -2607,26 +2597,6 @@
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_ABAD15E13A4C44ABA129B5281F1BF0F1"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_57A15958C09D4B5BA79DECAC74926108"
-            {
-            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\Elf Pin.ico"
-            "TargetName" = "8:Elf Pin.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2703,30 +2673,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_65F3B51FDD0742559E378F6003E117E7"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6ACF8D0EDDFC44A393446A4118B13C49"
             {
-            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\Shield_GenericApp.ico"
-            "TargetName" = "8:Shield_GenericApp.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_68C6D4FD324540BF82ECCB7E29DCE325"
-            {
-            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\delete.png"
-            "TargetName" = "8:delete.png"
+            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\downArrow.png"
+            "TargetName" = "8:downArrow.png"
             "Tag" = "8:"
             "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
             "Condition" = "8:"
@@ -2803,6 +2753,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_756707562D964BA992781833EEB5CC65"
+            {
+            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\bomb.png"
+            "TargetName" = "8:bomb.png"
+            "Tag" = "8:"
+            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_774BDB9CE7B641FE803FEA177939D940"
@@ -3009,6 +2979,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_81307F253A504B0CB8EE0BA28DE0EA91"
+            {
+            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\searchButtonImage.png"
+            "TargetName" = "8:searchButtonImage.png"
+            "Tag" = "8:"
+            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_85203CC652F9422FA5C0580F879A1ACA"
             {
             "AssemblyRegister" = "3:1"
@@ -3162,26 +3152,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8F9542E8A3E44531A357831B6772DC0F"
-            {
-            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\import.ico"
-            "TargetName" = "8:import.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_906534712B3BC13A0FF7A8790B58AA21"
             {
             "AssemblyRegister" = "3:1"
@@ -3211,6 +3181,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_97F39689A6AF4B5EA9427A442B6A8BAD"
+            {
+            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\dr.png"
+            "TargetName" = "8:dr.png"
+            "Tag" = "8:"
+            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9DE2133C624142769E2518E1EC7A7D62"
@@ -3306,30 +3296,10 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A416717708A34FAFB76ED1CCB2B7AEAD"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A4C29F8FD7EE48769DEC8DFCDB805F85"
             {
-            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\skin.ico"
-            "TargetName" = "8:skin.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A936354713384BF4BE57DB7F8E413152"
-            {
-            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\bomb.png"
-            "TargetName" = "8:bomb.png"
+            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\import.ico"
+            "TargetName" = "8:import.ico"
             "Tag" = "8:"
             "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
             "Condition" = "8:"
@@ -3508,6 +3478,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BDD647B915B7482895AE07829708D68E"
+            {
+            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\delete.png"
+            "TargetName" = "8:delete.png"
+            "Tag" = "8:"
+            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BF03441900F74C098781C4D869FC8366"
             {
             "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\Plugins\\rss1.xsl"
@@ -3559,10 +3549,110 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C2C5BAACD9BF4CD2A2E9EDA0CEA9FF5F"
+            {
+            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\newsgator.png"
+            "TargetName" = "8:newsgator.png"
+            "Tag" = "8:"
+            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C3F7FC83F7204D02A998482B3C1B8D93"
+            {
+            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\WebBrowser.ico"
+            "TargetName" = "8:WebBrowser.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C4EB61D78BA342B78BEF11AD4E17B5BF"
             {
             "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\search.ico"
             "TargetName" = "8:search.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C8E1E46CACD5457190ADF5724503B058"
+            {
+            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\icon.ico"
+            "TargetName" = "8:icon.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CD4A5162C159488F9A3DABC82B0AC82E"
+            {
+            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\newItem.png"
+            "TargetName" = "8:newItem.png"
+            "Tag" = "8:"
+            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CE81E1A5C5D0443786693120F2EE24B0"
+            {
+            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\skin.ico"
+            "TargetName" = "8:skin.ico"
             "Tag" = "8:"
             "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
             "Condition" = "8:"
@@ -3603,6 +3693,26 @@
             {
             "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\latest.ico"
             "TargetName" = "8:latest.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D3E443BC842D405FB6ADF598BE79B658"
+            {
+            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\cat.ico"
+            "TargetName" = "8:cat.ico"
             "Tag" = "8:"
             "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
             "Condition" = "8:"
@@ -3670,30 +3780,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D8DF7870CA784FF2AE4D4A6C899BB242"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D90FC0302214446E947A27DE01E48326"
             {
             "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\circle.png"
             "TargetName" = "8:circle.png"
-            "Tag" = "8:"
-            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DE6282C332754D059F3435DFA3119530"
-            {
-            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\cat.ico"
-            "TargetName" = "8:cat.ico"
             "Tag" = "8:"
             "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
             "Condition" = "8:"
@@ -3727,6 +3817,37 @@
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_ABAD15E13A4C44ABA129B5281F1BF0F1"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E368E03146D24B6BAEF5DD87790DBB51"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:NewsGatorSyscPlugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_E368E03146D24B6BAEF5DD87790DBB51"
+                    {
+                    "Name" = "8:NewsGatorSyscPlugin.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\Plugins\\NewsGatorSyscPlugin.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_A5D24862E4FE4531B4359E9BFD1AFCE4"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -3852,46 +3973,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EB100FE0EB0C456ABA09187CA15A6956"
-            {
-            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\bal.png"
-            "TargetName" = "8:bal.png"
-            "Tag" = "8:"
-            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F4E62DAADBE540A1ABD79DF60577EE48"
-            {
-            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\wi0126-48.ico"
-            "TargetName" = "8:wi0126-48.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F56BAE14C76ACF08B2346EE996052116"
             {
             "AssemblyRegister" = "3:1"
@@ -3972,26 +4053,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FCA4D37594F340D7A365CECC4A370142"
-            {
-            "SourcePath" = "8:..\\WinFXConsumer\\bin\\Release\\icons\\wi0124-48.ico"
-            "TargetName" = "8:wi0124-48.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_7233846C6ABC4A75ACBF61A346DB9C2A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FE920AAA178E4199AA0A86A8AC2C8E64"
@@ -4244,7 +4305,7 @@
             "Target" = "8:_50AF1DDB43B74968A6298EF333B31944"
             "Folder" = "8:_28E5F3861C884C8EB7EC28B942CCCFF4"
             "WorkingFolder" = "8:_ABAD15E13A4C44ABA129B5281F1BF0F1"
-            "Icon" = "8:_06A6C3B790C940138742F4E56951145F"
+            "Icon" = "8:_C8E1E46CACD5457190ADF5724503B058"
             "Feature" = "8:"
             }
         }
