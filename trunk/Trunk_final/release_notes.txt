@@ -39,10 +39,13 @@ Known bugs and limitations
 
 2. read/unread status status indicator may be inacurate.
 
-3. category delete/reneme is not working yet. To delete a category, delete all feeds contained within
+3. category delete/rename is not completeley working yet. 
 
 4. Changing viewed feeds too fast causes a "Cannot access object" error.
 
+5. Changing feed categories not implemented yet.
+
+6. OPML export not working as it should if you have feed with XML special characaters in their URL or name 
 
 Troubleshooting
 ---------------

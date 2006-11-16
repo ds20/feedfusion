@@ -91,7 +91,11 @@ namespace WinFXConsumer
             string rss=textBox1.Text.Trim();
             String customName = txtCustomName.Text.Trim();
             if (rss == "" || cat == "") return;
-
+            if (customName == "")
+            {
+                MessageBox.Show("Please enter a feed name.", "No feed name entered", MessageBoxButton.OK,MessageBoxImage.Warning ); 
+                return;
+            }
             
             if (!dataBase.categoryExists(cat) )
             {
