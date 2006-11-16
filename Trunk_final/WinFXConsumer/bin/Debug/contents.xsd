@@ -89,6 +89,13 @@
     <xs:attribute name="title" type="xs:string" use="optional" />
     <xs:attribute name="version" type="xs:string" use="optional" />
     <xs:attribute name="language" type="union.languageType" use="optional" />
+    <xs:attribute name="folderId" use="optional" type="xs:string"/>    
+    <xs:attribute name="unseen" type="xs:string" use="optional" />
+    <xs:attribute name="unread" type="xs:string" use="optional" />
+    <xs:attribute name="private" type="xs:string" use="optional" />
+    <xs:attribute name="checkedByDefault" type="xs:string" use="optional" />
+    <xs:attribute name="inStarterPack" type="xs:string" use="optional" />
+    <xs:attribute name="starterPackOrder" type="xs:string" use="optional" />
   </xs:complexType>
   <xs:complexType name="outlineWithTypeType" mixed="true">
     <xs:annotation>
@@ -147,10 +154,10 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="union.languageType">
-    <xs:union memberTypes="xs:language unknownType     " />
+    <xs:union memberTypes="xs:language unknownType        " />
   </xs:simpleType>
   <xs:simpleType name="union.typeType">
-    <xs:union memberTypes="xs:string typeType     " />
+    <xs:union memberTypes="xs:string typeType        " />
   </xs:simpleType>
   <xs:simpleType name="unknownType">
     <xs:restriction base="xs:string">
