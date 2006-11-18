@@ -76,8 +76,11 @@ namespace Indexer
         /// Uses standard directories
         /// </summary>
         public FeedDB()
-            : this(Environment.SpecialFolder.ApplicationData + "\\data\\cat", Environment.SpecialFolder.ApplicationData + "\\data\\feed", Environment.SpecialFolder.ApplicationData + "\\data\\history")
+            : this(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\FeedFusion\\data\\cat",
+                   Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\FeedFusion\\data\\feed", 
+                   Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\FeedFusion\\data\\history")
         {
+            System.Windows.Forms.MessageBox.Show(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));    
         }
 
         /// <summary>

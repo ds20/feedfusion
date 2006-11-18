@@ -82,7 +82,7 @@ namespace WinFXConsumer
         
         public Window2(FeedDB dataBase, string styleName, string feedURL):this(dataBase,styleName)
         {
-            textBox1.Text = feedURL;  
+            textBox1.Text = feedURL; 
         }
 
         public void button1_Click(object sender, RoutedEventArgs e)
@@ -103,7 +103,6 @@ namespace WinFXConsumer
                 if (accept==MessageBoxResult.Yes) dataBase.addCategory(cat);
                 else
                 {
-                    //IESI DIN FUNCTIE!!!! 
                     return;
                 }
             }
