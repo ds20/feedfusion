@@ -189,7 +189,10 @@ namespace rss2
             oldtitleitemcolor = rm.GetString("TitleItemColor");
             oldtitlecolor = rm.GetString("TitleColor");
             oldbackgroundcolor = rm.GetString("BackgroundColor");
-            rm = null;            
+
+            //MessageBox.Show("TitleItem: " + oldtitleitemcolor + " Title " + oldtitlecolor + " Background " + oldbackgroundcolor);
+            rm = null;             
+                   
         }
 
 
@@ -331,11 +334,11 @@ namespace rss2
             XmlSchemaCollection myschema = new XmlSchemaCollection();
             //ValidationEventHandler eventHandler = new ValidationEventHandler();
 
-
+           
             try
             {
                 //Create the XML fragment to be parsed.
-
+                
                 //Create the XmlParserContext.
                 XmlParserContext context = new XmlParserContext(null, null, "", XmlSpace.None);
 
@@ -343,7 +346,7 @@ namespace rss2
                 reader = new XmlValidatingReader(doc.OuterXml, XmlNodeType.Element, context);
                 //Add the schema.
                 myschema.Add("", xsdName1);
-                
+
                 //Set the schema type and add the schema to the reader.
                 reader.ValidationType = ValidationType.Schema;
                 reader.Schemas.Add(myschema);
@@ -362,7 +365,7 @@ namespace rss2
                 return s;
             }
             catch (XmlSchemaException XmlSchExp)
-            {
+            { 
                 if (XmlSchExp.Message != "The 'version' attribute has an invalid value according to its data type.")
                     return XmlSchExp.Message;
             }
@@ -375,6 +378,7 @@ namespace rss2
             {
                 return GenExp.Message;
             }
+               
             finally
             {
                 
@@ -384,7 +388,7 @@ namespace rss2
             try
             {
                 //Create the XML fragment to be parsed.
-
+                
                 //Create the XmlParserContext.
                 XmlParserContext context = new XmlParserContext(null, null, "", XmlSpace.None);
 
@@ -433,7 +437,7 @@ namespace rss2
             try
             {
                 //Create the XML fragment to be parsed.
-
+                
                 //Create the XmlParserContext.
                 XmlParserContext context = new XmlParserContext(null, null, "", XmlSpace.None);
 
@@ -478,7 +482,8 @@ namespace rss2
 
             }
             return "<h2><b>Plugin error.<b> RSS2 plugin: Parsing failed. This feed does not meet any standard specifications.</h2>";            
-        }
+       
+            }
 
         public void showConfiguration()
         {
@@ -511,7 +516,7 @@ namespace rss2
             // load up the stylesheet
 
             transform.Load(xslName, resolver);
-            
+            /*
             if (File.Exists(fileName))
             {
                 string s = "";
@@ -532,7 +537,7 @@ namespace rss2
                     sw.Write(s);
                 }
             }
-
+            */
             // perform the transformation
 
             transform.Transform(fileName,htmlName, resolver);
