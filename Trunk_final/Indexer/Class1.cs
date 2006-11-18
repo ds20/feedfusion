@@ -76,11 +76,9 @@ namespace Indexer
         /// Uses standard directories
         /// </summary>
         public FeedDB()
-            : this(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\FeedFusion\\data\\cat",
-                   Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\FeedFusion\\data\\feed", 
-                   Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\FeedFusion\\data\\history")
+            : this(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\FeedFusion")
         {
-            System.Windows.Forms.MessageBox.Show(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));    
+            //System.Windows.Forms.MessageBox.Show(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));    
         }
 
         /// <summary>
@@ -89,11 +87,14 @@ namespace Indexer
         /// <param name="dirCat">Directory for categories 'database'</param>
         /// <param name="dirFeed">Directory for feed 'database'</param>
         /// <param name="dirHistory">Directory for history 'database'</param>
-        public FeedDB(String dirCat, String dirFeed, String dirHistory)
+        public FeedDB(String dir)
         {
-            this.dirCat = dirCat;
-            this.dirFeed = dirFeed;
-            this.dirHistory = dirHistory;
+            if (!System.IO.Directory.Exists(dir))
+                System.IO.Directory.CreateDirectory(dir);
+            this.dirCat = dir + "\\data\\cat";
+            this.dirFeed = dir + "\\data\\feed";
+            this.dirHistory = dir + "\\data\\history";
+
             try { writerCat = new IndexWriter(dirCat, new StandardAnalyzer(), false); }
             catch (Exception)
             {  //create 'category database'
