@@ -22,7 +22,7 @@
 
         <xsl:for-each select="rss/channel/item">
           <xsl:variable name="stl">
-            <xsl:text/>background-color: maroon; 
+            <xsl:text/>background-color: #efeff5; 
                 border: 1px solid #cfcfcf;padding: 0em 1em 0em; margin:
             <xsl:text/>
             <xsl:choose>
@@ -33,7 +33,7 @@
           <div>
             <xsl:attribute name="style"><xsl:value-of select="$stl"/>
             </xsl:attribute>
-            <p><h3 style="color:red"><xsl:value-of select="title"/></h3>
+            <p><h3 style="color:maroon"><xsl:value-of select="title"/></h3>
             </p>
             <p><xsl:value-of disable-output-escaping="yes" 
                                                select="description"/>
