@@ -471,10 +471,12 @@ namespace WinFXConsumer
             this.InvalidateVisual();
             this.Width += 1;
             Timer t = new Timer(new TimerCallback(refreshTimerCallback), null, 0, 60 * Properties.Settings.Default.autorefreshInterval * 1000);
+            
+            //handle command line parameters
             string[] arguments = Environment.GetCommandLineArgs();
             if (arguments.Length > 1)
             {
-                Window2 addWindow = new Window2(dataBase, this._styleList[_styleIndex], arguments[0]);
+                Window2 addWindow = new Window2(dataBase, this._styleList[_styleIndex], arguments[1]);
                 addWindow.ShowDialog();
             }
       

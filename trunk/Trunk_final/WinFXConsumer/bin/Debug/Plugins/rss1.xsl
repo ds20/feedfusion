@@ -10,10 +10,15 @@
         
 	<xsl:for-each select="*/*[local-name()='channel']">
 	  <div>
-	    <p><h2 style="color:blue; margin:50"><xsl:value-of select="./*[local-name()='title']"/></h2>
-            </p>
-	    <h4 style="color:red"><xsl:text> link:  </xsl:text><xsl:value-of select="./*[local-name()='link']"/></h4>
-	    <h4 style="color:red"><xsl:text> about:  </xsl:text><xsl:value-of select="./*[local-name()='description']"/></h4>	    
+        <h2 style="color:blue; margin-left:50">
+        <a>
+            <xsl:attribute name="href">
+                <xsl:value-of select="./*[local-name()='link']"/>
+            </xsl:attribute>
+            <xsl:value-of select="./*[local-name()='title']"/>
+        </a>
+        </h2>
+	    <h4 style="color:blue; margin-left:50"><xsl:value-of select="./*[local-name()='description']"/></h4>
 	  </div>
 	</xsl:for-each>
 
