@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="NewsGatorSyscPlugin.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="NewsGatorSyscPlugin_SubscriptionService_SubscriptionWebService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://services.newsgator.com/ngws/svc/Subscription.asmx</Value>
+    </Setting>
+    <Setting Name="NewsGatorSyscPlugin_LocationSevice_LocationWebService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://services.newsgator.com/ngws/svc/Location.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,74 @@
+
+=============================
+==== FeedFusion 0.95 RC =====
+=============================
+
+
+General info
+------------
+With the release of Windows Vista final (RTM) and of .NET framework final, FeedFusion has access to a new level of stabililty. If you were afraid of using FeedFusion then,you can try now as many problems have been solved.
+
+
+Changes in this release:
+------------------------
+
+- Program Options support:
+	-autorefresh interval
+	-delete history
+	-autodelete history
+    -choose whether to open links in new windows
+
+- Read/unread indicator for feeds
+
+- Opml Import/Export fixes
+
+- Multiple Interface tweaks
+
+- Optimised resource usage
+
+- standard plugins configuration improvements and bugfixes
+
+-syncroniserFusion plugin was removed in this version, due to server unavailability. 
+The plugin is replaced with the new Newsgator plugin as a separate download (still in beta).
+IMPORTANT NOTE:Use the newsGator plugin only with feeds in folders. If you have feeds in the root of your main location in the online viewer you should delete them after the first sync, as they will be located in another folder also. Furthermore, only manual sync is currently supported.
+
+
+Known bugs and limitations
+--------------------------
+
+1. read/unread status indicator of feeds is not maintained after you close FeedFusion.
+
+2. read/unread status status indicator may be inacurate.
+
+3. category delete/rename is not completeley working yet. 
+
+4. Changing viewed feeds too fast causes a "Cannot access object" error.
+
+5. Changing feed categories not implemented yet.
+
+6. OPML export not working as it should if you have feed with XML special characaters in their URL or name 
+
+Troubleshooting
+---------------
+
+1.
+Q: After I install, FeedFusion doesn't start, it gives an error.
+
+A: If you had a prelease version of .NET 3.0 framework, check that you uninstalled it successfully and ran the Microsoft cleanup tool afterwards. Then Run the installer again and .NET 3.0 final will be automaicaly installed. The program should work now.
+
+2. 
+Q: I receive strange errors when i am not logged in as administrator.
+
+A: Some of the settings need administrator rights to change (write access in FeedFusion install location) . To fix, install FeedFusion in a folder with write-access.
+
+3. 
+Q: After using it a while , FeedFusion starts to work slower and slower. What is happening?
+
+A: When the database size increases it is normal to encounter a slower response time. Delete the history to fix the problem. (Options->User Options->Delete history)
+
+4. 
+
+Q: I have a problem that is not listed in this file. What do I do?
+A: If the present troubleshooting guide doues not help you, check out the Bugs and Limitations parapraph in this file. If the problem is not listed anywhere, then contact the FeedFusion support by posting in the Feedfusion mailing group
+or by mailing the project manager if you want a feature implemented: sbarlead - at- yahoo.com
+ 

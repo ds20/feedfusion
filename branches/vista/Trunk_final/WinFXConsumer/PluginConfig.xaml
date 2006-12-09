@@ -1,0 +1,40 @@
+<Window x:Class="WinFXConsumer.pluginConfigWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Plugin Configuration" Height="307" Width="564"  xmlns:d="http://schemas.microsoft.com/expression/interactivedesigner/2006" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    ResizeMode="NoResize">
+  <Window.Resources>
+
+  </Window.Resources>
+
+  <Grid Style="{DynamicResource Grid}">
+    <Label Style="{DynamicResource Label}" Height="27"  Margin="17.3433333333333,8,22.9999999999998,0" Name="label2" FontSize ="12" VerticalAlignment="Top">Click a plugin to view its description. Then, modify its priority using the Move up/down buttons.</Label>
+    <TextBlock Margin="216.343333333333,46,26,0" Name="label1" FontSize ="12" Height="70" VerticalAlignment="Top" TextWrapping="Wrap" />
+    <Button Style="{DynamicResource Button}"  Margin="210,0,0,13.04" Name="cmdConfigure" Tag="Open plugin configuration dialog" VerticalAlignment="Bottom" Click="ConfigurePlugin" Content="Configure" Height="27.96" HorizontalAlignment="Left" Width="50" />
+    <Button Style="{DynamicResource Button}" Margin="0,0,184,13" Name="btnMoveUp" Tag="Increase plugin priority" Click="MoveUp" Content="Move Up" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="50" />
+    <Button Style="{DynamicResource Button}" Margin="266,0,234,13.04" Name="btnMoveDown" Tag="Decrease plugin priority" Click="MoveDown" Content="Move Down" Height="27.96" VerticalAlignment="Bottom" Width="50"/>
+		<ItemsControl  HorizontalAlignment="Left" Margin="22.2,32.6,0,9.19999999999999" Width="117.6" x:Name="Group" RenderTransformOrigin="0.5,0.5">
+			<ItemsControl.RenderTransform>
+				<TransformGroup>
+					<TranslateTransform X="0" Y="0"/>
+					<ScaleTransform ScaleX="1" ScaleY="0.96964285714285725"/>
+					<SkewTransform AngleX="0" AngleY="0"/>
+					<RotateTransform Angle="0"/>
+					<TranslateTransform X="0" Y="0"/>
+					<TranslateTransform X="0" Y="3.3999999999999884"/>
+				</TransformGroup>
+			</ItemsControl.RenderTransform>
+			<ItemsControl.Template>
+				<ControlTemplate TargetType="{x:Type ItemsControl}">
+					<Viewbox>
+						<Viewbox.Child>
+							<Canvas Width="117.6" Height="224" IsItemsHost="True"/>
+						</Viewbox.Child>
+					</Viewbox>
+				</ControlTemplate>
+			</ItemsControl.Template>
+    <Rectangle  Stroke="sc#1, 0.228, 0.228, 0.228" Fill="#FFFFFFFF" RadiusX="9.49999999999998" RadiusY="9.49999999999998" HorizontalAlignment="Stretch" Margin="0,0,0,0" Width="185" Height="224" x:Name="Rectangle" Canvas.Left="0" Canvas.Top="-7.105427357601E-15"/>
+    <ListBox HorizontalAlignment="Stretch" Margin="0,0,0,0" x:Name="listBox1" Width="180" BorderBrush="{x:Null}" Height="207.8" Canvas.Left="2.8" Canvas.Top="7.39999999999997" />
+		</ItemsControl>
+  </Grid>
+</Window>

@@ -1,0 +1,427 @@
+<ResourceDictionary  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  
+<!--ToolBar-->
+    <Style x:Key="ToolBar" TargetType="ToolBar">
+      <Setter Property="Control.Background" >
+        <Setter.Value>
+          <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <LinearGradientBrush.RelativeTransform>
+              <TransformGroup>
+                <TranslateTransform X="0" Y="-0.5"/>
+                <ScaleTransform ScaleX="0.86663196240259244" ScaleY="0.86663196240259244"/>
+                <SkewTransform AngleX="0" AngleY="0"/>
+                <RotateTransform Angle="-0.086873383355093717"/>
+                <TranslateTransform X="0" Y="0.5"/>
+                <TranslateTransform X="0.00065700495298732424" Y="-0.066684516882983269"/>
+              </TransformGroup>
+            </LinearGradientBrush.RelativeTransform>
+            <GradientStop Offset="1" Color="sc#1, 0.303284764, 1, 0.8017494"/>
+            <GradientStop Offset="0.019230769230769232" Color="sc#1, 0.303284764, 1, 0.8017494"/>
+            <GradientStop Offset="0.50000002564102566" Color="#FFFAF9F5"/>
+          </LinearGradientBrush>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <!--ListBox-->
+    <Style x:Key="ListBox" TargetType="ListBox">
+      <Setter Property="SnapsToDevicePixels" Value="true"/>      
+      <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+      <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+      <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+      <Setter Property="Control.BorderBrush" Value="sc#1, 0.50072790052, 1, 0.833"/>
+      <Setter Property="Control.Background" >
+        <Setter.Value>          
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+              <GradientStop Color="sc#1, 0.50108397, 0.992916, 0.8335625" Offset="0.75000000769230771"/>
+              <GradientStop Color="sc#1, 0.9816805, 0.9979439, 0.9933576" Offset="0.12820512820512819"/>
+              <GradientStop Color="sc#1, 1, 1, 0.9705111" Offset="0.50000006923076927"/>
+              <GradientStop Color="sc#1, 0.313744, 0.990255952, 0.799479544" Offset="1"/>
+              <GradientStop Color="sc#1, 0.50108397, 0.992916, 0.8335625" Offset="0.25000074358974359"/>
+              <GradientStop Color="sc#1, 0.313744, 0.990255952, 0.799479544" Offset="0"/>
+              <GradientStop Color="sc#1, 0.9816805, 0.9979439, 0.9933576" Offset="0.87179487179487181"/>
+            </LinearGradientBrush>          
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <!--ProgressBar-->
+    <Style x:Key="ProgressBar" TargetType="ProgressBar">
+      <Setter Property="Control.Foreground" >
+        <Setter.Value>    
+          <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="sc#1, 0.270880044, 0.6564952, 0.79912" Offset="0"/>
+            <GradientStop Color="sc#1, 0.0273209065, 0.339917362, 0.651405632" Offset="0.5"/>
+            <GradientStop Color="sc#1, 0.270497829, 0.65709573, 0.7991027" Offset="1"/>
+          </LinearGradientBrush>   
+        </Setter.Value>
+      </Setter>
+    </Style>
+    
+    <!--Brush-->
+    <LinearGradientBrush x:Key="LightBrush" StartPoint="0,0" EndPoint="0,1">
+     <GradientBrush.GradientStops>
+       <GradientStopCollection>
+         <GradientStop Color="sc#1, 0.500949562, 0.99527353, 0.83327353" Offset="0.49358974358974361"/>
+         <GradientStop Color="sc#1, 0.303284764, 1, 0.8017494" Offset="1"/>
+         <GradientStop Color="sc#1, 0.774844766, 1, 0.926212" Offset="0"/>
+       </GradientStopCollection>
+     </GradientBrush.GradientStops>     
+   </LinearGradientBrush>
+
+    <!--TabControl-->
+    <Style x:Key="TabControl" TargetType="TabControl">
+      <Setter Property="Control.BorderBrush" Value="sc#1, 0.50072790052, 1, 0.833"/>         
+      <Setter Property="Control.Background" >
+        <Setter.Value>
+          <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" SpreadMethod="Repeat" MappingMode="RelativeToBoundingBox">
+            <GradientStop Offset="0" Color="sc#1, 0.378356934, 0.858099163, 1"/>
+            <GradientStop Offset="1" Color="sc#1, 0, 0.1453538, 1"/>
+          </LinearGradientBrush>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <!--TabItem-->
+    <Style x:Key="TabItem" TargetType="TabItem">
+      <Setter Property="Control.BorderBrush" Value="sc#1, 0.50072790052, 1, 0.833"/>
+      <Setter Property="Control.Background" >
+        <Setter.Value>
+          <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Offset="0" Color="sc#1, 0.498499781, 1, 0.932032049"/>
+            <GradientStop Offset="1" Color="sc#1, 0, 0.5627947, 1"/>
+          </LinearGradientBrush>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <!--StackPanel-->
+    <Style x:Key="StackPanel" TargetType="StackPanel">
+      <Setter Property="Control.BorderBrush" Setter.Value="sc#1,0.00772790052, 0, 0.966"/>
+      <Setter Property="Control.Background" >
+        <Setter.Value>
+          <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="sc#1, 0.9253425, 0.937214732, 0.941605866" Offset="0"/>
+            <GradientStop Color="sc#1, 0.0273209065, 0.339917362, 0.651405632" Offset="1"/>
+            <GradientStop Color="sc#1, 0.253914833, 0.753475845, 0.936977148" Offset="0.73717948717948722"/>
+          </LinearGradientBrush>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <!--TreeView-->
+    <Style x:Key="TreeView" TargetType="TreeView">
+      <Setter Property="Control.BorderBrush" Setter.Value="sc#1, 1, 1, 1"/>
+      <Setter Property="Control.Background" >
+        <Setter.Value>
+          <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="sc#1, 0.9253425, 0.937214732, 0.941605866" Offset="0"/>
+            <GradientStop Color="sc#1, 0.0273209065, 0.339917362, 0.651405632" Offset="1"/>
+            <GradientStop Color="sc#1, 0.253914833, 0.753475845, 0.936977148" Offset="0.73717948717948722"/>
+          </LinearGradientBrush>
+        </Setter.Value>
+      </Setter>
+    </Style>    
+
+    <!--Label-->
+    <Style x:Key ="Label" TargetType ="{x:Type Label}">
+      <Setter Property ="Background" Value ="{DynamicResource LightBrush}"/>
+    </Style>
+    
+    <!--Button-->
+    <Style x:Key ="Button" TargetType ="{x:Type Button}">
+      <Setter Property ="Background" Value ="{DynamicResource LightBrush}"/>
+    </Style>
+
+    <!--MenuItem-->
+    <Style x:Key ="Item" TargetType ="{x:Type MenuItem}">
+      <Setter Property ="Background" Value ="{DynamicResource LightBrush}"/>
+    </Style>
+
+
+    <!--Menu-->
+  <Style x:Key="{x:Type Menu}" TargetType="{x:Type Menu}">
+    <Setter Property="OverridesDefaultStyle" Value="True"/>
+    <Setter Property="SnapsToDevicePixels" Value="True"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Menu}">
+          <Border 
+            Background="{DynamicResource LightBrush}"
+            BorderBrush="{DynamicResource LightBrush}"
+            BorderThickness="1">
+            <StackPanel ClipToBounds="True" Orientation="Horizontal" IsItemsHost="True"/>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+    <!--DockPanel-->
+    <Style x:Key="DockPanel" TargetType="DockPanel">
+      <Setter Property="Control.BorderBrush" Value="sc#1, 0.50072790052, 1, 0.833"/>
+      <Setter Property="Control.Background" Value="sc#1, 0.303284764, 1, 0.8017494"/>
+    </Style>
+
+    <!--Grid-->
+    <Style x:Key="Grid" TargetType="Grid">
+      <Setter Property="Control.BorderBrush" Value="sc#1, 0.50072790052, 1, 0.833"/>
+      <Setter Property="Control.Background" Value="sc#1, 0.303284764, 1, 0.8017494"/>
+    </Style>
+
+
+
+ <Style x:Key="VerticalHIC" TargetType="{x:Type HeaderedItemsControl}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type HeaderedItemsControl}">
+          <StackPanel Margin="20">
+            <ContentPresenter 
+              Grid.Row="0" 
+              Margin="8,20,0,0" 
+              TextBlock.Foreground="#AAA" 
+              TextBlock.FontFamily="Trebuchet MS" 
+              TextBlock.FontSize="14px" 
+              TextBlock.FontWeight="Bold" 
+              ContentSource="Header" />
+            <StackPanel
+              IsItemsHost="True"
+              Orientation="Vertical" 
+              Grid.Row="1" 
+              VerticalAlignment="Center" 
+              HorizontalAlignment="Center" />
+          </StackPanel>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="HorizontalHIC" TargetType="{x:Type HeaderedItemsControl}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type HeaderedItemsControl}">
+          <StackPanel Margin="20">
+            <ContentPresenter 
+              Grid.Row="0" 
+              Margin="8,20,0,0" 
+              TextBlock.Foreground="#AAA" 
+              TextBlock.FontFamily="Trebuchet MS" 
+              TextBlock.FontSize="14px" 
+              TextBlock.FontWeight="Bold" 
+              ContentSource="Header" />
+            <StackPanel
+              IsItemsHost="True"
+              Orientation="Horizontal" 
+              Grid.Row="1" 
+              VerticalAlignment="Center" 
+              HorizontalAlignment="Center" />
+          </StackPanel>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  
+  <!-- Fill Brushes -->
+
+  <LinearGradientBrush x:Key="NormalBrush" StartPoint="0,0" EndPoint="0,1">
+    <GradientBrush.GradientStops>
+      <GradientStopCollection>
+        <GradientStop Color="#FFF" Offset="0.0"/>
+        <GradientStop Color="#CCC" Offset="1.0"/>
+      </GradientStopCollection>
+    </GradientBrush.GradientStops>
+  </LinearGradientBrush>
+
+  <LinearGradientBrush x:Key="HorizontalNormalBrush" StartPoint="0,0" EndPoint="1,0">
+    <GradientBrush.GradientStops>
+      <GradientStopCollection>
+        <GradientStop Color="#FFF" Offset="0.0"/>
+        <GradientStop Color="#CCC" Offset="1.0"/>
+      </GradientStopCollection>
+    </GradientBrush.GradientStops>
+  </LinearGradientBrush>
+
+  
+
+  <LinearGradientBrush x:Key="HorizontalLightBrush" StartPoint="0,0" EndPoint="1,0">
+    <GradientBrush.GradientStops>
+      <GradientStopCollection>
+        <GradientStop Color="#FFF" Offset="0.0"/>
+        <GradientStop Color="#EEE" Offset="1.0"/>
+      </GradientStopCollection>
+    </GradientBrush.GradientStops>
+  </LinearGradientBrush>
+
+  <LinearGradientBrush x:Key="DarkBrush" StartPoint="0,0" EndPoint="0,1">
+    <GradientBrush.GradientStops>
+      <GradientStopCollection>
+        <GradientStop Color="#FFF" Offset="0.0"/>
+        <GradientStop Color="#AAA" Offset="1.0"/>
+      </GradientStopCollection>
+    </GradientBrush.GradientStops>
+  </LinearGradientBrush>
+
+  <LinearGradientBrush x:Key="PressedBrush" StartPoint="0,0" EndPoint="0,1">
+    <GradientBrush.GradientStops>
+      <GradientStopCollection>
+        <GradientStop Color="#BBB" Offset="0.0"/>
+        <GradientStop Color="#EEE" Offset="0.1"/>
+        <GradientStop Color="#EEE" Offset="0.9"/>
+        <GradientStop Color="#FFF" Offset="1.0"/>
+      </GradientStopCollection>
+    </GradientBrush.GradientStops>
+  </LinearGradientBrush>
+
+  <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888" />
+  <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#EEE" />
+  <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#FFF" />
+  <SolidColorBrush x:Key="SelectedBackgroundBrush" Color="#DDD" />
+
+  <!-- Border Brushes -->
+
+  <LinearGradientBrush x:Key="NormalBorderBrush" StartPoint="0,0" EndPoint="0,1">
+    <GradientBrush.GradientStops>
+      <GradientStopCollection>
+        <GradientStop Color="#CCC" Offset="0.0"/>
+        <GradientStop Color="#444" Offset="1.0"/>
+      </GradientStopCollection>
+    </GradientBrush.GradientStops>
+  </LinearGradientBrush>
+
+  <LinearGradientBrush x:Key="HorizontalNormalBorderBrush" StartPoint="0,0" EndPoint="1,0">
+    <GradientBrush.GradientStops>
+      <GradientStopCollection>
+        <GradientStop Color="#CCC" Offset="0.0"/>
+        <GradientStop Color="#444" Offset="1.0"/>
+      </GradientStopCollection>
+    </GradientBrush.GradientStops>
+  </LinearGradientBrush>
+
+  <LinearGradientBrush x:Key="DefaultedBorderBrush" StartPoint="0,0" EndPoint="0,1">
+    <GradientBrush.GradientStops>
+      <GradientStopCollection>
+        <GradientStop Color="#777" Offset="0.0"/>
+        <GradientStop Color="#000" Offset="1.0"/>
+      </GradientStopCollection>
+    </GradientBrush.GradientStops>
+  </LinearGradientBrush>
+
+  <LinearGradientBrush x:Key="PressedBorderBrush" StartPoint="0,0" EndPoint="0,1">
+    <GradientBrush.GradientStops>
+      <GradientStopCollection>
+        <GradientStop Color="#444" Offset="0.0"/>
+        <GradientStop Color="#888" Offset="1.0"/>
+      </GradientStopCollection>
+    </GradientBrush.GradientStops>
+  </LinearGradientBrush>
+
+  <SolidColorBrush x:Key="DisabledBorderBrush" Color="#AAA" />
+  <SolidColorBrush x:Key="SolidBorderBrush" Color="#888" />
+  <SolidColorBrush x:Key="LightBorderBrush" Color="#AAA" />
+
+  <!-- Miscellaneous Brushes -->
+
+  <SolidColorBrush x:Key="GlyphBrush" Color="#444" />
+  <SolidColorBrush x:Key="LightColorBrush" Color="#DDD" />
+
+  <!-- SimpleStyles: Expander -->
+
+  <!--<SnippetExpander>-->
+  <ControlTemplate x:Key="ExpanderToggleButton" TargetType="{x:Type ToggleButton}">
+    <Border
+      Name="Border" 
+      CornerRadius="2,0,0,0"
+      Background="Transparent"
+      BorderBrush="{StaticResource NormalBorderBrush}"
+      BorderThickness="0,0,1,0">
+      <Path 
+        Name="Arrow"
+        Fill="{StaticResource GlyphBrush}"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Data="M 0 0 L 4 4 L 8 0 Z"/>
+    </Border>
+    <ControlTemplate.Triggers>
+      <Trigger Property="ToggleButton.IsMouseOver" Value="true">
+        <Setter TargetName="Border" Property="Background" Value="{StaticResource DarkBrush}" />
+      </Trigger>
+      <Trigger Property="IsPressed" Value="true">
+        <Setter TargetName="Border" Property="Background" Value="{StaticResource PressedBrush}" />
+      </Trigger>
+      <Trigger Property="IsChecked" Value="true">
+        <Setter TargetName="Arrow" Property="Data" Value="M 0 4 L 4 0 L 8 4 Z" />
+      </Trigger>
+      <Trigger Property="IsEnabled" Value="False">
+        <Setter TargetName="Border" Property="Background" Value="{StaticResource DisabledBackgroundBrush}" />
+        <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource DisabledBorderBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource DisabledForegroundBrush}"/>
+        <Setter TargetName="Arrow" Property="Fill" Value="{StaticResource DisabledForegroundBrush}" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+
+  <Style TargetType="{x:Type Expander}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Expander}">
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Name="ContentRow" Height="0"/>
+            </Grid.RowDefinitions>
+            <Border 
+              Name="Border" 
+              Grid.Row="0" 
+              Background="{StaticResource LightBrush}"
+              BorderBrush="{StaticResource NormalBorderBrush}"
+              BorderThickness="1" 
+              CornerRadius="2,2,0,0" >
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="20" />
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <ToggleButton
+                  IsChecked="{Binding Path=IsExpanded,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+                  OverridesDefaultStyle="True" 
+                  Template="{StaticResource ExpanderToggleButton}" 
+                  Background="{StaticResource NormalBrush}" />
+                <ContentPresenter 
+                  Grid.Column="1"
+                  Margin="4" 
+                  ContentSource="Header" 
+                  RecognizesAccessKey="True" />
+              </Grid>
+            </Border>
+            <Border 
+              Name="Content" 
+              Grid.Row="1" 
+              Background="{StaticResource WindowBackgroundBrush}"
+              BorderBrush="{StaticResource SolidBorderBrush}" 
+              BorderThickness="1,0,1,1" 
+              CornerRadius="0,0,2,2" >
+              <ContentPresenter Margin="4" />
+            </Border>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsExpanded" Value="True">
+              <Setter TargetName="ContentRow" Property="Height" Value="{Binding ElementName=Content,Path=DesiredHeight}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+              <Setter TargetName="Border" Property="Background" Value="{StaticResource DisabledBackgroundBrush}" />
+              <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource DisabledBorderBrush}" />
+              <Setter Property="Foreground" Value="{StaticResource DisabledForegroundBrush}"/>
+            </Trigger>
+
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <!--</SnippetExpander>-->
+
+
+
+
+
+</ResourceDictionary>
